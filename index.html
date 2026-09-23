@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1261a0"><title>मेरी बीसी PRO</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6f9;color:#18242e;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:#1261a0;color:#fff;padding:17px 15px;position:sticky;top:0;z-index:8}h1{margin:0;font-size:23px}.sub{font-size:12px;opacity:.9}
+main{max-width:760px;margin:auto;padding:12px 11px 88px}.card{background:#fff;border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 2px 12px #0001}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.stat{background:#eef6ff;border-radius:13px;padding:12px}.stat small{color:#627282}.stat b{display:block;font-size:19px;margin-top:2px}
+button{border:0;border-radius:10px;padding:10px 13px;background:#1261a0;color:#fff;font-weight:700;font-size:14px}.secondary{background:#e8eef3;color:#243542}.success{background:#16834b}.danger{background:#cf3f3f}.warn{background:#d88917}
+input,select{width:100%;padding:11px;border:1px solid #ccd6df;border-radius:10px;font-size:15px;background:#fff}label{font-size:12px;color:#5e6e7c;display:block;margin:9px 0 4px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.actions{display:flex;gap:7px;flex-wrap:wrap}.muted{color:#687887}.hidden{display:none}
+.member{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #edf0f2}.member:last-child{border:0}.avatar{width:37px;height:37px;border-radius:50%;background:#e6f1fb;color:#1261a0;display:grid;place-items:center;font-weight:800;flex:none}.info{flex:1}.info b{display:block}.info small{color:#74818d}.pill{padding:5px 8px;border-radius:20px;font-size:11px;font-weight:800}.paid{background:#e4f6eb;color:#167340}.due{background:#ffeded;color:#b72f2f}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #dce3e8;z-index:9}.navin{max-width:760px;margin:auto;display:flex}.navin button{flex:1;border-radius:0;background:#fff;color:#60717e;padding:9px 3px}.navin button.active{color:#1261a0}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:20}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:17px}.close{float:right;background:#e8eef3;color:#333;padding:6px 9px}.empty{text-align:center;padding:28px;color:#687887}
+h2,h3{margin-top:0}.mini{font-size:12px}.sep{border:0;border-top:1px solid #e8edf0;margin:14px 0}
+</style></head>
+<body>
+<header><h1>मेरी बीसी PRO</h1><div class="sub">कमेटी • जमा • बाकी • पर्ची • हिसाब • WhatsApp</div></header>
+<main>
+<section id="home">
+<div id="empty" class="card empty">अभी कोई बीसी नहीं है।<br><br><button onclick="newBC()">＋ नई बीसी</button></div>
+<div id="dash" class="hidden">
+<div class="card"><div class="row"><div><h2 id="bcTitle"></h2><div id="bcMeta" class="muted"></div></div><button class="secondary" onclick="editBC()">⚙️</button></div></div>
+<div class="grid">
+<div class="stat"><small>इस महीने जमा</small><b id="sPaid">₹0</b></div><div class="stat"><small>इस महीने बाकी</small><b id="sDue">₹0</b></div>
+<div class="stat"><small>जमा सदस्य</small><b id="sCount">0/0</b></div><div class="stat"><small>पर्चा रकम</small><b id="sPot">₹0</b></div>
+</div>
+<div class="card"><div class="row"><h3>इस महीने</h3><button onclick="memberEdit()">👥 सदस्य</button></div><p id="winner" class="muted"></p><div id="members"></div></div>
+<div class="card"><h3>अगला नंबर</h3><div id="next"></div><div class="actions" style="margin-top:10px"><button onclick="chooseWinner()">इस महीने पाने वाला चुनें</button><button class="secondary" onclick="openReceipt()">रसीद बनाएं</button></div></div>
+</div></section>
+
+<section id="history" class="hidden"><div class="card"><h2>महीनेवार हिसाब</h2><div id="hist"></div></div></section>
+<section id="people" class="hidden"><div class="card"><div class="row"><h2>सदस्य</h2><button onclick="memberEdit()">संपादन</button></div><div id="peopleList"></div></div></section>
+<section id="settings" class="hidden"><div class="card"><h2>सेटिंग</h2><div id="setBody"></div></div></section>
+</main>
+<nav><div class="navin">
+<button class="active" onclick="tab('home',this)">🏠<br><small>होम</small></button><button onclick="tab('history',this)">📒<br><small>हिसाब</small></button><button onclick="tab('people',this)">👥<br><small>सदस्य</small></button><button onclick="tab('settings',this)">⚙️<br><small>सेटिंग</small></button>
+</div></nav>
+<div id="modal" class="modal" onclick="if(event.target===this)closeM()"><div class="sheet"><button class="close" onclick="closeM()">✕</button><div id="mc"></div></div></div>
+
+<script>
+const K='meri_bisi_pro_v2';let D=JSON.parse(localStorage.getItem(K)||'null');
+const $=id=>document.getElementById(id);function save(){localStorage.setItem(K,JSON.stringify(D));render()}
+function money(n){return '₹'+Number(n||0).toLocaleString('en-IN')}function month(){let d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
+function periodName(k){let [y,m]=k.split('-');return new Date(+y,+m-1,1).toLocaleDateString('hi-IN',{month:'long',year:'numeric'})}
+function periodLabel(){return D.frequency==='weekly'?'हर हफ्ता':'हर महीना'}
+function periodKey(){if(D.frequency!=='weekly')return month();let d=new Date();let day=d.getDay();let diff=(day+6)%7;d.setDate(d.getDate()-diff);return d.toISOString().slice(0,10)}
+function periodName(k){if(D.frequency!=='weekly')return periodName(k);let d=new Date(k+'T00:00:00');let e=new Date(d);e.setDate(e.getDate()+6);return d.toLocaleDateString('hi-IN',{day:'2-digit',month:'short',year:'numeric'})+' – '+e.toLocaleDateString('hi-IN',{day:'2-digit',month:'short',year:'numeric'})}
+function esc(s){return String(s).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]))}
+function mm(k){D.months[k]??={paid:{},winner:null,receipts:[]};return D.months[k]}
+function newBC(){mc.innerHTML=`<h2>नई बीसी</h2><label>नाम</label><input id=n value="मेरी बीसी"><label>कुल सदस्य</label><input id=c type=number value=25 min=1><label>हर सदस्य की रकम</label><input id=a type=number value=1000 min=1>
+<label>जमा की अवधि</label><select id=freq><option value="monthly">हर महीना</option><option value="weekly">हर हफ्ता</option></select>
+<label>पहली अवधि</label><input id=st type=month value="${month()}"><button style="width:100%;margin-top:14px" onclick=create()>बीसी बनाएं</button>`;showM()}
+function create(){let count=+c.value,amount=+a.value;D={name:n.value.trim()||'मेरी बीसी',count,amount,frequency:freq.value||'monthly',start:st.value||month(),members:Array.from({length:count},(_,i)=>({id:i+1,name:'सदस्य '+(i+1),phone:'',order:i})),months:{}};closeM();save()}
+function current(){return mm(periodKey())}
+function pay(id){let m=current();if(m.paid[id])delete m.paid[id];else m.paid[id]=Date.now();save()}
+function chooseWinner(){let m=current();mc.innerHTML=`<h2>इस महीने पाने वाला</h2><p class=muted>जिसका नंबर निकला है उसे चुनें।</p><select id=win>${D.members.map(x=>`<option value="${x.id}" ${x.id==m.winner?'selected':''}>${esc(x.name)}</option>`).join('')}</select><button style="width:100%;margin-top:13px" onclick="current().winner=+win.value;closeM();save()">सेव करें</button>`;showM()}
+function memberEdit(){mc.innerHTML=`<h2>सदस्यों का विवरण</h2>${D.members.map(x=>`<div class=card><label>सदस्य ${x.id} का नाम</label><input data-n="${x.id}" value="${esc(x.name)}"><label>मोबाइल नंबर (WhatsApp)</label><input data-p="${x.id}" value="${esc(x.phone||'')}" inputmode=tel></div>`).join('')}<button style="width:100%" onclick="savePeople()">सेव करें</button>`;showM()}
+function savePeople(){D.members.forEach(x=>{x.name=document.querySelector(`[data-n="${x.id}"]`).value.trim()||'सदस्य '+x.id;x.phone=document.querySelector(`[data-p="${x.id}"]`).value.trim()});closeM();save()}
+function receiptFor(id){let m=current(),x=D.members.find(q=>q.id==id);let txt=`${D.name}%0Aरसीद%0Aसदस्य: ${encodeURIComponent(x.name)}%0Aमहीना: ${encodeURIComponent(periodName(periodKey()))}%0Aजमा: ${D.amount}%0Aस्थिति: जमा%0Aसमय: ${encodeURIComponent(new Date(m.paid[id]).toLocaleString('hi-IN'))}`;return txt}
+function openReceipt(){let paid=D.members.filter(x=>current().paid[x.id]);mc.innerHTML=`<h2>रसीद</h2><p class=muted>जिनका पैसा जमा हुआ है, उनकी रसीद/WhatsApp संदेश बना सकते हैं।</p>${paid.length?paid.map(x=>`<div class=member><div class=info><b>${esc(x.name)}</b><small>${money(D.amount)}</small></div><button onclick="shareWA(${x.id})">WhatsApp</button><button class=secondary onclick="printReceipt(${x.id})">प्रिंट</button></div>`).join(''):'<div class=empty>इस महीने अभी कोई जमा नहीं है।</div>'}`;showM()}
+function shareWA(id){let x=D.members.find(q=>q.id==id);if(!x.phone){alert('इस सदस्य का मोबाइल नंबर नहीं भरा है।');return}location.href='https://wa.me/'+x.phone.replace(/\D/g,'')+'?text='+receiptFor(id)}
+function printReceipt(id){let x=D.members.find(q=>q.id==id),m=current();let w=window.open('','_blank');w.document.write(`<html><body style="font-family:Arial;padding:25px"><h2>${esc(D.name)}</h2><h3>जमा रसीद</h3><p>सदस्य: <b>${esc(x.name)}</b></p><p>महीना: ${periodName(periodKey())}</p><p>रकम: <b>${money(D.amount)}</b></p><p>जमा समय: ${new Date(m.paid[id]).toLocaleString('hi-IN')}</p><hr><p>धन्यवाद</p><script>window.print()<\/script></body></html>`);w.document.close()}
+function editBC(){mc.innerHTML=`<h2>बीसी सेटिंग</h2><label>नाम</label><input id=en value="${esc(D.name)}"><label>रकम</label><input id=ea type=number value="${D.amount}">
+<label>जमा की अवधि</label><select id=ef><option value="monthly" ${D.frequency==='monthly'?'selected':''}>हर महीना</option><option value="weekly" ${D.frequency==='weekly'?'selected':''}>हर हफ्ता</option></select>
+<button style="width:100%;margin-top:14px" onclick="D.name=en.value.trim()||D.name;D.amount=+ea.value||D.amount;D.frequency=ef.value;closeM();save()">सेव करें</button><hr><button class=danger style="width:100%" onclick="if(confirm('पूरा डेटा हटाना है?')){localStorage.removeItem(K);D=null;closeM();render()}">पूरी बीसी हटाएं</button>`;showM()}
+function backup(){let blob=new Blob([JSON.stringify(D,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='meri-bisi-backup.json';a.click();URL.revokeObjectURL(u)}
+function restore(){let i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=()=>{let r=new FileReader();r.onload=()=>{try{D=JSON.parse(r.result);save();alert('बैकअप वापस आ गया।')}catch(e){alert('फाइल सही नहीं है')}};r.readAsText(i.files[0])};i.click()}
+function setPage(){setBody.innerHTML=`<p><b>${esc(D.name)}</b><br><span class=muted>${D.count} सदस्य · ${money(D.amount)} प्रति सदस्य · ${periodLabel()}</span></p><div class=actions><button onclick=memberEdit()>👥 सदस्य संपादित करें</button><button onclick=backup()>⬇️ बैकअप</button><button class=secondary onclick=restore()>⬆️ बैकअप वापस लाएं</button></div><hr><p class=mini muted>बैकअप फाइल फोन बदलने पर आपका हिसाब वापस लाने के काम आएगी। डेटा अभी इसी ब्राउज़र में रहता है।</p>`}
+function render(){
+ if(!D){$('empty').classList.remove('hidden');$('dash').classList.add('hidden');return}
+ $('empty').classList.add('hidden');$('dash').classList.remove('hidden');$('bcTitle').textContent=D.name;$('bcMeta').textContent=`${D.count} सदस्य × ${money(D.amount)} · ${periodLabel()}`;
+ let m=current(),active=D.members,paid=active.filter(x=>m.paid[x.id]);$('sPaid').textContent=money(paid.length*D.amount);$('sDue').textContent=money((D.count-paid.length)*D.amount);$('sCount').textContent=paid.length+'/'+D.count;$('sPot').textContent=money(D.count*D.amount);
+ let w=active.find(x=>x.id==m.winner);$('winner').textContent=w?'इस महीने पाने वाला: '+w.name:'इस महीने पाने वाला अभी तय नहीं है';
+ $('members').innerHTML=active.map(x=>`<div class=member><div class=avatar>${esc(x.name[0]||'?')}</div><div class=info><b>${esc(x.name)}</b><small>${m.paid[x.id]?'जमा '+new Date(m.paid[x.id]).toLocaleDateString('hi-IN'):'₹'+D.amount+' बाकी'}</small></div><span class="pill ${m.paid[x.id]?'paid':'due'}">${m.paid[x.id]?'जमा':'बाकी'}</span><button class="${m.paid[x.id]?'secondary':'success'}" onclick="pay(${x.id})">${m.paid[x.id]?'हटाएं':'जमा'}</button></div>`).join('');
+ let done=new Set(Object.values(D.months).map(x=>x.winner).filter(Boolean));let nx=active.find(x=>!done.has(x.id));$('next').innerHTML=nx?`<b>${esc(nx.name)}</b><div class=muted>${nx.phone?'📱 '+esc(nx.phone):'मोबाइल नंबर नहीं भरा'}</div>`:'सभी सदस्यों का नंबर पूरा हो चुका है।';
+ $('hist').innerHTML=Object.keys(D.months).sort().reverse().map(k=>{let z=D.months[k],p=Object.keys(z.paid).length,w=D.members.find(x=>x.id==z.winner);return `<div class=card><div class=row><b>${periodName(k)}</b><span>${p}/${D.count} जमा</span></div><div class=muted>जमा ${money(p*D.amount)} · बाकी ${money((D.count-p)*D.amount)}</div><div style="margin-top:6px">पाने वाला: <b>${w?esc(w.name):'तय नहीं'}</b></div></div>`}).join('')||'<div class=empty>अभी इतिहास नहीं है।';
+ $('peopleList').innerHTML=D.members.map(x=>`<div class=member><div class=avatar>${esc(x.name[0]||'?')}</div><div class=info><b>${esc(x.name)}</b><small>${x.phone||'मोबाइल नहीं'}</small></div></div>`).join('');
+ setPage()
+}
+function tab(id,el){['home','history','people','settings'].forEach(x=>$(x).classList.toggle('hidden',x!==id));document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));el.classList.add('active');render()}
+function showM(){$('modal').classList.add('show')}function closeM(){$('modal').classList.remove('show')}render()
+</script></body></html>
