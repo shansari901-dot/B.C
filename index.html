@@ -2,8 +2,18 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>कमेटी खाता</title>
+<meta name="description" content="आपकी कमेटी • आपका हिसाब • सुरक्षित ऑनलाइन">
+<meta name="theme-color" content="#6c35ff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="कमेटी खाता">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f0f4ff;color:#17213a}
@@ -263,11 +273,13 @@ function enterApp() {
 }
 
 function appLogout() {
+  const user = load(KEYS.user, null);
   localStorage.removeItem(KEYS.session);
   document.getElementById('mainNav').classList.add('hidden');
   document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
   document.getElementById('auth').classList.remove('hidden');
-  document.getElementById('authPhone').value = '';
+  // पुराना नंबर याद रखो, पासवर्ड खाली छोड़ो
+  document.getElementById('authPhone').value = user ? user.phone : '';
   document.getElementById('authPass').value = '';
   document.getElementById('authName').value = '';
   document.getElementById('authMsg').innerHTML = '';
@@ -291,7 +303,7 @@ function show(id) {
 const demoMembers = ['रमेश','सुनीता','अमित','प्रिया','विकास','अनीता','सुरेश','मीना','राजेश','कविता'];
 function renderDemo() {
   document.getElementById('demoMembers').innerHTML = demoMembers.map((n, i) =>
-    `<div class="member"><b>${i + 1}. ${n}</b><span class="tag ${i === 2 ? 'due' : 'paid'}">${i === 2 ? 'बाकी' : 'भुगतान'}</span></div>`
+    `<div class="member"><b>${i + 1}. ${n}</b><span class="tag \( {i === 2 ? 'due' : 'paid'}"> \){i === 2 ? 'बाकी' : 'भुगतान'}</span></div>`
   ).join('');
 }
 function demoWA() {
@@ -399,8 +411,8 @@ function loadDash() {
 
   document.getElementById('members').innerHTML = bc.members.map((m, i) =>
     `<div class="member">
-      <div><b>${i + 1}. ${m.name}</b><br><span class="small">${m.phone || ''}</span></div>
-      <span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? 'भुगतान' : 'बाकी'}</span>
+      <div><b>${i + 1}. \( {m.name}</b><br><span class="small"> \){m.phone || ''}</span></div>
+      <span class="tag \( {m.paid ? 'paid' : 'due'}"> \){m.paid ? 'भुगतान' : 'बाकी'}</span>
     </div>`
   ).join('');
 
@@ -408,10 +420,10 @@ function loadDash() {
   const unpaid = bc.members.filter(m => !m.paid);
   if (unpaid.length) {
     document.getElementById('warnings').innerHTML = unpaid.map(m => {
-      const msg = `⚠️ ${m.name} की ₹${bc.amount.toLocaleString('en-IN')} की किस्त बाकी है। कृपया जल्द भुगतान करें।`;
+      const msg = `⚠️ \( {m.name} की ₹ \){bc.amount.toLocaleString('en-IN')} की किस्त बाकी है। कृपया जल्द भुगतान करें।`;
       return `<div class="warn">${msg}<br><br>
-        <button onclick='wa(${JSON.stringify(msg)},${JSON.stringify(m.phone || "")})'>WhatsApp भेजें</button>
-        <button class="secondary" style="margin-top:8px" onclick="markPaid('${bc.code}','${m.name}')">भुगतान हो गया ✓</button>
+        <button onclick='wa(\( {JSON.stringify(msg)}, \){JSON.stringify(m.phone || "")})'>WhatsApp भेजें</button>
+        <button class="secondary" style="margin-top:8px" onclick="markPaid('\( {bc.code}',' \){m.name}')">भुगतान हो गया ✓</button>
       </div>`;
     }).join('');
   } else {
@@ -442,12 +454,25 @@ function wa(msg, phone) {
 
   const session = load(KEYS.session, null);
   const user = load(KEYS.user, null);
+
   if (session && user && user.phone === session) {
+    // पहले से लॉगिन है → सीधा ऐप खोलो
     enterApp();
   } else {
-    // first time → register tab
-    switchAuth('register');
     document.getElementById('auth').classList.remove('hidden');
+    if (user && user.phone) {
+      // अकाउंट पहले से है → लॉगिन स्क्रीन दिखाओ + नंबर भर दो
+      switchAuth('login');
+      document.getElementById('authPhone').value = user.phone;
+    } else {
+      // पहली बार → नया अकाउंट बनाओ
+      switchAuth('register');
+    }
+  }
+
+  // PWA Service Worker (offline + installable app)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
 })();
 </script>
