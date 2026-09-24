@@ -66,7 +66,7 @@ nav button{max-width:170px;padding:10px;font-size:13px}
 </header>
 
 <main>
-  <!-- ========== AUTH (पहली बार नंबर + पासवर्ड) ========== -->
+  <!-- ========== AUTH ========== -->
   <section id="auth">
     <div class="card auth-box">
       <h2 style="text-align:center">🔐 सुरक्षित प्रवेश</h2>
@@ -132,8 +132,13 @@ nav button{max-width:170px;padding:10px;font-size:13px}
       <br>
       <input id="ownerName" placeholder="कमेटी बनाने वाले का नाम">
       <br><br>
-      <input id="memberNames" placeholder="सदस्यों के नाम (कॉमा से अलग, जैसे: रमेश, सुनीता, अमित)">
-      <br><br>
+      <div class="grid">
+        <input id="memberCount" type="number" min="1" max="50" placeholder="कुल सदस्यों की संख्या" oninput="buildMemberInputs()">
+        <button type="button" class="secondary" onclick="buildMemberInputs()" style="padding:13px">नाम बॉक्स बनाएं</button>
+      </div>
+      <p class="small" style="margin:10px 0 6px">नीचे हर सदस्य का नाम अलग-अलग भरें (डेमो जैसा):</p>
+      <div id="memberInputs"></div>
+      <br>
       <button onclick="createBC()">कमेटी बनाएं</button>
     </div>
     <div id="created" class="card hidden"></div>
@@ -187,15 +192,13 @@ nav button{max-width:170px;padding:10px;font-size:13px}
 </nav>
 
 <script>
-/* ========== LOCAL STORAGE KEYS ========== */
 const KEYS = {
-  user: 'kk_user',          // {phone, pass, name}
-  session: 'kk_session',    // logged-in phone
-  bcs: 'kk_bcs',            // array of committees
-  current: 'kk_current'     // current access code for dashboard
+  user: 'kk_user',
+  session: 'kk_session',
+  bcs: 'kk_bcs',
+  current: 'kk_current'
 };
 
-/* ========== HELPERS ========== */
 function load(key, def) {
   try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
 }
@@ -212,7 +215,6 @@ function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
-/* ========== AUTH ========== */
 function switchAuth(mode) {
   const isReg = mode === 'register';
   document.getElementById('tabReg').classList.toggle('active', isReg);
@@ -278,7 +280,6 @@ function appLogout() {
   document.getElementById('mainNav').classList.add('hidden');
   document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
   document.getElementById('auth').classList.remove('hidden');
-  // पुराना नंबर याद रखो, पासवर्ड खाली छोड़ो
   document.getElementById('authPhone').value = user ? user.phone : '';
   document.getElementById('authPass').value = '';
   document.getElementById('authName').value = '';
@@ -286,7 +287,6 @@ function appLogout() {
   switchAuth('login');
 }
 
-/* ========== NAV ========== */
 function show(id) {
   document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
@@ -296,10 +296,11 @@ function show(id) {
     document.getElementById('created').classList.add('hidden');
     const user = load(KEYS.user, null);
     if (user && user.name) document.getElementById('ownerName').value = user.name;
+    document.getElementById('memberCount').value = '';
+    document.getElementById('memberInputs').innerHTML = '<p class="small">पहले सदस्यों की संख्या डालें, फिर नाम भरें</p>';
   }
 }
 
-/* ========== DEMO ========== */
 const demoMembers = ['रमेश','सुनीता','अमित','प्रिया','विकास','अनीता','सुरेश','मीना','राजेश','कविता'];
 function renderDemo() {
   document.getElementById('demoMembers').innerHTML = demoMembers.map((n, i) =>
@@ -310,14 +311,29 @@ function demoWA() {
   window.open('https://wa.me/?text=' + encodeURIComponent('⚠️ कमेटी खाता किस्त भुगतान चेतावनी\nआपकी ₹5,000 की कमेटी किस्त 5 दिन से बाकी है। कृपया जल्द भुगतान करें।'), '_blank');
 }
 
-/* ========== CREATE COMMITTEE (local) ========== */
+function buildMemberInputs() {
+  const count = Math.min(50, Math.max(0, Number(document.getElementById('memberCount').value) || 0));
+  const box = document.getElementById('memberInputs');
+  if (count < 1) {
+    box.innerHTML = '<p class="small">पहले सदस्यों की संख्या डालें</p>';
+    return;
+  }
+  let html = '';
+  for (let i = 1; i <= count; i++) {
+    html += `<div class="member" style="padding:8px 12px;margin:6px 0">
+      <b style="min-width:70px">${i}. नाम</b>
+      <input class="mem-name" data-i="${i}" placeholder="सदस्य ${i} का नाम" style="flex:1;margin:0;padding:10px">
+    </div>`;
+  }
+  box.innerHTML = html;
+}
+
 function createBC() {
   const name = (document.getElementById('bcName').value || '').trim();
   const amount = Number(document.getElementById('bcAmount').value);
   const frequency = document.getElementById('freq').value;
   const startDate = document.getElementById('startDate').value || today();
   const ownerName = (document.getElementById('ownerName').value || '').trim();
-  const memberStr = (document.getElementById('memberNames').value || '').trim();
 
   if (!name || !amount || amount <= 0) {
     alert('कृपया कमेटी का नाम और सही किस्त रकम डालें');
@@ -328,27 +344,30 @@ function createBC() {
     return;
   }
 
-  const members = memberStr
-    ? memberStr.split(',').map(s => s.trim()).filter(Boolean).map(n => ({ name: n, phone: '', paid: false }))
-    : [{ name: ownerName, phone: '', paid: true }];
+  const nameInputs = document.querySelectorAll('.mem-name');
+  let members = [];
+  nameInputs.forEach(inp => {
+    const n = (inp.value || '').trim();
+    if (n) members.push({ name: n, phone: '', paid: false });
+  });
 
-  // owner always first
+  if (members.length === 0) {
+    alert('कम से कम 1 सदस्य का नाम डालें (संख्या भरकर नाम बॉक्स बनाएं)');
+    return;
+  }
+
   if (!members.some(m => m.name === ownerName)) {
     members.unshift({ name: ownerName, phone: '', paid: true });
+  } else {
+    const m = members.find(x => x.name === ownerName);
+    if (m) m.paid = true;
   }
 
   const code = genCode();
   const ownerSecret = genCode() + '-' + genCode().slice(0, 4);
 
   const bc = {
-    code,
-    ownerSecret,
-    name,
-    amount,
-    frequency,
-    startDate,
-    ownerName,
-    members,
+    code, ownerSecret, name, amount, frequency, startDate, ownerName, members,
     createdAt: new Date().toISOString()
   };
 
@@ -365,38 +384,27 @@ function createBC() {
     <div class="code">${code}</div>
     <p><b>Owner Code:</b> ${ownerSecret}</p>
     <p class="small">Access Code सदस्यों को दें। Owner Code सिर्फ आपके पास रखें।</p>
+    <p class="small">कुल सदस्य: <b>${members.length}</b></p>
     <br>
     <button onclick="show('dashboard')">Dashboard खोलें</button>
   `;
 }
 
-/* ========== JOIN ========== */
 function join() {
   const code = (document.getElementById('accessCode').value || '').trim().toUpperCase();
-  if (!code) {
-    alert('Access Code डालें');
-    return;
-  }
+  if (!code) { alert('Access Code डालें'); return; }
   const all = load(KEYS.bcs, []);
   const found = all.find(b => b.code === code || b.ownerSecret === code);
-  if (!found) {
-    alert('गलत Access Code। कोई कमेटी नहीं मिली।');
-    return;
-  }
+  if (!found) { alert('गलत Access Code। कोई कमेटी नहीं मिली।'); return; }
   save(KEYS.current, found.code);
   show('dashboard');
 }
 
-/* ========== DASHBOARD ========== */
 function loadDash() {
   const code = load(KEYS.current, null);
   const all = load(KEYS.bcs, []);
   const bc = all.find(b => b.code === code);
-  if (!bc) {
-    alert('कमेटी नहीं मिली');
-    show('home');
-    return;
-  }
+  if (!bc) { alert('कमेटी नहीं मिली'); show('home'); return; }
 
   document.getElementById('dashTitle').textContent = '📊 ' + bc.name;
   document.getElementById('dash').innerHTML = `
@@ -416,7 +424,6 @@ function loadDash() {
     </div>`
   ).join('');
 
-  // simple overdue simulation: any unpaid member
   const unpaid = bc.members.filter(m => !m.paid);
   if (unpaid.length) {
     document.getElementById('warnings').innerHTML = unpaid.map(m => {
@@ -446,9 +453,7 @@ function wa(msg, phone) {
   window.open((p ? 'https://wa.me/' + p + '?text=' : 'https://wa.me/?text=') + encodeURIComponent(msg), '_blank');
 }
 
-/* ========== INIT ========== */
 (function init() {
-  // set default date
   const dateInput = document.getElementById('startDate');
   if (dateInput) dateInput.value = today();
 
@@ -456,21 +461,17 @@ function wa(msg, phone) {
   const user = load(KEYS.user, null);
 
   if (session && user && user.phone === session) {
-    // पहले से लॉगिन है → सीधा ऐप खोलो
     enterApp();
   } else {
     document.getElementById('auth').classList.remove('hidden');
     if (user && user.phone) {
-      // अकाउंट पहले से है → लॉगिन स्क्रीन दिखाओ + नंबर भर दो
       switchAuth('login');
       document.getElementById('authPhone').value = user.phone;
     } else {
-      // पहली बार → नया अकाउंट बनाओ
       switchAuth('register');
     }
   }
 
-  // PWA Service Worker (offline + installable app)
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
