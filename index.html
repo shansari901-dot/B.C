@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>कमेटी खाता</title>
 <meta name="description" content="आपकी कमेटी • आपका हिसाब • सुरक्षित ऑनलाइन">
-<meta name="theme-color" content="#6c35ff">
+<meta name="theme-color" content="#5b2be0">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,145 +15,424 @@
 <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f0f4ff;color:#17213a}
-header{background:linear-gradient(135deg,#6c35ff,#00a8ff);color:#fff;padding:22px 18px;border-radius:0 0 25px 25px;box-shadow:0 4px 15px rgba(108,53,255,.25)}
-header h1{margin:0;font-size:28px}
-header p{margin:7px 0 0;opacity:.9}
-main{max-width:850px;margin:auto;padding:15px 15px 90px}
-.card{background:#fff;border-radius:18px;padding:18px;margin:13px 0;box-shadow:0 5px 20px #00000012;transition:transform .15s ease}
-.card:active{transform:scale(.99)}
-h2{margin:0 0 12px;font-size:21px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-input,select,button{width:100%;padding:13px;border-radius:11px;border:1px solid #d8ddec;font-size:15px}
-input:focus,select:focus{outline:none;border-color:#6c35ff;box-shadow:0 0 0 3px rgba(108,53,255,.15)}
-button{border:0;background:#6035e8;color:#fff;font-weight:bold;cursor:pointer;transition:background .2s}
-button:hover{background:#4f2bc4}
-button.secondary{background:#e9edff;color:#362a8c}
-button.secondary:hover{background:#d8deff}
-.demo{background:linear-gradient(135deg,#fff0a8,#ffd56a);color:#493600}
-.demo:hover{background:linear-gradient(135deg,#ffe98a,#ffc84a)}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:center;gap:6px;padding:8px;z-index:5;box-shadow:0 -2px 10px #00000008}
-nav button{max-width:170px;padding:10px;font-size:13px}
-.hidden{display:none}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{background:#f1f4ff;border-radius:13px;padding:12px;text-align:center}
-.stat b{display:block;font-size:20px;color:#6035e8}
-.member{padding:12px;border:1px solid #e1e4ef;border-radius:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
-.tag{display:inline-block;padding:4px 8px;border-radius:20px;background:#eee;color:#333;font-size:12px}
-.tag.paid{background:#d4f5e0;color:#1a7a3c}
-.tag.due{background:#ffe0e0;color:#b91c1c}
-.warn{background:#fff1f1;border:1px solid #ffcaca;padding:12px;border-radius:12px;margin:8px 0}
-.ok{background:#ecfff3;border:1px solid #b8efc9;padding:12px;border-radius:12px}
-.small{font-size:13px;color:#68708a}
-.code{font-size:25px;font-weight:bold;letter-spacing:2px;background:#f0ecff;padding:12px;border-radius:12px;text-align:center;color:#4a2db8}
-.auth-box{max-width:400px;margin:30px auto}
-.tabs{display:flex;gap:0;margin-bottom:14px;border-radius:11px;overflow:hidden;border:1px solid #d8ddec}
-.tabs button{flex:1;border-radius:0;background:#f1f4ff;color:#362a8c;font-weight:600}
-.tabs button.active{background:#6035e8;color:#fff}
-.msg{padding:10px;border-radius:10px;margin:10px 0;font-size:14px;text-align:center}
-.msg.err{background:#fff1f1;color:#b91c1c;border:1px solid #ffcaca}
-.msg.ok{background:#ecfff3;color:#1a7a3c;border:1px solid #b8efc9}
-.user-bar{display:flex;justify-content:space-between;align-items:center;background:#f8f9ff;padding:10px 14px;border-radius:12px;margin-bottom:12px;font-size:14px}
-.user-bar span{color:#6035e8;font-weight:600}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
+:root {
+  --primary: #5b2be0;
+  --primary-dark: #4a22c0;
+  --accent: #00b4d8;
+  --bg: #f5f6fb;
+  --card: #ffffff;
+  --text: #1a1d2e;
+  --muted: #6b7280;
+  --border: #e8eaf0;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warn-bg: #fef2f2;
+  --ok-bg: #ecfdf5;
+  --radius: 16px;
+  --shadow: 0 4px 20px rgba(91,43,224,.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+.topbar {
+  background: linear-gradient(135deg, #5b2be0 0%, #00b4d8 100%);
+  color: #fff;
+  padding: 20px 18px 24px;
+  border-radius: 0 0 28px 28px;
+  box-shadow: 0 8px 24px rgba(91,43,224,.25);
+}
+.topbar h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.3px; }
+.topbar p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+main { max-width: 480px; margin: 0 auto; padding: 16px 14px 20px; }
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.03);
+}
+.card h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.field { margin-bottom: 12px; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+input, select {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-size: 15px;
+  background: #fafbff;
+  color: var(--text);
+  transition: border .2s, box-shadow .2s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(91,43,224,.12);
+  background: #fff;
+}
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .12s, background .2s;
+}
+.btn:active { transform: scale(.98); }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-secondary { background: #ede9fe; color: var(--primary); }
+.btn-demo {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #92400e;
+}
+.btn-sm { padding: 10px 14px; font-size: 13px; width: auto; }
+.btn-row { display: flex; gap: 10px; margin-top: 12px; }
+.btn-row .btn { flex: 1; }
+.auth-wrap { max-width: 400px; margin: 24px auto 0; }
+.tabs {
+  display: flex;
+  background: #f0f0f8;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 16px;
+}
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+}
+.tabs button.active {
+  background: #fff;
+  color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.msg {
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  text-align: center;
+}
+.msg.err { background: var(--warn-bg); color: var(--danger); }
+.msg.ok { background: var(--ok-bg); color: #047857; }
+.user-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+}
+.user-bar span { color: var(--primary); font-weight: 600; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+.stat {
+  background: #f5f3ff;
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+}
+.stat b {
+  display: block;
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 700;
+}
+.stat span { font-size: 11px; color: var(--muted); }
+.member {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  background: #fafbff;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.member b { font-size: 14px; }
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.tag.paid { background: #d1fae5; color: #047857; }
+.tag.due { background: #fee2e2; color: #b91c1c; }
+.code {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  background: #f5f3ff;
+  color: var(--primary);
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 10px 0;
+}
+.warn {
+  background: var(--warn-bg);
+  border: 1px solid #fecaca;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.ok {
+  background: var(--ok-bg);
+  border: 1px solid #a7f3d0;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #047857;
+}
+.small { font-size: 12px; color: var(--muted); }
+.hidden { display: none !important; }
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+  z-index: 50;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.06);
+}
+.bottom-nav button {
+  flex: 1;
+  max-width: 100px;
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  border-radius: 12px;
+  transition: color .2s, background .2s;
+}
+.bottom-nav button .ico { font-size: 22px; line-height: 1; }
+.bottom-nav button.active {
+  color: var(--primary);
+  background: #f5f3ff;
+}
+.section-tip {
+  background: #f0f9ff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: #0369a1;
+  line-height: 1.45;
+}
+.mem-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mem-row:last-child { border-bottom: none; }
+.mem-row .num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ede9fe;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.mem-row input { flex: 1; margin: 0; padding: 10px 12px; }
+@media (max-width: 400px) {
+  .row { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stats .stat:last-child { grid-column: 1 / -1; }
+}
 </style>
 </head>
 <body>
-<header>
+
+<div class="topbar">
   <h1>💰 कमेटी खाता</h1>
-  <p>आपकी कमेटी • आपका हिसाब • सुरक्षित (बिना सर्वर)</p>
-</header>
+  <p>आपकी कमेटी • आपका हिसाब • सुरक्षित</p>
+</div>
 
 <main>
-  <!-- ========== AUTH ========== -->
+
+  <!-- AUTH -->
   <section id="auth">
-    <div class="card auth-box">
-      <h2 style="text-align:center">🔐 सुरक्षित प्रवेश</h2>
-      <p class="small" style="text-align:center;margin-bottom:14px">पहली बार नंबर और पासवर्ड बनाएं। अगली बार लॉगिन करें। डेटा आपके फ़ोन में सुरक्षित रहता है।</p>
-      <div class="tabs">
-        <button id="tabReg" class="active" onclick="switchAuth('register')">नया अकाउंट</button>
-        <button id="tabLogin" onclick="switchAuth('login')">लॉगिन</button>
+    <div class="auth-wrap">
+      <div class="card">
+        <h2 style="justify-content:center">🔐 सुरक्षित प्रवेश</h2>
+        <p style="text-align:center;margin-bottom:14px">पहली बार अकाउंट बनाएं। अगली बार लॉगिन करें।</p>
+        <div class="tabs">
+          <button id="tabReg" class="active" onclick="switchAuth('register')">नया अकाउंट</button>
+          <button id="tabLogin" onclick="switchAuth('login')">लॉगिन</button>
+        </div>
+        <div id="authMsg"></div>
+        <div class="field">
+          <label>मोबाइल नंबर</label>
+          <input id="authPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label>पासवर्ड</label>
+          <input id="authPass" type="password" placeholder="कम से कम 4 अक्षर">
+        </div>
+        <div id="regExtra" class="hidden">
+          <div class="field">
+            <label>आपका नाम</label>
+            <input id="authName" placeholder="पूरा नाम">
+          </div>
+        </div>
+        <button id="authBtn" class="btn btn-primary" onclick="doAuth()">अकाउंट बनाएं</button>
       </div>
-      <div id="authMsg"></div>
-      <input id="authPhone" type="tel" placeholder="मोबाइल नंबर (10 अंक)" maxlength="10" inputmode="numeric">
-      <br><br>
-      <input id="authPass" type="password" placeholder="पासवर्ड (कम से कम 4 अक्षर)">
-      <br><br>
-      <div id="regExtra" class="hidden">
-        <input id="authName" placeholder="आपका नाम">
-        <br><br>
-      </div>
-      <button id="authBtn" onclick="doAuth()">अकाउंट बनाएं</button>
     </div>
   </section>
 
-  <!-- ========== HOME ========== -->
+  <!-- HOME -->
   <section id="home" class="hidden">
     <div class="user-bar">
       <span id="userInfo">👋</span>
-      <button class="secondary" style="width:auto;padding:6px 14px;font-size:13px" onclick="appLogout()">लॉगआउट</button>
+      <button class="btn btn-secondary btn-sm" onclick="appLogout()">लॉगआउट</button>
     </div>
+
     <div class="card">
-      <h2>कमेटी खाता में आपका स्वागत है</h2>
-      <p>पहले Demo देखकर ऐप का पूरा तरीका समझें। पसंद आए तो अपनी नई कमेटी बनाएं।</p>
-      <div class="grid">
-        <button class="demo" onclick="show('demo')">👀 Demo देखें</button>
-        <button onclick="show('create')">➕ नई कमेटी बनाएं</button>
+      <h2>👋 स्वागत है</h2>
+      <p>Demo देखकर समझें, फिर अपनी कमेटी बनाएं।</p>
+      <div class="btn-row">
+        <button class="btn btn-demo" onclick="show('demo')">👀 Demo</button>
+        <button class="btn btn-primary" onclick="show('create')">➕ नई कमेटी</button>
       </div>
     </div>
+
     <div class="card">
-      <h2>🔐 सदस्य प्रवेश</h2>
-      <p class="small">अपनी कमेटी का Access Code डालकर अपनी कमेटी देखें।</p>
-      <input id="accessCode" placeholder="Member Access Code">
-      <br><br>
-      <button onclick="join()">प्रवेश करें</button>
+      <h2>🔑 सदस्य प्रवेश</h2>
+      <p style="margin-bottom:10px">Access Code डालकर अपनी कमेटी देखें।</p>
+      <div class="field">
+        <input id="accessCode" placeholder="Member Access Code">
+      </div>
+      <button class="btn btn-primary" onclick="join()">प्रवेश करें</button>
     </div>
-    <div class="card">
-      <h2>यह कैसे काम करता है?</h2>
-      <p>① कमेटी बनाएं → ② Code सदस्यों को दें → ③ किस्तों का हिसाब रखें → ④ बकाया पर चेतावनी पाएं</p>
-      <p class="small" style="margin-top:10px">💡 सब कुछ आपके फ़ोन में सुरक्षित है। कोई सर्वर या डेटाबेस नहीं।</p>
+
+    <div class="section-tip">
+      ① कमेटी बनाएं → ② Code दें → ③ किस्त ट्रैक करें → ④ बकाया पर अलर्ट पाएं
     </div>
   </section>
 
-  <!-- ========== CREATE ========== -->
+  <!-- CREATE -->
   <section id="create" class="hidden">
     <div class="card">
-      <h2>➕ नई कमेटी बनाएं</h2>
-      <div class="grid">
-        <input id="bcName" placeholder="कमेटी का नाम">
-        <input id="bcAmount" type="number" placeholder="किस्त की रकम">
-        <select id="freq">
-          <option value="monthly">मासिक</option>
-          <option value="weekly">साप्ताहिक</option>
-        </select>
-        <input id="startDate" type="date">
+      <h2>➕ नई कमेटी</h2>
+      <div class="field">
+        <label>कमेटी का नाम</label>
+        <input id="bcName" placeholder="जैसे: गांव कमेटी 2026">
       </div>
-      <br>
-      <input id="ownerName" placeholder="कमेटी बनाने वाले का नाम">
-      <br><br>
-      <div class="grid">
-        <input id="memberCount" type="number" min="1" max="50" placeholder="कुल सदस्यों की संख्या" oninput="buildMemberInputs()">
-        <button type="button" class="secondary" onclick="buildMemberInputs()" style="padding:13px">नाम बॉक्स बनाएं</button>
+      <div class="row">
+        <div class="field">
+          <label>किस्त राशि (₹)</label>
+          <input id="bcAmount" type="number" placeholder="5000">
+        </div>
+        <div class="field">
+          <label>प्रकार</label>
+          <select id="freq">
+            <option value="monthly">मासिक</option>
+            <option value="weekly">साप्ताहिक</option>
+          </select>
+        </div>
       </div>
-      <p class="small" style="margin:10px 0 6px">नीचे हर सदस्य का नाम अलग-अलग भरें (डेमो जैसा):</p>
-      <div id="memberInputs"></div>
-      <br>
-      <button onclick="createBC()">कमेटी बनाएं</button>
+      <div class="row">
+        <div class="field">
+          <label>शुरुआत तिथि</label>
+          <input id="startDate" type="date">
+        </div>
+        <div class="field">
+          <label>मालिक का नाम</label>
+          <input id="ownerName" placeholder="आपका नाम">
+        </div>
+      </div>
     </div>
+
+    <div class="card">
+      <h2>👥 सदस्य जोड़ें</h2>
+      <div class="row">
+        <div class="field" style="margin-bottom:0">
+          <label>कुल सदस्यों की संख्या</label>
+          <input id="memberCount" type="number" min="1" max="50" placeholder="जैसे: 10" oninput="buildMemberInputs()">
+        </div>
+        <div class="field" style="margin-bottom:0;display:flex;align-items:flex-end">
+          <button type="button" class="btn btn-secondary" onclick="buildMemberInputs()">नाम बॉक्स बनाएं</button>
+        </div>
+      </div>
+      <p class="small" style="margin:12px 0 6px">हर सदस्य का नाम अलग भरें:</p>
+      <div id="memberInputs">
+        <p class="small">पहले संख्या डालें, फिर नाम भरें</p>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px">✅ कमेटी बनाएं</button>
     <div id="created" class="card hidden"></div>
   </section>
 
-  <!-- ========== DEMO ========== -->
+  <!-- DEMO -->
   <section id="demo" class="hidden">
     <div class="card">
       <h2>👀 Demo कमेटी</h2>
-      <p class="small">यह केवल समझने के लिए है। इसमें असली भुगतान नहीं होता।</p>
+      <p class="small">केवल समझने के लिए — असली भुगतान नहीं होता।</p>
       <div class="code">DEMO-2026</div>
       <div class="stats">
-        <div class="stat"><b>₹5,000</b>किस्त</div>
-        <div class="stat"><b>10</b>सदस्य</div>
-        <div class="stat"><b>₹50,000</b>कुल</div>
+        <div class="stat"><b>₹5,000</b><span>किस्त</span></div>
+        <div class="stat"><b>10</b><span>सदस्य</span></div>
+        <div class="stat"><b>₹50,000</b><span>कुल</span></div>
       </div>
     </div>
     <div class="card">
@@ -161,13 +440,13 @@ nav button{max-width:170px;padding:10px;font-size:13px}
       <div id="demoMembers"></div>
     </div>
     <div class="card">
-      <h2>⚠️ बकाया चेतावनी</h2>
-      <div class="warn">रमेश की ₹5,000 की किस्त 5 दिन से बाकी है। कृपया जल्द भुगतान करें।</div>
-      <button onclick="demoWA()">WhatsApp reminder देखें</button>
+      <h2>⚠️ बकाया</h2>
+      <div class="warn">रमेश की ₹5,000 की किस्त 5 दिन से बाकी है।</div>
+      <button class="btn btn-primary" onclick="demoWA()">WhatsApp reminder देखें</button>
     </div>
   </section>
 
-  <!-- ========== DASHBOARD ========== -->
+  <!-- DASHBOARD -->
   <section id="dashboard" class="hidden">
     <div class="card">
       <h2 id="dashTitle">Dashboard</h2>
@@ -181,14 +460,24 @@ nav button{max-width:170px;padding:10px;font-size:13px}
       <h2>⚠️ बकाया चेतावनी</h2>
       <div id="warnings"></div>
     </div>
-    <button class="secondary" onclick="show('home')">← होम पर जाएं</button>
+    <button class="btn btn-secondary" onclick="show('home')">← होम पर जाएं</button>
   </section>
+
 </main>
 
-<nav id="mainNav" class="hidden">
-  <button onclick="show('home')">🏠 होम</button>
-  <button onclick="show('demo')">👀 Demo</button>
-  <button onclick="show('create')">➕ नई कमेटी</button>
+<nav id="mainNav" class="bottom-nav hidden">
+  <button id="nav-home" onclick="show('home')">
+    <span class="ico">🏠</span>
+    होम
+  </button>
+  <button id="nav-demo" onclick="show('demo')">
+    <span class="ico">👀</span>
+    Demo
+  </button>
+  <button id="nav-create" onclick="show('create')">
+    <span class="ico">➕</span>
+    नई कमेटी
+  </button>
 </nav>
 
 <script>
@@ -232,7 +521,7 @@ function doAuth() {
   const msg = document.getElementById('authMsg');
 
   if (phone.length !== 10) {
-    msg.innerHTML = '<div class="msg err">कृपया सही 10 अंकों का मोबाइल नंबर डालें</div>';
+    msg.innerHTML = '<div class="msg err">सही 10 अंकों का मोबाइल नंबर डालें</div>';
     return;
   }
   if (pass.length < 4) {
@@ -290,6 +579,12 @@ function appLogout() {
 function show(id) {
   document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
+
+  ['home', 'demo', 'create'].forEach(n => {
+    const btn = document.getElementById('nav-' + n);
+    if (btn) btn.classList.toggle('active', n === id);
+  });
+
   if (id === 'demo') renderDemo();
   if (id === 'dashboard') loadDash();
   if (id === 'create') {
@@ -297,8 +592,9 @@ function show(id) {
     const user = load(KEYS.user, null);
     if (user && user.name) document.getElementById('ownerName').value = user.name;
     document.getElementById('memberCount').value = '';
-    document.getElementById('memberInputs').innerHTML = '<p class="small">पहले सदस्यों की संख्या डालें, फिर नाम भरें</p>';
+    document.getElementById('memberInputs').innerHTML = '<p class="small">पहले संख्या डालें, फिर नाम भरें</p>';
   }
+  window.scrollTo(0, 0);
 }
 
 const demoMembers = ['रमेश','सुनीता','अमित','प्रिया','विकास','अनीता','सुरेश','मीना','राजेश','कविता'];
@@ -320,9 +616,9 @@ function buildMemberInputs() {
   }
   let html = '';
   for (let i = 1; i <= count; i++) {
-    html += `<div class="member" style="padding:8px 12px;margin:6px 0">
-      <b style="min-width:70px">${i}. नाम</b>
-      <input class="mem-name" data-i="${i}" placeholder="सदस्य ${i} का नाम" style="flex:1;margin:0;padding:10px">
+    html += `<div class="mem-row">
+      <span class="num">${i}</span>
+      <input class="mem-name" data-i="${i}" placeholder="सदस्य ${i} का नाम">
     </div>`;
   }
   box.innerHTML = html;
@@ -352,7 +648,7 @@ function createBC() {
   });
 
   if (members.length === 0) {
-    alert('कम से कम 1 सदस्य का नाम डालें (संख्या भरकर नाम बॉक्स बनाएं)');
+    alert('कम से कम 1 सदस्य का नाम डालें');
     return;
   }
 
@@ -380,14 +676,14 @@ function createBC() {
   created.classList.remove('hidden');
   created.innerHTML = `
     <h2>✅ कमेटी बन गई</h2>
-    <p>यह जानकारी सुरक्षित रखें (स्क्रीनशॉट ले लें):</p>
+    <p class="small">यह जानकारी सुरक्षित रखें (स्क्रीनशॉट लें):</p>
     <div class="code">${code}</div>
     <p><b>Owner Code:</b> ${ownerSecret}</p>
-    <p class="small">Access Code सदस्यों को दें। Owner Code सिर्फ आपके पास रखें।</p>
+    <p class="small" style="margin-top:8px">Access Code सदस्यों को दें। Owner Code सिर्फ अपने पास रखें।</p>
     <p class="small">कुल सदस्य: <b>${members.length}</b></p>
-    <br>
-    <button onclick="show('dashboard')">Dashboard खोलें</button>
+    <button class="btn btn-primary" style="margin-top:12px" onclick="show('dashboard')">Dashboard खोलें</button>
   `;
+  created.scrollIntoView({ behavior: 'smooth' });
 }
 
 function join() {
@@ -409,17 +705,17 @@ function loadDash() {
   document.getElementById('dashTitle').textContent = '📊 ' + bc.name;
   document.getElementById('dash').innerHTML = `
     <div class="stats">
-      <div class="stat"><b>₹${bc.amount.toLocaleString('en-IN')}</b>किस्त</div>
-      <div class="stat"><b>${bc.members.length}</b>सदस्य</div>
-      <div class="stat"><b>${bc.frequency === 'monthly' ? 'मासिक' : 'साप्ताहिक'}</b>प्रकार</div>
+      <div class="stat"><b>₹${bc.amount.toLocaleString('en-IN')}</b><span>किस्त</span></div>
+      <div class="stat"><b>${bc.members.length}</b><span>सदस्य</span></div>
+      <div class="stat"><b>${bc.frequency === 'monthly' ? 'मासिक' : 'साप्ताहिक'}</b><span>प्रकार</span></div>
     </div>
-    <p style="margin-top:12px">Code: <b>${bc.code}</b></p>
+    <p style="margin-top:8px;font-size:14px">Code: <b>${bc.code}</b></p>
     <p class="small">शुरुआत: ${bc.startDate} • मालिक: ${bc.ownerName}</p>
   `;
 
   document.getElementById('members').innerHTML = bc.members.map((m, i) =>
     `<div class="member">
-      <div><b>${i + 1}. \( {m.name}</b><br><span class="small"> \){m.phone || ''}</span></div>
+      <div><b>${i + 1}. ${m.name}</b></div>
       <span class="tag \( {m.paid ? 'paid' : 'due'}"> \){m.paid ? 'भुगतान' : 'बाकी'}</span>
     </div>`
   ).join('');
@@ -428,9 +724,11 @@ function loadDash() {
   if (unpaid.length) {
     document.getElementById('warnings').innerHTML = unpaid.map(m => {
       const msg = `⚠️ \( {m.name} की ₹ \){bc.amount.toLocaleString('en-IN')} की किस्त बाकी है। कृपया जल्द भुगतान करें।`;
-      return `<div class="warn">${msg}<br><br>
-        <button onclick='wa(\( {JSON.stringify(msg)}, \){JSON.stringify(m.phone || "")})'>WhatsApp भेजें</button>
-        <button class="secondary" style="margin-top:8px" onclick="markPaid('\( {bc.code}',' \){m.name}')">भुगतान हो गया ✓</button>
+      return `<div class="warn">${msg}
+        <div class="btn-row" style="margin-top:10px">
+          <button class="btn btn-primary btn-sm" onclick='wa(\( {JSON.stringify(msg)}, \){JSON.stringify(m.phone || "")})'>WhatsApp</button>
+          <button class="btn btn-secondary btn-sm" onclick="markPaid('\( {bc.code}',' \){m.name}')">भुगतान ✓</button>
+        </div>
       </div>`;
     }).join('');
   } else {
