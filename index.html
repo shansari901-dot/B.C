@@ -64,9 +64,10 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .stat { background: #f8fafc; border-radius: 14px; padding: 16px 10px; text-align: center; border: 1px solid var(--border); }
 .stat b { display: block; font-size: 18px; color: var(--primary-dark); font-weight: 800; }
 .stat span { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-top: 4px; display: block; }
-.stat-pool { grid-column: span 2; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 1px solid #34d399; }
-.stat-pool b { font-size: 26px; color: #047857; margin-bottom: 2px; }
-.stat-pool span { color: #059669; font-size: 13px; }
+.stat-pool { grid-column: span 2; background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #0f172a; border-radius: 16px; padding: 20px; text-align: center; color: white; }
+.stat-pool b { font-size: 28px; color: #34d399; margin-bottom: 4px; }
+.stat-pool span { color: #cbd5e1; font-size: 13px; font-weight: 500; }
+.stat-pool .sub-info { font-size: 12px; background: rgba(255,255,255,0.1); display: inline-block; padding: 4px 12px; border-radius: 20px; margin-top: 8px; color: #f8fafc; }
 
 .member { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; background: #fff; }
 .member b { font-size: 15px; color: var(--text); }
@@ -96,22 +97,16 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .modal-box { background: #fff; border-radius: 24px; padding: 28px 24px; max-width: 340px; width: 100%; text-align: center; }
 .modal-box p { font-size: 16px; margin-bottom: 24px; color: var(--text); font-weight: 500; }
-
 #winnerModal .modal-box { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: 4px solid #fcd34d; box-shadow: 0 20px 50px rgba(217, 119, 6, 0.4); }
 #winnerModal h2 { color: white; font-size: 28px; margin-bottom: 8px; }
 </style>
 </head>
 <body>
 
-<!-- Basic Alert Modal -->
 <div id="appModal" class="modal-bg hidden">
-  <div class="modal-box">
-    <p id="modalText"></p>
-    <div class="btn-row" id="modalBtns"></div>
-  </div>
+  <div class="modal-box"><p id="modalText"></p><div class="btn-row" id="modalBtns"></div></div>
 </div>
 
-<!-- Winner Celebration Modal -->
 <div id="winnerModal" class="modal-bg hidden">
   <div class="modal-box">
     <div style="font-size: 50px; margin-bottom: 10px;">🎉🏆🎉</div>
@@ -123,10 +118,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 </div>
 
 <div class="topbar">
-  <div class="topbar-text">
-    <h1>कमेटी खाता</h1>
-    <p>सरल • ऑनलाइन • सुरक्षित</p>
-  </div>
+  <div class="topbar-text"><h1>कमेटी खाता</h1><p>सरल • ऑनलाइन • सुरक्षित</p></div>
   <button class="topbar-share" onclick="shareApp()">📤 शेयर</button>
 </div>
 
@@ -141,7 +133,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
           <button id="tabLogin" onclick="switchAuth('login')">लॉगिन</button>
         </div>
         <div id="authMsg"></div>
-
         <div id="authNormal">
           <div class="field"><label>मोबाइल नंबर</label><input id="authPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
           <div class="field"><label>पासवर्ड</label><input id="authPass" type="password" placeholder="कम से कम 4 अक्षर"></div>
@@ -154,37 +145,29 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 
   <!-- HOME -->
   <section id="home" class="hidden">
-    <div class="user-bar">
-      <span id="userInfo">👋</span>
-      <button class="btn btn-secondary btn-sm" onclick="appLogout()">लॉगआउट</button>
-    </div>
+    <div class="user-bar"><span id="userInfo">👋</span><button class="btn btn-secondary btn-sm" onclick="appLogout()">लॉगआउट</button></div>
     <div class="card" style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: none;">
-      <h2>👋 स्वागत है</h2>
-      <p style="margin-bottom: 16px;">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</p>
+      <h2>👋 स्वागत है</h2><p style="margin-bottom: 16px;">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</p>
       <button class="btn btn-primary" onclick="show('create')">➕ नई कमेटी बनाएं</button>
     </div>
     <div class="card">
-      <h2>🔑 कोड द्वारा प्रवेश</h2>
-      <div class="field"><input id="accessCode" placeholder="Access Code (उदा. A1B2C3D4)"></div>
+      <h2>🔑 कोड द्वारा प्रवेश</h2><div class="field"><input id="accessCode" placeholder="Access Code (उदा. A1B2C3D4)"></div>
       <button class="btn btn-secondary" onclick="join()">प्रवेश करें</button>
     </div>
   </section>
 
   <!-- MY LIST -->
-  <section id="mylist" class="hidden">
-    <div class="card">
-      <h2>📋 मेरी कमेटियाँ</h2>
-      <div id="bcList"></div>
-    </div>
-  </section>
+  <section id="mylist" class="hidden"><div class="card"><h2>📋 मेरी कमेटियाँ</h2><div id="bcList"></div></div></section>
 
   <!-- CREATE -->
   <section id="create" class="hidden">
     <div class="card">
       <h2>➕ नई कमेटी बनाएं</h2>
       <div class="field"><label>कमेटी का नाम</label><input id="bcName" placeholder="जैसे: गांव कमेटी 2026"></div>
+      
+      <!-- NEW DETAILED INPUTS -->
       <div class="row">
-        <div class="field"><label>किस्त राशि (₹)</label><input id="bcAmount" type="number" placeholder="उदा. 5000"></div>
+        <div class="field"><label>किस्त राशि (₹)</label><input id="bcAmount" type="number" placeholder="उदा. 100"></div>
         <div class="field">
           <label>किस्त का समय</label>
           <select id="freq">
@@ -194,6 +177,12 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
           </select>
         </div>
       </div>
+      
+      <div class="row">
+        <div class="field"><label>कुल किश्तें (कितनी बार?)</label><input id="totalInst" type="number" placeholder="उदा. 50"></div>
+        <div class="field"><label>खुलने पर कितना मिलेगा? (₹)</label><input id="totalPool" type="number" placeholder="उदा. 5000"></div>
+      </div>
+
       <div class="row">
         <div class="field"><label>शुरुआत तिथि</label><input id="startDate" type="date"></div>
         <div class="field"><label>मालिक का नाम</label><input id="ownerName"></div>
@@ -202,7 +191,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 
     <div class="card">
       <h2>👥 सदस्य जोड़ें</h2>
-      <div class="field"><label>कुल सदस्य संख्या</label><input id="memberCount" type="number" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
+      <div class="field"><label>कुल सदस्य संख्या</label><input id="memberCount" type="number" placeholder="उदा. 6" oninput="buildMemberInputs()"></div>
       <div id="memberInputs"></div>
     </div>
     
@@ -235,7 +224,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       <div class="msg ok" style="margin-top: 20px;">✓ Admin ID Verified</div>
     </div>
   </section>
-
 </main>
 
 <nav id="mainNav" class="bottom-nav hidden">
@@ -263,15 +251,12 @@ function appAlert(text) {
     document.getElementById('modalOk').onclick = () => { m.classList.add('hidden'); res(); };
   });
 }
-
 function genCode() { return Math.random().toString(36).substring(2, 10).toUpperCase(); }
 
 async function shareApp() {
   const shareData = { title: 'कमेटी खाता', text: '💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप अभी डाउनलोड करें:\n\n' + APP_LINK };
-  try {
-    if (navigator.share) await navigator.share(shareData);
-    else window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank');
-  } catch (err) { window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank'); }
+  try { if (navigator.share) await navigator.share(shareData); else window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank'); } 
+  catch (err) { window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank'); }
 }
 
 function switchAuth(mode) {
@@ -338,16 +323,19 @@ async function createBC() {
   const amount = document.getElementById('bcAmount').value;
   const freqVal = document.getElementById('freq').value;
   const freqText = document.getElementById('freq').options[document.getElementById('freq').selectedIndex].text;
+  const totalInst = document.getElementById('totalInst').value;
+  const totalPool = document.getElementById('totalPool').value;
   const ownerName = document.getElementById('ownerName').value;
-  const inps = document.querySelectorAll('.mem-name');
   
+  const inps = document.querySelectorAll('.mem-name');
   let members = [];
   inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paid: false }); });
-  if(!name || !amount || members.length === 0) return appAlert('कृपया जानकारी भरें और सदस्य जोड़ें');
+  
+  if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert('कृपया सभी जानकारी (किश्तें और राशि) भरें!');
   if(!members.some(m => m.name === ownerName)) members.unshift({ name: ownerName, paid: true });
 
   const code = genCode();
-  const bcData = { code, name, amount, freqText, freqVal, ownerName, members, startDate: document.getElementById('startDate').value };
+  const bcData = { code, name, amount, freqText, freqVal, totalInst, totalPool, ownerName, members, startDate: document.getElementById('startDate').value };
   
   document.getElementById('createBtn').textContent = "सेव हो रहा है...";
   try {
@@ -388,7 +376,6 @@ async function renderMyList() {
   document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size: 40px; margin-bottom: 12px;">📋</div><p>कोई कमेटी नहीं है</p></div>`;
 }
 
-// Global variable for total pool to use in winner modal
 let currentTotalPool = 0;
 
 async function loadDash() {
@@ -399,26 +386,26 @@ async function loadDash() {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     const bc = (await res.json()).data;
     
-    // ✨ NEW MATH CALCULATIONS ✨
     const totalMembers = bc.members.length;
-    currentTotalPool = bc.amount * totalMembers;
-    const durationType = bc.freqText || (bc.freqVal === 'monthly' ? 'महीना' : 'हफ़्ता');
-    const totalDurationText = `${totalMembers} ${durationType}`;
+    // Naya Data Use karein (Purane data ke liye fallback)
+    currentTotalPool = bc.totalPool || (bc.amount * totalMembers); 
+    const totalInstText = bc.totalInst ? `${bc.totalInst} बार` : `${totalMembers} ${bc.freqText}`;
+    const freqDisplay = bc.freqText || 'हफ़्ता';
     
     document.getElementById('dashTitle').textContent = '📊 ' + bc.name;
     document.getElementById('dash').innerHTML = `
       <div class="stats">
-        <div class="stat"><b>₹${bc.amount}</b><span>किस्त</span></div>
+        <div class="stat"><b>₹${bc.amount}</b><span>किस्त (${freqDisplay})</span></div>
         <div class="stat"><b>${totalMembers}</b><span>कुल सदस्य</span></div>
         <div class="stat stat-pool">
-          <b>₹${currentTotalPool.toLocaleString('en-IN')}</b>
-          <span>कमेटी खुलने पर कुल राशि (${totalDurationText})</span>
+          <b>₹${Number(currentTotalPool).toLocaleString('en-IN')}</b>
+          <span>कमेटी खुलने पर मिलेगा</span>
+          <div class="sub-info">कुल किश्तें: ${totalInstText}</div>
         </div>
       </div>
       <p style="text-align: center; margin-top: 12px; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b></p>
     `;
     
-    // ✨ ADDED WINNER TROPHY BUTTON ✨
     document.getElementById('members').innerHTML = bc.members.map((m,i) => `
       <div class="member">
         <div style="display: flex; align-items: center; gap: 10px;">
@@ -440,13 +427,10 @@ async function markPaid(code, memberName) {
   } catch(e) { appAlert("इंटरनेट चेक करें"); }
 }
 
-// ✨ SHOW WINNER CELEBRATION ✨
 function declareWinner(name) {
   document.getElementById('winName').textContent = name;
-  document.getElementById('winAmount').textContent = currentTotalPool.toLocaleString('en-IN');
+  document.getElementById('winAmount').textContent = Number(currentTotalPool).toLocaleString('en-IN');
   document.getElementById('winnerModal').classList.remove('hidden');
-  
-  // (Optional) Here we can later add backend API call to save winner permanently
 }
 
 window.onload = () => {
