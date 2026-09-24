@@ -1,86 +1,373 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>कमेटी खाता</title>
+<title>Worker Management Portal</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7ff;color:#17213a}
-header{background:linear-gradient(135deg,#6c35ff,#00a8ff);color:#fff;padding:22px 18px;border-radius:0 0 25px 25px}
-header h1{margin:0;font-size:28px}header p{margin:7px 0 0;opacity:.9}
-main{max-width:850px;margin:auto;padding:15px 15px 90px}.card{background:#fff;border-radius:18px;padding:18px;margin:13px 0;box-shadow:0 5px 20px #00000010}
-h2{margin:0 0 12px;font-size:21px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-input,select,button{width:100%;padding:13px;border-radius:11px;border:1px solid #d8ddec;font-size:15px}button{border:0;background:#6035e8;color:#fff;font-weight:bold;cursor:pointer}
-button.secondary{background:#e9edff;color:#362a8c}.demo{background:linear-gradient(135deg,#fff0a8,#ffd56a);color:#493600}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:center;gap:6px;padding:8px;z-index:5}nav button{max-width:170px;padding:10px;font-size:13px}
-.hidden{display:none}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#f1f4ff;border-radius:13px;padding:12px;text-align:center}.stat b{display:block;font-size:20px}
-.member{padding:12px;border:1px solid #e1e4ef;border-radius:12px;margin:8px 0}.tag{display:inline-block;padding:4px 8px;border-radius:20px;background:#eee;color:#333;font-size:12px}
-.warn{background:#fff1f1;border:1px solid #ffcaca;padding:12px;border-radius:12px;margin:8px 0}.ok{background:#ecfff3;border:1px solid #b8efc9;padding:12px;border-radius:12px}
-.small{font-size:13px;color:#68708a}.code{font-size:25px;font-weight:bold;letter-spacing:2px;background:#f0ecff;padding:12px;border-radius:12px;text-align:center}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6ff;
+padding-bottom:80px;
+}
+
+header{
+background:linear-gradient(135deg,#4f46e5,#2563eb);
+color:#fff;
+padding:20px;
+text-align:center;
+border-radius:0 0 20px 20px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:#fff;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+box-shadow:0 3px 12px rgba(0,0,0,.10);
+}
+
+input,button,select{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:10px;
+}
+
+button{
+background:#4f46e5;
+color:white;
+border:none;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#3730a3;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.worker{
+border:1px solid #ddd;
+padding:12px;
+border-radius:12px;
+margin-top:10px;
+}
+
+.hidden{
+display:none;
+}
+
+img{
+max-width:100px;
+margin-top:10px;
+border-radius:10px;
+}
+
+.stat{
+background:#eef2ff;
+padding:15px;
+text-align:center;
+border-radius:12px;
+}
+
+.stat h3{
+font-size:24px;
+color:#4f46e5;
+}
+
+@media(max-width:700px){
+.grid{
+grid-template-columns:1fr;
+}
+}
 </style>
 </head>
+
 <body>
-<header><h1>💰 कमेटी खाता</h1><p>आपकी कमेटी • आपका हिसाब • सुरक्षित ऑनलाइन</p></header>
-<main>
-<section id="home">
+
+<header>
+<h1>👷 Worker Management Portal</h1>
+<p>Admin & Worker Dashboard</p>
+</header>
+
+<div class="container">
+
 <div class="card">
-<h2>कमेटी खाता में आपका स्वागत है</h2>
-<p>पहले Demo देखकर ऐप का पूरा तरीका समझें। पसंद आए तो अपनी नई कमेटी बनाएं।</p>
-<div class="grid"><button class="demo" onclick="show('demo')">👀 Demo देखें</button><button onclick="show('create')">➕ नई कमेटी बनाएं</button></div>
-</div>
-<div class="card"><h2>🔐 सदस्य प्रवेश</h2><p class="small">अपनी कमेटी का Access Code डालकर अपनी कमेटी देखें।</p><input id="accessCode" placeholder="Member Access Code"><br><br><button onclick="join()">प्रवेश करें</button></div>
-<div class="card"><h2>यह कैसे काम करता है?</h2><p>① कमेटी बनाएं → ② Code सदस्यों को दें → ③ किस्तों का हिसाब रखें → ④ बकाया पर चेतावनी पाएं</p></div>
-</section>
+<h2>🔐 Admin Login</h2>
 
-<section id="create" class="hidden">
-<div class="card"><h2>➕ नई कमेटी बनाएं</h2>
-<div class="grid"><input id="bcName" placeholder="कमेटी का नाम"><input id="bcAmount" type="number" placeholder="किस्त की रकम">
-<select id="freq"><option value="monthly">मासिक</option><option value="weekly">साप्ताहिक</option></select><input id="startDate" type="date"></div>
-<br><input id="ownerName" placeholder="कमेटी बनाने वाले का नाम"><br><br>
-<button onclick="createBC()">कमेटी बनाएं</button>
-</div>
-<div id="created" class="card hidden"></div>
-</section>
+<input id="adminUser" placeholder="Username">
+<input id="adminPass" type="password" placeholder="Password">
 
-<section id="demo" class="hidden">
-<div class="card"><h2>👀 Demo कमेटी</h2><p class="small">यह केवल समझने के लिए है। इसमें असली भुगतान नहीं होता।</p>
-<div class="code">DEMO-2026</div>
-<div class="stats"><div class="stat"><b>₹5,000</b>किस्त</div><div class="stat"><b>10</b>सदस्य</div><div class="stat"><b>₹50,000</b>कुल</div></div>
-</div>
-<div class="card"><h2>👥 सदस्य</h2><div id="demoMembers"></div></div>
-<div class="card"><h2>⚠️ बकाया चेतावनी</h2><div class="warn">रमेश की ₹5,000 की किस्त 5 दिन से बाकी है। कृपया जल्द भुगतान करें।</div><button onclick="demoWA()">WhatsApp reminder देखें</button></div>
-</section>
+<button onclick="adminLogin()">Login</button>
 
-<section id="dashboard" class="hidden">
-<div class="card"><h2 id="dashTitle">Dashboard</h2><div id="dash"></div></div>
-<div class="card"><h2>👥 सदस्य</h2><div id="members"></div></div>
-<div class="card"><h2>⚠️ बकाया चेतावनी</h2><div id="warnings"></div></div>
-<button class="secondary" onclick="logout()">लॉगआउट</button>
-</section>
-</main>
-<nav><button onclick="show('home')">🏠 होम</button><button onclick="show('demo')">👀 Demo</button><button onclick="show('create')">➕ नई कमेटी</button></nav>
+<p style="margin-top:10px;">
+Default Login: <b>admin</b> / <b>12345</b>
+</p>
+</div>
+
+<div id="dashboard" class="hidden">
+
+<div class="card">
+<h2>📊 Dashboard</h2>
+
+<div class="grid">
+<div class="stat">
+<h3 id="totalWorkers">0</h3>
+<p>Total Workers</p>
+</div>
+
+<div class="stat">
+<h3 id="totalAttendance">0</h3>
+<p>Total Attendance</p>
+</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>➕ Register Worker</h2>
+
+<input id="name" placeholder="Worker Name">
+
+<input id="father" placeholder="Father Name">
+
+<input id="mobile" placeholder="Mobile Number">
+
+<input id="aadhaar" placeholder="Aadhaar Number">
+
+<input id="salary" placeholder="Monthly Salary">
+
+<input id="work" placeholder="Work Type">
+
+<input id="photo" type="file" accept="image/*">
+
+<button onclick="registerWorker()">
+Register Worker
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🔍 Search Worker</h2>
+
+<input id="search" placeholder="Search Worker" onkeyup="loadWorkers()">
+
+</div>
+
+<div class="card">
+
+<h2>👥 Worker List</h2>
+
+<div id="workerList"></div>
+
+</div>
+
+</div>
+
+</div>
 
 <script>
-const API='/api';
-let token=localStorage.getItem('kk_token');
-let demoMembers=['Member 1','Member 2','Member 3','Member 4','Member 5','Member 6','Member 7','Member 8','Member 9','Member 10'];
-function show(id){document.querySelectorAll('main>section').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='demo')renderDemo();if(id==='dashboard')loadDash()}
-function renderDemo(){demoMembers.forEach((n,i)=>{});document.getElementById('demoMembers').innerHTML=demoMembers.map((n,i)=>`<div class="member"><b>${i+1}. ${n}</b><span class="tag">${i===2?'बाकी':'भुगतान'}</span></div>`).join('')}
-function demoWA(){window.open('https://wa.me/?text='+encodeURIComponent('⚠️ कमेटी खाता किस्त भुगतान चेतावनी\\nआपकी ₹5,000 की कमेटी किस्त 5 दिन से बाकी है। कृपया जल्द भुगतान करें।'),'_blank')}
-async function api(path,opt={}){opt.headers=Object.assign({'Content-Type':'application/json'},opt.headers||{});if(token)opt.headers.Authorization='Bearer '+token;let r=await fetch(API+path,opt);let d=await r.json().catch(()=>({error:'Server से सही जवाब नहीं मिला'}));if(!r.ok)throw Error(d.error||'Request failed');return d}
-async function createBC(){
- try{
-  let d=await api('/bcs',{method:'POST',body:JSON.stringify({name:bcName.value,amount:Number(bcAmount.value),frequency:freq.value,startDate:startDate.value,ownerName:ownerName.value})});
-  token=d.token;localStorage.setItem('kk_token',token);
-  created.classList.remove('hidden');created.innerHTML=`<h2>✅ कमेटी बन गई</h2><p>यह जानकारी सुरक्षित रखें:</p><div class="code">${d.bc.code}</div><p><b>Owner Code:</b> ${d.ownerSecret}</p><p class="small">Owner Code दोबारा पूरा नहीं दिखाया जाएगा। सदस्यों को उनके अलग Access Code दें।</p>`;
- }catch(e){alert(e.message)}
+
+function adminLogin(){
+
+let u=document.getElementById("adminUser").value;
+let p=document.getElementById("adminPass").value;
+
+if(u==="admin" && p==="12345"){
+
+document.getElementById("dashboard")
+.classList.remove("hidden");
+
+loadWorkers();
+
+alert("Login Successful");
+
+}else{
+alert("Wrong Username or Password");
 }
-async function join(){try{let d=await api('/access',{method:'POST',body:JSON.stringify({accessCode:accessCode.value})});token=d.token;localStorage.setItem('kk_token',token);show('dashboard')}catch(e){alert(e.message)}}
-async function loadDash(){try{let d=await api('/me');dashTitle.textContent='📊 '+d.bc.name;dash.innerHTML=`<div class="stats"><div class="stat"><b>₹${d.bc.amount}</b>किस्त</div><div class="stat"><b>${d.members.length}</b>सदस्य</div><div class="stat"><b>${d.bc.frequency==='monthly'?'मासिक':'साप्ताहिक'}</b>प्रकार</div></div><p>Code: <b>${d.bc.code}</b></p>`;members.innerHTML=d.members.map((m,i)=>`<div class="member"><b>${i+1}. ${m.name}</b><br><span class="small">${m.phone||''}</span></div>`).join('');warnings.innerHTML=d.overdue?.length?d.overdue.map(w=>`<div class="warn">${w.message}<br><br><button onclick='wa(${JSON.stringify(w.message)},${JSON.stringify(w.phone||"")})'>WhatsApp</button></div>`).join(''):'<div class="ok">अभी कोई 3+ दिन पुरानी बकाया किस्त नहीं है।</div>'}catch(e){alert(e.message)}}
-function wa(msg,phone){let p=(phone||'').replace(/\D/g,'');window.open((p?'https://wa.me/'+p+'?text=':'https://wa.me/?text=')+encodeURIComponent(msg),'_blank')}
-function logout(){token=null;localStorage.removeItem('kk_token');show('home')}
-show('home');
-</script>
-</body>
-</html>
+
+}
+
+function registerWorker(){
+
+let file=document.getElementById("photo").files[0];
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let workers=
+JSON.parse(localStorage.getItem("workers")||"[]");
+
+let worker={
+
+id:"W"+Date.now(),
+
+name:document.getElementById("name").value,
+
+father:document.getElementById("father").value,
+
+mobile:document.getElementById("mobile").value,
+
+aadhaar:document.getElementById("aadhaar").value,
+
+salary:document.getElementById("salary").value,
+
+work:document.getElementById("work").value,
+
+attendance:0,
+
+photo:reader.result
+
+};
+
+workers.push(worker);
+
+localStorage.setItem(
+"workers",
+JSON.stringify(workers)
+);
+
+alert(
+"Worker Registered\nID: "+worker.id
+);
+
+loadWorkers();
+
+};
+
+if(file){
+reader.readAsDataURL(file);
+}else{
+reader.onload();
+}
+
+}
+
+function loadWorkers(){
+
+let workers=
+JSON.parse(localStorage.getItem("workers")||"[]");
+
+let search=
+document.getElementById("search")?.value?.toLowerCase()||"";
+
+workers=workers.filter(w=>
+w.name.toLowerCase().includes(search)
+);
+
+let html="";
+
+let totalAttendance=0;
+
+workers.forEach(w=>{
+
+totalAttendance+=Number(w.attendance);
+
+html+=`
+
+<div class="worker">
+
+${w.photo?
+`<img src="${w.photo}">`
+:""}
+
+<h3>${w.name}</h3>
+
+<p><b>ID:</b> ${w.id}</p>
+
+<p><b>Father:</b> ${w.father}</p>
+
+<p><b>Mobile:</b> ${w.mobile}</p>
+
+<p><b>Aadhaar:</b> ${w.aadhaar}</p>
+
+<p><b>Salary:</b> ₹${w.salary}</p>
+
+<p><b>Work:</b> ${w.work}</p>
+
+<p><b>Attendance:</b> ${w.attendance}</p>
+
+<button onclick="markAttendance('${w.id}')">
+✅ Present
+</button>
+
+<button onclick="deleteWorker('${w.id}')"
+style="background:red;margin-top:5px;">
+🗑 Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("workerList")
+.innerHTML=html;
+
+document.getElementById("totalWorkers")
+.innerText=workers.length;
+
+document.getElementById("totalAttendance")
+.innerText=totalAttendance;
+
+}
+
+function markAttendance(id){
+
+let workers=
+JSON.parse(localStorage.getItem("workers")||"[]");
+
+workers=workers.map(w=>{
+
+if(w.id===id){
+w.attendance++;
+}
+
+return w;
+
+});
+
+localStorage.setItem(
+"workers",
+JSON.stringify(workers)
+);
+
+loadWorkers();
+
+}
+
+function deleteWorker(id){
+
+if(!confirm("Delete Worker?")){
+return;
+}
+
+let workers=
+JSON.parse(localStorage.getItem("workers")||"[]");
+
+workers=
+workers.filter
