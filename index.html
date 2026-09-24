@@ -1,373 +1,455 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="hi">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Worker Management Portal</title>
-
+<title>कमेटी खाता</title>
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#f4f6ff;
-padding-bottom:80px;
-}
-
-header{
-background:linear-gradient(135deg,#4f46e5,#2563eb);
-color:#fff;
-padding:20px;
-text-align:center;
-border-radius:0 0 20px 20px;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:15px;
-}
-
-.card{
-background:#fff;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
-box-shadow:0 3px 12px rgba(0,0,0,.10);
-}
-
-input,button,select{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid #ccc;
-margin-top:10px;
-}
-
-button{
-background:#4f46e5;
-color:white;
-border:none;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-background:#3730a3;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.worker{
-border:1px solid #ddd;
-padding:12px;
-border-radius:12px;
-margin-top:10px;
-}
-
-.hidden{
-display:none;
-}
-
-img{
-max-width:100px;
-margin-top:10px;
-border-radius:10px;
-}
-
-.stat{
-background:#eef2ff;
-padding:15px;
-text-align:center;
-border-radius:12px;
-}
-
-.stat h3{
-font-size:24px;
-color:#4f46e5;
-}
-
-@media(max-width:700px){
-.grid{
-grid-template-columns:1fr;
-}
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f0f4ff;color:#17213a}
+header{background:linear-gradient(135deg,#6c35ff,#00a8ff);color:#fff;padding:22px 18px;border-radius:0 0 25px 25px;box-shadow:0 4px 15px rgba(108,53,255,.25)}
+header h1{margin:0;font-size:28px}
+header p{margin:7px 0 0;opacity:.9}
+main{max-width:850px;margin:auto;padding:15px 15px 90px}
+.card{background:#fff;border-radius:18px;padding:18px;margin:13px 0;box-shadow:0 5px 20px #00000012;transition:transform .15s ease}
+.card:active{transform:scale(.99)}
+h2{margin:0 0 12px;font-size:21px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+input,select,button{width:100%;padding:13px;border-radius:11px;border:1px solid #d8ddec;font-size:15px}
+input:focus,select:focus{outline:none;border-color:#6c35ff;box-shadow:0 0 0 3px rgba(108,53,255,.15)}
+button{border:0;background:#6035e8;color:#fff;font-weight:bold;cursor:pointer;transition:background .2s}
+button:hover{background:#4f2bc4}
+button.secondary{background:#e9edff;color:#362a8c}
+button.secondary:hover{background:#d8deff}
+.demo{background:linear-gradient(135deg,#fff0a8,#ffd56a);color:#493600}
+.demo:hover{background:linear-gradient(135deg,#ffe98a,#ffc84a)}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:center;gap:6px;padding:8px;z-index:5;box-shadow:0 -2px 10px #00000008}
+nav button{max-width:170px;padding:10px;font-size:13px}
+.hidden{display:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:#f1f4ff;border-radius:13px;padding:12px;text-align:center}
+.stat b{display:block;font-size:20px;color:#6035e8}
+.member{padding:12px;border:1px solid #e1e4ef;border-radius:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.tag{display:inline-block;padding:4px 8px;border-radius:20px;background:#eee;color:#333;font-size:12px}
+.tag.paid{background:#d4f5e0;color:#1a7a3c}
+.tag.due{background:#ffe0e0;color:#b91c1c}
+.warn{background:#fff1f1;border:1px solid #ffcaca;padding:12px;border-radius:12px;margin:8px 0}
+.ok{background:#ecfff3;border:1px solid #b8efc9;padding:12px;border-radius:12px}
+.small{font-size:13px;color:#68708a}
+.code{font-size:25px;font-weight:bold;letter-spacing:2px;background:#f0ecff;padding:12px;border-radius:12px;text-align:center;color:#4a2db8}
+.auth-box{max-width:400px;margin:30px auto}
+.tabs{display:flex;gap:0;margin-bottom:14px;border-radius:11px;overflow:hidden;border:1px solid #d8ddec}
+.tabs button{flex:1;border-radius:0;background:#f1f4ff;color:#362a8c;font-weight:600}
+.tabs button.active{background:#6035e8;color:#fff}
+.msg{padding:10px;border-radius:10px;margin:10px 0;font-size:14px;text-align:center}
+.msg.err{background:#fff1f1;color:#b91c1c;border:1px solid #ffcaca}
+.msg.ok{background:#ecfff3;color:#1a7a3c;border:1px solid #b8efc9}
+.user-bar{display:flex;justify-content:space-between;align-items:center;background:#f8f9ff;padding:10px 14px;border-radius:12px;margin-bottom:12px;font-size:14px}
+.user-bar span{color:#6035e8;font-weight:600}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
 </style>
 </head>
-
 <body>
-
 <header>
-<h1>👷 Worker Management Portal</h1>
-<p>Admin & Worker Dashboard</p>
+  <h1>💰 कमेटी खाता</h1>
+  <p>आपकी कमेटी • आपका हिसाब • सुरक्षित (बिना सर्वर)</p>
 </header>
 
-<div class="container">
+<main>
+  <!-- ========== AUTH (पहली बार नंबर + पासवर्ड) ========== -->
+  <section id="auth">
+    <div class="card auth-box">
+      <h2 style="text-align:center">🔐 सुरक्षित प्रवेश</h2>
+      <p class="small" style="text-align:center;margin-bottom:14px">पहली बार नंबर और पासवर्ड बनाएं। अगली बार लॉगिन करें। डेटा आपके फ़ोन में सुरक्षित रहता है।</p>
+      <div class="tabs">
+        <button id="tabReg" class="active" onclick="switchAuth('register')">नया अकाउंट</button>
+        <button id="tabLogin" onclick="switchAuth('login')">लॉगिन</button>
+      </div>
+      <div id="authMsg"></div>
+      <input id="authPhone" type="tel" placeholder="मोबाइल नंबर (10 अंक)" maxlength="10" inputmode="numeric">
+      <br><br>
+      <input id="authPass" type="password" placeholder="पासवर्ड (कम से कम 4 अक्षर)">
+      <br><br>
+      <div id="regExtra" class="hidden">
+        <input id="authName" placeholder="आपका नाम">
+        <br><br>
+      </div>
+      <button id="authBtn" onclick="doAuth()">अकाउंट बनाएं</button>
+    </div>
+  </section>
 
-<div class="card">
-<h2>🔐 Admin Login</h2>
+  <!-- ========== HOME ========== -->
+  <section id="home" class="hidden">
+    <div class="user-bar">
+      <span id="userInfo">👋</span>
+      <button class="secondary" style="width:auto;padding:6px 14px;font-size:13px" onclick="appLogout()">लॉगआउट</button>
+    </div>
+    <div class="card">
+      <h2>कमेटी खाता में आपका स्वागत है</h2>
+      <p>पहले Demo देखकर ऐप का पूरा तरीका समझें। पसंद आए तो अपनी नई कमेटी बनाएं।</p>
+      <div class="grid">
+        <button class="demo" onclick="show('demo')">👀 Demo देखें</button>
+        <button onclick="show('create')">➕ नई कमेटी बनाएं</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>🔐 सदस्य प्रवेश</h2>
+      <p class="small">अपनी कमेटी का Access Code डालकर अपनी कमेटी देखें।</p>
+      <input id="accessCode" placeholder="Member Access Code">
+      <br><br>
+      <button onclick="join()">प्रवेश करें</button>
+    </div>
+    <div class="card">
+      <h2>यह कैसे काम करता है?</h2>
+      <p>① कमेटी बनाएं → ② Code सदस्यों को दें → ③ किस्तों का हिसाब रखें → ④ बकाया पर चेतावनी पाएं</p>
+      <p class="small" style="margin-top:10px">💡 सब कुछ आपके फ़ोन में सुरक्षित है। कोई सर्वर या डेटाबेस नहीं।</p>
+    </div>
+  </section>
 
-<input id="adminUser" placeholder="Username">
-<input id="adminPass" type="password" placeholder="Password">
+  <!-- ========== CREATE ========== -->
+  <section id="create" class="hidden">
+    <div class="card">
+      <h2>➕ नई कमेटी बनाएं</h2>
+      <div class="grid">
+        <input id="bcName" placeholder="कमेटी का नाम">
+        <input id="bcAmount" type="number" placeholder="किस्त की रकम">
+        <select id="freq">
+          <option value="monthly">मासिक</option>
+          <option value="weekly">साप्ताहिक</option>
+        </select>
+        <input id="startDate" type="date">
+      </div>
+      <br>
+      <input id="ownerName" placeholder="कमेटी बनाने वाले का नाम">
+      <br><br>
+      <input id="memberNames" placeholder="सदस्यों के नाम (कॉमा से अलग, जैसे: रमेश, सुनीता, अमित)">
+      <br><br>
+      <button onclick="createBC()">कमेटी बनाएं</button>
+    </div>
+    <div id="created" class="card hidden"></div>
+  </section>
 
-<button onclick="adminLogin()">Login</button>
+  <!-- ========== DEMO ========== -->
+  <section id="demo" class="hidden">
+    <div class="card">
+      <h2>👀 Demo कमेटी</h2>
+      <p class="small">यह केवल समझने के लिए है। इसमें असली भुगतान नहीं होता।</p>
+      <div class="code">DEMO-2026</div>
+      <div class="stats">
+        <div class="stat"><b>₹5,000</b>किस्त</div>
+        <div class="stat"><b>10</b>सदस्य</div>
+        <div class="stat"><b>₹50,000</b>कुल</div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>👥 सदस्य</h2>
+      <div id="demoMembers"></div>
+    </div>
+    <div class="card">
+      <h2>⚠️ बकाया चेतावनी</h2>
+      <div class="warn">रमेश की ₹5,000 की किस्त 5 दिन से बाकी है। कृपया जल्द भुगतान करें।</div>
+      <button onclick="demoWA()">WhatsApp reminder देखें</button>
+    </div>
+  </section>
 
-<p style="margin-top:10px;">
-Default Login: <b>admin</b> / <b>12345</b>
-</p>
-</div>
+  <!-- ========== DASHBOARD ========== -->
+  <section id="dashboard" class="hidden">
+    <div class="card">
+      <h2 id="dashTitle">Dashboard</h2>
+      <div id="dash"></div>
+    </div>
+    <div class="card">
+      <h2>👥 सदस्य</h2>
+      <div id="members"></div>
+    </div>
+    <div class="card">
+      <h2>⚠️ बकाया चेतावनी</h2>
+      <div id="warnings"></div>
+    </div>
+    <button class="secondary" onclick="show('home')">← होम पर जाएं</button>
+  </section>
+</main>
 
-<div id="dashboard" class="hidden">
-
-<div class="card">
-<h2>📊 Dashboard</h2>
-
-<div class="grid">
-<div class="stat">
-<h3 id="totalWorkers">0</h3>
-<p>Total Workers</p>
-</div>
-
-<div class="stat">
-<h3 id="totalAttendance">0</h3>
-<p>Total Attendance</p>
-</div>
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>➕ Register Worker</h2>
-
-<input id="name" placeholder="Worker Name">
-
-<input id="father" placeholder="Father Name">
-
-<input id="mobile" placeholder="Mobile Number">
-
-<input id="aadhaar" placeholder="Aadhaar Number">
-
-<input id="salary" placeholder="Monthly Salary">
-
-<input id="work" placeholder="Work Type">
-
-<input id="photo" type="file" accept="image/*">
-
-<button onclick="registerWorker()">
-Register Worker
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>🔍 Search Worker</h2>
-
-<input id="search" placeholder="Search Worker" onkeyup="loadWorkers()">
-
-</div>
-
-<div class="card">
-
-<h2>👥 Worker List</h2>
-
-<div id="workerList"></div>
-
-</div>
-
-</div>
-
-</div>
+<nav id="mainNav" class="hidden">
+  <button onclick="show('home')">🏠 होम</button>
+  <button onclick="show('demo')">👀 Demo</button>
+  <button onclick="show('create')">➕ नई कमेटी</button>
+</nav>
 
 <script>
-
-function adminLogin(){
-
-let u=document.getElementById("adminUser").value;
-let p=document.getElementById("adminPass").value;
-
-if(u==="admin" && p==="12345"){
-
-document.getElementById("dashboard")
-.classList.remove("hidden");
-
-loadWorkers();
-
-alert("Login Successful");
-
-}else{
-alert("Wrong Username or Password");
-}
-
-}
-
-function registerWorker(){
-
-let file=document.getElementById("photo").files[0];
-
-let reader=new FileReader();
-
-reader.onload=function(){
-
-let workers=
-JSON.parse(localStorage.getItem("workers")||"[]");
-
-let worker={
-
-id:"W"+Date.now(),
-
-name:document.getElementById("name").value,
-
-father:document.getElementById("father").value,
-
-mobile:document.getElementById("mobile").value,
-
-aadhaar:document.getElementById("aadhaar").value,
-
-salary:document.getElementById("salary").value,
-
-work:document.getElementById("work").value,
-
-attendance:0,
-
-photo:reader.result
-
+/* ========== LOCAL STORAGE KEYS ========== */
+const KEYS = {
+  user: 'kk_user',          // {phone, pass, name}
+  session: 'kk_session',    // logged-in phone
+  bcs: 'kk_bcs',            // array of committees
+  current: 'kk_current'     // current access code for dashboard
 };
 
-workers.push(worker);
-
-localStorage.setItem(
-"workers",
-JSON.stringify(workers)
-);
-
-alert(
-"Worker Registered\nID: "+worker.id
-);
-
-loadWorkers();
-
-};
-
-if(file){
-reader.readAsDataURL(file);
-}else{
-reader.onload();
+/* ========== HELPERS ========== */
+function load(key, def) {
+  try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
+}
+function save(key, val) {
+  localStorage.setItem(key, JSON.stringify(val));
+}
+function genCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let c = '';
+  for (let i = 0; i < 8; i++) c += chars[Math.floor(Math.random() * chars.length)];
+  return c;
+}
+function today() {
+  return new Date().toISOString().slice(0, 10);
 }
 
+/* ========== AUTH ========== */
+function switchAuth(mode) {
+  const isReg = mode === 'register';
+  document.getElementById('tabReg').classList.toggle('active', isReg);
+  document.getElementById('tabLogin').classList.toggle('active', !isReg);
+  document.getElementById('regExtra').classList.toggle('hidden', !isReg);
+  document.getElementById('authBtn').textContent = isReg ? 'अकाउंट बनाएं' : 'लॉगिन करें';
+  document.getElementById('authMsg').innerHTML = '';
 }
 
-function loadWorkers(){
+function doAuth() {
+  const phone = (document.getElementById('authPhone').value || '').replace(/\D/g, '');
+  const pass = document.getElementById('authPass').value || '';
+  const name = (document.getElementById('authName').value || '').trim();
+  const isReg = document.getElementById('tabReg').classList.contains('active');
+  const msg = document.getElementById('authMsg');
 
-let workers=
-JSON.parse(localStorage.getItem("workers")||"[]");
+  if (phone.length !== 10) {
+    msg.innerHTML = '<div class="msg err">कृपया सही 10 अंकों का मोबाइल नंबर डालें</div>';
+    return;
+  }
+  if (pass.length < 4) {
+    msg.innerHTML = '<div class="msg err">पासवर्ड कम से कम 4 अक्षर का होना चाहिए</div>';
+    return;
+  }
 
-let search=
-document.getElementById("search")?.value?.toLowerCase()||"";
+  const existing = load(KEYS.user, null);
 
-workers=workers.filter(w=>
-w.name.toLowerCase().includes(search)
-);
-
-let html="";
-
-let totalAttendance=0;
-
-workers.forEach(w=>{
-
-totalAttendance+=Number(w.attendance);
-
-html+=`
-
-<div class="worker">
-
-${w.photo?
-`<img src="${w.photo}">`
-:""}
-
-<h3>${w.name}</h3>
-
-<p><b>ID:</b> ${w.id}</p>
-
-<p><b>Father:</b> ${w.father}</p>
-
-<p><b>Mobile:</b> ${w.mobile}</p>
-
-<p><b>Aadhaar:</b> ${w.aadhaar}</p>
-
-<p><b>Salary:</b> ₹${w.salary}</p>
-
-<p><b>Work:</b> ${w.work}</p>
-
-<p><b>Attendance:</b> ${w.attendance}</p>
-
-<button onclick="markAttendance('${w.id}')">
-✅ Present
-</button>
-
-<button onclick="deleteWorker('${w.id}')"
-style="background:red;margin-top:5px;">
-🗑 Delete
-</button>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("workerList")
-.innerHTML=html;
-
-document.getElementById("totalWorkers")
-.innerText=workers.length;
-
-document.getElementById("totalAttendance")
-.innerText=totalAttendance;
-
+  if (isReg) {
+    if (existing && existing.phone === phone) {
+      msg.innerHTML = '<div class="msg err">यह नंबर पहले से रजिस्टर है। लॉगिन करें।</div>';
+      return;
+    }
+    if (!name) {
+      msg.innerHTML = '<div class="msg err">कृपया अपना नाम डालें</div>';
+      return;
+    }
+    save(KEYS.user, { phone, pass, name });
+    save(KEYS.session, phone);
+    msg.innerHTML = '<div class="msg ok">अकाउंट बन गया! स्वागत है 🎉</div>';
+    setTimeout(enterApp, 700);
+  } else {
+    if (!existing || existing.phone !== phone || existing.pass !== pass) {
+      msg.innerHTML = '<div class="msg err">नंबर या पासवर्ड गलत है</div>';
+      return;
+    }
+    save(KEYS.session, phone);
+    enterApp();
+  }
 }
 
-function markAttendance(id){
-
-let workers=
-JSON.parse(localStorage.getItem("workers")||"[]");
-
-workers=workers.map(w=>{
-
-if(w.id===id){
-w.attendance++;
+function enterApp() {
+  const user = load(KEYS.user, null);
+  if (!user) return;
+  document.getElementById('auth').classList.add('hidden');
+  document.getElementById('mainNav').classList.remove('hidden');
+  document.getElementById('userInfo').textContent = '👋 ' + (user.name || user.phone);
+  show('home');
 }
 
-return w;
-
-});
-
-localStorage.setItem(
-"workers",
-JSON.stringify(workers)
-);
-
-loadWorkers();
-
+function appLogout() {
+  localStorage.removeItem(KEYS.session);
+  document.getElementById('mainNav').classList.add('hidden');
+  document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+  document.getElementById('auth').classList.remove('hidden');
+  document.getElementById('authPhone').value = '';
+  document.getElementById('authPass').value = '';
+  document.getElementById('authName').value = '';
+  document.getElementById('authMsg').innerHTML = '';
+  switchAuth('login');
 }
 
-function deleteWorker(id){
-
-if(!confirm("Delete Worker?")){
-return;
+/* ========== NAV ========== */
+function show(id) {
+  document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  if (id === 'demo') renderDemo();
+  if (id === 'dashboard') loadDash();
+  if (id === 'create') {
+    document.getElementById('created').classList.add('hidden');
+    const user = load(KEYS.user, null);
+    if (user && user.name) document.getElementById('ownerName').value = user.name;
+  }
 }
 
-let workers=
-JSON.parse(localStorage.getItem("workers")||"[]");
+/* ========== DEMO ========== */
+const demoMembers = ['रमेश','सुनीता','अमित','प्रिया','विकास','अनीता','सुरेश','मीना','राजेश','कविता'];
+function renderDemo() {
+  document.getElementById('demoMembers').innerHTML = demoMembers.map((n, i) =>
+    `<div class="member"><b>${i + 1}. ${n}</b><span class="tag ${i === 2 ? 'due' : 'paid'}">${i === 2 ? 'बाकी' : 'भुगतान'}</span></div>`
+  ).join('');
+}
+function demoWA() {
+  window.open('https://wa.me/?text=' + encodeURIComponent('⚠️ कमेटी खाता किस्त भुगतान चेतावनी\nआपकी ₹5,000 की कमेटी किस्त 5 दिन से बाकी है। कृपया जल्द भुगतान करें।'), '_blank');
+}
 
-workers=
-workers.filter
+/* ========== CREATE COMMITTEE (local) ========== */
+function createBC() {
+  const name = (document.getElementById('bcName').value || '').trim();
+  const amount = Number(document.getElementById('bcAmount').value);
+  const frequency = document.getElementById('freq').value;
+  const startDate = document.getElementById('startDate').value || today();
+  const ownerName = (document.getElementById('ownerName').value || '').trim();
+  const memberStr = (document.getElementById('memberNames').value || '').trim();
+
+  if (!name || !amount || amount <= 0) {
+    alert('कृपया कमेटी का नाम और सही किस्त रकम डालें');
+    return;
+  }
+  if (!ownerName) {
+    alert('कृपया बनाने वाले का नाम डालें');
+    return;
+  }
+
+  const members = memberStr
+    ? memberStr.split(',').map(s => s.trim()).filter(Boolean).map(n => ({ name: n, phone: '', paid: false }))
+    : [{ name: ownerName, phone: '', paid: true }];
+
+  // owner always first
+  if (!members.some(m => m.name === ownerName)) {
+    members.unshift({ name: ownerName, phone: '', paid: true });
+  }
+
+  const code = genCode();
+  const ownerSecret = genCode() + '-' + genCode().slice(0, 4);
+
+  const bc = {
+    code,
+    ownerSecret,
+    name,
+    amount,
+    frequency,
+    startDate,
+    ownerName,
+    members,
+    createdAt: new Date().toISOString()
+  };
+
+  const all = load(KEYS.bcs, []);
+  all.push(bc);
+  save(KEYS.bcs, all);
+  save(KEYS.current, code);
+
+  const created = document.getElementById('created');
+  created.classList.remove('hidden');
+  created.innerHTML = `
+    <h2>✅ कमेटी बन गई</h2>
+    <p>यह जानकारी सुरक्षित रखें (स्क्रीनशॉट ले लें):</p>
+    <div class="code">${code}</div>
+    <p><b>Owner Code:</b> ${ownerSecret}</p>
+    <p class="small">Access Code सदस्यों को दें। Owner Code सिर्फ आपके पास रखें।</p>
+    <br>
+    <button onclick="show('dashboard')">Dashboard खोलें</button>
+  `;
+}
+
+/* ========== JOIN ========== */
+function join() {
+  const code = (document.getElementById('accessCode').value || '').trim().toUpperCase();
+  if (!code) {
+    alert('Access Code डालें');
+    return;
+  }
+  const all = load(KEYS.bcs, []);
+  const found = all.find(b => b.code === code || b.ownerSecret === code);
+  if (!found) {
+    alert('गलत Access Code। कोई कमेटी नहीं मिली।');
+    return;
+  }
+  save(KEYS.current, found.code);
+  show('dashboard');
+}
+
+/* ========== DASHBOARD ========== */
+function loadDash() {
+  const code = load(KEYS.current, null);
+  const all = load(KEYS.bcs, []);
+  const bc = all.find(b => b.code === code);
+  if (!bc) {
+    alert('कमेटी नहीं मिली');
+    show('home');
+    return;
+  }
+
+  document.getElementById('dashTitle').textContent = '📊 ' + bc.name;
+  document.getElementById('dash').innerHTML = `
+    <div class="stats">
+      <div class="stat"><b>₹${bc.amount.toLocaleString('en-IN')}</b>किस्त</div>
+      <div class="stat"><b>${bc.members.length}</b>सदस्य</div>
+      <div class="stat"><b>${bc.frequency === 'monthly' ? 'मासिक' : 'साप्ताहिक'}</b>प्रकार</div>
+    </div>
+    <p style="margin-top:12px">Code: <b>${bc.code}</b></p>
+    <p class="small">शुरुआत: ${bc.startDate} • मालिक: ${bc.ownerName}</p>
+  `;
+
+  document.getElementById('members').innerHTML = bc.members.map((m, i) =>
+    `<div class="member">
+      <div><b>${i + 1}. ${m.name}</b><br><span class="small">${m.phone || ''}</span></div>
+      <span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? 'भुगतान' : 'बाकी'}</span>
+    </div>`
+  ).join('');
+
+  // simple overdue simulation: any unpaid member
+  const unpaid = bc.members.filter(m => !m.paid);
+  if (unpaid.length) {
+    document.getElementById('warnings').innerHTML = unpaid.map(m => {
+      const msg = `⚠️ ${m.name} की ₹${bc.amount.toLocaleString('en-IN')} की किस्त बाकी है। कृपया जल्द भुगतान करें।`;
+      return `<div class="warn">${msg}<br><br>
+        <button onclick='wa(${JSON.stringify(msg)},${JSON.stringify(m.phone || "")})'>WhatsApp भेजें</button>
+        <button class="secondary" style="margin-top:8px" onclick="markPaid('${bc.code}','${m.name}')">भुगतान हो गया ✓</button>
+      </div>`;
+    }).join('');
+  } else {
+    document.getElementById('warnings').innerHTML = '<div class="ok">अभी कोई बकाया किस्त नहीं है। सब ठीक है! 🎉</div>';
+  }
+}
+
+function markPaid(code, memberName) {
+  const all = load(KEYS.bcs, []);
+  const bc = all.find(b => b.code === code);
+  if (!bc) return;
+  const m = bc.members.find(x => x.name === memberName);
+  if (m) m.paid = true;
+  save(KEYS.bcs, all);
+  loadDash();
+}
+
+function wa(msg, phone) {
+  const p = (phone || '').replace(/\D/g, '');
+  window.open((p ? 'https://wa.me/' + p + '?text=' : 'https://wa.me/?text=') + encodeURIComponent(msg), '_blank');
+}
+
+/* ========== INIT ========== */
+(function init() {
+  // set default date
+  const dateInput = document.getElementById('startDate');
+  if (dateInput) dateInput.value = today();
+
+  const session = load(KEYS.session, null);
+  const user = load(KEYS.user, null);
+  if (session && user && user.phone === session) {
+    enterApp();
+  } else {
+    // first time → register tab
+    switchAuth('register');
+    document.getElementById('auth').classList.remove('hidden');
+  }
+})();
+</script>
+</body>
+</html>
