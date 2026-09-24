@@ -165,7 +165,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       <h2>➕ नई कमेटी बनाएं</h2>
       <div class="field"><label>कमेटी का नाम</label><input id="bcName" placeholder="जैसे: गांव कमेटी 2026"></div>
       
-      <!-- NEW DETAILED INPUTS -->
       <div class="row">
         <div class="field"><label>किस्त राशि (₹)</label><input id="bcAmount" type="number" placeholder="उदा. 100"></div>
         <div class="field">
@@ -205,23 +204,33 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       <h2 id="dashTitle" style="font-size: 20px;">Dashboard</h2>
       <div id="dash">डेटा लोड हो रहा है...</div>
     </div>
-    <div class="card">
+    <div class="card" id="memberCard">
       <h2>👥 सभी सदस्य (विजेता चुनें 🏆)</h2>
       <p style="font-size:12px; color:#64748b; margin-bottom:12px;">कमेटी खुलने पर सदस्य के आगे बनी 🏆 दबाएं</p>
       <div id="members"></div>
     </div>
-    <div class="card" style="border-color: #fecaca; background: #fffcfc;">
+    <div class="card" id="warningCard" style="border-color: #fecaca; background: #fffcfc;">
       <h2>⚠️ बकाया विवरण</h2>
       <div id="warnings"></div>
     </div>
   </section>
 
-  <!-- ADMIN PANEL -->
+  <!-- ADMIN PANEL (DELETE FEATURE ADDED) -->
   <section id="admin" class="hidden">
     <div class="card" style="border: 2px solid #3b82f6;">
       <h2 style="color: #3b82f6;">👑 Admin Dashboard</h2>
       <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है।</p>
-      <div class="msg ok" style="margin-top: 20px;">✓ Admin ID Verified</div>
+      <div class="msg ok" style="margin-bottom: 20px;">✓ Admin ID Verified</div>
+    </div>
+
+    <div class="card" style="border: 2px solid #e11d48; background: #fff1f2;">
+      <h2 style="color: #e11d48;">🗑️ कमेटी डिलीट करें</h2>
+      <p style="margin-bottom: 16px; font-size: 13px; color: #9f1239;">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</p>
+      
+      <div class="field">
+        <input id="adminDelCode" placeholder="कमेटी कोड (उदा. A1B2C3D4)" style="text-transform: uppercase;">
+      </div>
+      <button class="btn btn-primary" style="background: #e11d48; box-shadow: none;" onclick="adminDeleteBC()">🗑️ डाटा हमेशा के लिए डिलीट करें</button>
     </div>
   </section>
 </main>
@@ -353,6 +362,8 @@ async function join() {
   try {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     if(!res.ok) throw new Error();
+    const data = await res.json();
+    if(data.data.isDeleted) return appAlert("यह कमेटी एडमिन द्वारा डिलीट कर दी गई है।");
     let joined = load(KEYS.joined, []);
     if(!joined.includes(code)) { joined.push(code); save(KEYS.joined, joined); }
     save(KEYS.current, code); document.getElementById('accessCode').value = ''; show('dashboard');
@@ -367,6 +378,11 @@ async function renderMyList() {
       let res = await fetch(`${API_URL}/api/bcs?code=${c}`);
       if(res.ok) {
         let bc = (await res.json()).data;
+        if(bc.isDeleted) {
+           let joined = load(KEYS.joined, []);
+           save(KEYS.joined, joined.filter(x => x !== bc.code));
+           continue;
+        }
         html += `<div class="bc-item" onclick="save(KEYS.current, '${bc.code}'); show('dashboard')">
           <div><b style="display:block; font-size:16px; margin-bottom:4px;">${bc.name}</b><span class="small" style="font-weight: 600;">Code: ${bc.code}</span></div>
           <span style="font-size: 20px; color: #cbd5e1;">›</span></div>`;
@@ -386,8 +402,19 @@ async function loadDash() {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     const bc = (await res.json()).data;
     
+    // Check if deleted
+    if(bc.isDeleted) {
+        document.getElementById('dashTitle').textContent = '❌ डिलीट हो गई';
+        document.getElementById('dash').innerHTML = '<div class="warn" style="text-align:center;">यह कमेटी एडमिन द्वारा हमेशा के लिए डिलीट कर दी गई है।</div>';
+        document.getElementById('memberCard').classList.add('hidden');
+        document.getElementById('warningCard').classList.add('hidden');
+        return;
+    }
+    
+    document.getElementById('memberCard').classList.remove('hidden');
+    document.getElementById('warningCard').classList.remove('hidden');
+
     const totalMembers = bc.members.length;
-    // Naya Data Use karein (Purane data ke liye fallback)
     currentTotalPool = bc.totalPool || (bc.amount * totalMembers); 
     const totalInstText = bc.totalInst ? `${bc.totalInst} बार` : `${totalMembers} ${bc.freqText}`;
     const freqDisplay = bc.freqText || 'हफ़्ता';
@@ -431,6 +458,46 @@ function declareWinner(name) {
   document.getElementById('winName').textContent = name;
   document.getElementById('winAmount').textContent = Number(currentTotalPool).toLocaleString('en-IN');
   document.getElementById('winnerModal').classList.remove('hidden');
+}
+
+// ✨ NEW: ADMIN DELETE FUNCTION ✨
+async function adminDeleteBC() {
+  const code = document.getElementById('adminDelCode').value.trim().toUpperCase();
+  if(!code) return appAlert("कृपया कमेटी का Code डालें!");
+  
+  if(!confirm("⚠️ चेतावनी!\nक्या आप सच में कमेटी '" + code + "' को हमेशा के लिए डिलीट करना चाहते हैं? यह वापस नहीं आएगी।")) return;
+  
+  try {
+    const getRes = await fetch(`${API_URL}/api/bcs?code=${code}`);
+    if(!getRes.ok) return appAlert("यह कोड मौजूद नहीं है या पहले ही डिलीट हो चुका है!");
+    
+    const existingData = (await getRes.json()).data;
+    
+    // Override the data to empty it completely
+    existingData.name = "❌ यह कमेटी डिलीट कर दी गई है";
+    existingData.members = [];
+    existingData.isDeleted = true;
+    existingData.amount = 0;
+    
+    // Save empty data back to cloudflare (Soft Delete without touching Worker code)
+    await fetch(`${API_URL}/api/bcs`, { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      body: JSON.stringify(existingData) 
+    });
+    
+    appAlert("✅ कमेटी सफलतापूर्वक डिलीट हो गई!");
+    
+    // Remove from Admin's own local list
+    let joined = load(KEYS.joined, []);
+    joined = joined.filter(c => c !== code);
+    save(KEYS.joined, joined);
+    if(load(KEYS.current) === code) localStorage.removeItem(KEYS.current);
+    
+    document.getElementById('adminDelCode').value = '';
+  } catch(e) {
+    appAlert("डिलीट नहीं हो पाया। इंटरनेट चेक करें।");
+  }
 }
 
 window.onload = () => {
