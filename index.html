@@ -9,28 +9,21 @@
 <style>
 /* PREMIUM THEME COLORS */
 :root { 
-  --primary: #1e293b; 
-  --primary-dark: #0f172a; 
-  --accent: #3b82f6; 
-  --bg: #f8fafc; 
-  --card: #ffffff; 
-  --text: #334155; 
-  --muted: #64748b; 
-  --border: #e2e8f0; 
-  --success: #059669; 
-  --danger: #e11d48; 
-  --warn-bg: #fff1f2; 
-  --ok-bg: #ecfdf5; 
-  --radius: 20px; 
+  --primary: #1e293b; --primary-dark: #0f172a; --accent: #3b82f6; 
+  --bg: #f8fafc; --card: #ffffff; --text: #334155; --muted: #64748b; 
+  --border: #e2e8f0; --success: #059669; --danger: #e11d48; 
+  --warn-bg: #fff1f2; --ok-bg: #ecfdf5; --radius: 20px; 
   --shadow: 0 10px 25px rgba(0,0,0,0.05); 
 }
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 85px; }
 
 /* TOP BAR */
-.topbar { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; padding: 24px 20px; border-radius: 0 0 32px 32px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2); text-align: center; }
-.topbar h1 { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; }
-.topbar p { font-size: 13px; opacity: 0.8; margin-top: 6px; font-weight: 500; }
+.topbar { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; padding: 24px 20px; border-radius: 0 0 32px 32px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2); }
+.topbar-text h1 { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
+.topbar-text p { font-size: 13px; opacity: 0.8; margin-top: 4px; font-weight: 500; }
+.topbar-share { background: rgba(255,255,255,0.15); border: none; color: #fff; padding: 10px 14px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; gap: 6px; align-items: center; transition: background 0.2s; }
+.topbar-share:active { background: rgba(255,255,255,0.25); transform: scale(0.95); }
 
 main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; }
 
@@ -42,12 +35,12 @@ main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: r
 /* INPUTS */
 .field { margin-bottom: 16px; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-input, select { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--border); font-size: 15px; background: #f8fafc; color: var(--text); transition: all 0.3s ease; font-weight: 500; }
+input, select { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--border); font-size: 15px; background: #f8fafc; color: var(--text); font-weight: 500; }
 input:focus, select:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 /* BUTTONS */
-.btn { width: 100%; padding: 15px; border: none; border-radius: 14px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px; }
+.btn { width: 100%; padding: 15px; border: none; border-radius: 14px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
 .btn:active { transform: scale(0.97); }
 .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2); }
 .btn-secondary { background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); }
@@ -57,7 +50,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 /* AUTH TABS */
 .auth-wrap { max-width: 400px; margin: 30px auto 0; }
 .tabs { display: flex; background: #f1f5f9; border-radius: 14px; padding: 5px; margin-bottom: 20px; }
-.tabs button { flex: 1; padding: 12px; border: none; border-radius: 12px; background: transparent; font-size: 14px; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.3s; }
+.tabs button { flex: 1; padding: 12px; border: none; border-radius: 12px; background: transparent; font-size: 14px; font-weight: 700; color: var(--muted); cursor: pointer; }
 .tabs button.active { background: #fff; color: var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 
 /* ALERTS & MSGS */
@@ -76,14 +69,14 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .stat span { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-top: 4px; display: block; }
 .member { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
 .member b { font-size: 15px; color: var(--text); }
-.tag { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+.tag { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .tag.paid { background: #d1fae5; color: #047857; }
 .tag.due { background: #fee2e2; color: #b91c1c; }
 .code { font-size: 24px; font-weight: 800; letter-spacing: 4px; background: #f1f5f9; color: var(--primary); padding: 16px; border-radius: 14px; text-align: center; margin: 12px 0; border: 1px dashed #cbd5e1; }
 
 /* BOTTOM NAV */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); z-index: 50; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); }
-.bottom-nav button { flex: 1; background: none; border: none; padding: 8px 4px; font-size: 11px; font-weight: 700; color: var(--muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; border-radius: 12px; transition: all 0.2s; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); z-index: 50; }
+.bottom-nav button { flex: 1; background: none; border: none; padding: 8px 4px; font-size: 11px; font-weight: 700; color: var(--muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; border-radius: 12px; }
 .bottom-nav button .ico { font-size: 22px; }
 .bottom-nav button.active { color: var(--accent); }
 
@@ -94,15 +87,15 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .mem-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .mem-row .num { width: 32px; height: 32px; border-radius: 10px; background: #f1f5f9; color: var(--primary); font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .mem-row input { flex: 1; margin: 0; border: none; background: transparent; padding: 8px; font-size: 16px; border-bottom: 2px solid transparent; border-radius: 0; }
-.mem-row input:focus { box-shadow: none; border-bottom: 2px solid var(--accent); background: transparent; }
-.bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; background: #fff; cursor: pointer; gap: 12px; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.mem-row input:focus { box-shadow: none; border-bottom: 2px solid var(--accent); }
+.bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; background: #fff; cursor: pointer; transition: transform 0.2s; }
 .bc-item:active { transform: scale(0.98); border-color: var(--accent); }
 .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 15px; }
 
 /* MODAL */
-.modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.modal-box { background: #fff; border-radius: 24px; padding: 28px 24px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-.modal-box p { font-size: 16px; margin-bottom: 24px; color: var(--text); font-weight: 500; line-height: 1.5; }
+.modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal-box { background: #fff; border-radius: 24px; padding: 28px 24px; max-width: 340px; width: 100%; text-align: center; }
+.modal-box p { font-size: 16px; margin-bottom: 24px; color: var(--text); font-weight: 500; }
 </style>
 </head>
 <body>
@@ -115,8 +108,11 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 </div>
 
 <div class="topbar">
-  <h1>कमेटी खाता</h1>
-  <p>सरल • ऑनलाइन • सुरक्षित</p>
+  <div class="topbar-text">
+    <h1>कमेटी खाता</h1>
+    <p>सरल • ऑनलाइन • सुरक्षित</p>
+  </div>
+  <button class="topbar-share" onclick="shareApp()">📤 शेयर</button>
 </div>
 
 <main>
@@ -153,7 +149,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
         </div>
 
         <div id="authForgot" class="hidden">
-          <p class="small" style="margin-bottom:20px; text-align: center; font-size: 14px;">नया पासवर्ड सेट करें।</p>
+          <p class="small" style="margin-bottom:20px; text-align: center;">नया पासवर्ड सेट करें।</p>
           <div class="field"><label>मोबाइल नंबर</label><input id="forgotPhone" type="tel" maxlength="10"></div>
           <div class="field"><label>नया पासवर्ड</label><input id="forgotPass" type="password"></div>
           <button class="btn btn-primary" style="margin-top: 8px;" onclick="doForgot()">पासवर्ड रीसेट करें</button>
@@ -179,8 +175,15 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     <div class="card">
       <h2>🔑 कोड द्वारा प्रवेश</h2>
       <p style="margin-bottom: 12px; font-size: 13px;">अगर आपके पास कमेटी का Access Code है, तो यहाँ डालें:</p>
-      <div class="field"><input id="accessCode" placeholder="Access Code (उदा. A1B2C3D4)" style="text-transform: uppercase;"></div>
+      <div class="field"><input id="accessCode" placeholder="Access Code (उदा. A1B2C3D4)"></div>
       <button class="btn btn-secondary" onclick="join()">प्रवेश करें</button>
+    </div>
+    
+    <!-- Share Card -->
+    <div class="card" style="text-align: center; padding: 24px;">
+      <h2 style="justify-content: center; margin-bottom: 8px;">🤝 ऐप शेयर करें</h2>
+      <p style="margin-bottom: 16px; font-size: 13px;">अपने दोस्तों और कमेटी के सदस्यों के साथ ऐप साझा करें।</p>
+      <button class="btn btn-primary" onclick="shareApp()" style="background: #059669;">📤 WhatsApp / शेयर</button>
     </div>
   </section>
 
@@ -188,7 +191,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
   <section id="mylist" class="hidden">
     <div class="card">
       <h2>📋 मेरी कमेटियाँ</h2>
-      <p class="small" style="margin-bottom: 16px;">यहाँ वो सभी कमेटियाँ हैं जिनसे आप जुड़े हैं।</p>
       <div id="bcList"></div>
     </div>
   </section>
@@ -197,15 +199,9 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
   <section id="create" class="hidden">
     <div class="card">
       <h2>➕ नई कमेटी बनाएं</h2>
-      <div class="field">
-        <label>कमेटी का नाम</label>
-        <input id="bcName" placeholder="जैसे: गांव कमेटी 2026">
-      </div>
+      <div class="field"><label>कमेटी का नाम</label><input id="bcName" placeholder="जैसे: गांव कमेटी 2026"></div>
       <div class="row">
-        <div class="field">
-          <label>किस्त राशि (₹)</label>
-          <input id="bcAmount" type="number" placeholder="उदा. 5000">
-        </div>
+        <div class="field"><label>किस्त राशि (₹)</label><input id="bcAmount" type="number" placeholder="उदा. 5000"></div>
         <div class="field">
           <label>किस्त का समय</label>
           <select id="freq">
@@ -216,14 +212,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
         </div>
       </div>
       <div class="row">
-        <div class="field">
-          <label>शुरुआत तिथि</label>
-          <input id="startDate" type="date">
-        </div>
-        <div class="field">
-          <label>मालिक का नाम</label>
-          <input id="ownerName" placeholder="संचालक का नाम">
-        </div>
+        <div class="field"><label>शुरुआत तिथि</label><input id="startDate" type="date"></div>
+        <div class="field"><label>मालिक का नाम</label><input id="ownerName"></div>
       </div>
     </div>
 
@@ -233,11 +223,10 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
         <label>कुल सदस्य संख्या (ऑटोमैटिक बॉक्स)</label>
         <input id="memberCount" type="number" placeholder="उदा. 10" oninput="buildMemberInputs()">
       </div>
-      <p class="small" style="margin-bottom: 10px;">ऊपर संख्या लिखते ही नीचे नाम भरने के बॉक्स आ जाएंगे।</p>
       <div id="memberInputs"></div>
     </div>
     
-    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px; padding: 18px; font-size: 16px;" id="createBtn">✅ कमेटी सुरक्षित करें</button>
+    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px; padding: 18px;" id="createBtn">✅ कमेटी सुरक्षित करें</button>
     <div id="created" class="card hidden"></div>
   </section>
 
@@ -256,17 +245,40 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       <div id="warnings"></div>
     </div>
   </section>
+
+  <!-- ADMIN PANEL (Only visible to Admin) -->
+  <section id="admin" class="hidden">
+    <div class="card" style="border: 2px solid #3b82f6;">
+      <h2 style="color: #3b82f6;">👑 Admin Dashboard</h2>
+      <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है। यहाँ से आप ऐप को कंट्रोल कर सकते हैं।</p>
+      
+      <div class="field">
+        <label>कमेटी कोड से डाटा डिलीट/चेक करें (आने वाले अपडेट में)</label>
+        <input placeholder="कमेटी कोड डालें" disabled>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-secondary">डेटा देखें</button>
+        <button class="btn btn-secondary" style="color: red; border-color: red;">डेटा डिलीट</button>
+      </div>
+      
+      <div class="msg ok" style="margin-top: 20px;">✓ Admin ID Verified</div>
+    </div>
+  </section>
+
 </main>
 
 <nav id="mainNav" class="bottom-nav hidden">
   <button id="nav-home" onclick="show('home')"><span class="ico">🏠</span>होम</button>
   <button id="nav-create" onclick="show('create')"><span class="ico">➕</span>नई</button>
   <button id="nav-mylist" onclick="show('mylist')"><span class="ico">📋</span>लिस्ट</button>
+  <button id="nav-admin" class="hidden" onclick="show('admin')"><span class="ico">👑</span>Admin</button>
 </nav>
 
 <script>
-// ✨ CLOUDFLARE API LINK ✨
+// ✨ CONFIGURATION ✨
 const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
+const ADMIN_PHONE = '7318259001'; // <-- Yahan apna Admin Mobile Number daalein
+const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr'; 
 
 const KEYS = { session: 'kk_session', joined: 'kk_joined', current: 'kk_current' };
 
@@ -284,6 +296,25 @@ function appAlert(text) {
 }
 
 function genCode() { return Math.random().toString(36).substring(2, 10).toUpperCase(); }
+
+// ✨ SHARE FUNCTION (No GitHub mentioned) ✨
+async function shareApp() {
+  const shareData = {
+    title: 'कमेटी खाता',
+    text: '💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी और किस्तों का हिसाब सुरक्षित और ऑनलाइन रखें। ऐप अभी डाउनलोड करें:\n\n' + APP_LINK,
+  };
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank');
+    }
+  } catch (err) {
+    if (err.name !== 'AbortError') {
+      window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank');
+    }
+  }
+}
 
 function switchAuth(mode) {
   const isReg = mode === 'register';
@@ -307,7 +338,7 @@ async function doAuth() {
 
   if(phone.length !== 10) return msg.innerHTML = '<div class="msg err">सही 10 अंकों का नंबर डालें</div>';
   
-  btn.textContent = "कृपया प्रतीक्षा करें...";
+  btn.textContent = "प्रतीक्षा करें...";
   try {
     const res = await fetch(`${API_URL}/api/auth`, {
       method: 'POST',
@@ -346,9 +377,12 @@ function enterApp() {
   document.getElementById('auth').classList.add('hidden');
   document.getElementById('mainNav').classList.remove('hidden');
   document.getElementById('userInfo').textContent = '👋 नमस्ते, ' + s.name;
-  
-  // Set default owner name in create form
   document.getElementById('ownerName').value = s.name;
+  
+  // Admin Check
+  if (s.phone === ADMIN_PHONE) {
+    document.getElementById('nav-admin').classList.remove('hidden');
+  }
   
   show('home');
 }
@@ -357,7 +391,7 @@ function appLogout() { localStorage.removeItem(KEYS.session); location.reload();
 function show(id) {
   document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
-  ['home','mylist','create'].forEach(n => {
+  ['home','mylist','create','admin'].forEach(n => {
     const b = document.getElementById('nav-'+n);
     if(b) b.classList.toggle('active', n === id);
   });
@@ -366,12 +400,11 @@ function show(id) {
   window.scrollTo(0,0);
 }
 
-// Auto-build member inputs when typing number
 function buildMemberInputs() {
   let c = Number(document.getElementById('memberCount').value) || 0;
-  if(c > 100) c = 100; // Limit
+  if(c > 100) c = 100;
   let h = '';
-  for(let i=1; i<=c; i++) h += `<div class="mem-row"><span class="num">${i}</span><input class="mem-name" placeholder="सदस्य का नाम लिखें"></div>`;
+  for(let i=1; i<=c; i++) h += `<div class="mem-row"><span class="num">${i}</span><input class="mem-name" placeholder="सदस्य का नाम"></div>`;
   document.getElementById('memberInputs').innerHTML = h;
 }
 
@@ -386,14 +419,13 @@ async function createBC() {
   let members = [];
   inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paid: false }); });
   
-  if(!name || !amount || members.length === 0) return appAlert('कृपया सभी जानकारी भरें और कम से कम 1 सदस्य जोड़ें');
-  
+  if(!name || !amount || members.length === 0) return appAlert('कृपया जानकारी भरें और सदस्य जोड़ें');
   if(!members.some(m => m.name === ownerName)) members.unshift({ name: ownerName, paid: true });
 
   const code = genCode();
   const bcData = { code, name, amount, freqText, freqVal, ownerName, members, startDate: document.getElementById('startDate').value };
   
-  document.getElementById('createBtn').textContent = "डेटा सेव हो रहा है...";
+  document.getElementById('createBtn').textContent = "सेव हो रहा है...";
   try {
     await fetch(`${API_URL}/api/bcs`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -408,18 +440,15 @@ async function createBC() {
     document.getElementById('created').innerHTML = `
       <h2 style="color: #059669;">✅ कमेटी बन गई!</h2>
       <div class="code">${code}</div>
-      <p style="font-size: 14px; font-weight: 500;">यह Access Code अपने सदस्यों को दें।</p>
+      <p style="font-size: 14px; font-weight: 500;">यह Access Code सदस्यों को दें।</p>
       <button class="btn btn-primary" style="margin-top:16px;" onclick="show('dashboard')">कमेटी खोलें</button>
     `;
-    
-    // Clear inputs
     document.getElementById('bcName').value = '';
     document.getElementById('bcAmount').value = '';
     document.getElementById('memberCount').value = '';
     document.getElementById('memberInputs').innerHTML = '';
-    
-  } catch(e) { appAlert("डेटाबेस में सेव नहीं हो पाया"); }
-  document.getElementById('createBtn').textContent = "✅ कमेटी सुरक्षित करें";
+  } catch(e) { appAlert("सेव नहीं हो पाया"); }
+  document.getElementById('createBtn').textContent = "✅ सुरक्षित करें";
 }
 
 async function join() {
@@ -433,14 +462,13 @@ async function join() {
     save(KEYS.current, code);
     document.getElementById('accessCode').value = '';
     show('dashboard');
-  } catch(e) { appAlert("गलत Code! कमेटी नहीं मिली।"); }
+  } catch(e) { appAlert("गलत Code!"); }
 }
 
 async function renderMyList() {
   const codes = load(KEYS.joined, []);
   let html = '';
   document.getElementById('bcList').innerHTML = '<p class="empty-state">चेक कर रहे हैं...</p>';
-  
   for(let c of codes) {
     try {
       let res = await fetch(`${API_URL}/api/bcs?code=${c}`);
@@ -448,21 +476,13 @@ async function renderMyList() {
         let d = await res.json();
         let bc = d.data;
         html += `<div class="bc-item" onclick="save(KEYS.current, '${bc.code}'); show('dashboard')">
-          <div>
-            <b style="display:block; font-size:16px; margin-bottom:4px; color: #0f172a;">${bc.name}</b> 
-            <span class="small" style="font-weight: 600;">Code: ${bc.code}</span>
-          </div>
+          <div><b style="display:block; font-size:16px; margin-bottom:4px; color: #0f172a;">${bc.name}</b><span class="small" style="font-weight: 600;">Code: ${bc.code}</span></div>
           <span style="font-size: 20px; color: #cbd5e1;">›</span>
         </div>`;
       }
     } catch(e) {}
   }
-  document.getElementById('bcList').innerHTML = html || `
-    <div class="empty-state">
-      <div style="font-size: 40px; margin-bottom: 12px;">📋</div>
-      <p>अभी कोई कमेटी नहीं है</p>
-      <button class="btn btn-secondary btn-sm" style="margin-top: 16px;" onclick="show('create')">नई बनाएं</button>
-    </div>`;
+  document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size: 40px; margin-bottom: 12px;">📋</div><p>अभी कोई कमेटी नहीं है</p><button class="btn btn-secondary btn-sm" style="margin-top: 16px;" onclick="show('create')">नई बनाएं</button></div>`;
 }
 
 async function loadDash() {
@@ -473,8 +493,6 @@ async function loadDash() {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     const d = await res.json();
     const bc = d.data;
-    
-    // Fallback for older committees without freqText
     const freqDisplay = bc.freqText || (bc.frequency === 'monthly' ? '1 महीना' : '1 हफ़्ता');
     
     document.getElementById('dashTitle').textContent = '📊 ' + bc.name;
@@ -487,30 +505,16 @@ async function loadDash() {
       <p style="text-align: center; margin-top: 12px; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b></p>
     `;
     
-    document.getElementById('members').innerHTML = bc.members.map((m,i) => 
-      `<div class="member">
-        <b>${i+1}. ${m.name}</b>
-        <span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? '✓ भुगतान हो गया' : 'बाकी है'}</span>
-      </div>`
-    ).join('');
+    document.getElementById('members').innerHTML = bc.members.map((m,i) => `<div class="member"><b>${i+1}. ${m.name}</b><span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? '✓ भुगतान' : 'बाकी है'}</span></div>`).join('');
     
     const unpaid = bc.members.filter(m => !m.paid);
-    document.getElementById('warnings').innerHTML = unpaid.length ? unpaid.map(m => 
-      `<div class="warn">
-        <div style="font-weight: 700; margin-bottom: 8px;">⚠️ ${m.name}</div>
-        <div style="font-size: 13px; margin-bottom: 12px;">₹${bc.amount} की किस्त बाकी है।</div>
-        <button class="btn btn-primary btn-sm" style="width: 100%; box-shadow: none;" onclick="markPaid('${bc.code}','${m.name}')">✓ भुगतान प्राप्त हुआ</button>
-      </div>`
-    ).join('') : '<div class="ok">🎉 कमाल है! सभी का भुगतान आ चुका है। कोई बकाया नहीं।</div>';
+    document.getElementById('warnings').innerHTML = unpaid.length ? unpaid.map(m => `<div class="warn"><div style="font-weight: 700; margin-bottom: 8px;">⚠️ ${m.name}</div><div style="font-size: 13px; margin-bottom: 12px;">₹${bc.amount} की किस्त बाकी है।</div><button class="btn btn-primary btn-sm" style="width: 100%; box-shadow: none;" onclick="markPaid('${bc.code}','${m.name}')">✓ भुगतान प्राप्त हुआ</button></div>`).join('') : '<div class="ok">🎉 कमाल है! कोई बकाया नहीं।</div>';
   } catch(e) { appAlert("डेटा लोड नहीं हो पाया"); show('mylist'); }
 }
 
 async function markPaid(code, memberName) {
   try {
-    await fetch(`${API_URL}/api/pay`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code, memberName })
-    });
+    await fetch(`${API_URL}/api/pay`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, memberName }) });
     loadDash();
   } catch(e) { appAlert("अपडेट नहीं हो पाया, इंटरनेट चेक करें"); }
 }
