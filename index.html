@@ -111,12 +111,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 </head>
 <body>
 
-<!-- Basic Alert Modal -->
-<div id="appModal" class="modal-bg hidden">
-  <div class="modal-box"><p id="modalText"></p><div class="btn-row" id="modalBtns"></div></div>
-</div>
+<div id="appModal" class="modal-bg hidden"><div class="modal-box"><p id="modalText"></p><div class="btn-row" id="modalBtns"></div></div></div>
 
-<!-- Winner Celebration Modal -->
 <div id="winnerModal" class="modal-bg hidden">
   <div class="modal-box">
     <div style="font-size: 50px; margin-bottom: 10px;">🎉🏆🎉</div>
@@ -127,32 +123,24 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
   </div>
 </div>
 
-<!-- AI HELP MODAL -->
 <div id="helpModal" class="modal-bg hidden">
   <div class="modal-box">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
       <h2 style="font-size: 18px; color: var(--primary-dark); margin:0;">🤖 स्मार्ट सपोर्ट (Help)</h2>
       <button onclick="document.getElementById('helpModal').classList.add('hidden')" style="background:none; border:none; font-size:20px; cursor:pointer;">✖</button>
     </div>
-    
     <button class="faq-btn" onclick="toggleFaq('faq1')">🔹 नई कमेटी कैसे बनाएं?</button>
     <div id="faq1" class="faq-ans">नीचे 'नई' (➕) बटन पर क्लिक करें। कमेटी का नाम, किश्त, राशि और सदस्यों के नाम भरें। उसके बाद 'कमेटी सुरक्षित करें' पर क्लिक करें।</div>
-    
     <button class="faq-btn" onclick="toggleFaq('faq2')">🔹 सदस्य का कोड (Access Code) क्या है?</button>
     <div id="faq2" class="faq-ans">कमेटी बनने के बाद एक 8 अक्षरों का कोड मिलता है। आप यह कोड अपने सदस्यों को भेज सकते हैं, जिससे वो ऐप में अपनी कमेटी देख सकेंगे।</div>
-    
     <button class="faq-btn" onclick="toggleFaq('faq3')">🔹 किसी ने पैसे दे दिए, उसे कैसे अपडेट करें?</button>
     <div id="faq3" class="faq-ans">डैशबोर्ड में 'बकाया विवरण' वाले लाल बॉक्स में जाएं। जिस सदस्य ने पैसे दे दिए हैं, उसके नाम के आगे '✓ भुगतान प्राप्त हुआ' बटन दबाएं।</div>
-
     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
     <p style="font-size: 12px; text-align: center; color: var(--muted); margin-bottom: 12px;">क्या आपको और मदद चाहिए?</p>
-    <button class="btn btn-primary" style="background: #25D366; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.open('https://wa.me/917318259001?text=Hi Admin, मुझे कमेटी ऐप में मदद चाहिए', '_blank')">
-      💬 WhatsApp एडमिन से पूछें
-    </button>
+    <button class="btn btn-primary" style="background: #25D366; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.open('https://wa.me/917318259001?text=Hi Admin, मुझे कमेटी ऐप में मदद चाहिए', '_blank')">💬 WhatsApp एडमिन से पूछें</button>
   </div>
 </div>
 
-<!-- Floating Help Button -->
 <button class="float-help" onclick="document.getElementById('helpModal').classList.remove('hidden')">🤖 Help</button>
 
 <div class="topbar">
@@ -202,7 +190,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     <div class="card">
       <h2>➕ नई कमेटी बनाएं</h2>
       <div class="field"><label>कमेटी का नाम</label><input id="bcName" placeholder="जैसे: गांव कमेटी 2026"></div>
-      
       <div class="row">
         <div class="field"><label>किस्त राशि (₹)</label><input id="bcAmount" type="number" placeholder="उदा. 100"></div>
         <div class="field">
@@ -214,24 +201,20 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
           </select>
         </div>
       </div>
-      
       <div class="row">
         <div class="field"><label>कुल किश्तें (कितनी बार?)</label><input id="totalInst" type="number" placeholder="उदा. 50"></div>
         <div class="field"><label>खुलने पर कितना मिलेगा? (₹)</label><input id="totalPool" type="number" placeholder="उदा. 5000"></div>
       </div>
-
       <div class="row">
         <div class="field"><label>शुरुआत तिथि</label><input id="startDate" type="date"></div>
         <div class="field"><label>मालिक का नाम</label><input id="ownerName"></div>
       </div>
     </div>
-
     <div class="card">
       <h2>👥 सदस्य जोड़ें</h2>
       <div class="field"><label>कुल सदस्य संख्या</label><input id="memberCount" type="number" placeholder="उदा. 6" oninput="buildMemberInputs()"></div>
       <div id="memberInputs"></div>
     </div>
-    
     <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px; padding: 18px;" id="createBtn">✅ कमेटी सुरक्षित करें</button>
     <div id="created" class="card hidden"></div>
   </section>
@@ -253,21 +236,17 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     </div>
   </section>
 
-  <!-- ADMIN PANEL (DELETE FEATURE ADDED) -->
+  <!-- ADMIN PANEL -->
   <section id="admin" class="hidden">
     <div class="card" style="border: 2px solid #3b82f6;">
       <h2 style="color: #3b82f6;">👑 Admin Dashboard</h2>
       <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है।</p>
       <div class="msg ok" style="margin-bottom: 20px;">✓ Admin ID Verified</div>
     </div>
-
     <div class="card" style="border: 2px solid #e11d48; background: #fff1f2;">
       <h2 style="color: #e11d48;">🗑️ कमेटी डिलीट करें</h2>
       <p style="margin-bottom: 16px; font-size: 13px; color: #9f1239;">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</p>
-      
-      <div class="field">
-        <input id="adminDelCode" placeholder="कमेटी कोड (उदा. A1B2C3D4)" style="text-transform: uppercase;">
-      </div>
+      <div class="field"><input id="adminDelCode" placeholder="कमेटी कोड (उदा. A1B2C3D4)" style="text-transform: uppercase;"></div>
       <button class="btn btn-primary" style="background: #e11d48; box-shadow: none;" onclick="adminDeleteBC()">🗑️ डाटा हमेशा के लिए डिलीट करें</button>
     </div>
   </section>
@@ -370,6 +349,7 @@ function buildMemberInputs() {
   document.getElementById('memberInputs').innerHTML = h;
 }
 
+// ✨ FIXED: Auto-add logic removed so names don't duplicate ✨
 async function createBC() {
   const name = document.getElementById('bcName').value;
   const amount = document.getElementById('bcAmount').value;
@@ -384,7 +364,6 @@ async function createBC() {
   inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paid: false }); });
   
   if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert('कृपया सभी जानकारी (किश्तें और राशि) भरें!');
-  if(!members.some(m => m.name === ownerName)) members.unshift({ name: ownerName, paid: true });
 
   const code = genCode();
   const bcData = { code, name, amount, freqText, freqVal, totalInst, totalPool, ownerName, members, startDate: document.getElementById('startDate').value };
