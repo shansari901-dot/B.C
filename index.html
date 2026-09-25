@@ -138,7 +138,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     <div id="faq3" class="faq-ans">डैशबोर्ड में 'बकाया विवरण' वाले लाल बॉक्स में जाएं। जिस सदस्य ने पैसे दे दिए हैं, उसके नाम के आगे '✓ भुगतान प्राप्त हुआ' बटन दबाएं।</div>
     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
     <p style="font-size: 12px; text-align: center; color: var(--muted); margin-bottom: 12px;">क्या आपको और मदद चाहिए?</p>
-    <button class="btn btn-primary" style="background: #25D366; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.open('https://wa.me/917318259001?text=Hi Admin, मुझे कमेटी ऐप में मदद चाहिए', '_blank')">💬 WhatsApp एडमिन से पूछें</button>
+    <!-- FIX: Use location.href for AppCreator24 -->
+    <button class="btn btn-primary" style="background: #25D366; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.location.href='https://wa.me/917318259001?text=Hi Admin, मुझे कमेटी ऐप में मदद चाहिए'">💬 WhatsApp एडमिन से पूछें</button>
   </div>
 </div>
 
@@ -208,7 +209,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       </div>
       <div class="row">
         <div class="field"><label>शुरुआत तिथि</label><input id="startDate" type="date"></div>
-        <div class="field"><label>मालिक का नाम</label><input id="ownerName"></div>
+        <!-- FIX: Owner name will NOT auto-fill anymore -->
+        <div class="field"><label>मालिक का नाम</label><input id="ownerName" placeholder="संचालक का नाम लिखें"></div>
       </div>
     </div>
     <div class="card">
@@ -285,16 +287,24 @@ function appAlert(text) {
 }
 function genCode() { return Math.random().toString(36).substring(2, 10).toUpperCase(); }
 
+// FIX: Share App updated to location.href for WebViews
 async function shareApp() {
   const shareData = { title: 'कमेटी खाता', text: '💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप अभी डाउनलोड करें:\n\n' + APP_LINK };
-  try { if (navigator.share) await navigator.share(shareData); else window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank'); } 
-  catch (err) { window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank'); }
+  try { 
+    if (navigator.share) {
+        await navigator.share(shareData); 
+    } else {
+        window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text);
+    }
+  } catch (err) { 
+    window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); 
+  }
 }
 
-// ✨ NEW: WhatsApp Invitation / Proof Sender ✨
+// FIX: Send Invite Proof updated to location.href for WebViews
 function sendInviteProof(bcName, bcCode, amount, memberName) {
   const msg = `नमस्ते ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* या *'हाँ'* लिखकर रिप्लाई करें ताकि मेरी लिस्ट में आपका नाम पक्का हो जाए। (यह हमारी सहमति का प्रमाण है)\n\nऐप में अपना हिसाब देखने के लिए Access Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`;
-  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  window.location.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 
 function switchAuth(mode) {
@@ -333,7 +343,10 @@ function enterApp() {
   document.getElementById('auth').classList.add('hidden');
   document.getElementById('mainNav').classList.remove('hidden');
   document.getElementById('userInfo').textContent = '👋 नमस्ते, ' + s.name;
-  document.getElementById('ownerName').value = s.name;
+  
+  // FIX: Removed auto-fill of ownerName so it stays blank
+  // document.getElementById('ownerName').value = s.name;
+  
   if (s.phone === ADMIN_PHONE) document.getElementById('nav-admin').classList.remove('hidden');
   show('home');
 }
@@ -460,7 +473,6 @@ async function loadDash() {
       <p style="text-align: center; margin-top: 12px; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b></p>
     `;
     
-    // ✨ ADDED: WhatsApp Invite/Proof Button inside member card ✨
     document.getElementById('members').innerHTML = bc.members.map((m,i) => `
       <div class="member">
         <div class="member-top">
@@ -472,7 +484,7 @@ async function loadDash() {
         </div>
         <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
            <button class="btn btn-sm" style="background: #25D366; color: white; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px;" onclick="sendInviteProof('${bc.name}', '${bc.code}', '${bc.amount}', '${m.name}')">
-              📲 WhatsApp Invite / Proof
+              📲 WhatsApp Invite
            </button>
         </div>
       </div>`).join('');
@@ -524,4 +536,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+</html>
