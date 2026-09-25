@@ -69,7 +69,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .stat-pool span { color: #cbd5e1; font-size: 13px; font-weight: 500; }
 .stat-pool .sub-info { font-size: 12px; background: rgba(255,255,255,0.1); display: inline-block; padding: 4px 12px; border-radius: 20px; margin-top: 8px; color: #f8fafc; }
 
-.member { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; background: #fff; }
+.member { display: flex; flex-direction: column; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; background: #fff; gap: 12px; }
+.member-top { display: flex; justify-content: space-between; align-items: center; }
 .member b { font-size: 15px; color: var(--text); }
 .tag { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .tag.paid { background: #d1fae5; color: #047857; }
@@ -131,8 +132,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     </div>
     <button class="faq-btn" onclick="toggleFaq('faq1')">🔹 नई कमेटी कैसे बनाएं?</button>
     <div id="faq1" class="faq-ans">नीचे 'नई' (➕) बटन पर क्लिक करें। कमेटी का नाम, किश्त, राशि और सदस्यों के नाम भरें। उसके बाद 'कमेटी सुरक्षित करें' पर क्लिक करें।</div>
-    <button class="faq-btn" onclick="toggleFaq('faq2')">🔹 सदस्य का कोड (Access Code) क्या है?</button>
-    <div id="faq2" class="faq-ans">कमेटी बनने के बाद एक 8 अक्षरों का कोड मिलता है। आप यह कोड अपने सदस्यों को भेज सकते हैं, जिससे वो ऐप में अपनी कमेटी देख सकेंगे।</div>
+    <button class="faq-btn" onclick="toggleFaq('faq2')">🔹 कोई सदस्य कमेटी से मुकर जाए तो?</button>
+    <div id="faq2" class="faq-ans">डैशबोर्ड में सदस्य के नाम के नीचे "WhatsApp Invite / Proof" बटन है। उसे दबाकर उन्हें मैसेज भेजें। उनका रिप्लाई आपका सबूत होगा।</div>
     <button class="faq-btn" onclick="toggleFaq('faq3')">🔹 किसी ने पैसे दे दिए, उसे कैसे अपडेट करें?</button>
     <div id="faq3" class="faq-ans">डैशबोर्ड में 'बकाया विवरण' वाले लाल बॉक्स में जाएं। जिस सदस्य ने पैसे दे दिए हैं, उसके नाम के आगे '✓ भुगतान प्राप्त हुआ' बटन दबाएं।</div>
     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
@@ -226,8 +227,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       <div id="dash">डेटा लोड हो रहा है...</div>
     </div>
     <div class="card" id="memberCard">
-      <h2>👥 सभी सदस्य (विजेता चुनें 🏆)</h2>
-      <p style="font-size:12px; color:#64748b; margin-bottom:12px;">कमेटी खुलने पर सदस्य के आगे बनी 🏆 दबाएं</p>
+      <h2>👥 सभी सदस्य</h2>
+      <p style="font-size:12px; color:#64748b; margin-bottom:12px;">प्रमाण के लिए सदस्य को WhatsApp Invite भेजें</p>
       <div id="members"></div>
     </div>
     <div class="card" id="warningCard" style="border-color: #fecaca; background: #fffcfc;">
@@ -290,6 +291,12 @@ async function shareApp() {
   catch (err) { window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text), '_blank'); }
 }
 
+// ✨ NEW: WhatsApp Invitation / Proof Sender ✨
+function sendInviteProof(bcName, bcCode, amount, memberName) {
+  const msg = `नमस्ते ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* या *'हाँ'* लिखकर रिप्लाई करें ताकि मेरी लिस्ट में आपका नाम पक्का हो जाए। (यह हमारी सहमति का प्रमाण है)\n\nऐप में अपना हिसाब देखने के लिए Access Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+}
+
 function switchAuth(mode) {
   const isReg = mode === 'register';
   document.getElementById('tabReg').classList.toggle('active', isReg);
@@ -349,7 +356,6 @@ function buildMemberInputs() {
   document.getElementById('memberInputs').innerHTML = h;
 }
 
-// ✨ FIXED: Auto-add logic removed so names don't duplicate ✨
 async function createBC() {
   const name = document.getElementById('bcName').value;
   const amount = document.getElementById('bcAmount').value;
@@ -454,13 +460,21 @@ async function loadDash() {
       <p style="text-align: center; margin-top: 12px; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b></p>
     `;
     
+    // ✨ ADDED: WhatsApp Invite/Proof Button inside member card ✨
     document.getElementById('members').innerHTML = bc.members.map((m,i) => `
       <div class="member">
-        <div style="display: flex; align-items: center; gap: 10px;">
-           <button class="win-btn" onclick="declareWinner('${m.name}')" title="विजेता बनाएं">🏆</button>
-           <b>${i+1}. ${m.name}</b>
+        <div class="member-top">
+           <div style="display: flex; align-items: center; gap: 10px;">
+             <button class="win-btn" onclick="declareWinner('${m.name}')" title="विजेता बनाएं">🏆</button>
+             <b>${i+1}. ${m.name}</b>
+           </div>
+           <span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? '✓ भुगतान' : 'बाकी है'}</span>
         </div>
-        <span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? '✓ भुगतान' : 'बाकी है'}</span>
+        <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
+           <button class="btn btn-sm" style="background: #25D366; color: white; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px;" onclick="sendInviteProof('${bc.name}', '${bc.code}', '${bc.amount}', '${m.name}')">
+              📲 WhatsApp Invite / Proof
+           </button>
+        </div>
       </div>`).join('');
     
     const unpaid = bc.members.filter(m => !m.paid);
@@ -510,4 +524,4 @@ window.onload = () => {
 };
 </script>
 </body>
-</html>
+  </html>
