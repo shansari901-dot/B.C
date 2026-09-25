@@ -243,7 +243,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
   <section id="admin" class="hidden">
     <div class="card" style="border: 2px solid #3b82f6;">
       <h2 style="color: #3b82f6;">👑 Admin Dashboard</h2>
-      <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है।</p>
+      <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है。</p>
       <div class="msg ok" style="margin-bottom: 20px;">✓ Admin ID Verified</div>
     </div>
     <div class="card" style="border: 2px solid #e11d48; background: #fff1f2;">
@@ -264,14 +264,12 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 </nav>
 
 <script>
-// ✨ CONFIGURATION ✨
 const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
 const ADMIN_PHONE = '7318259001'; 
 const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr'; 
 const KEYS = { session: 'kk_session', joined: 'kk_joined', current: 'kk_current' };
-let currentBCData = null; // Global object for Dashboard
+let currentBCData = null;
 
-// LOCAL STORAGE
 function load(key, def) { try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; } }
 function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
@@ -297,7 +295,6 @@ function sendInviteProof(bcName, bcCode, amount, memberName) {
   window.location.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 
-// ✨ AUTHENTICATION ✨
 function switchAuth(mode) {
   const isReg = mode === 'register';
   document.getElementById('tabReg').classList.toggle('active', isReg);
@@ -384,7 +381,6 @@ function buildMemberInputs() {
   document.getElementById('memberInputs').innerHTML = h;
 }
 
-// ✨ ADVANCED CREATE BC ✨
 async function createBC() {
   const name = document.getElementById('bcName').value;
   const amount = document.getElementById('bcAmount').value;
@@ -398,22 +394,23 @@ async function createBC() {
   
   const inps = document.querySelectorAll('.mem-name');
   let members = [];
-  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); }); // Changed to track rounds
+  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); });
   
   if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert('कृपया सभी जानकारी भरें!');
   if(!ownerName || ownerPhone.length !== 10) return appAlert('कृपया मालिक का नाम और 10 अंकों का सही मोबाइल नंबर दर्ज़ करें!');
   
+  // FIXED: Owner no longer gets automatic 1 paid round
   if(!members.some(m => m.name.toLowerCase() === ownerName.toLowerCase())) {
-      members.unshift({ name: ownerName, paidRounds: 1, hasWon: false }); // Owner starts with 1 paid round roughly
+      members.unshift({ name: ownerName, paidRounds: 0, hasWon: false });
   }
 
   const code = genCode();
   
-  // New Initial State Structure
+  // FIXED: Wallet Balance starts at 0
   const bcData = { 
     code, name, amount: Number(amount), freqText, freqVal, totalInst: Number(totalInst), totalPool: Number(totalPool), 
     ownerName, ownerPhone, startDate: document.getElementById('startDate').value,
-    currentRound: 1, walletBalance: Number(amount), // Assume owner paid 1st round
+    currentRound: 1, walletBalance: 0, 
     members 
   };
   
@@ -463,15 +460,13 @@ async function renderMyList() {
   document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size: 40px; margin-bottom: 12px;">📋</div><p>कोई कमेटी नहीं है</p></div>`;
 }
 
-// ✨ SAVE ENTIRE BC STATE TO BACKEND ✨
 async function saveBCState() {
    try {
      await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(currentBCData) });
-     loadDash(); // Reload UI
+     loadDash(); 
    } catch(e) { appAlert("सेव करने में त्रुटि। इंटरनेट चेक करें।"); }
 }
 
-// ✨ ADVANCED DASHBOARD RENDERER ✨
 async function loadDash() {
   const code = load(KEYS.current, null);
   const currentUser = load(KEYS.session, {});
@@ -489,7 +484,6 @@ async function loadDash() {
         return;
     }
     
-    // MIGRATION: Convert old data to new Wallet/Round format automatically
     if(bc.currentRound === undefined) bc.currentRound = 1;
     if(bc.walletBalance === undefined) bc.walletBalance = 0;
     bc.members.forEach(m => {
@@ -508,7 +502,6 @@ async function loadDash() {
        document.getElementById('nextRoundBtn').classList.add('hidden');
     }
 
-    // DATE CALCULATION
     let startD = new Date(bc.startDate);
     let endD = new Date(startD);
     let inst = Number(bc.totalInst) || 0;
@@ -520,7 +513,6 @@ async function loadDash() {
 
     const totalMembers = bc.members.length;
     
-    // RENDER WALLET & STATS
     document.getElementById('walletBlock').innerHTML = `
       <div class="wallet-card">
          <div class="wallet-title">${bc.name} • 💼 कमेटी वॉलेट</div>
@@ -539,13 +531,11 @@ async function loadDash() {
       <p style="text-align: center; margin: 12px 0; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b><br><span style="color:var(--muted); font-size:11px;">संचालक: ${bc.ownerName}</span></p>
     `;
     
-    // RENDER MEMBERS DETAILED LIST
     document.getElementById('members').innerHTML = bc.members.map((m,i) => {
-      // Calculate Dues based on Round
       let totalPaidByMem = m.paidRounds * bc.amount;
       let targetPaid = bc.currentRound * bc.amount;
       let pendingDue = targetPaid - totalPaidByMem;
-      if(pendingDue < 0) pendingDue = 0; // if paid in advance
+      if(pendingDue < 0) pendingDue = 0;
       
       let payBtnHtml = '';
       if(isOwner && pendingDue > 0) {
@@ -581,7 +571,6 @@ async function loadDash() {
   } catch(e) { show('mylist'); }
 }
 
-// ✨ MARK INSTALLMENT AS PAID ✨
 async function markPaidAdvance(memberName) {
     if(!currentBCData) return;
     let m = currentBCData.members.find(x => x.name === memberName);
@@ -593,7 +582,6 @@ async function markPaidAdvance(memberName) {
     }
 }
 
-// ✨ START NEXT ROUND ✨
 async function startNextRound() {
     if(!confirm("क्या आप वाकई अगली किश्त (नया महीना/हफ्ता) चालू करना चाहते हैं? इससे सभी सदस्यों का 'बाकी' पैसा बढ़ जाएगा।")) return;
     currentBCData.currentRound += 1;
@@ -601,7 +589,6 @@ async function startNextRound() {
     await saveBCState();
 }
 
-// ✨ WINNER DEDUCTION SYSTEM ✨
 let pendingWinnerName = "";
 function declareWinner(name) {
   pendingWinnerName = name;
@@ -614,7 +601,6 @@ async function confirmWinner() {
    let m = currentBCData.members.find(x => x.name === pendingWinnerName);
    if(m && !m.hasWon) {
        m.hasWon = true;
-       // Deduct Winning Pool from Wallet
        currentBCData.walletBalance -= Number(currentBCData.totalPool || 0);
        document.getElementById('winnerModal').classList.add('hidden');
        document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>पैसे दिए जा रहे हैं...</div>";
