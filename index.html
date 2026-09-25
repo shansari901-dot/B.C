@@ -65,21 +65,24 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .stat { background: #f8fafc; border-radius: 14px; padding: 16px 10px; text-align: center; border: 1px solid var(--border); }
 .stat b { display: block; font-size: 18px; color: var(--primary-dark); font-weight: 800; }
 .stat span { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-top: 4px; display: block; }
-.stat-pool { grid-column: span 2; background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #0f172a; border-radius: 16px; padding: 20px; text-align: center; color: white; }
-.stat-pool b { font-size: 28px; color: #34d399; margin-bottom: 4px; }
-.stat-pool span { color: #cbd5e1; font-size: 13px; font-weight: 500; }
-.stat-pool .sub-info { font-size: 12px; background: rgba(255,255,255,0.1); display: inline-block; padding: 4px 12px; border-radius: 20px; margin-top: 8px; color: #f8fafc; }
 
-.member { display: flex; flex-direction: column; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; background: #fff; gap: 12px; }
+/* WALLET CARD */
+.wallet-card { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; padding: 24px; border-radius: 20px; text-align: center; box-shadow: 0 15px 30px rgba(15,23,42,0.3); margin-bottom: 16px; position: relative; overflow: hidden; }
+.wallet-card::before { content: '💼'; position: absolute; right: -20px; top: -10px; font-size: 100px; opacity: 0.1; }
+.wallet-title { font-size: 14px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.wallet-amt { font-size: 38px; font-weight: 800; color: #34d399; margin-bottom: 4px; }
+.wallet-sub { font-size: 13px; color: #94a3b8; }
+.date-bar { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; font-size: 12px; font-weight: 600; margin-top: 16px; display: flex; justify-content: space-around; }
+
+.member { display: flex; flex-direction: column; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; background: #fff; gap: 10px; }
 .member-top { display: flex; justify-content: space-between; align-items: center; }
-.member b { font-size: 15px; color: var(--text); }
-.tag { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-.tag.paid { background: #d1fae5; color: #047857; }
-.tag.due { background: #fee2e2; color: #b91c1c; }
-.code { font-size: 24px; font-weight: 800; letter-spacing: 4px; background: #f1f5f9; color: var(--primary); padding: 16px; border-radius: 14px; text-align: center; margin: 12px 0; border: 1px dashed #cbd5e1; }
+.member b { font-size: 16px; color: var(--text); }
+.mem-stats { display: flex; justify-content: space-between; background: #f8fafc; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+.mem-stats .paid { color: #059669; }
+.mem-stats .due { color: #e11d48; }
 .win-btn { background: #fef08a; border: 1px solid #facc15; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s; }
 .win-btn:active { transform: scale(0.9); }
-.win-btn-disabled { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; opacity: 0.5; }
+.win-btn-disabled { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; opacity: 0.4; }
 
 /* BOTTOM NAV */
 .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); z-index: 50; }
@@ -95,57 +98,30 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; background: #fff; cursor: pointer; }
 .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 15px; }
 
-/* MODALS & HELP BOT */
+/* MODALS */
 .modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .modal-box { background: #fff; border-radius: 24px; padding: 28px 24px; max-width: 340px; width: 100%; text-align: center; }
 .modal-box p { font-size: 16px; margin-bottom: 24px; color: var(--text); font-weight: 500; }
 #winnerModal .modal-box { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: 4px solid #fcd34d; box-shadow: 0 20px 50px rgba(217, 119, 6, 0.4); }
 #winnerModal h2 { color: white; font-size: 28px; margin-bottom: 8px; }
-
-.float-help { position: fixed; bottom: 80px; right: 20px; background: #3b82f6; color: white; border: none; border-radius: 30px; padding: 12px 20px; font-size: 14px; font-weight: 700; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4); cursor: pointer; z-index: 90; display: flex; align-items: center; gap: 8px; transition: transform 0.2s; }
-.float-help:active { transform: scale(0.9); }
-#helpModal .modal-box { max-width: 380px; text-align: left; padding: 24px; }
-.faq-btn { background: #f8fafc; border: 1px solid var(--border); width: 100%; text-align: left; padding: 14px; border-radius: 12px; margin-bottom: 10px; font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; transition: background 0.2s; }
-.faq-btn:active { background: #e2e8f0; }
-.faq-ans { font-size: 13px; color: var(--muted); background: #f1f5f9; padding: 12px; border-radius: 10px; margin-bottom: 16px; display: none; line-height: 1.5; border-left: 3px solid #3b82f6; }
 </style>
 </head>
 <body>
 
-<!-- Basic App Alerts -->
 <div id="appModal" class="modal-bg hidden"><div class="modal-box"><p id="modalText"></p><div class="btn-row" id="modalBtns"></div></div></div>
 
-<!-- Winner Celebration Modal -->
 <div id="winnerModal" class="modal-bg hidden">
   <div class="modal-box">
     <div style="font-size: 50px; margin-bottom: 10px;">🎉🏆🎉</div>
-    <h2>Congratulations!</h2>
-    <p style="font-size: 22px; font-weight: 800; margin: 15px 0; color: #fffef0;" id="winName">नाम</p>
-    <p style="color: #fef3c7; font-size: 15px;">इस बार की कमेटी <br><b style="font-size: 22px; color: #fff;">₹<span id="winAmount">0</span></b><br> इनकी खुली है!</p>
-    <button class="btn" style="background: #fff; color: #d97706; margin-top: 20px;" onclick="document.getElementById('winnerModal').classList.add('hidden')">बंद करें</button>
-  </div>
-</div>
-
-<!-- Help AI Modal -->
-<div id="helpModal" class="modal-bg hidden">
-  <div class="modal-box">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-      <h2 style="font-size: 18px; color: var(--primary-dark); margin:0;">🤖 स्मार्ट सपोर्ट (Help)</h2>
-      <button onclick="document.getElementById('helpModal').classList.add('hidden')" style="background:none; border:none; font-size:20px; cursor:pointer;">✖</button>
+    <h2>Winner!</h2>
+    <p style="font-size: 22px; font-weight: 800; margin: 10px 0; color: #fffef0;" id="winName">नाम</p>
+    <p style="color: #fef3c7; font-size: 14px; margin-bottom: 20px;">इनकी कमेटी खुल गई है!<br>क्या आप वॉलेट से <b style="font-size: 18px; color: #fff;">₹<span id="winAmount">0</span></b> देना चाहते हैं?</p>
+    <div style="display:flex; gap:10px;">
+       <button class="btn" style="background: rgba(255,255,255,0.2); color: white;" onclick="document.getElementById('winnerModal').classList.add('hidden')">रद्द करें</button>
+       <button class="btn" style="background: #fff; color: #d97706;" onclick="confirmWinner()">हाँ, पैसे दे दिए</button>
     </div>
-    <button class="faq-btn" onclick="toggleFaq('faq1')">🔹 नई कमेटी कैसे बनाएं?</button>
-    <div id="faq1" class="faq-ans">नीचे 'नई' (➕) बटन पर क्लिक करें। कमेटी का नाम, किश्त, राशि और सदस्यों के नाम भरें। उसके बाद 'कमेटी सुरक्षित करें' पर क्लिक करें।</div>
-    <button class="faq-btn" onclick="toggleFaq('faq2')">🔹 कोई सदस्य कमेटी से मुकर जाए तो?</button>
-    <div id="faq2" class="faq-ans">डैशबोर्ड में सदस्य के नाम के नीचे "WhatsApp Invite" बटन है। उसे दबाकर उन्हें मैसेज भेजें। उनका रिप्लाई आपका सबूत होगा।</div>
-    <button class="faq-btn" onclick="toggleFaq('faq3')">🔹 किसी ने पैसे दे दिए, उसे कैसे अपडेट करें?</button>
-    <div id="faq3" class="faq-ans">डैशबोर्ड में 'बकाया विवरण' वाले बॉक्स में जाएं। जिस सदस्य ने पैसे दे दिए हैं, उसके नाम के आगे '✓ भुगतान प्राप्त हुआ' बटन दबाएं। (यह बटन सिर्फ मालिक/एडमिन को दिखेगा)</div>
-    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
-    <p style="font-size: 12px; text-align: center; color: var(--muted); margin-bottom: 12px;">क्या आपको और मदद चाहिए?</p>
-    <button class="btn btn-primary" style="background: #25D366; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.location.href='https://wa.me/917318259001?text=Hi Admin, मुझे कमेटी ऐप में मदद चाहिए'">💬 WhatsApp एडमिन से पूछें</button>
   </div>
 </div>
-
-<button class="float-help" onclick="document.getElementById('helpModal').classList.remove('hidden')">🤖 Help</button>
 
 <div class="topbar">
   <div class="topbar-text"><h1>कमेटी खाता</h1><p>सरल • ऑनलाइन • सुरक्षित</p></div>
@@ -153,30 +129,23 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 </div>
 
 <main>
-  <!-- AUTHENTICATION (NO OTP) -->
+  <!-- AUTHENTICATION -->
   <section id="auth">
     <div class="auth-wrap">
       <div class="card" style="padding: 28px 20px;">
         <h2 style="justify-content:center; font-size: 20px; margin-bottom: 24px;">🔐 सुरक्षित प्रवेश</h2>
-        
         <div class="tabs" id="authTabs">
           <button id="tabReg" class="active" onclick="switchAuth('register')">नया अकाउंट</button>
           <button id="tabLogin" onclick="switchAuth('login')">लॉगिन</button>
         </div>
-        
         <div id="authMsg"></div>
-        
-        <!-- Auth Details Input -->
         <div id="authNormal">
           <div class="field"><label>मोबाइल नंबर</label><input id="authPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
           <div class="field"><label>पासवर्ड</label><input id="authPass" type="password" placeholder="कम से कम 4 अक्षर"></div>
           <div id="regExtra"><div class="field"><label>आपका नाम</label><input id="authName" placeholder="अपना पूरा नाम लिखें"></div></div>
-          
           <button id="authBtn" class="btn btn-primary" style="margin-top: 8px;" onclick="doAuth()">अकाउंट बनाएं</button>
           <p style="text-align:center; margin-top:20px;"><button class="link-btn" onclick="showForgot()">पासवर्ड भूल गए?</button></p>
         </div>
-
-        <!-- FORGOT PASSWORD FLOW (NO OTP) -->
         <div id="authForgot" class="hidden">
           <p class="small" style="margin-bottom:20px; text-align: center;">नया पासवर्ड सेट करें।</p>
           <div class="field"><label>मोबाइल नंबर</label><input id="forgotPhone" type="tel" maxlength="10"></div>
@@ -197,24 +166,22 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     </div>
     <div class="card">
       <h2>🔑 कोड द्वारा प्रवेश</h2>
-      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">अगर आप सदस्य हैं, तो कमेटी का Access Code डालें:</p>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">कमेटी का Access Code डालें:</p>
       <div class="field"><input id="accessCode" placeholder="Access Code (उदा. A1B2C3D4)"></div>
       <button class="btn btn-secondary" onclick="join()">प्रवेश करें</button>
     </div>
   </section>
 
-  <!-- PROFILE PAGE -->
+  <!-- PROFILE -->
   <section id="profile" class="hidden">
     <div class="card" style="text-align: center; padding: 30px 20px;">
       <div style="font-size: 60px; margin-bottom: 10px;">👤</div>
       <h2 id="profName" style="justify-content: center; font-size: 24px; color: var(--primary-dark); margin-bottom: 4px;">नाम</h2>
       <p id="profPhone" style="font-size: 16px; color: var(--muted); font-weight: 600; margin-bottom: 24px; letter-spacing: 1px;">+91 0000000000</p>
-      
       <div class="stats" style="margin-bottom: 24px;">
          <div class="stat"><b id="profCount">0</b><span>जुड़ी कमेटियाँ</span></div>
          <div class="stat"><b id="profRole">यूज़र</b><span>अकाउंट टाइप</span></div>
       </div>
-      
       <button class="btn btn-secondary" onclick="appLogout()" style="color: #e11d48; border-color: #fecaca; background: #fff1f2;">🚪 सुरक्षित लॉगआउट</button>
     </div>
   </section>
@@ -228,7 +195,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       <h2>➕ नई कमेटी बनाएं</h2>
       <div class="field"><label>कमेटी का नाम *</label><input id="bcName" placeholder="जैसे: गांव कमेटी 2026"></div>
       <div class="row">
-        <div class="field"><label>किस्त राशि (₹) *</label><input id="bcAmount" type="number" placeholder="उदा. 100"></div>
+        <div class="field"><label>किस्त राशि (₹) *</label><input id="bcAmount" type="number" placeholder="उदा. 1000"></div>
         <div class="field">
           <label>किस्त का समय</label>
           <select id="freq">
@@ -239,21 +206,19 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
         </div>
       </div>
       <div class="row">
-        <div class="field"><label>कुल किश्तें *</label><input id="totalInst" type="number" placeholder="उदा. 50"></div>
-        <div class="field"><label>कुल राशि (₹) *</label><input id="totalPool" type="number" placeholder="उदा. 5000"></div>
+        <div class="field"><label>कुल किश्तें (महीने/हफ्ते) *</label><input id="totalInst" type="number" placeholder="उदा. 10"></div>
+        <div class="field"><label>कमेटी खुलने पर मिलेगा (₹) *</label><input id="totalPool" type="number" placeholder="उदा. 10000"></div>
       </div>
-      
       <div class="row" style="margin-top: 10px; padding-top:10px; border-top: 1px dashed var(--border);">
         <div class="field"><label style="color:var(--primary-dark);">मालिक का नाम *</label><input id="ownerName" placeholder="संचालक का नाम"></div>
         <div class="field"><label style="color:var(--primary-dark);">मालिक का मोबाइल *</label><input id="ownerPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
       </div>
-      
       <div class="field"><label>शुरुआत तिथि</label><input id="startDate" type="date"></div>
     </div>
     
     <div class="card">
       <h2>👥 सदस्य जोड़ें</h2>
-      <div class="field"><label>कुल सदस्य संख्या</label><input id="memberCount" type="number" placeholder="उदा. 6" oninput="buildMemberInputs()"></div>
+      <div class="field"><label>कुल सदस्य संख्या</label><input id="memberCount" type="number" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
       <div id="memberInputs"></div>
     </div>
     <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px; padding: 18px;" id="createBtn">✅ कमेटी सुरक्षित करें</button>
@@ -262,20 +227,15 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 
   <!-- DASHBOARD -->
   <section id="dashboard" class="hidden">
-    <div class="card">
-      <h2 id="dashTitle" style="font-size: 20px;">Dashboard</h2>
-      <div id="dash">डेटा लोड हो रहा है...</div>
-    </div>
+    <div id="walletBlock"></div>
     
     <div class="card" id="memberCard">
-      <h2>👥 सभी सदस्य</h2>
-      <p id="ownerGuideText" style="font-size:12px; color:#64748b; margin-bottom:12px;">प्रमाण के लिए सदस्य को WhatsApp Invite भेजें</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+         <h2 style="margin:0;">👥 सभी सदस्य</h2>
+         <button id="nextRoundBtn" class="btn btn-sm btn-secondary hidden" onclick="startNextRound()" style="background:#fef3c7; color:#d97706; border-color:#fcd34d;">+ अगली किश्त चालू करें</button>
+      </div>
+      <p id="ownerGuideText" style="font-size:12px; color:#64748b; margin-bottom:12px;">कमेटी खुलने पर सदस्य के आगे बनी 🏆 दबाएं</p>
       <div id="members"></div>
-    </div>
-    
-    <div class="card" id="warningCard" style="border-color: #fecaca; background: #fffcfc;">
-      <h2>⚠️ बकाया विवरण</h2>
-      <div id="warnings"></div>
     </div>
   </section>
 
@@ -286,7 +246,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है।</p>
       <div class="msg ok" style="margin-bottom: 20px;">✓ Admin ID Verified</div>
     </div>
-    
     <div class="card" style="border: 2px solid #e11d48; background: #fff1f2;">
       <h2 style="color: #e11d48;">🗑️ कमेटी डिलीट करें</h2>
       <p style="margin-bottom: 16px; font-size: 13px; color: #9f1239;">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</p>
@@ -296,7 +255,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
   </section>
 </main>
 
-<!-- BOTTOM NAVIGATION -->
 <nav id="mainNav" class="bottom-nav hidden">
   <button id="nav-home" onclick="show('home')"><span class="ico">🏠</span>होम</button>
   <button id="nav-create" onclick="show('create')"><span class="ico">➕</span>नई</button>
@@ -311,15 +269,11 @@ const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
 const ADMIN_PHONE = '7318259001'; 
 const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr'; 
 const KEYS = { session: 'kk_session', joined: 'kk_joined', current: 'kk_current' };
+let currentBCData = null; // Global object for Dashboard
 
 // LOCAL STORAGE
 function load(key, def) { try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; } }
 function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
-
-function toggleFaq(id) {
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-}
 
 function appAlert(text) {
   return new Promise(res => {
@@ -339,22 +293,17 @@ async function shareApp() {
 }
 
 function sendInviteProof(bcName, bcCode, amount, memberName) {
-  const msg = `नमस्ते ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* या *'हाँ'* लिखकर रिप्लाई करें ताकि मेरी लिस्ट में आपका नाम पक्का हो जाए। (यह हमारी सहमति का प्रमाण है)\n\nऐप में अपना हिसाब देखने के लिए Access Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`;
+  const msg = `नमस्ते ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* लिखकर रिप्लाई करें ताकि लिस्ट में आपका नाम पक्का हो जाए।\n\nऐप में अपना हिसाब देखने के लिए Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`;
   window.location.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 
-// ✨ AUTHENTICATION SYSTEM (NO OTP) ✨
+// ✨ AUTHENTICATION ✨
 function switchAuth(mode) {
   const isReg = mode === 'register';
   document.getElementById('tabReg').classList.toggle('active', isReg);
   document.getElementById('tabLogin').classList.toggle('active', !isReg);
-  if (isReg) {
-    document.getElementById('regExtra').classList.remove('hidden');
-    document.getElementById('authBtn').textContent = 'अकाउंट बनाएं';
-  } else {
-    document.getElementById('regExtra').classList.add('hidden');
-    document.getElementById('authBtn').textContent = 'लॉगिन करें';
-  }
+  if (isReg) { document.getElementById('regExtra').classList.remove('hidden'); document.getElementById('authBtn').textContent = 'अकाउंट बनाएं'; } 
+  else { document.getElementById('regExtra').classList.add('hidden'); document.getElementById('authBtn').textContent = 'लॉगिन करें'; }
   document.getElementById('authMsg').innerHTML = '';
 }
 
@@ -368,8 +317,7 @@ async function doAuth() {
 
   if(phone.length !== 10) return msg.innerHTML = '<div class="msg err">सही 10 अंकों का नंबर डालें</div>';
   if(pass.length < 4) return msg.innerHTML = '<div class="msg err">पासवर्ड कम से कम 4 अक्षरों का रखें</div>';
-  if(isReg && !name.trim()) return msg.innerHTML = '<div class="msg err">कृपया अपना नाम लिखें</div>';
-
+  
   btn.textContent = "प्रतीक्षा करें...";
   try {
     const res = await fetch(`${API_URL}/api/auth`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, pass, name, isRegister: isReg }) });
@@ -382,29 +330,17 @@ async function doAuth() {
   btn.textContent = isReg ? 'अकाउंट बनाएं' : 'लॉगिन करें';
 }
 
-function showForgot() {
-  document.getElementById('authNormal').classList.add('hidden');
-  document.getElementById('authTabs').classList.add('hidden');
-  document.getElementById('authForgot').classList.remove('hidden');
-}
-
-function hideForgot() {
-  document.getElementById('authNormal').classList.remove('hidden');
-  document.getElementById('authTabs').classList.remove('hidden');
-  document.getElementById('authForgot').classList.add('hidden');
-}
+function showForgot() { document.getElementById('authNormal').classList.add('hidden'); document.getElementById('authTabs').classList.add('hidden'); document.getElementById('authForgot').classList.remove('hidden'); }
+function hideForgot() { document.getElementById('authNormal').classList.remove('hidden'); document.getElementById('authTabs').classList.remove('hidden'); document.getElementById('authForgot').classList.add('hidden'); }
 
 async function doForgot() {
   const phone = document.getElementById('forgotPhone').value;
   const pass = document.getElementById('forgotPass').value;
-  if(phone.length !== 10) return appAlert('सही 10 अंकों का नंबर डालें');
-  if(pass.length < 4) return appAlert('पासवर्ड कम से कम 4 अक्षरों का रखें');
-  
+  if(phone.length !== 10 || pass.length < 4) return appAlert('सही जानकारी डालें');
   try {
     const res = await fetch(`${API_URL}/api/forgot`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, newPass: pass }) });
     if(!res.ok) throw new Error("नंबर रजिस्टर नहीं है");
-    appAlert("✅ पासवर्ड बदल गया। अब नए पासवर्ड से लॉगिन करें।");
-    hideForgot(); switchAuth('login');
+    appAlert("✅ पासवर्ड बदल गया।"); hideForgot(); switchAuth('login');
   } catch(e) { appAlert("त्रुटि: " + e.message); }
 }
 
@@ -416,37 +352,25 @@ function enterApp() {
   
   document.getElementById('profName').textContent = s.name;
   document.getElementById('profPhone').textContent = "+91 " + s.phone;
-  let joinedCount = load(KEYS.joined, []).length;
-  document.getElementById('profCount').textContent = joinedCount;
+  document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
   
-  if (s.phone === ADMIN_PHONE) {
-    document.getElementById('nav-admin').classList.remove('hidden');
-    document.getElementById('profRole').textContent = "मुख्य एडमिन 👑";
-  } else {
-    document.getElementById('profRole').textContent = "कमेटी सदस्य";
-  }
-  
+  if (s.phone === ADMIN_PHONE) { document.getElementById('nav-admin').classList.remove('hidden'); document.getElementById('profRole').textContent = "मुख्य एडमिन 👑"; } 
+  else { document.getElementById('profRole').textContent = "कमेटी सदस्य"; }
   show('home');
 }
+
 function appLogout() { localStorage.removeItem(KEYS.session); location.reload(); }
 
 function show(id) {
   document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
-  
   if(id === 'profile') document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
-  
   if(id === 'create') {
       const s = load(KEYS.session, {});
       if(!document.getElementById('ownerName').value) document.getElementById('ownerName').value = s.name || "";
       if(!document.getElementById('ownerPhone').value) document.getElementById('ownerPhone').value = s.phone || "";
   }
-
-  ['home','mylist','create','profile','admin'].forEach(n => { 
-      const b = document.getElementById('nav-'+n); 
-      if(b) b.classList.toggle('active', n === id); 
-  });
-  
+  ['home','mylist','create','profile','admin'].forEach(n => { const b = document.getElementById('nav-'+n); if(b) b.classList.toggle('active', n === id); });
   if(id === 'dashboard') loadDash();
   if(id === 'mylist') renderMyList();
   window.scrollTo(0,0);
@@ -460,7 +384,7 @@ function buildMemberInputs() {
   document.getElementById('memberInputs').innerHTML = h;
 }
 
-// ✨ CREATE BC ✨
+// ✨ ADVANCED CREATE BC ✨
 async function createBC() {
   const name = document.getElementById('bcName').value;
   const amount = document.getElementById('bcAmount').value;
@@ -474,25 +398,31 @@ async function createBC() {
   
   const inps = document.querySelectorAll('.mem-name');
   let members = [];
-  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paid: false }); });
+  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); }); // Changed to track rounds
   
   if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert('कृपया सभी जानकारी भरें!');
   if(!ownerName || ownerPhone.length !== 10) return appAlert('कृपया मालिक का नाम और 10 अंकों का सही मोबाइल नंबर दर्ज़ करें!');
   
   if(!members.some(m => m.name.toLowerCase() === ownerName.toLowerCase())) {
-      members.unshift({ name: ownerName, paid: true });
+      members.unshift({ name: ownerName, paidRounds: 1, hasWon: false }); // Owner starts with 1 paid round roughly
   }
 
   const code = genCode();
-  const bcData = { code, name, amount, freqText, freqVal, totalInst, totalPool, ownerName, ownerPhone, members, startDate: document.getElementById('startDate').value };
+  
+  // New Initial State Structure
+  const bcData = { 
+    code, name, amount: Number(amount), freqText, freqVal, totalInst: Number(totalInst), totalPool: Number(totalPool), 
+    ownerName, ownerPhone, startDate: document.getElementById('startDate').value,
+    currentRound: 1, walletBalance: Number(amount), // Assume owner paid 1st round
+    members 
+  };
   
   document.getElementById('createBtn').textContent = "सेव हो रहा है...";
   try {
     await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bcData) });
     let joined = load(KEYS.joined, []); joined.push(code); save(KEYS.joined, joined); save(KEYS.current, code);
     
-    document.getElementById('bcName').value = ''; document.getElementById('bcAmount').value = ''; document.getElementById('memberInputs').innerHTML = ''; document.getElementById('memberCount').value = '';
-    
+    document.getElementById('bcName').value = ''; document.getElementById('memberInputs').innerHTML = '';
     document.getElementById('created').classList.remove('hidden');
     document.getElementById('created').innerHTML = `<h2 style="color: #059669;">✅ कमेटी बन गई!</h2><div class="code">${code}</div><p style="font-size: 14px; font-weight: 500;">यह Access Code सदस्यों को दें।</p><button class="btn btn-primary" style="margin-top:16px;" onclick="show('dashboard')">कमेटी खोलें</button>`;
   } catch(e) { appAlert("सेव नहीं हो पाया"); }
@@ -506,7 +436,7 @@ async function join() {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     if(!res.ok) throw new Error();
     const data = await res.json();
-    if(data.data.isDeleted) return appAlert("यह कमेटी एडमिन द्वारा डिलीट कर दी गई है।");
+    if(data.data.isDeleted) return appAlert("यह कमेटी डिलीट कर दी गई है।");
     let joined = load(KEYS.joined, []);
     if(!joined.includes(code)) { joined.push(code); save(KEYS.joined, joined); }
     save(KEYS.current, code); document.getElementById('accessCode').value = ''; show('dashboard');
@@ -522,9 +452,7 @@ async function renderMyList() {
       if(res.ok) {
         let bc = (await res.json()).data;
         if(bc.isDeleted) {
-           let joined = load(KEYS.joined, []);
-           save(KEYS.joined, joined.filter(x => x !== bc.code));
-           continue;
+           let joined = load(KEYS.joined, []); save(KEYS.joined, joined.filter(x => x !== bc.code)); continue;
         }
         html += `<div class="bc-item" onclick="save(KEYS.current, '${bc.code}'); show('dashboard')">
           <div><b style="display:block; font-size:16px; margin-bottom:4px;">${bc.name}</b><span class="small" style="font-weight: 600;">Code: ${bc.code}</span></div>
@@ -535,128 +463,185 @@ async function renderMyList() {
   document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size: 40px; margin-bottom: 12px;">📋</div><p>कोई कमेटी नहीं है</p></div>`;
 }
 
-let currentTotalPool = 0;
+// ✨ SAVE ENTIRE BC STATE TO BACKEND ✨
+async function saveBCState() {
+   try {
+     await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(currentBCData) });
+     loadDash(); // Reload UI
+   } catch(e) { appAlert("सेव करने में त्रुटि। इंटरनेट चेक करें।"); }
+}
 
+// ✨ ADVANCED DASHBOARD RENDERER ✨
 async function loadDash() {
   const code = load(KEYS.current, null);
   const currentUser = load(KEYS.session, {});
-  document.getElementById('dashTitle').textContent = "लोड हो रहा है...";
-  document.getElementById('dash').innerHTML = "";
+  document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>लोड हो रहा है...</div>";
+  document.getElementById('members').innerHTML = "";
   
   try {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    const bc = (await res.json()).data;
+    currentBCData = (await res.json()).data;
+    const bc = currentBCData;
     
     if(bc.isDeleted) {
-        document.getElementById('dashTitle').textContent = '❌ डिलीट हो गई';
-        document.getElementById('dash').innerHTML = '<div class="warn" style="text-align:center;">यह कमेटी एडमिन द्वारा हमेशा के लिए डिलीट कर दी गई है।</div>';
+        document.getElementById('walletBlock').innerHTML = '<div class="warn" style="text-align:center;">❌ यह कमेटी एडमिन द्वारा हमेशा के लिए डिलीट कर दी गई है।</div>';
         document.getElementById('memberCard').classList.add('hidden');
-        document.getElementById('warningCard').classList.add('hidden');
         return;
     }
     
-    // SECURITY CHECK: Matches Owner Phone OR Admin Phone
+    // MIGRATION: Convert old data to new Wallet/Round format automatically
+    if(bc.currentRound === undefined) bc.currentRound = 1;
+    if(bc.walletBalance === undefined) bc.walletBalance = 0;
+    bc.members.forEach(m => {
+        if(m.paidRounds === undefined) { m.paidRounds = m.paid ? 1 : 0; if(m.paid) bc.walletBalance += Number(bc.amount); }
+        if(m.hasWon === undefined) m.hasWon = false;
+    });
+
     const isOwner = (String(bc.ownerPhone) === String(currentUser.phone)) || (String(currentUser.phone) === ADMIN_PHONE);
-    
     document.getElementById('memberCard').classList.remove('hidden');
-    document.getElementById('warningCard').classList.remove('hidden');
 
     if(isOwner){
        document.getElementById('ownerGuideText').innerHTML = "प्रमाण के लिए सदस्य को WhatsApp Invite भेजें। <br><b>(कमेटी खुलने पर 🏆 दबाएं)</b>";
+       document.getElementById('nextRoundBtn').classList.remove('hidden');
     } else {
        document.getElementById('ownerGuideText').innerHTML = "कमेटी सदस्य सूची (सिर्फ संचालक बदलाव कर सकते हैं)";
+       document.getElementById('nextRoundBtn').classList.add('hidden');
     }
 
+    // DATE CALCULATION
+    let startD = new Date(bc.startDate);
+    let endD = new Date(startD);
+    let inst = Number(bc.totalInst) || 0;
+    if(bc.freqVal === 'weekly') endD.setDate(endD.getDate() + (inst * 7));
+    else if(bc.freqVal === 'biweekly') endD.setDate(endD.getDate() + (inst * 15));
+    else if(bc.freqVal === 'monthly') endD.setMonth(endD.getMonth() + inst);
+    let formatD = (d) => d.toLocaleDateString('hi-IN', {day:'2-digit', month:'short', year:'numeric'});
+    let dateStr = `📅 शुरू: ${formatD(startD)} &nbsp;|&nbsp; खत्म: ${formatD(endD)}`;
+
     const totalMembers = bc.members.length;
-    currentTotalPool = bc.totalPool || (bc.amount * totalMembers); 
-    const totalInstText = bc.totalInst ? `${bc.totalInst} बार` : `${totalMembers} ${bc.freqText}`;
-    const freqDisplay = bc.freqText || 'हफ़्ता';
     
-    document.getElementById('dashTitle').textContent = '📊 ' + bc.name;
-    document.getElementById('dash').innerHTML = `
+    // RENDER WALLET & STATS
+    document.getElementById('walletBlock').innerHTML = `
+      <div class="wallet-card">
+         <div class="wallet-title">${bc.name} • 💼 कमेटी वॉलेट</div>
+         <div class="wallet-amt">₹${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
+         <div class="wallet-sub">अभी इतना पैसा इकट्ठा है</div>
+         <div class="date-bar">${dateStr}</div>
+      </div>
       <div class="stats">
-        <div class="stat"><b>₹${bc.amount}</b><span>किस्त (${freqDisplay})</span></div>
-        <div class="stat"><b>${totalMembers}</b><span>कुल सदस्य</span></div>
-        <div class="stat stat-pool">
-          <b>₹${Number(currentTotalPool).toLocaleString('en-IN')}</b>
-          <span>कमेटी खुलने पर मिलेगा</span>
-          <div class="sub-info">कुल किश्तें: ${totalInstText}</div>
+        <div class="stat"><b>₹${bc.amount}</b><span>किस्त (${bc.freqText || 'हफ़्ता'})</span></div>
+        <div class="stat"><b>${bc.currentRound} / ${bc.totalInst || totalMembers}</b><span>चल रही किश्त</span></div>
+        <div class="stat stat-pool" style="background:#f1f5f9; color:var(--primary-dark); border-color:var(--border);">
+          <b style="color:var(--primary-dark); font-size:22px;">₹${Number(bc.totalPool || (bc.amount * totalMembers)).toLocaleString('en-IN')}</b>
+          <span style="color:var(--muted);">कमेटी खुलने पर मिलेगा</span>
         </div>
       </div>
-      <p style="text-align: center; margin-top: 12px; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b><br><span style="color:var(--muted); font-size:11px;">संचालक: ${bc.ownerName}</span></p>
+      <p style="text-align: center; margin: 12px 0; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b><br><span style="color:var(--muted); font-size:11px;">संचालक: ${bc.ownerName}</span></p>
     `;
     
-    document.getElementById('members').innerHTML = bc.members.map((m,i) => `
+    // RENDER MEMBERS DETAILED LIST
+    document.getElementById('members').innerHTML = bc.members.map((m,i) => {
+      // Calculate Dues based on Round
+      let totalPaidByMem = m.paidRounds * bc.amount;
+      let targetPaid = bc.currentRound * bc.amount;
+      let pendingDue = targetPaid - totalPaidByMem;
+      if(pendingDue < 0) pendingDue = 0; // if paid in advance
+      
+      let payBtnHtml = '';
+      if(isOwner && pendingDue > 0) {
+          payBtnHtml = `<button class="btn btn-sm" style="background:#059669; color:white; padding:6px 12px;" onclick="markPaidAdvance('${m.name}')">✓ किश्त जमा करें</button>`;
+      }
+      
+      let winBtn = `<div class="win-btn-disabled">🏆</div>`;
+      if(isOwner && !m.hasWon) winBtn = `<button class="win-btn" onclick="declareWinner('${m.name}')" title="विजेता बनाएं">🏆</button>`;
+      else if(m.hasWon) winBtn = `<div style="font-size:20px;" title="कमेटी खुल चुकी है">🎉</div>`;
+
+      return `
       <div class="member">
         <div class="member-top">
            <div style="display: flex; align-items: center; gap: 10px;">
-             ${isOwner ? `<button class="win-btn" onclick="declareWinner('${m.name}')" title="विजेता बनाएं">🏆</button>` : `<div class="win-btn-disabled">🏆</div>`}
+             ${winBtn}
              <b>${i+1}. ${m.name}</b>
            </div>
-           <span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? '✓ भुगतान' : 'बाकी है'}</span>
+           ${payBtnHtml}
+        </div>
+        <div class="mem-stats">
+            <span class="paid">कुल जमा: ₹${totalPaidByMem}</span>
+            <span class="${pendingDue > 0 ? 'due' : 'paid'}">बाकी है: ₹${pendingDue}</span>
         </div>
         ${isOwner ? `
-        <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
-           <button class="btn btn-sm" style="background: #25D366; color: white; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px;" onclick="sendInviteProof('${bc.name}', '${bc.code}', '${bc.amount}', '${m.name}')">
-              📲 WhatsApp Invite
+        <div style="display: flex; justify-content: flex-end;">
+           <button style="background:none; border:none; color:#25D366; font-size:12px; font-weight:700; cursor:pointer;" onclick="sendInviteProof('${bc.name}', '${bc.code}', '${bc.amount}', '${m.name}')">
+              📲 WhatsApp Invite / Proof
            </button>
         </div>` : ''}
-      </div>`).join('');
-    
-    const unpaid = bc.members.filter(m => !m.paid);
-    
-    if (isOwner) {
-       document.getElementById('warnings').innerHTML = unpaid.length ? unpaid.map(m => `
-         <div class="warn">
-           <div style="font-weight: 700; margin-bottom: 8px;">⚠️ ${m.name}</div>
-           <div style="font-size: 13px; margin-bottom: 12px;">₹${bc.amount} की किस्त बाकी है।</div>
-           <button class="btn btn-primary btn-sm" style="width: 100%; box-shadow: none;" onclick="markPaid('${bc.code}','${m.name}')">✓ भुगतान प्राप्त हुआ</button>
-         </div>`).join('') : '<div class="ok">🎉 कमाल है! कोई बकाया नहीं।</div>';
-    } else {
-       document.getElementById('warnings').innerHTML = unpaid.length ? unpaid.map(m => `
-         <div class="warn">
-           <div style="font-weight: 700; margin-bottom: 8px;">⚠️ ${m.name}</div>
-           <div style="font-size: 13px; margin-bottom: 12px;">₹${bc.amount} की किस्त बाकी है।</div>
-           <div style="font-size: 13px; color: #9f1239; font-weight:600; text-align:center; padding: 6px; background: rgba(255,255,255,0.5); border-radius: 8px;">(भुगतान जमा करने के लिए संचालक से संपर्क करें)</div>
-         </div>`).join('') : '<div class="ok">🎉 कमाल है! कोई बकाया नहीं।</div>';
-    }
+      </div>`;
+    }).join('');
 
   } catch(e) { show('mylist'); }
 }
 
-async function markPaid(code, memberName) {
-  try {
-    await fetch(`${API_URL}/api/pay`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, memberName }) });
-    loadDash();
-  } catch(e) { appAlert("इंटरनेट चेक करें"); }
+// ✨ MARK INSTALLMENT AS PAID ✨
+async function markPaidAdvance(memberName) {
+    if(!currentBCData) return;
+    let m = currentBCData.members.find(x => x.name === memberName);
+    if(m) {
+        m.paidRounds += 1;
+        currentBCData.walletBalance += Number(currentBCData.amount);
+        document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>अपडेट हो रहा है...</div>";
+        await saveBCState();
+    }
 }
 
+// ✨ START NEXT ROUND ✨
+async function startNextRound() {
+    if(!confirm("क्या आप वाकई अगली किश्त (नया महीना/हफ्ता) चालू करना चाहते हैं? इससे सभी सदस्यों का 'बाकी' पैसा बढ़ जाएगा।")) return;
+    currentBCData.currentRound += 1;
+    document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>अपडेट हो रहा है...</div>";
+    await saveBCState();
+}
+
+// ✨ WINNER DEDUCTION SYSTEM ✨
+let pendingWinnerName = "";
 function declareWinner(name) {
+  pendingWinnerName = name;
   document.getElementById('winName').textContent = name;
-  document.getElementById('winAmount').textContent = Number(currentTotalPool).toLocaleString('en-IN');
+  document.getElementById('winAmount').textContent = Number(currentBCData.totalPool || 0).toLocaleString('en-IN');
   document.getElementById('winnerModal').classList.remove('hidden');
+}
+
+async function confirmWinner() {
+   let m = currentBCData.members.find(x => x.name === pendingWinnerName);
+   if(m && !m.hasWon) {
+       m.hasWon = true;
+       // Deduct Winning Pool from Wallet
+       currentBCData.walletBalance -= Number(currentBCData.totalPool || 0);
+       document.getElementById('winnerModal').classList.add('hidden');
+       document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>पैसे दिए जा रहे हैं...</div>";
+       await saveBCState();
+   }
 }
 
 async function adminDeleteBC() {
   const code = document.getElementById('adminDelCode').value.trim().toUpperCase();
   if(!code) return appAlert("कृपया कमेटी का Code डालें!");
-  if(!confirm("⚠️ चेतावनी!\nक्या आप सच में कमेटी '" + code + "' को हमेशा के लिए डिलीट करना चाहते हैं? यह वापस नहीं आएगी।")) return;
+  if(!confirm("⚠️ चेतावनी!\nक्या आप सच में कमेटी डिलीट करना चाहते हैं?")) return;
   try {
     const getRes = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if(!getRes.ok) return appAlert("यह कोड मौजूद नहीं है या पहले ही डिलीट हो चुका है!");
+    if(!getRes.ok) return appAlert("यह कोड मौजूद नहीं है!");
     const existingData = (await getRes.json()).data;
     existingData.name = "❌ यह कमेटी डिलीट कर दी गई है";
     existingData.members = [];
     existingData.isDeleted = true;
     existingData.amount = 0;
     await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(existingData) });
-    appAlert("✅ कमेटी सफलतापूर्वक डिलीट চরম गई!");
+    appAlert("✅ कमेटी सफलतापूर्वक डिलीट हो गई!");
     let joined = load(KEYS.joined, []);
     joined = joined.filter(c => c !== code);
     save(KEYS.joined, joined);
     if(load(KEYS.current) === code) localStorage.removeItem(KEYS.current);
     document.getElementById('adminDelCode').value = '';
-  } catch(e) { appAlert("डिलीट नहीं हो पाया। इंटरनेट चेक करें।"); }
+  } catch(e) { appAlert("डिलीट नहीं हो पाया।"); }
 }
 
 window.onload = () => {
@@ -666,4 +651,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+</html>
