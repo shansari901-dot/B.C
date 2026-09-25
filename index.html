@@ -5,105 +5,128 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>कमेटी खाता</title>
 <meta name="description" content="आपकी कमेटी • आपका हिसाब • सुरक्षित ऑनलाइन">
-<meta name="theme-color" content="#1e293b">
+<meta name="theme-color" content="#1e3a8a">
 <style>
-/* PREMIUM THEME COLORS */
+/* 🌈 COLORFUL NATURAL THEME COLORS */
 :root { 
-  --primary: #1e293b; --primary-dark: #0f172a; --accent: #3b82f6; 
-  --bg: #f8fafc; --card: #ffffff; --text: #334155; --muted: #64748b; 
-  --border: #e2e8f0; --success: #059669; --danger: #e11d48; 
-  --warn-bg: #fff1f2; --ok-bg: #ecfdf5; --radius: 20px; 
-  --shadow: 0 10px 25px rgba(0,0,0,0.05); 
+  --primary: #1e3a8a; --primary-dark: #172554; --accent: #2563eb; 
+  --bg: #e0f2fe; /* Light sky blue background */
+  --text: #1e293b; --muted: #475569; 
+  --border: rgba(0,0,0,0.1); --success: #059669; --danger: #e11d48; 
+  --radius: 20px; 
+  --shadow: 0 10px 25px rgba(0,0,0,0.06); 
 }
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 85px; }
+body { 
+  background: linear-gradient(135deg, #dbeafe 0%, #bae6fd 100%); /* Beautiful Natural Sky Gradient */
+  color: var(--text); min-height: 100vh; padding-bottom: 85px; 
+}
 
 /* TOP BAR */
-.topbar { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; padding: 24px 20px; border-radius: 0 0 32px 32px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2); }
-.topbar-text h1 { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
-.topbar-text p { font-size: 13px; opacity: 0.8; margin-top: 4px; font-weight: 500; }
-.topbar-share { background: rgba(255,255,255,0.15); border: none; color: #fff; padding: 10px 14px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; gap: 6px; align-items: center; transition: background 0.2s; }
+.topbar { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%); color: #fff; padding: 24px 20px 30px; border-radius: 0 0 32px 32px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3); }
+.topbar-text h1 { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.topbar-text p { font-size: 13px; opacity: 0.9; margin-top: 4px; font-weight: 500; color: #bfdbfe; }
+.topbar-share { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 10px 14px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; gap: 6px; align-items: center; transition: transform 0.2s; }
 .topbar-share:active { transform: scale(0.95); }
 
-main { max-width: 480px; margin: -15px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; }
+/* MAIN CONTAINER (Fixed Overlap) */
+main { max-width: 480px; margin: 25px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; }
 
-/* CARDS */
-.card { background: var(--card); border-radius: var(--radius); padding: 22px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid rgba(226, 232, 240, 0.8); }
-.card h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--primary-dark); }
+/* CARDS BASE */
+.card { border-radius: var(--radius); padding: 22px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.5); }
+.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--primary-dark); }
 
-/* INPUTS */
+/* INPUTS (Glassmorphism instead of plain white) */
 .field { margin-bottom: 16px; }
-.field label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-input, select { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--border); font-size: 15px; background: #f8fafc; color: var(--text); font-weight: 500; }
-input:focus, select:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+.field label { display: block; font-size: 12px; font-weight: 800; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+input, select { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--border); font-size: 15px; background: rgba(255, 255, 255, 0.6); color: var(--text); font-weight: 600; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); backdrop-filter: blur(5px); }
+input:focus, select:focus { outline: none; border-color: var(--accent); background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 /* BUTTONS */
-.btn { width: 100%; padding: 15px; border: none; border-radius: 14px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.btn { width: 100%; padding: 15px; border: none; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
 .btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2); }
-.btn-secondary { background: #f1f5f9; color: var(--primary); border: 1px solid var(--border); }
-.btn-sm { padding: 10px 16px; font-size: 13px; width: auto; }
+.btn-primary { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3); border: 1px solid #1e40af; }
+.btn-secondary { background: rgba(255,255,255,0.8); color: var(--primary-dark); border: 1px solid var(--border); }
+.btn-sm { padding: 10px 16px; font-size: 12px; width: auto; }
 .btn-row { display: flex; gap: 10px; margin-top: 16px; }
-.link-btn { background: none; border: none; color: var(--accent); font-size: 14px; font-weight: 700; cursor: pointer; padding: 8px; }
+.link-btn { background: none; border: none; color: var(--accent); font-size: 14px; font-weight: 800; cursor: pointer; padding: 8px; }
 
 /* AUTH TABS */
-.auth-wrap { max-width: 400px; margin: 30px auto 0; }
-.tabs { display: flex; background: #f1f5f9; border-radius: 14px; padding: 5px; margin-bottom: 20px; }
-.tabs button { flex: 1; padding: 12px; border: none; border-radius: 12px; background: transparent; font-size: 14px; font-weight: 700; color: var(--muted); cursor: pointer; }
-.tabs button.active { background: #fff; color: var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.auth-wrap { max-width: 400px; margin: 10px auto 0; }
+.tabs { display: flex; background: rgba(0,0,0,0.05); border-radius: 14px; padding: 5px; margin-bottom: 20px; }
+.tabs button { flex: 1; padding: 12px; border: none; border-radius: 12px; background: transparent; font-size: 14px; font-weight: 800; color: var(--muted); cursor: pointer; }
+.tabs button.active { background: rgba(255,255,255,0.9); color: var(--primary-dark); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 
-/* ALERTS & MSGS */
-.msg { padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 14px; text-align: center; font-weight: 600; }
-.msg.err { background: var(--warn-bg); color: var(--danger); border: 1px solid #fda4af; }
-.msg.ok { background: var(--ok-bg); color: var(--success); border: 1px solid #6ee7b7; }
-.warn { background: var(--warn-bg); border: 1px solid #fecaca; padding: 16px; border-radius: 14px; margin-bottom: 12px; font-size: 14px; color: #9f1239; }
+/* ALERTS */
+.msg { padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 14px; text-align: center; font-weight: 700; }
+.msg.err { background: #ffe4e6; color: #be123c; border: 1px solid #fda4af; }
+.msg.ok { background: #d1fae5; color: #047857; border: 1px solid #6ee7b7; }
+.warn { background: #ffe4e6; border: 1px solid #fecaca; padding: 16px; border-radius: 14px; margin-bottom: 12px; font-size: 14px; color: #9f1239; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
 
-/* DASHBOARD & MEMBERS */
-.user-bar { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 12px 18px; border-radius: 16px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+/* DASHBOARD & STATS */
 .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
-.stat { background: #f8fafc; border-radius: 14px; padding: 16px 10px; text-align: center; border: 1px solid var(--border); }
-.stat b { display: block; font-size: 18px; color: var(--primary-dark); font-weight: 800; }
-.stat span { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-top: 4px; display: block; }
+.stat { border-radius: 14px; padding: 16px 10px; text-align: center; border: 1px solid; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+.stat b { display: block; font-size: 18px; font-weight: 800; }
+.stat span { font-size: 11px; font-weight: 700; text-transform: uppercase; margin-top: 4px; display: block; letter-spacing: 0.5px; }
 
-/* WALLET CARD */
-.wallet-card { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; padding: 24px; border-radius: 20px; text-align: center; box-shadow: 0 15px 30px rgba(15,23,42,0.3); margin-bottom: 16px; position: relative; overflow: hidden; }
-.wallet-card::before { content: '💼'; position: absolute; right: -20px; top: -10px; font-size: 100px; opacity: 0.1; }
-.wallet-title { font-size: 14px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.wallet-amt { font-size: 38px; font-weight: 800; color: #34d399; margin-bottom: 4px; }
-.wallet-sub { font-size: 13px; color: #94a3b8; }
-.date-bar { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; font-size: 12px; font-weight: 600; margin-top: 16px; display: flex; justify-content: space-around; }
+/* 💳 CREDIT CARD WALLET DESIGN */
+.wallet-card { 
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Premium Platinum Bank Card */
+  color: white; 
+  padding: 24px; 
+  border-radius: 18px; 
+  text-align: left; 
+  box-shadow: 0 15px 35px rgba(15,32,39,0.4); 
+  margin-bottom: 24px; 
+  position: relative; 
+  overflow: hidden; 
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.wallet-card::before { 
+  content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; 
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%); pointer-events: none;
+}
+.wallet-card::after {
+  content: '💳'; position: absolute; top: 20px; right: 24px; font-size: 32px; opacity: 0.9; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.wallet-title { font-size: 12px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
+.wallet-amt { font-size: 42px; font-weight: 800; color: #fff; margin-bottom: 4px; font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; text-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+.wallet-sub { font-size: 11px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+.date-bar { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 8px 14px; font-size: 11px; font-weight: 700; margin-top: 24px; display: inline-block; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.05); letter-spacing: 1px;}
 
-.member { display: flex; flex-direction: column; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; background: #fff; gap: 10px; }
+/* MEMBERS */
+.member { display: flex; flex-direction: column; padding: 14px 16px; border: 1px solid; border-radius: 14px; margin-bottom: 12px; gap: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
 .member-top { display: flex; justify-content: space-between; align-items: center; }
-.member b { font-size: 16px; color: var(--text); }
-.mem-stats { display: flex; justify-content: space-between; background: #f8fafc; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; }
-.mem-stats .paid { color: #059669; }
-.mem-stats .due { color: #e11d48; }
-.win-btn { background: #fef08a; border: 1px solid #facc15; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.member b { font-size: 16px; color: var(--primary-dark); font-weight: 800; }
+.mem-stats { display: flex; justify-content: space-between; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 800; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); }
+.mem-stats .paid { color: #047857; }
+.mem-stats .due { color: #be123c; }
+
+/* MISC STYLES */
+.win-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); border: 1px solid #d97706; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; box-shadow: 0 4px 10px rgba(245,158,11,0.3); transition: transform 0.2s; }
 .win-btn:active { transform: scale(0.9); }
-.win-btn-disabled { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; opacity: 0.4; }
+.win-btn-disabled { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 18px; opacity: 0.4; }
 
-/* BOTTOM NAV */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); z-index: 50; }
-.bottom-nav button { flex: 1; background: none; border: none; padding: 8px 4px; font-size: 11px; font-weight: 700; color: var(--muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; border-radius: 12px; }
-.bottom-nav button .ico { font-size: 22px; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.5); display: flex; justify-content: space-around; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); z-index: 50; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); }
+.bottom-nav button { flex: 1; background: none; border: none; padding: 8px 4px; font-size: 11px; font-weight: 800; color: var(--muted); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; border-radius: 12px; }
+.bottom-nav button .ico { font-size: 24px; transition: transform 0.2s; }
 .bottom-nav button.active { color: var(--accent); }
+.bottom-nav button.active .ico { transform: scale(1.1); }
 
-/* MISC */
 .hidden { display: none !important; }
-.mem-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.mem-row .num { width: 32px; height: 32px; border-radius: 10px; background: #f1f5f9; color: var(--primary); font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.mem-row input { flex: 1; margin: 0; border: none; background: transparent; padding: 8px; font-size: 16px; border-bottom: 2px solid transparent; border-radius: 0; }
-.bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; background: #fff; cursor: pointer; }
-.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 15px; }
+.mem-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); }
+.mem-row .num { width: 34px; height: 34px; border-radius: 10px; background: rgba(0,0,0,0.05); color: var(--primary-dark); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mem-row input { flex: 1; margin: 0; border: none; background: transparent; padding: 8px; font-size: 16px; border-radius: 0; box-shadow: none; }
+.bc-item { display: flex; justify-content: space-between; align-items: center; padding: 18px; border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; margin-bottom: 12px; background: rgba(255,255,255,0.6); box-shadow: 0 4px 10px rgba(0,0,0,0.03); cursor: pointer; backdrop-filter: blur(5px); }
+.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 15px; font-weight: 700; }
 
 /* MODALS */
-.modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.modal-box { background: #fff; border-radius: 24px; padding: 28px 24px; max-width: 340px; width: 100%; text-align: center; }
-.modal-box p { font-size: 16px; margin-bottom: 24px; color: var(--text); font-weight: 500; }
+.modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal-box { background: #fff; border-radius: 24px; padding: 32px 24px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.modal-box p { font-size: 16px; margin-bottom: 24px; color: var(--text); font-weight: 600; }
 #winnerModal .modal-box { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: 4px solid #fcd34d; box-shadow: 0 20px 50px rgba(217, 119, 6, 0.4); }
-#winnerModal h2 { color: white; font-size: 28px; margin-bottom: 8px; }
+#winnerModal h2 { color: white; font-size: 32px; margin-bottom: 8px; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 </style>
 </head>
 <body>
@@ -112,27 +135,27 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 
 <div id="winnerModal" class="modal-bg hidden">
   <div class="modal-box">
-    <div style="font-size: 50px; margin-bottom: 10px;">🎉🏆🎉</div>
+    <div style="font-size: 55px; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">🎉🏆🎉</div>
     <h2>Winner!</h2>
-    <p style="font-size: 22px; font-weight: 800; margin: 10px 0; color: #fffef0;" id="winName">नाम</p>
-    <p style="color: #fef3c7; font-size: 14px; margin-bottom: 20px;">इनकी कमेटी खुल गई है!<br>क्या आप वॉलेट से <b style="font-size: 18px; color: #fff;">₹<span id="winAmount">0</span></b> देना चाहते हैं?</p>
+    <p style="font-size: 24px; font-weight: 800; margin: 10px 0; color: #fffef0;" id="winName">नाम</p>
+    <p style="color: #fef3c7; font-size: 15px; margin-bottom: 24px; font-weight: 600;">इनकी कमेटी खुल गई है!<br><br>क्या आप वॉलेट से <b style="font-size: 22px; color: #fff; background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: 8px;">₹<span id="winAmount">0</span></b> देना चाहते हैं?</p>
     <div style="display:flex; gap:10px;">
        <button class="btn" style="background: rgba(255,255,255,0.2); color: white;" onclick="document.getElementById('winnerModal').classList.add('hidden')">रद्द करें</button>
-       <button class="btn" style="background: #fff; color: #d97706;" onclick="confirmWinner()">हाँ, पैसे दे दिए</button>
+       <button class="btn" style="background: #fff; color: #d97706; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" onclick="confirmWinner()">हाँ, दे दिए</button>
     </div>
   </div>
 </div>
 
 <div class="topbar">
-  <div class="topbar-text"><h1>कमेटी खाता</h1><p>सरल • ऑनलाइन • सुरक्षित</p></div>
+  <div class="topbar-text"><h1>कमेटी खाता</h1><p>सरल • कलरफुल • सुरक्षित</p></div>
   <button class="topbar-share" onclick="shareApp()">📤 शेयर</button>
 </div>
 
 <main>
-  <!-- AUTHENTICATION -->
+  <!-- AUTHENTICATION (Purple Soft Theme) -->
   <section id="auth">
     <div class="auth-wrap">
-      <div class="card" style="padding: 28px 20px;">
+      <div class="card" style="padding: 30px 20px; background: linear-gradient(135deg, #fdf4ff, #fae8ff); border-color: #f5d0fe;">
         <h2 style="justify-content:center; font-size: 20px; margin-bottom: 24px;">🔐 सुरक्षित प्रवेश</h2>
         <div class="tabs" id="authTabs">
           <button id="tabReg" class="active" onclick="switchAuth('register')">नया अकाउंट</button>
@@ -147,10 +170,10 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
           <p style="text-align:center; margin-top:20px;"><button class="link-btn" onclick="showForgot()">पासवर्ड भूल गए?</button></p>
         </div>
         <div id="authForgot" class="hidden">
-          <p class="small" style="margin-bottom:20px; text-align: center;">नया पासवर्ड सेट करें।</p>
+          <p class="small" style="margin-bottom:20px; text-align: center; font-weight: 700; color: #86198f;">नया पासवर्ड सेट करें।</p>
           <div class="field"><label>मोबाइल नंबर</label><input id="forgotPhone" type="tel" maxlength="10"></div>
           <div class="field"><label>नया पासवर्ड</label><input id="forgotPass" type="password"></div>
-          <button class="btn btn-primary" style="margin-top: 8px; background: #059669;" onclick="doForgot()">✅ पासवर्ड बदलें</button>
+          <button class="btn btn-primary" style="margin-top: 8px; background: linear-gradient(135deg, #10b981, #059669); border-color: #047857;" onclick="doForgot()">✅ पासवर्ड बदलें</button>
           <p style="text-align:center; margin-top:15px;"><button class="link-btn" onclick="hideForgot()">← वापस लॉगिन पर</button></p>
         </div>
       </div>
@@ -159,45 +182,53 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 
   <!-- HOME PAGE -->
   <section id="home" class="hidden">
-    <div class="card" style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: none;">
+    <!-- Green Soft Card -->
+    <div class="card" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: #86efac;">
       <h2>👋 Welcome</h2>
-      <p style="margin-bottom: 16px;">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</p>
-      <button class="btn btn-primary" onclick="show('create')">➕ नई कमेटी बनाएं</button>
+      <p style="margin-bottom: 16px; font-weight: 600; color: #166534;">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</p>
+      <button class="btn btn-primary" style="background: linear-gradient(135deg, #16a34a, #15803d); border-color: #14532d;" onclick="show('create')">➕ नई कमेटी बनाएं</button>
     </div>
-    <div class="card">
+    <!-- Yellow Soft Card -->
+    <div class="card" style="background: linear-gradient(135deg, #fef9c3, #fef08a); border-color: #fde047;">
       <h2>🔑 कोड द्वारा प्रवेश</h2>
-      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">कमेटी का Access Code डालें:</p>
-      <div class="field"><input id="accessCode" placeholder="Access Code (उदा. A1B2C3D4)"></div>
-      <button class="btn btn-secondary" onclick="join()">प्रवेश करें</button>
+      <p style="font-size:12px; color:#854d0e; font-weight:700; margin-bottom:12px;">कमेटी का Access Code डालें:</p>
+      <div class="field"><input id="accessCode" placeholder="Code (उदा. A1B2C3D4)" style="background: rgba(255,255,255,0.8);"></div>
+      <button class="btn btn-secondary" style="background: #ca8a04; color: white; border-color: #a16207;" onclick="join()">प्रवेश करें</button>
     </div>
   </section>
 
-  <!-- PROFILE -->
+  <!-- PROFILE (Blue Soft Card) -->
   <section id="profile" class="hidden">
-    <div class="card" style="text-align: center; padding: 30px 20px;">
-      <div style="font-size: 60px; margin-bottom: 10px;">👤</div>
-      <h2 id="profName" style="justify-content: center; font-size: 24px; color: var(--primary-dark); margin-bottom: 4px;">नाम</h2>
-      <p id="profPhone" style="font-size: 16px; color: var(--muted); font-weight: 600; margin-bottom: 24px; letter-spacing: 1px;">+91 0000000000</p>
-      <div class="stats" style="margin-bottom: 24px;">
-         <div class="stat"><b id="profCount">0</b><span>जुड़ी कमेटियाँ</span></div>
-         <div class="stat"><b id="profRole">यूज़र</b><span>अकाउंट टाइप</span></div>
+    <div class="card" style="text-align: center; padding: 35px 20px; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); border-color: #a5b4fc;">
+      <div style="font-size: 65px; margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">👤</div>
+      <h2 id="profName" style="justify-content: center; font-size: 26px; color: #312e81; margin-bottom: 6px;">नाम</h2>
+      <p id="profPhone" style="font-size: 16px; color: #4338ca; font-weight: 800; margin-bottom: 28px; letter-spacing: 1.5px;">+91 0000000000</p>
+      <div class="stats" style="margin-bottom: 28px;">
+         <div class="stat" style="background: rgba(255,255,255,0.6); border-color: #c7d2fe;"><b id="profCount" style="color: #3730a3;">0</b><span style="color: #4f46e5;">जुड़ी कमेटियाँ</span></div>
+         <div class="stat" style="background: rgba(255,255,255,0.6); border-color: #c7d2fe;"><b id="profRole" style="color: #3730a3;">यूज़र</b><span style="color: #4f46e5;">अकाउंट टाइप</span></div>
       </div>
-      <button class="btn btn-secondary" onclick="appLogout()" style="color: #e11d48; border-color: #fecaca; background: #fff1f2;">🚪 सुरक्षित लॉगआउट</button>
+      <button class="btn btn-secondary" onclick="appLogout()" style="color: #fff; border:none; background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);">🚪 सुरक्षित लॉगआउट</button>
     </div>
   </section>
 
   <!-- MY LIST -->
-  <section id="mylist" class="hidden"><div class="card"><h2>📋 मेरी कमेटियाँ</h2><div id="bcList"></div></div></section>
+  <section id="mylist" class="hidden">
+    <div class="card" style="background: linear-gradient(135deg, #f3e8ff, #e9d5ff); border-color: #d8b4fe;">
+      <h2 style="color: #581c87;">📋 मेरी कमेटियाँ</h2>
+      <div id="bcList"></div>
+    </div>
+  </section>
 
   <!-- CREATE NEW BC -->
   <section id="create" class="hidden">
-    <div class="card">
-      <h2>➕ नई कमेटी बनाएं</h2>
-      <div class="field"><label>कमेटी का नाम *</label><input id="bcName" placeholder="जैसे: गांव कमेटी 2026"></div>
+    <!-- Orange Soft Card -->
+    <div class="card" style="background: linear-gradient(135deg, #ffedd5, #fed7aa); border-color: #fdba74;">
+      <h2 style="color: #9a3412;">➕ नई कमेटी बनाएं</h2>
+      <div class="field"><label style="color: #9a3412;">कमेटी का नाम *</label><input id="bcName" placeholder="जैसे: गांव कमेटी 2026"></div>
       <div class="row">
-        <div class="field"><label>किस्त राशि (₹) *</label><input id="bcAmount" type="number" placeholder="उदा. 1000"></div>
+        <div class="field"><label style="color: #9a3412;">किस्त राशि (₹) *</label><input id="bcAmount" type="number" placeholder="उदा. 1000"></div>
         <div class="field">
-          <label>किस्त का समय</label>
+          <label style="color: #9a3412;">किस्त का समय</label>
           <select id="freq">
             <option value="weekly">हफ़्ता</option>
             <option value="biweekly">15 दिन</option>
@@ -206,51 +237,53 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
         </div>
       </div>
       <div class="row">
-        <div class="field"><label>कुल किश्तें (महीने/हफ्ते) *</label><input id="totalInst" type="number" placeholder="उदा. 10"></div>
-        <div class="field"><label>कमेटी खुलने पर मिलेगा (₹) *</label><input id="totalPool" type="number" placeholder="उदा. 10000"></div>
+        <div class="field"><label style="color: #9a3412;">कुल किश्तें *</label><input id="totalInst" type="number" placeholder="उदा. 10"></div>
+        <div class="field"><label style="color: #9a3412;">कुल पूल (₹) *</label><input id="totalPool" type="number" placeholder="उदा. 10000"></div>
       </div>
-      <div class="row" style="margin-top: 10px; padding-top:10px; border-top: 1px dashed var(--border);">
-        <div class="field"><label style="color:var(--primary-dark);">मालिक का नाम *</label><input id="ownerName" placeholder="संचालक का नाम"></div>
-        <div class="field"><label style="color:var(--primary-dark);">मालिक का मोबाइल *</label><input id="ownerPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
+      <div class="row" style="margin-top: 10px; padding-top:15px; border-top: 2px dashed rgba(194, 65, 12, 0.2);">
+        <div class="field"><label style="color:#7c2d12;">मालिक का नाम *</label><input id="ownerName" placeholder="संचालक का नाम"></div>
+        <div class="field"><label style="color:#7c2d12;">मालिक का मोबाइल *</label><input id="ownerPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
       </div>
-      <div class="field"><label>शुरुआत तिथि</label><input id="startDate" type="date"></div>
+      <div class="field"><label style="color: #9a3412;">शुरुआत तिथि</label><input id="startDate" type="date"></div>
     </div>
     
-    <div class="card">
-      <h2>👥 सदस्य जोड़ें</h2>
-      <div class="field"><label>कुल सदस्य संख्या</label><input id="memberCount" type="number" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
+    <!-- Cyan Soft Card -->
+    <div class="card" style="background: linear-gradient(135deg, #ccfbf1, #99f6e4); border-color: #5eead4;">
+      <h2 style="color: #115e59;">👥 सदस्य जोड़ें</h2>
+      <div class="field"><label style="color: #115e59;">कुल सदस्य संख्या</label><input id="memberCount" type="number" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
       <div id="memberInputs"></div>
     </div>
-    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px; padding: 18px;" id="createBtn">✅ कमेटी सुरक्षित करें</button>
-    <div id="created" class="card hidden"></div>
+    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px; padding: 18px; font-size: 16px; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);" id="createBtn">✅ कमेटी सुरक्षित करें</button>
+    <div id="created" class="card hidden" style="background: #d1fae5; border-color: #34d399; text-align:center;"></div>
   </section>
 
   <!-- DASHBOARD -->
   <section id="dashboard" class="hidden">
     <div id="walletBlock"></div>
     
-    <div class="card" id="memberCard">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-         <h2 style="margin:0;">👥 सभी सदस्य</h2>
-         <button id="nextRoundBtn" class="btn btn-sm btn-secondary hidden" onclick="startNextRound()" style="background:#fef3c7; color:#d97706; border-color:#fcd34d;">+ अगली किश्त चालू करें</button>
+    <!-- Members Container (No white background here) -->
+    <div style="margin-bottom: 20px;" id="memberCard">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding: 0 8px;">
+         <h2 style="margin:0; font-size: 20px; color: var(--primary-dark); font-weight: 800;">👥 सभी सदस्य</h2>
+         <button id="nextRoundBtn" class="btn btn-sm btn-secondary hidden" onclick="startNextRound()" style="background:linear-gradient(135deg, #fef08a, #facc15); color:#854d0e; border:none; box-shadow: 0 4px 10px rgba(250, 204, 21, 0.4); font-weight: 800;">+ अगली किश्त चालू करें</button>
       </div>
-      <p id="ownerGuideText" style="font-size:12px; color:#64748b; margin-bottom:12px;">कमेटी खुलने पर सदस्य के आगे बनी 🏆 दबाएं</p>
+      <p id="ownerGuideText" style="font-size:13px; color:#334155; margin-bottom:16px; font-weight: 700; padding: 0 8px;">कमेटी खुलने पर सदस्य के आगे बनी 🏆 दबाएं</p>
       <div id="members"></div>
     </div>
   </section>
 
   <!-- ADMIN PANEL -->
   <section id="admin" class="hidden">
-    <div class="card" style="border: 2px solid #3b82f6;">
-      <h2 style="color: #3b82f6;">👑 Admin Dashboard</h2>
-      <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है।</p>
-      <div class="msg ok" style="margin-bottom: 20px;">✓ Admin ID Verified</div>
+    <div class="card" style="background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-color: #7dd3fc;">
+      <h2 style="color: #0369a1;">👑 Admin Dashboard</h2>
+      <p style="margin-bottom: 16px; color: #0284c7; font-weight: 600;">यह पैनल सिर्फ मुख्य एडमिन के लिए है।</p>
+      <div class="msg ok" style="margin-bottom: 10px; background: rgba(255,255,255,0.6); border:none;">✓ Admin ID Verified</div>
     </div>
-    <div class="card" style="border: 2px solid #e11d48; background: #fff1f2;">
-      <h2 style="color: #e11d48;">🗑️ कमेटी डिलीट करें</h2>
-      <p style="margin-bottom: 16px; font-size: 13px; color: #9f1239;">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</p>
-      <div class="field"><input id="adminDelCode" placeholder="कमेटी कोड (उदा. A1B2C3D4)" style="text-transform: uppercase;"></div>
-      <button class="btn btn-primary" style="background: #e11d48; box-shadow: none;" onclick="adminDeleteBC()">🗑️ डाटा हमेशा के लिए डिलीट करें</button>
+    <div class="card" style="background: linear-gradient(135deg, #ffe4e6, #fecdd3); border-color: #fda4af;">
+      <h2 style="color: #be123c;">🗑️ कमेटी डिलीट करें</h2>
+      <p style="margin-bottom: 16px; font-size: 13px; font-weight: 700; color: #9f1239;">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</p>
+      <div class="field"><input id="adminDelCode" placeholder="कमेटी कोड (उदा. A1B2C3D4)" style="text-transform: uppercase; background: rgba(255,255,255,0.7);"></div>
+      <button class="btn btn-primary" style="background: linear-gradient(135deg, #ef4444, #dc2626); border: none; box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3);" onclick="adminDeleteBC()">🗑️ डाटा डिलीट करें</button>
     </div>
   </section>
 </main>
@@ -277,7 +310,7 @@ function appAlert(text) {
   return new Promise(res => {
     const m = document.getElementById('appModal');
     document.getElementById('modalText').textContent = text;
-    document.getElementById('modalBtns').innerHTML = '<button class="btn btn-primary" id="modalOk">OK</button>';
+    document.getElementById('modalBtns').innerHTML = '<button class="btn btn-primary" style="background: #2563eb;" id="modalOk">OK</button>';
     m.classList.remove('hidden');
     document.getElementById('modalOk').onclick = () => { m.classList.add('hidden'); res(); };
   });
@@ -354,7 +387,6 @@ function enterApp() {
   if (s.phone === ADMIN_PHONE) { document.getElementById('nav-admin').classList.remove('hidden'); document.getElementById('profRole').textContent = "मुख्य एडमिन 👑"; } 
   else { document.getElementById('profRole').textContent = "कमेटी सदस्य"; }
   
-  // ✨ REFRESH MEMORY FIX ✨
   let lastTab = localStorage.getItem('kk_last_tab') || 'home';
   show(lastTab);
 }
@@ -378,7 +410,6 @@ function show(id) {
   
   ['home','mylist','create','profile','admin'].forEach(n => { const b = document.getElementById('nav-'+n); if(b) b.classList.toggle('active', n === id); });
   
-  // ✨ SAVE LAST TAB ✨
   localStorage.setItem('kk_last_tab', id);
   
   if(id === 'dashboard') loadDash();
@@ -432,7 +463,7 @@ async function createBC() {
     
     document.getElementById('bcName').value = ''; document.getElementById('memberInputs').innerHTML = '';
     document.getElementById('created').classList.remove('hidden');
-    document.getElementById('created').innerHTML = `<h2 style="color: #059669;">✅ कमेटी बन गई!</h2><div class="code">${code}</div><p style="font-size: 14px; font-weight: 500;">यह Access Code सदस्यों को दें।</p><button class="btn btn-primary" style="margin-top:16px;" onclick="show('dashboard')">कमेटी खोलें</button>`;
+    document.getElementById('created').innerHTML = `<h2 style="color: #059669; font-weight:800;">✅ कमेटी बन गई!</h2><div class="code">${code}</div><p style="font-size: 14px; font-weight: 700; color:#065f46;">यह Access Code सदस्यों को दें।</p><button class="btn btn-primary" style="margin-top:16px; background:#059669; border:none;" onclick="show('dashboard')">कमेटी खोलें</button>`;
   } catch(e) { appAlert("सेव नहीं हो पाया"); }
   document.getElementById('createBtn').textContent = "✅ सुरक्षित करें";
 }
@@ -463,12 +494,12 @@ async function renderMyList() {
            let joined = load(KEYS.joined, []); save(KEYS.joined, joined.filter(x => x !== bc.code)); continue;
         }
         html += `<div class="bc-item" onclick="save(KEYS.current, '${bc.code}'); show('dashboard')">
-          <div><b style="display:block; font-size:16px; margin-bottom:4px;">${bc.name}</b><span class="small" style="font-weight: 600;">Code: ${bc.code}</span></div>
-          <span style="font-size: 20px; color: #cbd5e1;">›</span></div>`;
+          <div><b style="display:block; font-size:18px; margin-bottom:4px; color:#4c1d95;">${bc.name}</b><span class="small" style="font-weight: 700; color:#7e22ce;">Code: ${bc.code}</span></div>
+          <span style="font-size: 24px; color: #a855f7;">›</span></div>`;
       }
     } catch(e) {}
   }
-  document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size: 40px; margin-bottom: 12px;">📋</div><p>कोई कमेटी नहीं है</p></div>`;
+  document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size: 50px; margin-bottom: 12px; filter: grayscale(1);">📋</div><p>कोई कमेटी नहीं है</p></div>`;
 }
 
 async function saveBCState() {
@@ -528,20 +559,29 @@ async function loadDash() {
       <div class="wallet-card">
          <div class="wallet-title">${bc.name} • 💼 कमेटी वॉलेट</div>
          <div class="wallet-amt">₹${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
-         <div class="wallet-sub">अभी इतना पैसा इकट्ठा है</div>
+         <div class="wallet-sub">Available Balance</div>
          <div class="date-bar">${dateStr}</div>
       </div>
+      
+      <!-- Colorful Stats Grid -->
       <div class="stats">
-        <div class="stat"><b>₹${bc.amount}</b><span>किस्त (${bc.freqText || 'हफ़्ता'})</span></div>
-        <div class="stat"><b>${bc.currentRound} / ${bc.totalInst || totalMembers}</b><span>चल रही किश्त</span></div>
-        <div class="stat stat-pool" style="background:#f1f5f9; color:var(--primary-dark); border-color:var(--border);">
-          <b style="color:var(--primary-dark); font-size:22px;">₹${Number(bc.totalPool || (bc.amount * totalMembers)).toLocaleString('en-IN')}</b>
-          <span style="color:var(--muted);">कमेटी खुलने पर मिलेगा</span>
+        <div class="stat" style="background: linear-gradient(135deg, #fef9c3, #fef08a); border-color: #fde047;">
+          <b style="color: #a16207;">₹${bc.amount}</b>
+          <span style="color: #ca8a04;">किस्त (${bc.freqText || 'हफ़्ता'})</span>
+        </div>
+        <div class="stat" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-color: #f9a8d4;">
+          <b style="color: #be185d;">${bc.currentRound} / ${bc.totalInst || totalMembers}</b>
+          <span style="color: #db2777;">चल रही किश्त</span>
+        </div>
+        <div class="stat stat-pool" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: #86efac; padding: 25px;">
+          <b style="color: #14532d; font-size:30px; text-shadow: 0 2px 4px rgba(0,0,0,0.05);">₹${Number(bc.totalPool || (bc.amount * totalMembers)).toLocaleString('en-IN')}</b>
+          <span style="color: #166534; font-size: 13px;">कमेटी खुलने पर मिलेगा</span>
         </div>
       </div>
-      <p style="text-align: center; margin: 12px 0; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b><br><span style="color:var(--muted); font-size:11px;">संचालक: ${bc.ownerName}</span></p>
+      <p style="text-align: center; margin: 20px 0; font-size: 14px; font-weight: 800;">Code: <b style="color: #2563eb; background: rgba(37, 99, 235, 0.1); padding: 4px 10px; border-radius: 8px;">${bc.code}</b><br><span style="color:var(--muted); font-size:12px; display:inline-block; margin-top: 8px;">संचालक: ${bc.ownerName}</span></p>
     `;
     
+    // Colorful Member Cards
     document.getElementById('members').innerHTML = bc.members.map((m,i) => {
       let totalPaidByMem = m.paidRounds * bc.amount;
       let targetPaid = bc.currentRound * bc.amount;
@@ -550,29 +590,30 @@ async function loadDash() {
       
       let payBtnHtml = '';
       if(isOwner && pendingDue > 0) {
-          payBtnHtml = `<button class="btn btn-sm" style="background:#059669; color:white; padding:6px 12px;" onclick="markPaidAdvance('${m.name}')">✓ किश्त जमा करें</button>`;
+          payBtnHtml = `<button class="btn btn-sm" style="background: linear-gradient(135deg, #34d399, #10b981); color:white; padding:8px 14px; border:none; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);" onclick="markPaidAdvance('${m.name}')">✓ किश्त जमा करें</button>`;
       }
       
       let winBtn = `<div class="win-btn-disabled">🏆</div>`;
       if(isOwner && !m.hasWon) winBtn = `<button class="win-btn" onclick="declareWinner('${m.name}')" title="विजेता बनाएं">🏆</button>`;
-      else if(m.hasWon) winBtn = `<div style="font-size:20px;" title="कमेटी खुल चुकी है">🎉</div>`;
+      else if(m.hasWon) winBtn = `<div style="font-size:28px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));" title="कमेटी खुल चुकी है">🎉</div>`;
 
+      // Assigning a soft Mint Green background to member cards to avoid white
       return `
-      <div class="member">
+      <div class="member" style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-color: #86efac;">
         <div class="member-top">
-           <div style="display: flex; align-items: center; gap: 10px;">
+           <div style="display: flex; align-items: center; gap: 12px;">
              ${winBtn}
-             <b>${i+1}. ${m.name}</b>
+             <b style="color: #14532d; font-size: 17px;">${i+1}. ${m.name}</b>
            </div>
            ${payBtnHtml}
         </div>
-        <div class="mem-stats">
-            <span class="paid">कुल जमा: ₹${totalPaidByMem}</span>
-            <span class="${pendingDue > 0 ? 'due' : 'paid'}">बाकी है: ₹${pendingDue}</span>
+        <div class="mem-stats" style="background: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.8);">
+            <span class="paid" style="color: #047857;">कुल जमा: ₹${totalPaidByMem}</span>
+            <span class="${pendingDue > 0 ? 'due' : 'paid'}" style="color: ${pendingDue > 0 ? '#e11d48' : '#047857'};">बाकी है: ₹${pendingDue}</span>
         </div>
         ${isOwner ? `
-        <div style="display: flex; justify-content: flex-end;">
-           <button style="background:none; border:none; color:#25D366; font-size:12px; font-weight:700; cursor:pointer;" onclick="sendInviteProof('${bc.name}', '${bc.code}', '${bc.amount}', '${m.name}')">
+        <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+           <button style="background:none; border:none; color:#059669; font-size:12px; font-weight:800; cursor:pointer;" onclick="sendInviteProof('${bc.name}', '${bc.code}', '${bc.amount}', '${m.name}')">
               📲 WhatsApp Invite / Proof
            </button>
         </div>` : ''}
@@ -588,7 +629,7 @@ async function markPaidAdvance(memberName) {
     if(m) {
         m.paidRounds += 1;
         currentBCData.walletBalance += Number(currentBCData.amount);
-        document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>अपडेट हो रहा है...</div>";
+        document.getElementById('walletBlock').innerHTML = "<div class='empty-state' style='color:#059669;'>अपडेट हो रहा है...</div>";
         await saveBCState();
     }
 }
@@ -596,7 +637,7 @@ async function markPaidAdvance(memberName) {
 async function startNextRound() {
     if(!confirm("क्या आप वाकई अगली किश्त (नया महीना/हफ्ता) चालू करना चाहते हैं? इससे सभी सदस्यों का 'बाकी' पैसा बढ़ जाएगा।")) return;
     currentBCData.currentRound += 1;
-    document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>अपडेट हो रहा है...</div>";
+    document.getElementById('walletBlock').innerHTML = "<div class='empty-state' style='color:#059669;'>अपडेट हो रहा है...</div>";
     await saveBCState();
 }
 
@@ -614,7 +655,7 @@ async function confirmWinner() {
        m.hasWon = true;
        currentBCData.walletBalance -= Number(currentBCData.totalPool || 0);
        document.getElementById('winnerModal').classList.add('hidden');
-       document.getElementById('walletBlock').innerHTML = "<div class='empty-state'>पैसे दिए जा रहे हैं...</div>";
+       document.getElementById('walletBlock').innerHTML = "<div class='empty-state' style='color:#059669;'>पैसे दिए जा रहे हैं...</div>";
        await saveBCState();
    }
 }
