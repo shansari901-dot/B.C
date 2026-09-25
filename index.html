@@ -153,7 +153,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 </div>
 
 <main>
-  <!-- AUTHENTICATION WITH OTP -->
+  <!-- AUTHENTICATION (NO OTP) -->
   <section id="auth">
     <div class="auth-wrap">
       <div class="card" style="padding: 28px 20px;">
@@ -166,44 +166,23 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
         
         <div id="authMsg"></div>
         
-        <!-- STEP 1: Details Input -->
+        <!-- Auth Details Input -->
         <div id="authNormal">
           <div class="field"><label>मोबाइल नंबर</label><input id="authPhone" type="tel" placeholder="10 अंकों का नंबर" maxlength="10"></div>
           <div class="field"><label>पासवर्ड</label><input id="authPass" type="password" placeholder="कम से कम 4 अक्षर"></div>
           <div id="regExtra"><div class="field"><label>आपका नाम</label><input id="authName" placeholder="अपना पूरा नाम लिखें"></div></div>
           
-          <button id="authBtn" class="btn btn-primary" style="margin-top: 8px;" onclick="requestAuthOTP()">OTP मंगाएं</button>
+          <button id="authBtn" class="btn btn-primary" style="margin-top: 8px;" onclick="doAuth()">अकाउंट बनाएं</button>
           <p style="text-align:center; margin-top:20px;"><button class="link-btn" onclick="showForgot()">पासवर्ड भूल गए?</button></p>
         </div>
 
-        <!-- STEP 2: OTP Verification Box -->
-        <div id="authOtpBlock" class="hidden">
-           <h3 style="text-align:center; margin-bottom: 10px; color: var(--primary-dark);">📲 OTP Verification</h3>
-           <p style="text-align:center; font-size:13px; color:var(--muted); margin-bottom:20px;">आपके नंबर <b id="otpDisplayNum"></b> पर OTP भेजा गया है।<br><br><span style="color:#e11d48; background: #fff1f2; padding: 6px 10px; border-radius: 8px;">टेस्टिंग के लिए <b>1234</b> डालें</span></p>
-           
-           <div class="field">
-             <input id="authOtpInput" type="number" placeholder="4 अंकों का OTP" style="text-align:center; font-size:22px; letter-spacing: 6px; font-weight: 800;">
-           </div>
-           
-           <button class="btn btn-primary" style="background: #059669;" onclick="verifyAuthOTP()">✅ Verify & Submit</button>
-           <p style="text-align:center; margin-top:15px;"><button class="link-btn" onclick="cancelOTP()">← वापस जाएं</button></p>
-        </div>
-
-        <!-- FORGOT PASSWORD FLOW -->
+        <!-- FORGOT PASSWORD FLOW (NO OTP) -->
         <div id="authForgot" class="hidden">
-          <div id="forgotStep1">
-              <p class="small" style="margin-bottom:20px; text-align: center;">अपना नंबर डालें, हम OTP भेजेंगे।</p>
-              <div class="field"><label>मोबाइल नंबर</label><input id="forgotPhone" type="tel" maxlength="10"></div>
-              <button class="btn btn-primary" onclick="requestForgotOTP()">OTP मंगाएं</button>
-              <p style="text-align:center; margin-top:20px;"><button class="link-btn" onclick="hideForgot()">← वापस लॉगिन पर</button></p>
-          </div>
-          <div id="forgotStep2" class="hidden">
-              <p class="small" style="margin-bottom:20px; text-align: center;">OTP और नया पासवर्ड सेट करें।<br><br><span style="color:#e11d48; background: #fff1f2; padding: 4px 8px; border-radius: 6px;">(टेस्टिंग OTP: <b>1234</b>)</span></p>
-              <div class="field"><label>OTP</label><input id="forgotOtpInput" type="number" placeholder="4 अंकों का OTP" style="text-align:center; font-size:18px; letter-spacing: 4px;"></div>
-              <div class="field"><label>नया पासवर्ड</label><input id="forgotPass" type="password"></div>
-              <button class="btn btn-primary" style="background: #059669;" onclick="verifyForgotOTP()">✅ पासवर्ड बदलें</button>
-              <p style="text-align:center; margin-top:15px;"><button class="link-btn" onclick="hideForgot()">रद्द करें</button></p>
-          </div>
+          <p class="small" style="margin-bottom:20px; text-align: center;">नया पासवर्ड सेट करें।</p>
+          <div class="field"><label>मोबाइल नंबर</label><input id="forgotPhone" type="tel" maxlength="10"></div>
+          <div class="field"><label>नया पासवर्ड</label><input id="forgotPass" type="password"></div>
+          <button class="btn btn-primary" style="margin-top: 8px; background: #059669;" onclick="doForgot()">✅ पासवर्ड बदलें</button>
+          <p style="text-align:center; margin-top:15px;"><button class="link-btn" onclick="hideForgot()">← वापस लॉगिन पर</button></p>
         </div>
       </div>
     </div>
@@ -364,112 +343,69 @@ function sendInviteProof(bcName, bcCode, amount, memberName) {
   window.location.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 
-// ✨ OTP & AUTHENTICATION SYSTEM ✨
+// ✨ AUTHENTICATION SYSTEM (NO OTP) ✨
 function switchAuth(mode) {
   const isReg = mode === 'register';
   document.getElementById('tabReg').classList.toggle('active', isReg);
   document.getElementById('tabLogin').classList.toggle('active', !isReg);
   if (isReg) {
     document.getElementById('regExtra').classList.remove('hidden');
-    document.getElementById('authBtn').textContent = 'OTP मंगाएं (रजिस्टर)';
+    document.getElementById('authBtn').textContent = 'अकाउंट बनाएं';
   } else {
     document.getElementById('regExtra').classList.add('hidden');
-    document.getElementById('authBtn').textContent = 'OTP मंगाएं (लॉगिन)';
+    document.getElementById('authBtn').textContent = 'लॉगिन करें';
   }
   document.getElementById('authMsg').innerHTML = '';
 }
 
-// Show OTP Box for Login/Register
-function requestAuthOTP() {
+async function doAuth() {
   const phone = document.getElementById('authPhone').value;
   const pass = document.getElementById('authPass').value;
-  const isReg = document.getElementById('tabReg').classList.contains('active');
   const name = document.getElementById('authName').value;
+  const isReg = document.getElementById('tabReg').classList.contains('active');
   const msg = document.getElementById('authMsg');
+  const btn = document.getElementById('authBtn');
 
   if(phone.length !== 10) return msg.innerHTML = '<div class="msg err">सही 10 अंकों का नंबर डालें</div>';
   if(pass.length < 4) return msg.innerHTML = '<div class="msg err">पासवर्ड कम से कम 4 अक्षरों का रखें</div>';
   if(isReg && !name.trim()) return msg.innerHTML = '<div class="msg err">कृपया अपना नाम लिखें</div>';
 
-  msg.innerHTML = '';
-  document.getElementById('authNormal').classList.add('hidden');
-  document.getElementById('authTabs').classList.add('hidden');
-  document.getElementById('authOtpBlock').classList.remove('hidden');
-  document.getElementById('otpDisplayNum').textContent = phone;
-}
-
-function cancelOTP() {
-  document.getElementById('authNormal').classList.remove('hidden');
-  document.getElementById('authTabs').classList.remove('hidden');
-  document.getElementById('authOtpBlock').classList.add('hidden');
-  document.getElementById('authOtpInput').value = '';
-}
-
-async function verifyAuthOTP() {
-  const otp = document.getElementById('authOtpInput').value;
-  const msg = document.getElementById('authMsg');
-  
-  // MASTER OTP VERIFICATION
-  if(otp !== '1234') {
-     document.getElementById('authOtpInput').value = '';
-     return appAlert("❌ गलत OTP! कृपया 1234 डालें।");
-  }
-
-  // Once OTP is correct, proceed to database
-  const phone = document.getElementById('authPhone').value;
-  const pass = document.getElementById('authPass').value;
-  const name = document.getElementById('authName').value;
-  const isReg = document.getElementById('tabReg').classList.contains('active');
-  
+  btn.textContent = "प्रतीक्षा करें...";
   try {
     const res = await fetch(`${API_URL}/api/auth`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, pass, name, isRegister: isReg }) });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error || "Error");
     save(KEYS.session, { phone, name: data.user.name });
-    enterApp();
-  } catch(e) { 
-    cancelOTP();
-    msg.innerHTML = `<div class="msg err">${e.message}</div>`; 
-  }
+    msg.innerHTML = '<div class="msg ok">सफलतापूर्वक हो गया!</div>';
+    setTimeout(enterApp, 800);
+  } catch(e) { msg.innerHTML = `<div class="msg err">${e.message}</div>`; }
+  btn.textContent = isReg ? 'अकाउंट बनाएं' : 'लॉगिन करें';
 }
 
-// Forgot Password Flow
 function showForgot() {
   document.getElementById('authNormal').classList.add('hidden');
   document.getElementById('authTabs').classList.add('hidden');
   document.getElementById('authForgot').classList.remove('hidden');
-  document.getElementById('forgotStep1').classList.remove('hidden');
-  document.getElementById('forgotStep2').classList.add('hidden');
 }
 
 function hideForgot() {
   document.getElementById('authNormal').classList.remove('hidden');
   document.getElementById('authTabs').classList.remove('hidden');
   document.getElementById('authForgot').classList.add('hidden');
-  document.getElementById('authOtpBlock').classList.add('hidden');
 }
 
-function requestForgotOTP() {
-  const phone = document.getElementById('forgotPhone').value;
-  if(phone.length !== 10) return appAlert('सही 10 अंकों का नंबर डालें');
-  document.getElementById('forgotStep1').classList.add('hidden');
-  document.getElementById('forgotStep2').classList.remove('hidden');
-}
-
-async function verifyForgotOTP() {
-  const otp = document.getElementById('forgotOtpInput').value;
-  if(otp !== '1234') return appAlert("❌ गलत OTP! कृपया 1234 डालें।");
-  
+async function doForgot() {
   const phone = document.getElementById('forgotPhone').value;
   const pass = document.getElementById('forgotPass').value;
+  if(phone.length !== 10) return appAlert('सही 10 अंकों का नंबर डालें');
   if(pass.length < 4) return appAlert('पासवर्ड कम से कम 4 अक्षरों का रखें');
-
+  
   try {
     const res = await fetch(`${API_URL}/api/forgot`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, newPass: pass }) });
     if(!res.ok) throw new Error("नंबर रजिस्टर नहीं है");
     appAlert("✅ पासवर्ड बदल गया। अब नए पासवर्ड से लॉगिन करें।");
     hideForgot(); switchAuth('login');
-  } catch(e) { appAlert("त्रुटि: " + e.message); hideForgot(); }
+  } catch(e) { appAlert("त्रुटि: " + e.message); }
 }
 
 function enterApp() {
@@ -714,7 +650,7 @@ async function adminDeleteBC() {
     existingData.isDeleted = true;
     existingData.amount = 0;
     await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(existingData) });
-    appAlert("✅ कमेटी सफलतापूर्वक डिलीट हो गई!");
+    appAlert("✅ कमेटी सफलतापूर्वक डिलीट চরম गई!");
     let joined = load(KEYS.joined, []);
     joined = joined.filter(c => c !== code);
     save(KEYS.joined, joined);
@@ -730,4 +666,4 @@ window.onload = () => {
 };
 </script>
 </body>
-</html>
+  </html>
