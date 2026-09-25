@@ -243,7 +243,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
   <section id="admin" class="hidden">
     <div class="card" style="border: 2px solid #3b82f6;">
       <h2 style="color: #3b82f6;">👑 Admin Dashboard</h2>
-      <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है。</p>
+      <p style="margin-bottom: 16px;">यह पैनल सिर्फ मुख्य एडमिन के लिए है।</p>
       <div class="msg ok" style="margin-bottom: 20px;">✓ Admin ID Verified</div>
     </div>
     <div class="card" style="border: 2px solid #e11d48; background: #fff1f2;">
@@ -268,7 +268,7 @@ const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
 const ADMIN_PHONE = '7318259001'; 
 const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr'; 
 const KEYS = { session: 'kk_session', joined: 'kk_joined', current: 'kk_current' };
-let currentBCData = null;
+let currentBCData = null; 
 
 function load(key, def) { try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; } }
 function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
@@ -291,7 +291,7 @@ async function shareApp() {
 }
 
 function sendInviteProof(bcName, bcCode, amount, memberName) {
-  const msg = `नमस्ते ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* लिखकर रिप्लाई करें ताकि लिस्ट में आपका नाम पक्का हो जाए।\n\nऐप में अपना हिसाब देखने के लिए Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`;
+  const msg = `Welcome ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* लिखकर रिप्लाई करें ताकि लिस्ट में आपका नाम पक्का हो जाए।\n\nऐप में अपना हिसाब देखने के लिए Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`;
   window.location.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 
@@ -347,6 +347,9 @@ function enterApp() {
   document.getElementById('auth').classList.add('hidden');
   document.getElementById('mainNav').classList.remove('hidden');
   
+  // Dashboard UI changes here
+  document.getElementById('userInfo').textContent = '👋 Welcome, ' + s.name;
+  
   document.getElementById('profName').textContent = s.name;
   document.getElementById('profPhone').textContent = "+91 " + s.phone;
   document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
@@ -394,19 +397,17 @@ async function createBC() {
   
   const inps = document.querySelectorAll('.mem-name');
   let members = [];
-  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); });
+  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); }); 
   
   if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert('कृपया सभी जानकारी भरें!');
   if(!ownerName || ownerPhone.length !== 10) return appAlert('कृपया मालिक का नाम और 10 अंकों का सही मोबाइल नंबर दर्ज़ करें!');
   
-  // FIXED: Owner no longer gets automatic 1 paid round
   if(!members.some(m => m.name.toLowerCase() === ownerName.toLowerCase())) {
-      members.unshift({ name: ownerName, paidRounds: 0, hasWon: false });
+      members.unshift({ name: ownerName, paidRounds: 0, hasWon: false }); 
   }
 
   const code = genCode();
   
-  // FIXED: Wallet Balance starts at 0
   const bcData = { 
     code, name, amount: Number(amount), freqText, freqVal, totalInst: Number(totalInst), totalPool: Number(totalPool), 
     ownerName, ownerPhone, startDate: document.getElementById('startDate').value,
@@ -637,4 +638,4 @@ window.onload = () => {
 };
 </script>
 </body>
-</html>
+    </html>
