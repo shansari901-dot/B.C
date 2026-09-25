@@ -78,6 +78,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 .code { font-size: 24px; font-weight: 800; letter-spacing: 4px; background: #f1f5f9; color: var(--primary); padding: 16px; border-radius: 14px; text-align: center; margin: 12px 0; border: 1px dashed #cbd5e1; }
 .win-btn { background: #fef08a; border: 1px solid #facc15; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s; }
 .win-btn:active { transform: scale(0.9); }
+.win-btn-disabled { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; opacity: 0.5; }
 
 /* BOTTOM NAV */
 .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); z-index: 50; }
@@ -138,7 +139,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     <div id="faq3" class="faq-ans">डैशबोर्ड में 'बकाया विवरण' वाले लाल बॉक्स में जाएं। जिस सदस्य ने पैसे दे दिए हैं, उसके नाम के आगे '✓ भुगतान प्राप्त हुआ' बटन दबाएं।</div>
     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
     <p style="font-size: 12px; text-align: center; color: var(--muted); margin-bottom: 12px;">क्या आपको और मदद चाहिए?</p>
-    <!-- FIX: Use location.href for AppCreator24 -->
     <button class="btn btn-primary" style="background: #25D366; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.location.href='https://wa.me/917318259001?text=Hi Admin, मुझे कमेटी ऐप में मदद चाहिए'">💬 WhatsApp एडमिन से पूछें</button>
   </div>
 </div>
@@ -209,7 +209,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
       </div>
       <div class="row">
         <div class="field"><label>शुरुआत तिथि</label><input id="startDate" type="date"></div>
-        <!-- FIX: Owner name will NOT auto-fill anymore -->
         <div class="field"><label>मालिक का नाम</label><input id="ownerName" placeholder="संचालक का नाम लिखें"></div>
       </div>
     </div>
@@ -230,7 +229,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
     </div>
     <div class="card" id="memberCard">
       <h2>👥 सभी सदस्य</h2>
-      <p style="font-size:12px; color:#64748b; margin-bottom:12px;">प्रमाण के लिए सदस्य को WhatsApp Invite भेजें</p>
+      <p id="ownerGuideText" style="font-size:12px; color:#64748b; margin-bottom:12px;">प्रमाण के लिए सदस्य को WhatsApp Invite भेजें</p>
       <div id="members"></div>
     </div>
     <div class="card" id="warningCard" style="border-color: #fecaca; background: #fffcfc;">
@@ -287,253 +286,11 @@ function appAlert(text) {
 }
 function genCode() { return Math.random().toString(36).substring(2, 10).toUpperCase(); }
 
-// FIX: Share App updated to location.href for WebViews
 async function shareApp() {
   const shareData = { title: 'कमेटी खाता', text: '💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप अभी डाउनलोड करें:\n\n' + APP_LINK };
-  try { 
-    if (navigator.share) {
-        await navigator.share(shareData); 
-    } else {
-        window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text);
-    }
-  } catch (err) { 
-    window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); 
-  }
+  try { if (navigator.share) { await navigator.share(shareData); } else { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); } } 
+  catch (err) { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
 }
 
-// FIX: Send Invite Proof updated to location.href for WebViews
 function sendInviteProof(bcName, bcCode, amount, memberName) {
-  const msg = `नमस्ते ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* या *'हाँ'* लिखकर रिप्लाई करें ताकि मेरी लिस्ट में आपका नाम पक्का हो जाए। (यह हमारी सहमति का प्रमाण है)\n\nऐप में अपना हिसाब देखने के लिए Access Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`;
-  window.location.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
-}
-
-function switchAuth(mode) {
-  const isReg = mode === 'register';
-  document.getElementById('tabReg').classList.toggle('active', isReg);
-  document.getElementById('tabLogin').classList.toggle('active', !isReg);
-  document.getElementById('regExtra').classList.toggle('hidden', !isReg);
-  document.getElementById('authBtn').textContent = isReg ? 'अकाउंट बनाएं' : 'लॉगिन करें';
-  document.getElementById('authMsg').innerHTML = '';
-}
-
-async function doAuth() {
-  const phone = document.getElementById('authPhone').value;
-  const pass = document.getElementById('authPass').value;
-  const name = document.getElementById('authName').value;
-  const isReg = document.getElementById('tabReg').classList.contains('active');
-  const msg = document.getElementById('authMsg');
-  const btn = document.getElementById('authBtn');
-
-  if(phone.length !== 10) return msg.innerHTML = '<div class="msg err">सही 10 अंकों का नंबर डालें</div>';
-  btn.textContent = "प्रतीक्षा करें...";
-  try {
-    const res = await fetch(`${API_URL}/api/auth`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, pass, name, isRegister: isReg }) });
-    const data = await res.json();
-    if(!res.ok) throw new Error(data.error || "Error");
-    save(KEYS.session, { phone, name: data.user.name });
-    msg.innerHTML = '<div class="msg ok">सफलतापूर्वक हो गया!</div>';
-    setTimeout(enterApp, 800);
-  } catch(e) { msg.innerHTML = `<div class="msg err">${e.message}</div>`; }
-  btn.textContent = isReg ? 'अकाउंट बनाएं' : 'लॉगिन करें';
-}
-
-function enterApp() {
-  const s = load(KEYS.session, null);
-  if(!s) return;
-  document.getElementById('auth').classList.add('hidden');
-  document.getElementById('mainNav').classList.remove('hidden');
-  document.getElementById('userInfo').textContent = '👋 नमस्ते, ' + s.name;
-  
-  // FIX: Removed auto-fill of ownerName so it stays blank
-  // document.getElementById('ownerName').value = s.name;
-  
-  if (s.phone === ADMIN_PHONE) document.getElementById('nav-admin').classList.remove('hidden');
-  show('home');
-}
-function appLogout() { localStorage.removeItem(KEYS.session); location.reload(); }
-
-function show(id) {
-  document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-  ['home','mylist','create','admin'].forEach(n => { const b = document.getElementById('nav-'+n); if(b) b.classList.toggle('active', n === id); });
-  if(id === 'dashboard') loadDash();
-  if(id === 'mylist') renderMyList();
-  window.scrollTo(0,0);
-}
-
-function buildMemberInputs() {
-  let c = Number(document.getElementById('memberCount').value) || 0;
-  if(c > 100) c = 100;
-  let h = '';
-  for(let i=1; i<=c; i++) h += `<div class="mem-row"><span class="num">${i}</span><input class="mem-name" placeholder="सदस्य का नाम"></div>`;
-  document.getElementById('memberInputs').innerHTML = h;
-}
-
-async function createBC() {
-  const name = document.getElementById('bcName').value;
-  const amount = document.getElementById('bcAmount').value;
-  const freqVal = document.getElementById('freq').value;
-  const freqText = document.getElementById('freq').options[document.getElementById('freq').selectedIndex].text;
-  const totalInst = document.getElementById('totalInst').value;
-  const totalPool = document.getElementById('totalPool').value;
-  const ownerName = document.getElementById('ownerName').value;
-  
-  const inps = document.querySelectorAll('.mem-name');
-  let members = [];
-  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paid: false }); });
-  
-  if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert('कृपया सभी जानकारी (किश्तें और राशि) भरें!');
-
-  const code = genCode();
-  const bcData = { code, name, amount, freqText, freqVal, totalInst, totalPool, ownerName, members, startDate: document.getElementById('startDate').value };
-  
-  document.getElementById('createBtn').textContent = "सेव हो रहा है...";
-  try {
-    await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bcData) });
-    let joined = load(KEYS.joined, []); joined.push(code); save(KEYS.joined, joined); save(KEYS.current, code);
-    document.getElementById('created').classList.remove('hidden');
-    document.getElementById('created').innerHTML = `<h2 style="color: #059669;">✅ कमेटी बन गई!</h2><div class="code">${code}</div><p style="font-size: 14px; font-weight: 500;">यह Access Code सदस्यों को दें।</p><button class="btn btn-primary" style="margin-top:16px;" onclick="show('dashboard')">कमेटी खोलें</button>`;
-  } catch(e) { appAlert("सेव नहीं हो पाया"); }
-  document.getElementById('createBtn').textContent = "✅ सुरक्षित करें";
-}
-
-async function join() {
-  const code = document.getElementById('accessCode').value.trim().toUpperCase();
-  if(!code) return;
-  try {
-    const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if(!res.ok) throw new Error();
-    const data = await res.json();
-    if(data.data.isDeleted) return appAlert("यह कमेटी एडमिन द्वारा डिलीट कर दी गई है।");
-    let joined = load(KEYS.joined, []);
-    if(!joined.includes(code)) { joined.push(code); save(KEYS.joined, joined); }
-    save(KEYS.current, code); document.getElementById('accessCode').value = ''; show('dashboard');
-  } catch(e) { appAlert("गलत Code!"); }
-}
-
-async function renderMyList() {
-  const codes = load(KEYS.joined, []); let html = '';
-  document.getElementById('bcList').innerHTML = '<p class="empty-state">चेक कर रहे हैं...</p>';
-  for(let c of codes) {
-    try {
-      let res = await fetch(`${API_URL}/api/bcs?code=${c}`);
-      if(res.ok) {
-        let bc = (await res.json()).data;
-        if(bc.isDeleted) {
-           let joined = load(KEYS.joined, []);
-           save(KEYS.joined, joined.filter(x => x !== bc.code));
-           continue;
-        }
-        html += `<div class="bc-item" onclick="save(KEYS.current, '${bc.code}'); show('dashboard')">
-          <div><b style="display:block; font-size:16px; margin-bottom:4px;">${bc.name}</b><span class="small" style="font-weight: 600;">Code: ${bc.code}</span></div>
-          <span style="font-size: 20px; color: #cbd5e1;">›</span></div>`;
-      }
-    } catch(e) {}
-  }
-  document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size: 40px; margin-bottom: 12px;">📋</div><p>कोई कमेटी नहीं है</p></div>`;
-}
-
-let currentTotalPool = 0;
-
-async function loadDash() {
-  const code = load(KEYS.current, null);
-  document.getElementById('dashTitle').textContent = "लोड हो रहा है...";
-  document.getElementById('dash').innerHTML = "";
-  try {
-    const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    const bc = (await res.json()).data;
-    
-    if(bc.isDeleted) {
-        document.getElementById('dashTitle').textContent = '❌ डिलीट हो गई';
-        document.getElementById('dash').innerHTML = '<div class="warn" style="text-align:center;">यह कमेटी एडमिन द्वारा हमेशा के लिए डिलीट कर दी गई है।</div>';
-        document.getElementById('memberCard').classList.add('hidden');
-        document.getElementById('warningCard').classList.add('hidden');
-        return;
-    }
-    
-    document.getElementById('memberCard').classList.remove('hidden');
-    document.getElementById('warningCard').classList.remove('hidden');
-
-    const totalMembers = bc.members.length;
-    currentTotalPool = bc.totalPool || (bc.amount * totalMembers); 
-    const totalInstText = bc.totalInst ? `${bc.totalInst} बार` : `${totalMembers} ${bc.freqText}`;
-    const freqDisplay = bc.freqText || 'हफ़्ता';
-    
-    document.getElementById('dashTitle').textContent = '📊 ' + bc.name;
-    document.getElementById('dash').innerHTML = `
-      <div class="stats">
-        <div class="stat"><b>₹${bc.amount}</b><span>किस्त (${freqDisplay})</span></div>
-        <div class="stat"><b>${totalMembers}</b><span>कुल सदस्य</span></div>
-        <div class="stat stat-pool">
-          <b>₹${Number(currentTotalPool).toLocaleString('en-IN')}</b>
-          <span>कमेटी खुलने पर मिलेगा</span>
-          <div class="sub-info">कुल किश्तें: ${totalInstText}</div>
-        </div>
-      </div>
-      <p style="text-align: center; margin-top: 12px; font-size: 13px;">Code: <b style="color: #3b82f6;">${bc.code}</b></p>
-    `;
-    
-    document.getElementById('members').innerHTML = bc.members.map((m,i) => `
-      <div class="member">
-        <div class="member-top">
-           <div style="display: flex; align-items: center; gap: 10px;">
-             <button class="win-btn" onclick="declareWinner('${m.name}')" title="विजेता बनाएं">🏆</button>
-             <b>${i+1}. ${m.name}</b>
-           </div>
-           <span class="tag ${m.paid ? 'paid' : 'due'}">${m.paid ? '✓ भुगतान' : 'बाकी है'}</span>
-        </div>
-        <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
-           <button class="btn btn-sm" style="background: #25D366; color: white; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px;" onclick="sendInviteProof('${bc.name}', '${bc.code}', '${bc.amount}', '${m.name}')">
-              📲 WhatsApp Invite
-           </button>
-        </div>
-      </div>`).join('');
-    
-    const unpaid = bc.members.filter(m => !m.paid);
-    document.getElementById('warnings').innerHTML = unpaid.length ? unpaid.map(m => `<div class="warn"><div style="font-weight: 700; margin-bottom: 8px;">⚠️ ${m.name}</div><div style="font-size: 13px; margin-bottom: 12px;">₹${bc.amount} की किस्त बाकी है।</div><button class="btn btn-primary btn-sm" style="width: 100%; box-shadow: none;" onclick="markPaid('${bc.code}','${m.name}')">✓ भुगतान प्राप्त हुआ</button></div>`).join('') : '<div class="ok">🎉 कमाल है! कोई बकाया नहीं।</div>';
-  } catch(e) { show('mylist'); }
-}
-
-async function markPaid(code, memberName) {
-  try {
-    await fetch(`${API_URL}/api/pay`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, memberName }) });
-    loadDash();
-  } catch(e) { appAlert("इंटरनेट चेक करें"); }
-}
-
-function declareWinner(name) {
-  document.getElementById('winName').textContent = name;
-  document.getElementById('winAmount').textContent = Number(currentTotalPool).toLocaleString('en-IN');
-  document.getElementById('winnerModal').classList.remove('hidden');
-}
-
-async function adminDeleteBC() {
-  const code = document.getElementById('adminDelCode').value.trim().toUpperCase();
-  if(!code) return appAlert("कृपया कमेटी का Code डालें!");
-  if(!confirm("⚠️ चेतावनी!\nक्या आप सच में कमेटी '" + code + "' को हमेशा के लिए डिलीट करना चाहते हैं? यह वापस नहीं आएगी।")) return;
-  try {
-    const getRes = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if(!getRes.ok) return appAlert("यह कोड मौजूद नहीं है या पहले ही डिलीट हो चुका है!");
-    const existingData = (await getRes.json()).data;
-    existingData.name = "❌ यह कमेटी डिलीट कर दी गई है";
-    existingData.members = [];
-    existingData.isDeleted = true;
-    existingData.amount = 0;
-    await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(existingData) });
-    appAlert("✅ कमेटी सफलतापूर्वक डिलीट हो गई!");
-    let joined = load(KEYS.joined, []);
-    joined = joined.filter(c => c !== code);
-    save(KEYS.joined, joined);
-    if(load(KEYS.current) === code) localStorage.removeItem(KEYS.current);
-    document.getElementById('adminDelCode').value = '';
-  } catch(e) { appAlert("डिलीट नहीं हो पाया। इंटरनेट चेक करें।"); }
-}
-
-window.onload = () => {
-  const s = load(KEYS.session, null);
-  document.getElementById('startDate').value = new Date().toISOString().slice(0,10);
-  if(s) { enterApp(); } else { document.getElementById('auth').classList.remove('hidden'); switchAuth('register'); }
-};
-</script>
-</body>
-</html>
+                                 
