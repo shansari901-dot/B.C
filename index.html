@@ -157,6 +157,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 #winnerModal .modal-box { background: linear-gradient(180deg, #fffbeb, #fef3c7); border: 2px solid #fde68a; }
 .win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
 #winAmount { background: #f59e0b; color: white; padding: 8px 20px; border-radius: 12px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); }
+
 .win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 #editModal .modal-box { padding: 24px; text-align: left; }
 </style>
@@ -563,7 +564,6 @@ function buildMemberInputs() {
     h += `<div class="mem-row"><span class="num">${i}</span><input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम" data-en="Member ${i} Name" placeholder="${t('सदस्य '+i+' का नाम', 'Member '+i+' Name')}"></div>`;
   }
   document.getElementById('memberInputs').innerHTML = h;
-  // REMOVED: Auto update totalInst here. Now it stays exactly as user typed.
   autoCalc(); 
 }
 
@@ -788,6 +788,9 @@ async function loadDash() {
       let leftEMIs = totalInstalls - m.paidRounds;
       if (leftEMIs < 0) leftEMIs = 0;
 
+      // 💡 SMART NAME MATCHING LOGIC 💡
+      let isMe = (currentUser.name && m.name.toLowerCase() === currentUser.name.toLowerCase());
+
       let confirmationTracker = `
         <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
            <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा हो गई | <b>${leftEMIs}</b> किश्त बाकी</span>
@@ -807,23 +810,25 @@ async function loadDash() {
           payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${m.name}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
       }
       
-      // 💡 FIX FOR ISSUE 2: Payment logic updated
+      // 💡 NEW: PRIVATE UPI PAY BUTTON (Only shows to exact matched member)
       let payOnlineHtml = '';
       if(!isOwner && pendingDue > 0 && bc.upiId) {
-          // UPI Button only shows if there is a DUE amount.
-          let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
-          let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
-          payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
-              <a href="${upiLink}" style="background:var(--success); color:white; text-decoration:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3);">
-                  📱 ${btnText}
-              </a>
-          </div>`;
+          if (isMe) { // Sirf usi aadmi ko dikhega jiska account hai
+              let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
+              let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
+              payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
+                  <a href="${upiLink}" style="background:var(--success); color:white; text-decoration:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3);">
+                      📱 ${btnText}
+                  </a>
+              </div>`;
+          }
       } else if (!isOwner && pendingDue === 0) {
-          // If Due is 0, UPI button is replaced with "Payment Clear"
-          payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
-              <span class="hi">✅ इस किश्त का भुगतान पूरा हुआ</span>
-              <span class="en">✅ Payment Clear for this round</span>
-          </div>`;
+          if (isMe) { // Payment successful badge sirf usi aadmi ko badha dikhega
+              payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
+                  <span class="hi">✅ आपकी किश्त का भुगतान पूरा हुआ</span>
+                  <span class="en">✅ Your Payment Clear for this round</span>
+              </div>`;
+          }
       }
 
       let winBtn = `<div class="win-btn-disabled">🏆</div>`;
@@ -855,7 +860,7 @@ async function loadDash() {
         </div>
         ${confirmationTracker}
         ${payBtnHtml}
-        ${payOnlineHtml} <!-- Show either Pay Button or Clear Text -->
+        ${payOnlineHtml}
       </div>`;
     }).join('');
 
