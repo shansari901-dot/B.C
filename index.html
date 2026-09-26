@@ -116,7 +116,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 
 /* MEMBERS LIST */
 .member { display: flex; flex-direction: column; padding: 16px; background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); }
-.member-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.member-top { display: flex; justify-content: space-between; align-items: center; }
 .mem-info { display: flex; align-items: center; gap: 12px; }
 .mem-num { width: 28px; height: 28px; background: var(--primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
 .member b { font-size: 15px; color: var(--text); font-weight: 800; }
@@ -157,7 +157,6 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 #winnerModal .modal-box { background: linear-gradient(180deg, #fffbeb, #fef3c7); border: 2px solid #fde68a; }
 .win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
 #winAmount { background: #f59e0b; color: white; padding: 8px 20px; border-radius: 12px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); }
-
 .win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 </style>
 </head>
@@ -471,7 +470,7 @@ async function doAuth() {
     msg.innerHTML = `<div class="msg ok">${t('सफलतापूर्वक हो गया!', 'Success!')}</div>`;
     setTimeout(enterApp, 800);
   } catch(e) { msg.innerHTML = `<div class="msg err">${e.message}</div>`; }
-  applyLang(); // Reset button text
+  applyLang(); 
 }
 
 function showForgot() { document.getElementById('authNormal').classList.add('hidden'); document.getElementById('authTabs').classList.add('hidden'); document.getElementById('authForgot').classList.remove('hidden'); }
@@ -526,7 +525,6 @@ function show(id) {
   window.scrollTo(0,0);
 }
 
-// 💡 AUTO-CALCULATOR 💡
 function autoCalc() {
   let amt = Number(document.getElementById('bcAmount').value) || 0;
   let inst = Number(document.getElementById('totalInst').value) || 0;
@@ -682,6 +680,7 @@ async function loadDash() {
     let dateStr = `📅 ${txtS}: ${formatD(startD)} | ${txtE}: ${formatD(endD)}`;
 
     const totalMembers = bc.members.length;
+    let totalInstalls = Number(bc.totalInst) || totalMembers;
     
     document.getElementById('walletBlock').innerHTML = `
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; color:white;">
@@ -712,7 +711,7 @@ async function loadDash() {
           <span style="color: var(--muted);">${t('किस्त', 'Inst.')}</span>
         </div>
         <div class="stat">
-          <b style="color: var(--primary); display:flex; align-items:center; justify-content:center; gap:6px;"><span style="font-size:14px;">⏳</span> ${bc.currentRound} / ${bc.totalInst || totalMembers}</b>
+          <b style="color: var(--primary); display:flex; align-items:center; justify-content:center; gap:6px;"><span style="font-size:14px;">⏳</span> ${bc.currentRound} / ${totalInstalls}</b>
           <span style="color: var(--muted);">${t('चल रही किश्त', 'Current Round')}</span>
         </div>
         <div class="stat stat-pool">
@@ -728,6 +727,24 @@ async function loadDash() {
       let pendingDue = targetPaid - totalPaidByMem;
       if(pendingDue < 0) pendingDue = 0;
       
+      let leftEMIs = totalInstalls - m.paidRounds;
+      if (leftEMIs < 0) leftEMIs = 0;
+
+      // 🌟 LIVE STATUS TRACKER 🌟
+      let confirmationTracker = `
+        <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
+           <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा हो गई | <b>${leftEMIs}</b> किश्त बाकी</span>
+           <span class="en">✅ <b>${m.paidRounds}</b> EMI Successful | <b>${leftEMIs}</b> EMI Left</span>
+        </div>`;
+
+      if(m.hasWon) {
+           confirmationTracker = `
+           <div style="background: #dcfce7; border: 1px solid #34d399; padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 13px; font-weight: 800; color: #065f46;">
+              <span class="hi">🎉 बधाई! आपकी कमेटी खुल चुकी है।</span>
+              <span class="en">🎉 Congrats! Your group is opened.</span>
+           </div>`;
+      }
+      
       let payBtnHtml = '';
       if(isOwner && pendingDue > 0) {
           payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${m.name}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
@@ -739,7 +756,7 @@ async function loadDash() {
 
       return `
       <div class="member">
-        <div class="member-top">
+        <div class="member-top" style="margin-bottom:0;">
            <div class="mem-info">
              <div class="mem-num">${i+1}</div>
              <div>
@@ -755,6 +772,7 @@ async function loadDash() {
               ${winBtn}
            </div>
         </div>
+        ${confirmationTracker}
         ${payBtnHtml}
       </div>`;
     }).join('');
@@ -822,7 +840,7 @@ async function adminDeleteBC() {
 }
 
 window.onload = () => {
-  applyLang(); // Initialize Language UI
+  applyLang(); 
   const s = load(KEYS.session, null);
   document.getElementById('startDate').value = new Date().toISOString().slice(0,10);
   if(s) { enterApp(); } else { document.getElementById('auth').classList.remove('hidden'); switchAuth('register'); }
