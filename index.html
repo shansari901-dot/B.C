@@ -178,7 +178,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   </div>
 </div>
 
-<!-- 💡 NEW: PREMIUM CONFIRM MODAL (NO MORE GITHUB URL POPUP) -->
+<!-- PREMIUM CONFIRM MODAL -->
 <div id="confirmModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 24px; text-align:center;">
     <p id="confirmText" style="font-weight: 800; margin-bottom: 20px; color: #1e293b; white-space: pre-wrap; font-size:16px;"></p>
@@ -464,7 +464,7 @@ function appAlert(text) {
   });
 }
 
-// 💡 NEW: CUSTOM CONFIRM MODAL (NO GITHUB LINK POPUP)
+// 💡 NEW: CUSTOM CONFIRM MODAL
 function appConfirm(text) {
   return new Promise(res => {
     const m = document.getElementById('confirmModal');
@@ -484,12 +484,28 @@ async function shareApp() {
   catch (err) { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
 }
 
-// 💡 NEW: ANDROID INTENT FIX FOR UPI
+// 💡 FIX 2: ANDROID INTENT UPI BYPASS + NAME CLEANER 💡
 function payUPI(pa, pn, am) {
-    // Ye code AppCreator24 aur Android Webview mein 100% chalega bina kisi error ke
-    var intentLink = 'intent://pay?pa=' + pa + '&pn=' + encodeURIComponent(pn) + '&am=' + am + '&cu=INR#Intent;scheme=upi;end';
-    try { window.location.href = intentLink; } 
-    catch(e) { window.location.href = 'upi://pay?pa=' + pa + '&pn=' + encodeURIComponent(pn) + '&am=' + am + '&cu=INR'; }
+    // 1. Clean the UPI ID (remove spaces)
+    var cleanUpi = pa.trim().replace(/\s/g, '');
+    
+    // 2. Clean the Name (remove special chars & emojis which block intent in GPay/PhonePe)
+    var cleanName = pn.replace(/[^a-zA-Z0-9 ]/g, '').trim() || 'Committee';
+    
+    // 3. Add a default Transaction Note (tn)
+    var note = encodeURIComponent('Committee Payment');
+    
+    var upiParams = 'pa=' + cleanUpi + '&pn=' + encodeURIComponent(cleanName) + '&am=' + am + '&cu=INR&tn=' + note;
+    
+    // Webview compatible Android Intent
+    var intentLink = 'intent://pay?' + upiParams + '#Intent;scheme=upi;end';
+    var fallbackLink = 'upi://pay?' + upiParams;
+
+    try { 
+        window.location.href = intentLink; 
+    } catch(e) { 
+        window.location.href = fallbackLink; 
+    }
 }
 
 function switchAuth(mode) {
@@ -877,7 +893,7 @@ async function loadDash() {
           if (pendingDue > 0 && bc.upiId) {
               if (isMe) { 
                   let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
-                  // 💡 FIX: Used JS onclick instead of standard href to fix Android Webview intent error
+                  // 💡 FIX 2: Added JS Function call payUPI() inside button onclick
                   payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
                       <button onclick="payUPI('${bc.upiId}', '${bc.ownerName}', ${pendingDue})" style="background:var(--success); color:white; border:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3); font-size:14px; cursor:pointer;">
                           📱 ${btnText}
@@ -959,7 +975,7 @@ async function markPaidAdvance(id) {
 }
 
 async function startNextRound() {
-    // 💡 FIX 1: Custom Premium Popup (NO GITHUB NAME)
+    // 💡 FIX 1: Custom App Modal
     let ans = await appConfirm(t("क्या आप वाकई अगली किश्त चालू करना चाहते हैं?", "Start next round?"));
     if(!ans) return;
     
@@ -992,7 +1008,7 @@ async function adminDeleteBC() {
   const code = document.getElementById('adminDelCode').value.trim().toUpperCase();
   if(!code) return appAlert(t("कृपया कमेटी का Code डालें!", "Enter Group Code!"));
   
-  // 💡 FIX 1: Custom Premium Popup (NO GITHUB NAME)
+  // 💡 FIX 1: Custom App Modal
   let ans = await appConfirm(t("⚠️ चेतावनी!\nक्या आप सच में कमेटी डिलीट करना चाहते हैं?", "⚠️ Warning!\nDelete this Group permanently?"));
   if(!ans) return;
   
@@ -1022,4 +1038,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+                                                                                                </html>
