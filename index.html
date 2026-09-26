@@ -139,9 +139,6 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 .calc-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; color: #065f46; margin-top: 12px; padding-top: 12px; border-top: 1px solid #a7f3d0; }
 
 .hidden { display: none !important; }
-.mem-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--border); }
-.mem-row .num { width: 34px; height: 34px; border-radius: 50%; background: #e2e8f0; color: var(--primary-dark); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.mem-row input { flex: 1; margin: 0; border: none; background: transparent; padding: 8px; font-size: 15px; border-radius: 0; }
 .bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 16px; margin-bottom: 12px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.03); cursor: pointer; }
 .bc-icon { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-right: 14px; }
 .bc-color-1 { background: #dcfce7; color: #059669; }
@@ -150,6 +147,13 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 .bc-info { flex: 1; }
 .bc-info b { display: block; font-size: 16px; color: var(--primary-dark); margin-bottom: 4px; }
 .bc-info span { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+/* MEMBERS INPUT ROW UPDATE (WITH PHONE) */
+.mem-row { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.02); margin-bottom: 12px; border: 1px solid var(--border); }
+.mem-input-group { display: flex; align-items: center; gap: 10px; }
+.mem-input-group .num { width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; color: var(--primary-dark); font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mem-input-group input { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px; background: #fff; }
+.mem-input-group input:focus { border-color: var(--accent); outline: none; }
 
 /* WINNER & EDIT MODALS */
 .modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -471,9 +475,9 @@ function switchAuth(mode) {
 }
 
 async function doAuth() {
-  const phone = document.getElementById('authPhone').value;
-  const pass = document.getElementById('authPass').value;
-  const name = document.getElementById('authName').value;
+  const phone = document.getElementById('authPhone').value.trim();
+  const pass = document.getElementById('authPass').value.trim();
+  const name = document.getElementById('authName').value.trim();
   const isReg = document.getElementById('tabReg').classList.contains('active');
   const msg = document.getElementById('authMsg');
   const btn = document.getElementById('authBtn');
@@ -556,15 +560,25 @@ function autoCalc() {
   document.getElementById('c-pool').textContent = '₹ ' + total.toLocaleString('en-IN');
 }
 
+// 💡 FIX 1: New Member Inputs with Mobile Number
 function buildMemberInputs() {
   let c = Number(document.getElementById('memberCount').value) || 0;
   if(c > 100) c = 100;
   let h = '';
   for(let i=1; i<=c; i++) {
-    h += `<div class="mem-row"><span class="num">${i}</span><input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम" data-en="Member ${i} Name" placeholder="${t('सदस्य '+i+' का नाम', 'Member '+i+' Name')}"></div>`;
+    h += `
+    <div class="mem-row">
+       <div class="mem-input-group">
+           <span class="num">${i}</span>
+           <input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' का नाम *', 'Member '+i+' Name *')}">
+       </div>
+       <div class="mem-input-group" style="padding-left: 44px;">
+           <span style="font-size:16px;">📱</span>
+           <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल नंबर *" data-en="Mobile Number *" placeholder="${t('मोबाइल नंबर *', 'Mobile Number *')}">
+       </div>
+    </div>`;
   }
   document.getElementById('memberInputs').innerHTML = h;
-  // NOTE: autoCalc() will calculate based on user input, it won't force totalInst to memberCount.
   autoCalc(); 
 }
 
@@ -580,12 +594,24 @@ async function createBC() {
   const ownerPhone = document.getElementById('ownerPhone').value.trim();
   const upiId = document.getElementById('upiId').value.trim(); 
   
-  const inps = document.querySelectorAll('.mem-name');
+  const nameInps = document.querySelectorAll('.mem-name');
+  const phoneInps = document.querySelectorAll('.mem-phone');
   let members = [];
-  inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); }); 
+  let hasError = false;
+  
+  // 💡 FIX 1: Validate Name AND Phone
+  for(let i=0; i<nameInps.length; i++) {
+      let n = nameInps[i].value.trim();
+      let p = phoneInps[i].value.trim();
+      if(n || p) { // if any is filled, both must be valid
+          if(!n || p.length !== 10) { hasError = true; }
+          if(n && p.length === 10) members.push({ name: n, phone: p, paidRounds: 0, hasWon: false });
+      }
+  }
   
   if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert(t('कृपया सभी जानकारी भरें!', 'Please fill all details!'));
   if(!ownerName || ownerPhone.length !== 10) return appAlert(t('कृपया मालिक का नाम और 10 अंकों का सही मोबाइल नंबर दर्ज़ करें!', 'Enter valid Owner Name & 10-digit Phone!'));
+  if(hasError) return appAlert(t('कृपया सभी सदस्यों का नाम और 10 अंकों का मोबाइल नंबर सही से भरें!', 'Please enter valid name & 10-digit phone for all members!'));
 
   const code = genCode();
   
@@ -600,7 +626,7 @@ async function createBC() {
     await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bcData) });
     let joined = load(KEYS.joined, []); joined.push(code); save(KEYS.joined, joined); save(KEYS.current, code);
     
-    document.getElementById('bcName').value = ''; document.getElementById('memberInputs').innerHTML = '';
+    document.getElementById('bcName').value = ''; document.getElementById('memberInputs').innerHTML = ''; document.getElementById('memberCount').value = '';
     document.getElementById('created').classList.remove('hidden');
     document.getElementById('created').innerHTML = `<h2 style="color: #059669; font-weight:800; margin-bottom:10px;">✅ ${t('सुरक्षित!', 'Saved!')}</h2><div style="font-size:24px; font-weight:800; letter-spacing:3px; background:#fff; padding:10px; border-radius:10px; color:#065f46; border:1px dashed #34d399; margin-bottom:10px;">${code}</div><button class="btn btn-primary" style="background:#059669;" onclick="show('dashboard')">${t('कमेटी खोलें', 'Open Group')}</button>`;
   } catch(e) { appAlert(t("सेव नहीं हो पाया", "Save failed")); }
@@ -610,12 +636,23 @@ async function createBC() {
 
 async function join() {
   const code = document.getElementById('accessCode').value.trim().toUpperCase();
+  const currentUser = load(KEYS.session, {});
   if(!code) return;
+  
   try {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     if(!res.ok) throw new Error();
     const data = await res.json();
     if(data.data.isDeleted) return appAlert(t("यह कमेटी डिलीट कर दी गई है।", "This Group is deleted."));
+    
+    // 💡 FIX 2: Check if phone number is registered in the BC
+    let isOwner = (data.data.ownerPhone === currentUser.phone) || (currentUser.phone === ADMIN_PHONE);
+    let isMember = data.data.members.some(m => m.phone === currentUser.phone);
+    
+    if(!isOwner && !isMember) {
+        return appAlert(t("इस कमेटी में आपका नंबर रजिस्टर नहीं है। कृपया संचालक से संपर्क करें।", "Your number is not registered in this Group. Contact Admin."));
+    }
+
     let joined = load(KEYS.joined, []);
     if(!joined.includes(code)) { joined.push(code); save(KEYS.joined, joined); }
     save(KEYS.current, code); document.getElementById('accessCode').value = ''; show('dashboard');
@@ -789,15 +826,16 @@ async function loadDash() {
       let leftEMIs = totalInstalls - m.paidRounds;
       if (leftEMIs < 0) leftEMIs = 0;
 
-      // 💡 NEW SMART NAME MATCHING (More Accurate)
-      let isMe = false;
-      let cName = (currentUser.name || "").trim().toLowerCase();
-      let mName = (m.name || "").trim().toLowerCase();
-      if (cName && mName) {
-          if (cName === mName || mName.startsWith(cName) || cName.startsWith(mName)) {
-              isMe = true;
-          }
+      // 💡 FIX 3: 100% Accurate IsMe match using Phone Number
+      // (If old committee doesn't have phone, fallback to name)
+      let isMe = (m.phone && m.phone === currentUser.phone);
+      if(!m.phone && currentUser.name) {
+         let cN = currentUser.name.toLowerCase().trim();
+         let mN = m.name.toLowerCase().trim();
+         isMe = (cN === mN || mN.includes(cN) || cN.includes(mN));
       }
+      
+      let uniqueId = m.phone || m.name; // Use phone as ID for actions if available
 
       let confirmationTracker = `
         <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
@@ -815,40 +853,45 @@ async function loadDash() {
       
       let payBtnHtml = '';
       if(isOwner && pendingDue > 0) {
-          payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${m.name}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
+          payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${uniqueId}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
       }
       
-      // 💡 FIX 2: Payment Button Display Logic
       let payOnlineHtml = '';
-      if (!isOwner) { // Owner ko kabhi pay ka button nahi dikhega
+      if (!isOwner) { 
           if (pendingDue > 0 && bc.upiId) {
-              // Sirf jiska baki hai usko hara UPI button dikhega
-              let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
-              let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
-              payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
-                  <a href="${upiLink}" style="background:var(--success); color:white; text-decoration:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3);">
-                      📱 ${btnText}
-                  </a>
-              </div>`;
+              if (isMe) { 
+                  let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
+                  let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
+                  payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
+                      <a href="${upiLink}" style="background:var(--success); color:white; text-decoration:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3);">
+                          📱 ${btnText}
+                      </a>
+                  </div>`;
+              }
           } else if (pendingDue === 0) {
-              // Jiska pay ho gaya hai, use Payment Clear ka message dikhega
-              payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
-                  <span class="hi">✅ इस किश्त का भुगतान पूरा हुआ</span>
-                  <span class="en">✅ Payment Clear for this round</span>
-              </div>`;
+              if (isMe) {
+                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
+                      <span class="hi">✅ आपकी किश्त का भुगतान पूरा हुआ</span>
+                      <span class="en">✅ Your Payment Clear for this round</span>
+                  </div>`;
+              } else if (isOwner) {
+                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 8px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 11px; font-weight: 800; color: #059669;">
+                      ✅ Payment Clear
+                  </div>`;
+              }
           }
       }
 
       let winBtn = `<div class="win-btn-disabled">🏆</div>`;
-      if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${m.name}')" title="${t('विजेता बनाएं', 'Set Winner')}">🏆</button>`;
+      if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${uniqueId}')" title="${t('विजेता बनाएं', 'Set Winner')}">🏆</button>`;
       else if(m.hasWon) winBtn = `<div style="font-size:24px;" title="Winner">🎉</div>`;
 
       let nameDisplay = `<b>${m.name}</b>`;
       if(isOwner) {
-          nameDisplay = `<input type="text" value="${m.name}" style="font-weight:800; font-size:15px; border:none; background:transparent; padding:0; margin:0; width:120px;" onchange="editMemberName('${m.name}', this.value)" title="${t('नाम बदलने के लिए यहाँ क्लिक करें','Click to edit name')}">`;
+          nameDisplay = `<input type="text" value="${m.name}" style="font-weight:800; font-size:15px; border:none; background:transparent; padding:0; margin:0; width:120px;" onchange="editMemberName('${uniqueId}', this.value)" title="${t('नाम बदलने के लिए यहाँ क्लिक करें','Click to edit name')}">`;
       }
-
-      // Add a subtle highlight if this is the logged-in user's card
+      
+      let phoneDisplay = m.phone ? `<div style="font-size:10px; color:var(--muted); font-weight:600; margin-top:2px;">📱 ${m.phone}</div>` : '';
       let cardStyle = isMe ? 'border: 2px solid var(--accent); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);' : '';
 
       return `
@@ -858,7 +901,8 @@ async function loadDash() {
              <div class="mem-num">${i+1}</div>
              <div>
                 ${nameDisplay}
-                <div style="font-size:11px; color:var(--muted); font-weight:600; margin-top:2px;">${t('जमा', 'Paid')}: ₹${totalPaidByMem.toLocaleString('en-IN')}</div>
+                ${isOwner ? phoneDisplay : ''}
+                <div style="font-size:11px; color:var(--muted); font-weight:600; margin-top:4px;">${t('जमा', 'Paid')}: ₹${totalPaidByMem.toLocaleString('en-IN')}</div>
              </div>
            </div>
            <div style="display:flex; align-items:center; gap:12px;">
@@ -878,18 +922,18 @@ async function loadDash() {
   } catch(e) { show('mylist'); }
 }
 
-async function editMemberName(oldName, newName) {
+async function editMemberName(id, newName) {
     if(!newName.trim()) return;
-    let m = currentBCData.members.find(x => x.name === oldName);
+    let m = currentBCData.members.find(x => (x.phone || x.name) === id);
     if(m) {
         m.name = newName.trim();
         await saveBCState();
     }
 }
 
-async function markPaidAdvance(memberName) {
+async function markPaidAdvance(id) {
     if(!currentBCData) return;
-    let m = currentBCData.members.find(x => x.name === memberName);
+    let m = currentBCData.members.find(x => (x.phone || x.name) === id);
     if(m) {
         m.paidRounds += 1;
         currentBCData.walletBalance += Number(currentBCData.amount);
@@ -905,16 +949,17 @@ async function startNextRound() {
     await saveBCState();
 }
 
-let pendingWinnerName = "";
-function declareWinner(name) {
-  pendingWinnerName = name;
-  document.getElementById('winName').textContent = name;
+let pendingWinnerId = "";
+function declareWinner(id) {
+  pendingWinnerId = id;
+  let m = currentBCData.members.find(x => (x.phone || x.name) === id);
+  document.getElementById('winName').textContent = m ? m.name : "Winner";
   document.getElementById('winAmount').textContent = Number(currentBCData.totalPool || 0).toLocaleString('en-IN');
   document.getElementById('winnerModal').classList.remove('hidden');
 }
 
 async function confirmWinner() {
-   let m = currentBCData.members.find(x => x.name === pendingWinnerName);
+   let m = currentBCData.members.find(x => (x.phone || x.name) === pendingWinnerId);
    if(m && !m.hasWon) {
        m.hasWon = true;
        currentBCData.walletBalance -= Number(currentBCData.totalPool || 0);
@@ -954,4 +999,4 @@ window.onload = () => {
 };
 </script>
 </body>
-</html>
+  </html>
