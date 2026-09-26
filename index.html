@@ -403,6 +403,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 </nav>
 
 <script>
+// ✨ CONFIGURATION & I18N ✨
 const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
 const ADMIN_PHONE = '7318259001'; 
 const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr'; 
@@ -563,6 +564,7 @@ function buildMemberInputs() {
     h += `<div class="mem-row"><span class="num">${i}</span><input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम" data-en="Member ${i} Name" placeholder="${t('सदस्य '+i+' का नाम', 'Member '+i+' Name')}"></div>`;
   }
   document.getElementById('memberInputs').innerHTML = h;
+  // NOTE: autoCalc() will calculate based on user input, it won't force totalInst to memberCount.
   autoCalc(); 
 }
 
@@ -787,12 +789,14 @@ async function loadDash() {
       let leftEMIs = totalInstalls - m.paidRounds;
       if (leftEMIs < 0) leftEMIs = 0;
 
-      // 💡 SMART NAME MATCHING 💡
-      let cName = (currentUser.name || "").toLowerCase().trim();
-      let mName = (m.name || "").toLowerCase().trim();
+      // 💡 NEW SMART NAME MATCHING (More Accurate)
       let isMe = false;
-      if (cName && mName && (cName === mName || cName.includes(mName) || mName.includes(cName))) {
-          isMe = true;
+      let cName = (currentUser.name || "").trim().toLowerCase();
+      let mName = (m.name || "").trim().toLowerCase();
+      if (cName && mName) {
+          if (cName === mName || mName.startsWith(cName) || cName.startsWith(mName)) {
+              isMe = true;
+          }
       }
 
       let confirmationTracker = `
@@ -814,12 +818,11 @@ async function loadDash() {
           payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${m.name}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
       }
       
-      // 💡 NEW SMART UPI BUTTON LOGIC 💡
+      // 💡 FIX 2: Payment Button Display Logic
       let payOnlineHtml = '';
-      if (pendingDue > 0 && bc.upiId) {
-          if (isOwner) {
-              payOnlineHtml = `<div style="margin-top:10px; font-size:11px; color:var(--success); text-align:center; font-weight:700;">(📱 इस मेंबर को UPI पेमेंट बटन दिखेगा)</div>`;
-          } else if (isMe) {
+      if (!isOwner) { // Owner ko kabhi pay ka button nahi dikhega
+          if (pendingDue > 0 && bc.upiId) {
+              // Sirf jiska baki hai usko hara UPI button dikhega
               let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
               let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
               payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
@@ -827,16 +830,11 @@ async function loadDash() {
                       📱 ${btnText}
                   </a>
               </div>`;
-          }
-      } else if (pendingDue === 0) {
-          if (isMe) {
+          } else if (pendingDue === 0) {
+              // Jiska pay ho gaya hai, use Payment Clear ka message dikhega
               payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
-                  <span class="hi">✅ आपकी किश्त का भुगतान पूरा हुआ</span>
-                  <span class="en">✅ Your Payment Clear for this round</span>
-              </div>`;
-          } else if (isOwner) {
-              payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 8px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 11px; font-weight: 800; color: #059669;">
-                  ✅ Payment Clear
+                  <span class="hi">✅ इस किश्त का भुगतान पूरा हुआ</span>
+                  <span class="en">✅ Payment Clear for this round</span>
               </div>`;
           }
       }
@@ -850,8 +848,11 @@ async function loadDash() {
           nameDisplay = `<input type="text" value="${m.name}" style="font-weight:800; font-size:15px; border:none; background:transparent; padding:0; margin:0; width:120px;" onchange="editMemberName('${m.name}', this.value)" title="${t('नाम बदलने के लिए यहाँ क्लिक करें','Click to edit name')}">`;
       }
 
+      // Add a subtle highlight if this is the logged-in user's card
+      let cardStyle = isMe ? 'border: 2px solid var(--accent); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);' : '';
+
       return `
-      <div class="member">
+      <div class="member" style="${cardStyle}">
         <div class="member-top" style="margin-bottom:0;">
            <div class="mem-info">
              <div class="mem-num">${i+1}</div>
@@ -953,4 +954,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+</html>
