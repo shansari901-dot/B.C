@@ -116,7 +116,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 
 /* MEMBERS LIST */
 .member { display: flex; flex-direction: column; padding: 16px; background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); }
-.member-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.member-top { display: flex; justify-content: space-between; align-items: center; }
 .mem-info { display: flex; align-items: center; gap: 12px; }
 .mem-num { width: 28px; height: 28px; background: var(--primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
 .member b { font-size: 15px; color: var(--text); font-weight: 800; }
@@ -191,13 +191,15 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   </div>
 </div>
 
-<!-- EDIT MODAL -->
+<!-- EDIT MODAL (NOW HAS UPI FIELD) -->
 <div id="editModal" class="modal-bg hidden">
   <div class="modal-box">
     <h2 style="color: var(--primary-dark); font-size: 18px; margin-bottom: 15px;"><span class="hi">कमेटी जानकारी एडिट करें</span><span class="en">Edit Group Details</span></h2>
     <div class="field"><label><span class="hi">किस्त राशि (₹)</span><span class="en">Installment Amount (₹)</span></label><input class="no-ico" type="number" id="editAmt" oninput="editAutoCalc()"></div>
     <div class="field"><label><span class="hi">कुल किश्तें</span><span class="en">Total Installments</span></label><input class="no-ico" type="number" id="editInst" oninput="editAutoCalc()"></div>
     <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background: #f1f5f9; color: var(--success); font-weight: 800;"></div>
+    <!-- NEW UPI EDIT FIELD -->
+    <div class="field"><label><span class="hi">UPI ID (ऑप्शनल)</span><span class="en">UPI ID (Optional)</span></label><input class="no-ico" type="text" id="editUpi" placeholder="mobilenumber@upi"></div>
     <div style="display:flex; gap:10px; margin-top: 20px;">
        <button class="btn" style="background: #e5e7eb; color: #475569;" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
        <button class="btn btn-primary" onclick="saveEdit()"><span class="hi">सेव करें</span><span class="en">Save</span></button>
@@ -343,6 +345,11 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
       <div style="margin-top: 24px; padding-top:20px; border-top: 1px solid var(--border);">
         <div class="field"><label><span class="hi">मालिक का नाम *</span><span class="en">Owner Name *</span></label><input class="no-ico lang-input" id="ownerName" data-hi="संचालक का नाम" data-en="Admin Name" placeholder="संचालक का नाम"></div>
         <div class="field"><label><span class="hi">मालिक का मोबाइल *</span><span class="en">Owner Mobile *</span></label><input class="no-ico lang-input" id="ownerPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Mobile" placeholder="10 अंकों का नंबर" maxlength="10"></div>
+        <!-- 💡 NEW OPTIONAL UPI ID FIELD -->
+        <div class="field">
+           <label><span class="hi">UPI ID (ऑनलाइन पेमेंट के लिए - Optional)</span><span class="en">UPI ID (Optional for Online Pay)</span></label>
+           <input class="no-ico lang-input" id="upiId" data-hi="उदा. 9876543210@ybl" data-en="e.g. 9876543210@ybl" placeholder="उदा. 9876543210@ybl">
+        </div>
         <div class="field"><label><span class="hi">शुरुआत तिथि</span><span class="en">Start Date</span></label><input class="no-ico" id="startDate" type="date"></div>
       </div>
     </div>
@@ -571,11 +578,10 @@ async function createBC() {
   
   const ownerName = document.getElementById('ownerName').value.trim();
   const ownerPhone = document.getElementById('ownerPhone').value.trim();
+  const upiId = document.getElementById('upiId').value.trim(); // 💡 UPI ID Data
   
   const inps = document.querySelectorAll('.mem-name');
   let members = [];
-  
-  // ✂️ FIX: No auto-owner addition. Strictly use what user typed. ✂️
   inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); }); 
   
   if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert(t('कृपया सभी जानकारी भरें!', 'Please fill all details!'));
@@ -585,7 +591,7 @@ async function createBC() {
   
   const bcData = { 
     code, name, amount: Number(amount), freqText, freqVal, totalInst: Number(totalInst), totalPool: Number(totalPool), 
-    ownerName, ownerPhone, startDate: document.getElementById('startDate').value,
+    ownerName, ownerPhone, upiId, startDate: document.getElementById('startDate').value, // Saved UPI
     currentRound: 1, walletBalance: 0, members 
   };
   
@@ -656,6 +662,7 @@ function openEditModal() {
     document.getElementById('editAmt').value = currentBCData.amount;
     document.getElementById('editInst').value = currentBCData.totalInst || currentBCData.members.length;
     document.getElementById('editPool').value = currentBCData.totalPool || (currentBCData.amount * currentBCData.members.length);
+    document.getElementById('editUpi').value = currentBCData.upiId || ''; // Edit UPI logic
     document.getElementById('editModal').classList.remove('hidden');
 }
 
@@ -669,11 +676,13 @@ async function saveEdit() {
     let a = Number(document.getElementById('editAmt').value);
     let i = Number(document.getElementById('editInst').value);
     let p = Number(document.getElementById('editPool').value);
+    let u = document.getElementById('editUpi').value.trim();
     if(a <= 0 || i <= 0 || p <= 0) return appAlert(t('सही जानकारी भरें', 'Enter valid details'));
     
     currentBCData.amount = a;
     currentBCData.totalInst = i;
     currentBCData.totalPool = p;
+    currentBCData.upiId = u; // Save Edited UPI
     document.getElementById('editModal').classList.add('hidden');
     document.getElementById('walletBlock').innerHTML = `<div class='empty-state' style='color:white;'>${t('सेव हो रहा है...', 'Saving...')}</div>`;
     await saveBCState();
@@ -729,6 +738,8 @@ async function loadDash() {
     const totalMembers = bc.members.length;
     let totalInstalls = Number(bc.totalInst) || totalMembers;
     
+    let upiText = bc.upiId ? `<br><span style="color:#dcfce7; font-size:12px;">UPI: ${bc.upiId}</span>` : '';
+
     document.getElementById('walletBlock').innerHTML = `
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; color:white;">
          <div style="width:40px; height:40px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px;">👥</div>
@@ -766,6 +777,7 @@ async function loadDash() {
           <span>${t('कमेटी खुलने पर मिलेगा', 'Total Pool Amount')}</span>
         </div>
       </div>
+      <p style="text-align: center; margin: 20px 0; font-size: 14px; font-weight: 800; color:white;">Code: <b style="color: white; background: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 8px;">${bc.code}</b><br><span style="color:#cbd5e1; font-size:12px; display:inline-block; margin-top: 8px;">संचालक: ${bc.ownerName}</span>${upiText}</p>
     `;
     
     document.getElementById('members').innerHTML = bc.members.map((m,i) => {
@@ -796,6 +808,13 @@ async function loadDash() {
           payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${m.name}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
       }
       
+      // 💡 NEW: Pay via UPI option for Members
+      let payOnlineHtml = '';
+      if(!isOwner && pendingDue > 0 && bc.upiId) {
+          let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
+          payOnlineHtml = `<div style="margin-top:10px; text-align:right;"><a href="${upiLink}" style="background:var(--success); color:white; padding:6px 12px; border-radius:8px; text-decoration:none; font-size:12px; font-weight:800; display:inline-flex; align-items:center; gap:4px; box-shadow:0 4px 10px rgba(5,150,105,0.2);">📱 Pay ₹${pendingDue} via UPI</a></div>`;
+      }
+
       let winBtn = `<div class="win-btn-disabled">🏆</div>`;
       if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${m.name}')" title="${t('विजेता बनाएं', 'Set Winner')}">🏆</button>`;
       else if(m.hasWon) winBtn = `<div style="font-size:24px;" title="Winner">🎉</div>`;
@@ -825,6 +844,7 @@ async function loadDash() {
         </div>
         ${confirmationTracker}
         ${payBtnHtml}
+        ${payOnlineHtml}
       </div>`;
     }).join('');
 
@@ -907,4 +927,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+</html>
