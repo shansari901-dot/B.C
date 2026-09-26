@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>कमेटी खाता</title>
+<title>कमेटी खाता - Group Khata</title>
 <meta name="description" content="आपकी कमेटी • आपका हिसाब • सुरक्षित ऑनलाइन">
 <meta name="theme-color" content="#1e3a8a">
 <style>
@@ -157,6 +157,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 #winnerModal .modal-box { background: linear-gradient(180deg, #fffbeb, #fef3c7); border: 2px solid #fde68a; }
 .win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
 #winAmount { background: #f59e0b; color: white; padding: 8px 20px; border-radius: 12px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); }
+
 .win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 </style>
 </head>
@@ -179,7 +180,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
     <div class="win-trophy">🏆</div>
     <h2 style="color: #ea580c; font-size: 28px; font-weight: 900; margin-bottom: 5px;">Winner!</h2>
     <p style="font-size: 22px; font-weight: 800; color: #92400e;" id="winName">Name</p>
-    <p style="color: #b45309; font-size: 14px; font-weight: 600;"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Committee opened for them!</span></p>
+    <p style="color: #b45309; font-size: 14px; font-weight: 600;"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Group opened for them!</span></p>
     <div id="winAmount">₹0</div>
     <p style="color: #b45309; font-size: 13px; font-weight: 700; margin-bottom: 20px;"><span class="hi">क्या आप वॉलेट से पैसे देना चाहते हैं?</span><span class="en">Do you want to pay from Wallet?</span></p>
     <div style="display:flex; gap:10px;">
@@ -193,7 +194,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   <div class="topbar-text">
     <div class="topbar-icon"><span style="font-size: 24px;">👥</span></div>
     <div>
-       <h1><span class="hi">कमेटी खाता</span><span class="en">Kameeti Khata</span></h1>
+       <h1><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h1>
        <p><span class="hi">सुरक्षित • सरल • ऑटोमैटिक</span><span class="en">Secure • Simple • Auto</span></p>
     </div>
   </div>
@@ -258,14 +259,14 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
     <div class="card" style="background: linear-gradient(135deg, #fff, #f8fafc);">
       <div style="font-size: 40px; margin-bottom: 10px;">👋</div>
       <h2 style="font-size: 22px;">Welcome</h2>
-      <p style="margin-bottom: 20px; font-size: 14px; font-weight: 600; color: var(--muted);"><span class="hi">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</span><span class="en">Create a new committee or check old ones in the list.</span></p>
-      <button class="btn btn-primary" style="border-radius: 14px;" onclick="show('create')"><span class="hi">➕ नई कमेटी बनाएं</span><span class="en">➕ Create New BC</span></button>
+      <p style="margin-bottom: 20px; font-size: 14px; font-weight: 600; color: var(--muted);"><span class="hi">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</span><span class="en">Create a new group or check old ones in the list.</span></p>
+      <button class="btn btn-primary" style="border-radius: 14px;" onclick="show('create')"><span class="hi">➕ नई कमेटी बनाएं</span><span class="en">➕ Create New Group</span></button>
     </div>
     <div class="card">
       <h2 style="font-size: 18px;"><span class="hi">🔑 कोड द्वारा प्रवेश</span><span class="en">🔑 Enter via Code</span></h2>
-      <p style="font-size:12px; color:var(--muted); font-weight:700; margin-bottom:16px;"><span class="hi">कमेटी का Access Code डालें:</span><span class="en">Enter BC Access Code:</span></p>
+      <p style="font-size:12px; color:var(--muted); font-weight:700; margin-bottom:16px;"><span class="hi">कमेटी का Access Code डालें:</span><span class="en">Enter Group Access Code:</span></p>
       <div class="field"><input class="no-ico lang-input" id="accessCode" data-hi="Code (उदा. A1B2C3D4)" data-en="Code (e.g. A1B2C3D4)" placeholder="Code (उदा. A1B2C3D4)" style="text-transform: uppercase;"></div>
-      <button class="btn btn-secondary" style="border-radius: 14px;" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter BC</span></button>
+      <button class="btn btn-secondary" style="border-radius: 14px; background: #e2e8f0; color: var(--primary-dark);" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter Group</span></button>
     </div>
   </section>
 
@@ -276,7 +277,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
       <h2 id="profName" style="justify-content: center; font-size: 24px; margin-bottom: 6px;">Name</h2>
       <p id="profPhone" style="font-size: 15px; color: var(--muted); font-weight: 700; margin-bottom: 30px; letter-spacing: 1px;">+91 0000000000</p>
       <div class="stats" style="margin-bottom: 30px;">
-         <div class="stat" style="background: #f1f5f9;"><b id="profCount" style="color: var(--accent);">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined BCs</span></div>
+         <div class="stat" style="background: #f1f5f9;"><b id="profCount" style="color: var(--accent);">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
          <div class="stat" style="background: #f1f5f9;"><b id="profRole" style="color: var(--accent);">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
       </div>
       <button class="btn" onclick="appLogout()" style="color: white; background: var(--danger); box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3);"><span class="hi">🚪 सुरक्षित लॉगआउट</span><span class="en">🚪 Secure Logout</span></button>
@@ -287,7 +288,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   <section id="mylist" class="hidden">
     <div style="display:flex; align-items:center; margin-bottom:20px; color:white;">
        <span style="font-size:24px; margin-right:10px;">📋</span>
-       <h2 style="font-size:20px; font-weight:800;"><span class="hi">मेरी कमेटियाँ</span><span class="en">My Committees</span></h2>
+       <h2 style="font-size:20px; font-weight:800;"><span class="hi">मेरी कमेटियाँ</span><span class="en">My Groups</span></h2>
     </div>
     <div id="bcList"></div>
   </section>
@@ -295,10 +296,10 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   <!-- CREATE NEW BC -->
   <section id="create" class="hidden">
     <div class="card">
-      <h2><span style="color:var(--accent);">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New BC</span></h2>
+      <h2><span style="color:var(--accent);">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
       <div class="field">
-        <label><span class="hi">कमेटी का नाम *</span><span class="en">Committee Name *</span></label>
-        <input class="no-ico lang-input" id="bcName" data-hi="जैसे: गांव कमेटी 2026" data-en="e.g. Village BC 2026" placeholder="जैसे: गांव कमेटी 2026">
+        <label><span class="hi">कमेटी का नाम *</span><span class="en">Group Name *</span></label>
+        <input class="no-ico lang-input" id="bcName" data-hi="जैसे: गांव कमेटी 2026" data-en="e.g. Village Group 2026" placeholder="जैसे: गांव कमेटी 2026">
       </div>
       
       <div class="row">
@@ -338,7 +339,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
       <div id="memberInputs" style="margin-top: 16px;"></div>
     </div>
     
-    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px;" id="createBtn"><span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Committee</span></button>
+    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px;" id="createBtn"><span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span></button>
     <div id="created" class="card hidden" style="background: #d1fae5; text-align:center;"></div>
   </section>
 
@@ -362,8 +363,8 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
       <div class="msg ok" style="margin-bottom: 0; background: #f8fafc; border:none;">✓ Admin ID Verified</div>
     </div>
     <div class="card" style="background: #fff1f2; border-color: #fecaca; border-left: 4px solid var(--danger);">
-      <h2 style="color: var(--danger);"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete BC</span></h2>
-      <p style="margin-bottom: 16px; font-size: 12px; font-weight: 700; color: #9f1239;"><span class="hi">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</span><span class="en">Enter Code to permanently delete committee.</span></p>
+      <h2 style="color: var(--danger);"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete Group</span></h2>
+      <p style="margin-bottom: 16px; font-size: 12px; font-weight: 700; color: #9f1239;"><span class="hi">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</span><span class="en">Enter Code to permanently delete group.</span></p>
       <div class="field"><input class="no-ico" id="adminDelCode" placeholder="Code (उदा. A1B2C3D4)" style="background: white; text-transform:uppercase;"></div>
       <button class="btn" style="background: var(--danger); color:white; border-radius:14px;" onclick="adminDeleteBC()"><span class="hi">🗑️ डाटा डिलीट करें</span><span class="en">🗑️ Delete Data</span></button>
     </div>
@@ -430,14 +431,14 @@ function appAlert(text) {
 function genCode() { return Math.random().toString(36).substring(2, 10).toUpperCase(); }
 
 async function shareApp() {
-  const shareData = { title: t('कमेटी खाता', 'Kameeti Khata'), text: t('💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप अभी डाउनलोड करें:\n\n', '💰 *Kameeti Khata App*\n\nKeep your committee records secure. Download app now:\n\n') + APP_LINK };
+  const shareData = { title: t('कमेटी खाता', 'Group Khata'), text: t('💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप अभी डाउनलोड करें:\n\n', '💰 *Group Khata App*\n\nKeep your group records secure. Download app now:\n\n') + APP_LINK };
   try { if (navigator.share) { await navigator.share(shareData); } else { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); } } 
   catch (err) { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
 }
 
 function sendInviteProof(bcName, bcCode, amount, memberName) {
   const msg = t(`Welcome ${memberName} जी, 🙏\n\nमैंने आपको अपनी कमेटी *"${bcName}"* में जोड़ लिया है।\n💰 आपकी किश्त: ₹${amount}\n\nकृपया इस मेसेज का *'OK'* लिखकर रिप्लाई करें ताकि लिस्ट में आपका नाम पक्का हो जाए।\n\nऐप में अपना हिसाब देखने के लिए Code: *${bcCode}*\n\nऐप लिंक: ${APP_LINK}`,
-                `Welcome ${memberName}, 🙏\n\nI have added you to my committee *"${bcName}"*.\n💰 Your Installment: ₹${amount}\n\nPlease reply with *'OK'* to confirm your name in the list.\n\nTo view your account, use Code: *${bcCode}*\n\nApp Link: ${APP_LINK}`);
+                `Welcome ${memberName}, 🙏\n\nI have added you to my group *"${bcName}"*.\n💰 Your Installment: ₹${amount}\n\nPlease reply with *'OK'* to confirm your name in the list.\n\nTo view your account, use Code: *${bcCode}*\n\nApp Link: ${APP_LINK}`);
   window.location.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 
@@ -584,9 +585,9 @@ async function createBC() {
     
     document.getElementById('bcName').value = ''; document.getElementById('memberInputs').innerHTML = '';
     document.getElementById('created').classList.remove('hidden');
-    document.getElementById('created').innerHTML = `<h2 style="color: #059669; font-weight:800; margin-bottom:10px;">✅ ${t('सुरक्षित!', 'Saved!')}</h2><div style="font-size:24px; font-weight:800; letter-spacing:3px; background:#fff; padding:10px; border-radius:10px; color:#065f46; border:1px dashed #34d399; margin-bottom:10px;">${code}</div><button class="btn btn-primary" style="background:#059669;" onclick="show('dashboard')">${t('कमेटी खोलें', 'Open BC')}</button>`;
+    document.getElementById('created').innerHTML = `<h2 style="color: #059669; font-weight:800; margin-bottom:10px;">✅ ${t('सुरक्षित!', 'Saved!')}</h2><div style="font-size:24px; font-weight:800; letter-spacing:3px; background:#fff; padding:10px; border-radius:10px; color:#065f46; border:1px dashed #34d399; margin-bottom:10px;">${code}</div><button class="btn btn-primary" style="background:#059669;" onclick="show('dashboard')">${t('कमेटी खोलें', 'Open Group')}</button>`;
   } catch(e) { appAlert(t("सेव नहीं हो पाया", "Save failed")); }
-  document.getElementById('createBtn').innerHTML = `<span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Committee</span>`;
+  document.getElementById('createBtn').innerHTML = `<span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span>`;
   applyLang();
 }
 
@@ -597,7 +598,7 @@ async function join() {
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     if(!res.ok) throw new Error();
     const data = await res.json();
-    if(data.data.isDeleted) return appAlert(t("यह कमेटी डिलीट कर दी गई है।", "This BC is deleted."));
+    if(data.data.isDeleted) return appAlert(t("यह कमेटी डिलीट कर दी गई है।", "This Group is deleted."));
     let joined = load(KEYS.joined, []);
     if(!joined.includes(code)) { joined.push(code); save(KEYS.joined, joined); }
     save(KEYS.current, code); document.getElementById('accessCode').value = ''; show('dashboard');
@@ -629,7 +630,7 @@ async function renderMyList() {
       }
     } catch(e) {}
   }
-  document.getElementById('bcList').innerHTML = html || `<div class="empty-state" style="color:white;"><div style="font-size: 50px; margin-bottom: 12px; filter: grayscale(1);">📋</div><p>${t('कोई कमेटी नहीं है', 'No BC Found')}</p></div>`;
+  document.getElementById('bcList').innerHTML = html || `<div class="empty-state" style="color:white;"><div style="font-size: 50px; margin-bottom: 12px; filter: grayscale(1);">📋</div><p>${t('कोई कमेटी नहीं है', 'No Group Found')}</p></div>`;
 }
 
 async function saveBCState() {
@@ -651,7 +652,7 @@ async function loadDash() {
     const bc = currentBCData;
     
     if(bc.isDeleted) {
-        document.getElementById('walletBlock').innerHTML = `<div class="card" style="text-align:center; color:red;">❌ ${t('यह कमेटी डिलीट कर दी गई है।', 'This BC is deleted.')}</div>`;
+        document.getElementById('walletBlock').innerHTML = `<div class="card" style="text-align:center; color:red;">❌ ${t('यह कमेटी डिलीट कर दी गई है।', 'This Group is deleted.')}</div>`;
         document.getElementById('memberCard').classList.add('hidden');
         return;
     }
@@ -696,7 +697,7 @@ async function loadDash() {
             <div class="w-chip"></div>
             <div class="w-wifi">🛜</div>
          </div>
-         <div class="wallet-title">${t('कमेटी वॉलेट', 'BC WALLET')}</div>
+         <div class="wallet-title">${t('कमेटी वॉलेट', 'GROUP WALLET')}</div>
          <div class="wallet-amt"><span style="font-size:24px; margin-right:4px;">₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
          <div class="wallet-num">Available Balance</div>
          <div class="wallet-bot">
@@ -800,8 +801,8 @@ async function confirmWinner() {
 
 async function adminDeleteBC() {
   const code = document.getElementById('adminDelCode').value.trim().toUpperCase();
-  if(!code) return appAlert(t("कृपया कमेटी का Code डालें!", "Enter BC Code!"));
-  if(!confirm(t("⚠️ चेतावनी!\nक्या आप सच में कमेटी डिलीट करना चाहते हैं?", "⚠️ Warning!\nDelete this BC permanently?"))) return;
+  if(!code) return appAlert(t("कृपया कमेटी का Code डालें!", "Enter Group Code!"));
+  if(!confirm(t("⚠️ चेतावनी!\nक्या आप सच में कमेटी डिलीट करना चाहते हैं?", "⚠️ Warning!\nDelete this Group permanently?"))) return;
   try {
     const getRes = await fetch(`${API_URL}/api/bcs?code=${code}`);
     if(!getRes.ok) return appAlert(t("यह कोड मौजूद नहीं है!", "Code not found!"));
@@ -811,7 +812,7 @@ async function adminDeleteBC() {
     existingData.isDeleted = true;
     existingData.amount = 0;
     await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(existingData) });
-    appAlert(t("✅ कमेटी डिलीट हो गई!", "✅ BC Deleted!"));
+    appAlert(t("✅ कमेटी डिलीट हो गई!", "✅ Group Deleted!"));
     let joined = load(KEYS.joined, []);
     joined = joined.filter(c => c !== code);
     save(KEYS.joined, joined);
@@ -828,4 +829,4 @@ window.onload = () => {
 };
 </script>
 </body>
-                             </html>
+  </html>
