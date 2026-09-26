@@ -158,6 +158,9 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 .win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
 #winAmount { background: #f59e0b; color: white; padding: 8px 20px; border-radius: 12px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); }
 .win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+/* EDIT MODAL */
+#editModal .modal-box { padding: 20px; text-align: left; }
 </style>
 </head>
 <body class="lang-hi">
@@ -189,6 +192,20 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   </div>
 </div>
 
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal-bg hidden">
+  <div class="modal-box">
+    <h2 style="color: var(--primary-dark); font-size: 18px; margin-bottom: 15px;"><span class="hi">कमेटी जानकारी एडिट करें</span><span class="en">Edit Group Details</span></h2>
+    <div class="field"><label><span class="hi">किस्त राशि (₹)</span><span class="en">Installment Amount (₹)</span></label><input class="no-ico" type="number" id="editAmt" oninput="editAutoCalc()"></div>
+    <div class="field"><label><span class="hi">कुल किश्तें</span><span class="en">Total Installments</span></label><input class="no-ico" type="number" id="editInst" oninput="editAutoCalc()"></div>
+    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background: #f1f5f9; color: var(--success); font-weight: 800;"></div>
+    <div style="display:flex; gap:10px; margin-top: 20px;">
+       <button class="btn" style="background: #e5e7eb; color: #475569;" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+       <button class="btn btn-primary" onclick="saveEdit()"><span class="hi">सेव करें</span><span class="en">Save</span></button>
+    </div>
+  </div>
+</div>
+
 <div class="topbar">
   <div class="topbar-text">
     <div class="topbar-icon"><span style="font-size: 24px;">👥</span></div>
@@ -198,7 +215,6 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
     </div>
   </div>
   <div style="display:flex; gap:8px;">
-    <!-- 🌐 LANGUAGE TOGGLE BUTTON -->
     <button class="topbar-share" id="langToggleBtn" onclick="toggleLang()">🌐 EN</button>
     <button class="topbar-share" onclick="shareApp()">📤 <span class="hi">शेयर</span><span class="en">Share</span></button>
   </div>
@@ -349,7 +365,10 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
     <div style="margin-bottom: 20px;" id="memberCard">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding: 0 4px;">
          <h2 style="margin:0; font-size: 18px; font-weight: 800; color:white;"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
-         <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px;"><span class="hi">+ अगली किश्त</span><span class="en">+ Next Round</span></button>
+         <div style="display:flex; gap:8px;">
+           <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:white; color:var(--primary-dark); font-weight: 800; border-radius:50px;">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
+           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px;"><span class="hi">+ अगली किश्त</span><span class="en">+ Next Round</span></button>
+         </div>
       </div>
       <div id="members"></div>
     </div>
@@ -401,12 +420,10 @@ function applyLang() {
     document.body.className = 'lang-' + currentLang;
     document.getElementById('langToggleBtn').innerHTML = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
     
-    // Update Placeholders
     document.querySelectorAll('.lang-input').forEach(el => {
         el.placeholder = el.getAttribute('data-' + currentLang) || el.placeholder;
     });
     
-    // Re-render JS dynamic parts
     if(!document.getElementById('dashboard').classList.contains('hidden')) loadDash();
     if(!document.getElementById('mylist').classList.contains('hidden')) renderMyList();
     if(!document.getElementById('create').classList.contains('hidden')) autoCalc();
@@ -525,6 +542,7 @@ function show(id) {
   window.scrollTo(0,0);
 }
 
+// 💡 AUTO-CALCULATOR 💡
 function autoCalc() {
   let amt = Number(document.getElementById('bcAmount').value) || 0;
   let inst = Number(document.getElementById('totalInst').value) || 0;
@@ -540,10 +558,9 @@ function buildMemberInputs() {
   let c = Number(document.getElementById('memberCount').value) || 0;
   if(c > 100) c = 100;
   let h = '';
+  // Removed auto owner addition. User explicitly inputs all members.
   for(let i=1; i<=c; i++) h += `<div class="mem-row"><span class="num">${i}</span><input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम" data-en="Member ${i} Name" placeholder="${t('सदस्य '+i+' का नाम', 'Member '+i+' Name')}"></div>`;
   document.getElementById('memberInputs').innerHTML = h;
-  document.getElementById('totalInst').value = c;
-  autoCalc(); 
 }
 
 async function createBC() {
@@ -559,15 +576,12 @@ async function createBC() {
   
   const inps = document.querySelectorAll('.mem-name');
   let members = [];
+  // ✅ FIXED: Only inputs from the member list are added. No auto owner push.
   inps.forEach(i => { if(i.value.trim()) members.push({ name: i.value.trim(), paidRounds: 0, hasWon: false }); }); 
   
   if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert(t('कृपया सभी जानकारी भरें!', 'Please fill all details!'));
   if(!ownerName || ownerPhone.length !== 10) return appAlert(t('कृपया मालिक का नाम और 10 अंकों का सही मोबाइल नंबर दर्ज़ करें!', 'Enter valid Owner Name & 10-digit Phone!'));
   
-  if(!members.some(m => m.name.toLowerCase() === ownerName.toLowerCase())) {
-      members.unshift({ name: ownerName, paidRounds: 0, hasWon: false }); 
-  }
-
   const code = genCode();
   
   const bcData = { 
@@ -638,6 +652,35 @@ async function saveBCState() {
    } catch(e) { appAlert(t("सेव करने में त्रुटि।", "Error saving data.")); }
 }
 
+// 💡 ADMIN EDIT LOGIC 💡
+function openEditModal() {
+    if(!currentBCData) return;
+    document.getElementById('editAmt').value = currentBCData.amount;
+    document.getElementById('editInst').value = currentBCData.totalInst || currentBCData.members.length;
+    document.getElementById('editPool').value = currentBCData.totalPool || (currentBCData.amount * currentBCData.members.length);
+    document.getElementById('editModal').classList.remove('hidden');
+}
+
+function editAutoCalc() {
+    let a = Number(document.getElementById('editAmt').value) || 0;
+    let i = Number(document.getElementById('editInst').value) || 0;
+    document.getElementById('editPool').value = a * i;
+}
+
+async function saveEdit() {
+    let a = Number(document.getElementById('editAmt').value);
+    let i = Number(document.getElementById('editInst').value);
+    let p = Number(document.getElementById('editPool').value);
+    if(a <= 0 || i <= 0 || p <= 0) return appAlert(t('सही जानकारी भरें', 'Enter valid details'));
+    
+    currentBCData.amount = a;
+    currentBCData.totalInst = i;
+    currentBCData.totalPool = p;
+    document.getElementById('editModal').classList.add('hidden');
+    document.getElementById('walletBlock').innerHTML = `<div class='empty-state' style='color:white;'>${t('सेव हो रहा है...', 'Saving...')}</div>`;
+    await saveBCState();
+}
+
 async function loadDash() {
   const code = load(KEYS.current, null);
   const currentUser = load(KEYS.session, {});
@@ -665,8 +708,14 @@ async function loadDash() {
     const isOwner = (String(bc.ownerPhone) === String(currentUser.phone)) || (String(currentUser.phone) === ADMIN_PHONE);
     document.getElementById('memberCard').classList.remove('hidden');
 
-    if(isOwner){ document.getElementById('nextRoundBtn').classList.remove('hidden'); } 
-    else { document.getElementById('nextRoundBtn').classList.add('hidden'); }
+    if(isOwner){ 
+        document.getElementById('nextRoundBtn').classList.remove('hidden'); 
+        document.getElementById('editBtn').classList.remove('hidden'); 
+    } 
+    else { 
+        document.getElementById('nextRoundBtn').classList.add('hidden'); 
+        document.getElementById('editBtn').classList.add('hidden'); 
+    }
 
     let startD = new Date(bc.startDate);
     let endD = new Date(startD);
@@ -730,7 +779,6 @@ async function loadDash() {
       let leftEMIs = totalInstalls - m.paidRounds;
       if (leftEMIs < 0) leftEMIs = 0;
 
-      // 🌟 LIVE STATUS TRACKER 🌟
       let confirmationTracker = `
         <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
            <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा हो गई | <b>${leftEMIs}</b> किश्त बाकी</span>
@@ -754,13 +802,19 @@ async function loadDash() {
       if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${m.name}')" title="${t('विजेता बनाएं', 'Set Winner')}">🏆</button>`;
       else if(m.hasWon) winBtn = `<div style="font-size:24px;" title="Winner">🎉</div>`;
 
+      // EDIT MEMBER NAME LOGIC
+      let nameDisplay = `<b>${m.name}</b>`;
+      if(isOwner) {
+          nameDisplay = `<input type="text" value="${m.name}" style="font-weight:800; font-size:15px; border:none; background:transparent; padding:0; margin:0; width:120px;" onchange="editMemberName('${m.name}', this.value)" title="${t('नाम बदलने के लिए यहाँ क्लिक करें','Click to edit name')}">`;
+      }
+
       return `
       <div class="member">
         <div class="member-top" style="margin-bottom:0;">
            <div class="mem-info">
              <div class="mem-num">${i+1}</div>
              <div>
-                <b>${m.name}</b>
+                ${nameDisplay}
                 <div style="font-size:11px; color:var(--muted); font-weight:600; margin-top:2px;">${t('जमा', 'Paid')}: ₹${totalPaidByMem.toLocaleString('en-IN')}</div>
              </div>
            </div>
@@ -778,6 +832,15 @@ async function loadDash() {
     }).join('');
 
   } catch(e) { show('mylist'); }
+}
+
+async function editMemberName(oldName, newName) {
+    if(!newName.trim()) return;
+    let m = currentBCData.members.find(x => x.name === oldName);
+    if(m) {
+        m.name = newName.trim();
+        await saveBCState();
+    }
 }
 
 async function markPaidAdvance(memberName) {
@@ -847,4 +910,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+           </html>
