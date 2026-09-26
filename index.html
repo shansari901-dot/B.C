@@ -788,9 +788,6 @@ async function loadDash() {
       let leftEMIs = totalInstalls - m.paidRounds;
       if (leftEMIs < 0) leftEMIs = 0;
 
-      // 💡 SMART NAME MATCHING LOGIC 💡
-      let isMe = (currentUser.name && m.name.toLowerCase() === currentUser.name.toLowerCase());
-
       let confirmationTracker = `
         <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
            <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा हो गई | <b>${leftEMIs}</b> किश्त बाकी</span>
@@ -810,25 +807,22 @@ async function loadDash() {
           payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${m.name}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
       }
       
-      // 💡 NEW: PRIVATE UPI PAY BUTTON (Only shows to exact matched member)
+      // 💡 FIX: ALWAYS Show Pay or Clear to all members based on Due. 
+      // Removed the strict "isMe" check. If there's a Due, anyone in the app can see the Pay button. If Due is 0, anyone can see "Payment Clear".
       let payOnlineHtml = '';
       if(!isOwner && pendingDue > 0 && bc.upiId) {
-          if (isMe) { // Sirf usi aadmi ko dikhega jiska account hai
-              let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
-              let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
-              payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
-                  <a href="${upiLink}" style="background:var(--success); color:white; text-decoration:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3);">
-                      📱 ${btnText}
-                  </a>
-              </div>`;
-          }
+          let upiLink = `upi://pay?pa=${bc.upiId}&pn=${encodeURIComponent(bc.ownerName)}&am=${pendingDue}&cu=INR`;
+          let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
+          payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
+              <a href="${upiLink}" style="background:var(--success); color:white; text-decoration:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3);">
+                  📱 ${btnText}
+              </a>
+          </div>`;
       } else if (!isOwner && pendingDue === 0) {
-          if (isMe) { // Payment successful badge sirf usi aadmi ko badha dikhega
-              payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
-                  <span class="hi">✅ आपकी किश्त का भुगतान पूरा हुआ</span>
-                  <span class="en">✅ Your Payment Clear for this round</span>
-              </div>`;
-          }
+          payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
+              <span class="hi">✅ इस किश्त का भुगतान पूरा हुआ</span>
+              <span class="en">✅ Payment Clear for this round</span>
+          </div>`;
       }
 
       let winBtn = `<div class="win-btn-disabled">🏆</div>`;
