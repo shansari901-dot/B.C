@@ -101,10 +101,6 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 .wallet-amt { font-size: 38px; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 4px; color: #fef3c7; text-shadow: 0 2px 5px rgba(0,0,0,0.3);}
 .wallet-num { font-family: monospace; font-size: 16px; letter-spacing: 2px; opacity: 0.9; margin-bottom: 15px; color: #d1fae5;}
 .wallet-bot { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; opacity: 0.8; }
-.mc-circles { display: flex; }
-.mc-circles div { width: 24px; height: 24px; border-radius: 50%; }
-.mc-1 { background: #ef4444; position: relative; z-index: 2; }
-.mc-2 { background: #f59e0b; margin-left: -10px; opacity: 0.9; }
 
 /* DASHBOARD STATS */
 .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
@@ -120,10 +116,8 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 .mem-info { display: flex; align-items: center; gap: 14px; }
 .mem-num { width: 32px; height: 32px; background: var(--primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; box-shadow: 0 4px 8px rgba(6, 78, 59, 0.3);}
 .member b { font-size: 16px; color: var(--text); font-weight: 800; }
-.mem-stats { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; }
-.mem-stats .paid { color: var(--muted); }
-.mem-stats .due { color: var(--success); }
-.mem-stats .due.red { color: var(--danger); }
+.due { color: var(--success); }
+.due.red { color: var(--danger); }
 .pay-action { display: flex; justify-content: flex-end; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
 
 /* BOTTOM NAV */
@@ -150,7 +144,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 .bc-info b { display: block; font-size: 16px; color: var(--primary-dark); margin-bottom: 4px; font-weight:800;}
 .bc-info span { font-size: 12px; color: var(--muted); font-weight: 600; }
 
-/* MEMBERS INPUT ROW UPDATE */
+/* MEMBERS INPUT ROW */
 .mem-row { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 16px; background: #fff; margin-bottom: 12px; border: 1px solid var(--border); box-shadow: var(--shadow);}
 .mem-input-group { display: flex; align-items: center; gap: 12px; }
 .mem-input-group .num { width: 34px; height: 34px; border-radius: 50%; background: var(--primary-dark); color: white; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 8px rgba(6, 78, 59, 0.3);}
@@ -159,19 +153,32 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 
 /* MODALS */
 .modal-bg { position: fixed; inset: 0; background: rgba(2, 44, 34, 0.85); backdrop-filter: blur(8px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.modal-box { background: #fff; border-radius: 24px; padding: 30px 20px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
+.modal-box { background: #fff; border-radius: 24px; padding: 30px 20px; max-width: 350px; width: 100%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
 #winnerModal .modal-box { background: linear-gradient(180deg, #fffbeb, #fef3c7); border: 2px solid #fde68a; }
 .win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
 #winAmount { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 10px 24px; border-radius: 16px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(217, 119, 6, 0.4); border: 2px solid #fcd34d;}
 
 .win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2); transition: transform 0.2s;}
 .win-icon-btn:active { transform: scale(0.9);}
-#editModal .modal-box { padding: 24px; text-align: left; }
+
+/* 🤖 AI CHATBOT CSS 🤖 */
+.ai-fab { position: fixed; bottom: 85px; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(5,150,105,0.4); cursor: pointer; z-index: 90; transition: transform 0.2s; border: 2px solid #fff;}
+.ai-fab:active { transform: scale(0.9); }
+.chat-box { height: 260px; overflow-y: auto; background: #f8fafc; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); margin-bottom: 15px;}
+.msg-bubble { max-width: 85%; padding: 12px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; font-weight: 600;}
+.msg-ai { background: #e2e8f0; color: var(--primary-dark); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
+.msg-user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 2px 4px rgba(5,150,105,0.2);}
+.ai-options { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;}
+.ai-opt-btn { background: #fff; border: 1px solid var(--accent); color: var(--primary-dark); padding: 8px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(16,185,129,0.1);}
+.ai-opt-btn:active { background: var(--accent); color: #fff;}
 </style>
 </head>
 <body class="lang-hi">
 
 <div class="app-bg"></div>
+
+<!-- 🤖 AI FAB BUTTON 🤖 -->
+<div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
 <!-- GENERAL APP ALERT -->
 <div id="appModal" class="modal-bg hidden">
@@ -192,51 +199,55 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
   </div>
 </div>
 
-<!-- 💡 NEW: SMART DEMO MODAL 💡 -->
+<!-- 🤖 AI ASSISTANT MODAL 🤖 -->
+<div id="aiModal" class="modal-bg hidden">
+  <div class="modal-box" style="padding: 20px; text-align:left;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+       <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 AI Help Guide</h2>
+       <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
+    </div>
+    
+    <div class="chat-box" id="aiChat">
+       <div class="msg-bubble msg-ai">नमस्ते! मैं आपका AI असिस्टेंट हूँ। आप मुझसे ऐप की सिक्योरिटी और इस्तेमाल के बारे में सवाल पूछ सकते हैं। 👇</div>
+    </div>
+    
+    <div class="ai-options">
+       <button class="ai-opt-btn" onclick="askAI('🔒 क्या यह ऐप सुरक्षित है?')">🔒 क्या यह ऐप सुरक्षित है?</button>
+       <button class="ai-opt-btn" onclick="askAI('💳 ऑनलाइन पेमेंट कैसे करें?')">💳 ऑनलाइन पेमेंट कैसे करें?</button>
+       <button class="ai-opt-btn" onclick="askAI('☁️ डेटा खो गया तो क्या होगा?')">☁️ डेटा खो गया तो?</button>
+       <button class="ai-opt-btn" onclick="askAI('✅ ऐप का इस्तेमाल कैसे करें?')">✅ ऐप कैसे इस्तेमाल करें?</button>
+    </div>
+  </div>
+</div>
+
+<!-- SMART DEMO MODAL -->
 <div id="demoModal" class="modal-bg hidden">
-  <div class="modal-box" style="padding: 24px; max-width: 350px; text-align:left;">
+  <div class="modal-box" style="padding: 24px; text-align:left;">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
        <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">
            👀 <span class="hi">ऐप कैसे चलाएं?</span><span class="en">How App Works?</span>
        </h2>
        <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('demoModal').classList.add('hidden')">✖</div>
     </div>
-    
     <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
        <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">1️⃣ <span class="hi">कमेटी बनाएं</span><span class="en">Create Group</span></b>
-       <p style="font-size:12px; color:var(--muted); line-height:1.4;">
-           <span class="hi">संचालक 'नई कमेटी' में जाकर किश्त राशि, कुल किश्तें और सदस्यों के नंबर डालकर सेव करें।</span>
-           <span class="en">Admin creates a new group by entering amount, total installments and members' phone numbers.</span>
-       </p>
+       <p style="font-size:12px; color:var(--muted); line-height:1.4;"><span class="hi">संचालक 'नई कमेटी' में जाकर जानकारी और सदस्यों के नंबर डालकर सेव करें।</span></p>
     </div>
     <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
-    
     <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
        <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">2️⃣ <span class="hi">कोड शेयर करें</span><span class="en">Share Code</span></b>
-       <p style="font-size:12px; color:var(--muted); line-height:1.4;">
-           <span class="hi">कमेटी सेव होने के बाद एक 8 अंकों का Code मिलेगा, उसे सभी सदस्यों को WhatsApp पर भेजें।</span>
-           <span class="en">After saving, a unique 8-digit Code will be generated. Share it with members.</span>
-       </p>
+       <p style="font-size:12px; color:var(--muted); line-height:1.4;"><span class="hi">कमेटी सेव होने के बाद एक 8 अंकों का Code मिलेगा, उसे सदस्यों को WhatsApp पर भेजें।</span></p>
     </div>
     <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
-
     <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
        <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">3️⃣ <span class="hi">कोड डालकर जुड़ें</span><span class="en">Join via Code</span></b>
-       <p style="font-size:12px; color:var(--muted); line-height:1.4;">
-           <span class="hi">सभी सदस्य होम पेज पर वह Code डालकर कमेटी में प्रवेश करेंगे और अपना हिसाब देखेंगे।</span>
-           <span class="en">Members will enter that Code on the home screen to access their account.</span>
-       </p>
+       <p style="font-size:12px; color:var(--muted); line-height:1.4;"><span class="hi">सदस्य होम पेज पर वह Code डालकर कमेटी में प्रवेश करेंगे।</span></p>
     </div>
     <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
-
     <div style="margin-bottom:20px; background:#ecfdf5; padding:12px; border-radius:12px; border:1px solid #34d399;">
        <b style="color:#059669; font-size:14px; display:block; margin-bottom:4px;">4️⃣ <span class="hi">ऑनलाइन पेमेंट</span><span class="en">Online Payment</span></b>
-       <p style="font-size:12px; color:#064e3b; line-height:1.4; font-weight:600;">
-           <span class="hi">सदस्यों को उनके नाम के नीचे '📱 Pay' का बटन दिखेगा। क्लिक करके सीधे UPI से पेमेंट करें!</span>
-           <span class="en">Members will see a '📱 Pay' button below their name to pay dues directly via UPI!</span>
-       </p>
+       <p style="font-size:12px; color:#064e3b; line-height:1.4; font-weight:600;"><span class="hi">सदस्यों को उनके नाम के नीचे '📱 Pay' बटन दिखेगा। क्लिक करके सीधे UPI से पेमेंट करें!</span></p>
     </div>
-    
     <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('hidden')"><span class="hi">✅ समझ गया</span><span class="en">✅ Got it</span></button>
   </div>
 </div>
@@ -351,7 +362,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
       <button class="btn btn-secondary" style="border-radius: 16px;" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter Group</span></button>
     </div>
 
-    <!-- 💡 NEW DEMO BUTTON 💡 -->
+    <!-- DEMO BUTTON -->
     <div style="text-align:center; margin-top: 10px;">
        <button style="background:#e2e8f0; color:var(--primary-dark); font-weight:800; border-radius:50px; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.05); padding: 12px 24px; font-size:13px; cursor:pointer;" onclick="document.getElementById('demoModal').classList.remove('hidden')">
            👀 <span class="hi">ऐप कैसे काम करता है? (Demo)</span><span class="en">How app works? (Demo)</span>
@@ -444,8 +455,10 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding: 0 4px;">
          <h2 style="margin:0; font-size: 18px; font-weight: 800; color:white;"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
          <div style="display:flex; gap:8px;">
-           <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:white; color:var(--primary-dark); font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
-           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><span class="hi">+ अगली किश्त</span><span class="en">+ Next Round</span></button>
+           <!-- 💡 NEW EXCEL DOWNLOAD BUTTON 💡 -->
+           <button id="excelBtn" class="btn btn-sm hidden" onclick="downloadExcel()" style="background:#059669; color:white; font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">📊 Excel</button>
+           <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:white; color:var(--primary-dark); font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">📝</button>
+           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">+ <span class="hi">अगली किश्त</span><span class="en">Next</span></button>
          </div>
       </div>
       <div id="members"></div>
@@ -554,6 +567,71 @@ function copyToClipboard(text) {
         document.body.removeChild(tempInput);
         appAlert(t("✅ UPI ID कॉपी हो गई: \n\n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n\n" + text + "\n\nNow open your PhonePe or GPay to pay."));
     }
+}
+
+// 🤖 NEW: AI CHATBOT LOGIC 🤖
+function askAI(question) {
+    const chat = document.getElementById('aiChat');
+    // Add user question
+    chat.innerHTML += `<div class="msg-bubble msg-user">${question}</div>`;
+    chat.scrollTop = chat.scrollHeight;
+    
+    // Disable buttons temporarily
+    document.querySelectorAll('.ai-opt-btn').forEach(b => b.disabled = true);
+    
+    setTimeout(() => {
+        let ans = "";
+        if(question.includes('सुरक्षित')) {
+            ans = "✅ जी हाँ, यह 100% सुरक्षित है। आपका सारा डेटा Cloudflare के सुरक्षित सर्वर पर (Encrypted) रूप में सेव होता है। कोई भी बाहरी व्यक्ति इसे नहीं देख सकता।";
+        } else if(question.includes('पेमेंट')) {
+            ans = "💳 जब आपकी किश्त बाकी होगी, तो आपके नाम के नीचे '📱 Pay' का बटन दिखेगा। आप उसे दबाकर या दी गई UPI ID को कॉपी करके सीधे PhonePe/GPay से पेमेंट कर सकते हैं।";
+        } else if(question.includes('डेटा')) {
+            ans = "☁️ आपका डेटा AppCreator24 में नहीं, बल्कि हमारे क्लाउड सर्वर पर रहता है। अगर ऐप डिलीट भी हो जाए, तो दोबारा लॉगिन करने पर आपका सारा हिसाब वैसा ही मिल जाएगा। आप चाहें तो 'Excel' बटन से सारा हिसाब फ़ोन में भी डाउनलोड कर सकते हैं।";
+        } else if(question.includes('इस्तेमाल')) {
+            ans = "✅ 1. संचालक 'नई कमेटी' बनाएं। <br>2. 8 अंकों का कोड सबको भेजें। <br>3. मेंबर होम पेज पर कोड डालकर जुड़ें। <br>4. ऑनलाइन पेमेंट करें और हिसाब लाइव देखें!";
+        } else {
+            ans = "मैं एक AI हूँ, कृपया नीचे दिए गए विकल्पों में से ही सवाल चुनें।";
+        }
+        
+        chat.innerHTML += `<div class="msg-bubble msg-ai">${ans}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+        document.querySelectorAll('.ai-opt-btn').forEach(b => b.disabled = false);
+    }, 800);
+}
+
+// 📊 NEW: EXCEL DOWNLOAD LOGIC 📊
+function downloadExcel() {
+    if(!currentBCData) return;
+    let csv = "\uFEFF"; // BOM for UTF-8 Excel support
+    csv += "कमेटी का नाम:," + currentBCData.name + "\n";
+    csv += "कोड:," + currentBCData.code + "\n";
+    csv += "मालिक:," + currentBCData.ownerName + "\n\n";
+    
+    csv += "सीरियल न.,मेंबर का नाम,मोबाइल नंबर,जमा किश्तें,जमा राशि (Rs),बाकी राशि (Rs),स्थिति\n";
+    
+    let totalInstalls = Number(currentBCData.totalInst) || currentBCData.members.length;
+    
+    currentBCData.members.forEach((m, index) => {
+        let paidAmt = (m.paidRounds || 0) * currentBCData.amount;
+        let targetPaid = currentBCData.currentRound * currentBCData.amount;
+        let dueAmt = targetPaid - paidAmt;
+        if(dueAmt < 0) dueAmt = 0;
+        
+        let status = m.hasWon ? "कमेटी खुल गई" : (dueAmt === 0 ? "क्लियर" : "बाकी है");
+        
+        csv += `${index + 1},${m.name},${m.phone || 'N/A'},${m.paidRounds},${paidAmt},${dueAmt},${status}\n`;
+    });
+    
+    let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    let link = document.createElement("a");
+    let url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", currentBCData.name + "_Data.csv");
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    appAlert(t("✅ डेटा Excel में डाउनलोड हो गया है!", "✅ Data Downloaded to Excel!"));
 }
 
 function switchAuth(mode) {
@@ -843,10 +921,12 @@ async function loadDash() {
     if(isOwner){ 
         document.getElementById('nextRoundBtn').classList.remove('hidden'); 
         document.getElementById('editBtn').classList.remove('hidden'); 
+        document.getElementById('excelBtn').classList.remove('hidden'); // Show Excel to Admin
     } 
     else { 
         document.getElementById('nextRoundBtn').classList.add('hidden'); 
         document.getElementById('editBtn').classList.add('hidden'); 
+        document.getElementById('excelBtn').classList.add('hidden'); // Hide Excel from User
     }
 
     let startD = new Date(bc.startDate);
@@ -1096,4 +1176,4 @@ window.onload = () => {
 };
 </script>
 </body>
-  </html>
+                         </html>
