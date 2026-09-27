@@ -29,7 +29,8 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
-body { background: #f1f5f9; color: var(--text); min-height: 100vh; padding-bottom: 90px; }
+/* 💡 FIXED SCROLL PADDING */
+body { background: #f1f5f9; color: var(--text); min-height: 100vh; padding-bottom: 120px; overflow-x: hidden; }
 
 /* 🌐 LANGUAGE TOGGLE LOGIC */
 body.lang-hi .en { display: none !important; }
@@ -45,7 +46,7 @@ body.lang-en .hi { display: none !important; }
   z-index: 0; pointer-events: none;
 }
 
-/* TOP BAR */
+/* TOP BAR WITH BACK ARROW */
 .topbar { display: flex; justify-content: space-between; align-items: center; padding: 25px 20px 20px; position: relative; z-index: 10; color: white; }
 .topbar-text { display: flex; align-items: center; gap: 10px; }
 .topbar-icon { background: #ecfdf5; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #34d399;}
@@ -53,6 +54,10 @@ body.lang-en .hi { display: none !important; }
 .topbar-text p { font-size: 11px; opacity: 0.9; margin-top: 2px; font-weight: 600; color: #a7f3d0;}
 .topbar-share { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; backdrop-filter: blur(5px); transition: background 0.2s;}
 .topbar-share:active { background: rgba(255,255,255,0.3); }
+
+/* 🔙 BACK ARROW STYLING */
+#backArrow { font-size: 26px; margin-right: 12px; cursor: pointer; padding-right: 12px; border-right: 1px solid rgba(255,255,255,0.2); font-weight: bold; transition: transform 0.2s;}
+#backArrow:active { transform: scale(0.9); }
 
 main { max-width: 480px; margin: 10px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; }
 
@@ -120,8 +125,23 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 .due.red { color: var(--danger); }
 .pay-action { display: flex; justify-content: flex-end; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
 
-/* BOTTOM NAV */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 12px 0 calc(12px + env(safe-area-inset-bottom)); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.08); border-top: 1px solid var(--border);}
+/* 🚀 FIX: BOTTOM NAV SCROLL ISSUE */
+.bottom-nav { 
+  position: fixed !important; 
+  bottom: 0 !important; 
+  left: 0; 
+  right: 0; 
+  background: #fff; 
+  border-top-left-radius: 24px; 
+  border-top-right-radius: 24px; 
+  display: flex; 
+  justify-content: space-around; 
+  padding: 12px 0 calc(12px + env(safe-area-inset-bottom)); 
+  z-index: 9999 !important; /* Forces it to stay on top */
+  box-shadow: 0 -10px 25px rgba(0,0,0,0.08); 
+  border-top: 1px solid var(--border);
+  transform: translateZ(0); /* Hardware Acceleration to stop glitching */
+}
 .bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .bottom-nav button .ico { font-size: 22px; transition: all 0.2s; filter: grayscale(1); opacity:0.6;}
 .bottom-nav button.active { color: var(--primary); }
@@ -134,7 +154,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 
 .hidden { display: none !important; }
 
-/* LIST ITEMS */
+/* LIST ITEMS MATCHING IMAGE */
 .bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 16px; margin-bottom: 12px; background: #fff; box-shadow: var(--shadow); cursor: pointer; border: 1px solid var(--border);}
 .bc-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 14px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);}
 .bc-color-1 { background: linear-gradient(135deg, #a7f3d0, #34d399); color: #064e3b; }
@@ -144,7 +164,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 .bc-info b { display: block; font-size: 16px; color: var(--primary-dark); margin-bottom: 4px; font-weight:800;}
 .bc-info span { font-size: 12px; color: var(--muted); font-weight: 600; }
 
-/* MEMBERS INPUT ROW */
+/* MEMBERS INPUT ROW UPDATE */
 .mem-row { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 16px; background: #fff; margin-bottom: 12px; border: 1px solid var(--border); box-shadow: var(--shadow);}
 .mem-input-group { display: flex; align-items: center; gap: 12px; }
 .mem-input-group .num { width: 34px; height: 34px; border-radius: 50%; background: var(--primary-dark); color: white; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 8px rgba(6, 78, 59, 0.3);}
@@ -152,7 +172,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 .mem-input-group input:focus { border-color: var(--accent); outline: none; background: #fff;}
 
 /* MODALS */
-.modal-bg { position: fixed; inset: 0; background: rgba(2, 44, 34, 0.85); backdrop-filter: blur(8px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal-bg { position: fixed; inset: 0; background: rgba(2, 44, 34, 0.85); backdrop-filter: blur(8px); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .modal-box { background: #fff; border-radius: 24px; padding: 30px 20px; max-width: 350px; width: 100%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
 #winnerModal .modal-box { background: linear-gradient(180deg, #fffbeb, #fef3c7); border: 2px solid #fde68a; }
 .win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
@@ -161,8 +181,26 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 .win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2); transition: transform 0.2s;}
 .win-icon-btn:active { transform: scale(0.9);}
 
-/* AI CHATBOT CSS */
-.ai-fab { position: fixed; bottom: 85px; right: 20px; width: 56px; height: 56px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 4px 15px rgba(5,150,105,0.4); cursor: pointer; z-index: 90; transition: transform 0.2s; border: 2px solid #fff;}
+/* 🚀 FIX: AI CHATBOT MOVED UP HIGHER */
+.ai-fab { 
+   position: fixed !important; 
+   bottom: 110px !important; /* Moved Up from 85px */
+   right: 20px; 
+   width: 56px; 
+   height: 56px; 
+   background: linear-gradient(135deg, #10b981, #059669); 
+   border-radius: 50%; 
+   display: flex; 
+   align-items: center; 
+   justify-content: center; 
+   font-size: 28px; 
+   color: white; 
+   box-shadow: 0 4px 15px rgba(5,150,105,0.4); 
+   cursor: pointer; 
+   z-index: 9990; 
+   transition: transform 0.2s; 
+   border: 2px solid #fff;
+}
 .ai-fab:active { transform: scale(0.9); }
 .chat-box { height: 260px; overflow-y: auto; background: #f8fafc; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); margin-bottom: 15px;}
 .msg-bubble { max-width: 85%; padding: 12px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; font-weight: 600;}
@@ -177,7 +215,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
 
 <div class="app-bg"></div>
 
-<!-- 🤖 AI FAB BUTTON 🤖 -->
+<!-- 🤖 AI FAB BUTTON (MOVED HIGHER) 🤖 -->
 <div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
 <!-- GENERAL APP ALERT -->
@@ -284,8 +322,10 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
   </div>
 </div>
 
+<!-- 🚀 NEW: TOP BAR WITH DYNAMIC BACK ARROW 🚀 -->
 <div class="topbar">
   <div class="topbar-text">
+    <div id="backArrow" style="display:none;" onclick="goBack()">←</div>
     <div class="topbar-icon"><span style="font-size: 24px;">🌿</span></div>
     <div>
        <h1><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h1>
@@ -451,7 +491,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
   <section id="dashboard" class="hidden">
     <div id="walletBlock"></div>
     
-    <!-- 💡 PROMINENT EXCEL DOWNLOAD CARD (ALWAYS VISIBLE TO OWNER/ADMIN) 💡 -->
+    <!-- PROMINENT EXCEL DOWNLOAD CARD (ALWAYS VISIBLE TO OWNER/ADMIN) -->
     <div id="excelCardBlock" class="card cream-card hidden" style="margin-bottom: 20px; text-align:center; padding: 18px;">
        <h3 style="color: var(--primary-dark); font-size: 15px; font-weight: 800; margin-bottom: 8px;">
           📊 <span class="hi">कमेटी का पक्का हिसाब (Excel File)</span><span class="en">Group Backup (Excel File)</span>
@@ -470,7 +510,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
          <h2 style="margin:0; font-size: 18px; font-weight: 800; color:white;"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
          <div style="display:flex; gap:8px;">
            <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:white; color:var(--primary-dark); font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
-           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">+ <span class="hi">अगली किश्त</span><span class="en">Next</span></button>
+           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">+ <span class="hi">अगली किश्त</span><span class="en">+ Next Round</span></button>
          </div>
       </div>
       <div id="members"></div>
@@ -484,7 +524,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
       <div class="msg ok" style="margin-bottom: 0; background: #fff; border:none; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">✓ Admin ID Verified</div>
     </div>
 
-    <!-- 💡 ADMIN MASTER EXCEL BACKUP TOOL 💡 -->
+    <!-- ADMIN MASTER EXCEL BACKUP TOOL -->
     <div class="card cream-card" style="border-left: 4px solid var(--accent);">
       <h2 style="color: var(--primary-dark);">📊 Master Excel Backup</h2>
       <p style="margin-bottom: 12px; font-size: 12px; font-weight: 700; color: var(--muted);"><span class="hi">किसी भी कमेटी का Code डालकर तुरंत उसकी Excel फाइल डाउनलोड करें:</span><span class="en">Enter Code to download any group Excel sheet:</span></p>
@@ -517,10 +557,10 @@ const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr';
 const KEYS = { session: 'kk_session', joined: 'kk_joined', current: 'kk_current' };
 let currentBCData = null; 
 let currentLang = localStorage.getItem('kk_lang') || 'hi';
+let navHistory = []; // 💡 NAVIGATION HISTORY ARRAY
 
 function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
 
-// 💡 10-DIGIT PHONE CLEANER HELPER
 function cleanPhone(p) {
     if(!p) return "";
     return String(p).replace(/\D/g, '').slice(-10);
@@ -757,10 +797,25 @@ function enterApp() {
 
 function appLogout() { localStorage.removeItem(KEYS.session); localStorage.removeItem('kk_last_tab'); location.reload(); }
 
-function show(id) {
+// 💡 NEW NAVIGATION LOGIC WITH BACK ARROW 💡
+function show(id, isBack = false) {
   document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
   
+  if(!isBack) {
+      if(navHistory.length === 0 || navHistory[navHistory.length - 1] !== id) {
+          navHistory.push(id);
+      }
+  }
+
+  // Handle Back Arrow Visibility
+  if(id === 'home' || id === 'auth') {
+      document.getElementById('backArrow').style.display = 'none';
+      navHistory = [id]; // Reset history when returning to home root
+  } else {
+      document.getElementById('backArrow').style.display = 'block';
+  }
+
   if(id === 'profile') document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
   if(id === 'create') {
       const s = load(KEYS.session, {});
@@ -774,6 +829,17 @@ function show(id) {
   if(id === 'dashboard') loadDash();
   if(id === 'mylist') renderMyList();
   window.scrollTo(0,0);
+}
+
+// 💡 GO BACK FUNCTION 💡
+function goBack() {
+    if(navHistory.length > 1) {
+        navHistory.pop(); // remove current page
+        let prevPage = navHistory[navHistory.length - 1];
+        show(prevPage, true);
+    } else {
+        show('home');
+    }
 }
 
 function autoCalc() {
@@ -974,14 +1040,13 @@ async function loadDash() {
         if(m.hasWon === undefined) m.hasWon = false;
     });
 
-    // 💡 100% RELIABLE OWNER CHECK (CLEAN 10 DIGITS)
     const isOwner = (cleanPhone(bc.ownerPhone) === cleanPhone(currentUser.phone)) || (cleanPhone(currentUser.phone) === cleanPhone(ADMIN_PHONE));
     document.getElementById('memberCard').classList.remove('hidden');
 
     if(isOwner){ 
         document.getElementById('nextRoundBtn').classList.remove('hidden'); 
         document.getElementById('editBtn').classList.remove('hidden'); 
-        document.getElementById('excelCardBlock').classList.remove('hidden'); // Show prominent Excel Card
+        document.getElementById('excelCardBlock').classList.remove('hidden'); 
     } 
     else { 
         document.getElementById('nextRoundBtn').classList.add('hidden'); 
@@ -1236,4 +1301,4 @@ window.onload = () => {
 };
 </script>
 </body>
-          </html>
+                                                                                                                                                            </html>
