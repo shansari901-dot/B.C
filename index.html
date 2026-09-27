@@ -192,6 +192,55 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
   </div>
 </div>
 
+<!-- 💡 NEW: SMART DEMO MODAL 💡 -->
+<div id="demoModal" class="modal-bg hidden">
+  <div class="modal-box" style="padding: 24px; max-width: 350px; text-align:left;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+       <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">
+           👀 <span class="hi">ऐप कैसे चलाएं?</span><span class="en">How App Works?</span>
+       </h2>
+       <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('demoModal').classList.add('hidden')">✖</div>
+    </div>
+    
+    <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
+       <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">1️⃣ <span class="hi">कमेटी बनाएं</span><span class="en">Create Group</span></b>
+       <p style="font-size:12px; color:var(--muted); line-height:1.4;">
+           <span class="hi">संचालक 'नई कमेटी' में जाकर किश्त राशि, कुल किश्तें और सदस्यों के नंबर डालकर सेव करें।</span>
+           <span class="en">Admin creates a new group by entering amount, total installments and members' phone numbers.</span>
+       </p>
+    </div>
+    <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
+    
+    <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
+       <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">2️⃣ <span class="hi">कोड शेयर करें</span><span class="en">Share Code</span></b>
+       <p style="font-size:12px; color:var(--muted); line-height:1.4;">
+           <span class="hi">कमेटी सेव होने के बाद एक 8 अंकों का Code मिलेगा, उसे सभी सदस्यों को WhatsApp पर भेजें।</span>
+           <span class="en">After saving, a unique 8-digit Code will be generated. Share it with members.</span>
+       </p>
+    </div>
+    <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
+
+    <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
+       <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">3️⃣ <span class="hi">कोड डालकर जुड़ें</span><span class="en">Join via Code</span></b>
+       <p style="font-size:12px; color:var(--muted); line-height:1.4;">
+           <span class="hi">सभी सदस्य होम पेज पर वह Code डालकर कमेटी में प्रवेश करेंगे और अपना हिसाब देखेंगे।</span>
+           <span class="en">Members will enter that Code on the home screen to access their account.</span>
+       </p>
+    </div>
+    <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
+
+    <div style="margin-bottom:20px; background:#ecfdf5; padding:12px; border-radius:12px; border:1px solid #34d399;">
+       <b style="color:#059669; font-size:14px; display:block; margin-bottom:4px;">4️⃣ <span class="hi">ऑनलाइन पेमेंट</span><span class="en">Online Payment</span></b>
+       <p style="font-size:12px; color:#064e3b; line-height:1.4; font-weight:600;">
+           <span class="hi">सदस्यों को उनके नाम के नीचे '📱 Pay' का बटन दिखेगा। क्लिक करके सीधे UPI से पेमेंट करें!</span>
+           <span class="en">Members will see a '📱 Pay' button below their name to pay dues directly via UPI!</span>
+       </p>
+    </div>
+    
+    <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('hidden')"><span class="hi">✅ समझ गया</span><span class="en">✅ Got it</span></button>
+  </div>
+</div>
+
 <!-- WINNER MODAL -->
 <div id="winnerModal" class="modal-bg hidden">
   <div class="modal-box">
@@ -302,56 +351,11 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shado
       <button class="btn btn-secondary" style="border-radius: 16px;" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter Group</span></button>
     </div>
 
-    <!-- 💡 DEMO CARD FOR EMPTY SPACE 💡 -->
-    <div class="card" style="background: linear-gradient(135deg, #f8fafc, #e2e8f0); border: 1px dashed #cbd5e1;">
-      <h2 style="font-size: 16px; color: var(--primary-dark); justify-content:center; margin-bottom:15px; opacity:0.8;">
-         <span class="hi">👀 ऐप का डेमो देखें</span>
-         <span class="en">👀 See App Demo</span>
-      </h2>
-
-      <div style="font-size:12px; font-weight:700; color:var(--primary-dark); margin-bottom:15px; text-align:center;">
-         1️⃣ <span class="hi">कमेटी बनाएं</span><span class="en">Create Group</span> 
-         <span style="color:var(--accent); margin:0 5px;">➔</span> 
-         2️⃣ <span class="hi">कोड शेयर करें</span><span class="en">Share Code</span>
-      </div>
-
-      <!-- Fake Member 1 (Clear) -->
-      <div style="background:#fff; padding:12px; border-radius:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 4px rgba(0,0,0,0.05); border: 1px solid var(--border);">
-         <div style="display:flex; align-items:center; gap:10px;">
-            <div style="width:28px; height:28px; background:var(--primary-dark); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;">1</div>
-            <div>
-               <b style="font-size:14px; color:var(--text);">Member 1</b>
-               <div style="font-size:11px; color:var(--muted); margin-top:2px;">Paid: ₹1,000</div>
-            </div>
-         </div>
-         <div style="text-align:right;">
-            <div style="font-size:10px; color:var(--muted); margin-bottom:2px;">Due: ₹0</div>
-            <div style="font-size:11px; color:var(--success); font-weight:800; background:#ecfdf5; padding:2px 6px; border-radius:4px; border:1px solid #a7f3d0;">✅ Clear</div>
-         </div>
-      </div>
-
-      <!-- Fake Member 2 (Pending/Pay) -->
-      <div style="background:#fff; padding:12px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 4px rgba(0,0,0,0.05); border: 1px solid var(--border);">
-         <div style="display:flex; align-items:center; gap:10px;">
-            <div style="width:28px; height:28px; background:var(--primary-dark); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;">2</div>
-            <div>
-               <b style="font-size:14px; color:var(--text);">Member 2</b>
-               <div style="font-size:11px; color:var(--muted); margin-top:2px;">Paid: ₹0</div>
-            </div>
-         </div>
-         <div style="display:flex; align-items:center; gap:8px;">
-            <div style="text-align:right;">
-               <div style="font-size:10px; color:var(--muted); margin-bottom:2px;">Due: ₹1,000</div>
-            </div>
-            <span style="color:var(--accent); font-weight:900;">➔</span>
-            <div style="background:var(--primary); color:white; font-size:11px; padding:6px 10px; border-radius:8px; font-weight:800; box-shadow:0 2px 5px rgba(5,150,105,0.3);">📱 Pay</div>
-         </div>
-      </div>
-
-      <p style="text-align:center; font-size:11px; color:var(--muted); margin-top:15px; font-weight:600;">
-         <span class="hi">💡 मेंबर अपना बकाया सीधे UPI से दे सकते हैं!</span>
-         <span class="en">💡 Members can pay dues directly via UPI!</span>
-      </p>
+    <!-- 💡 NEW DEMO BUTTON 💡 -->
+    <div style="text-align:center; margin-top: 10px;">
+       <button style="background:#e2e8f0; color:var(--primary-dark); font-weight:800; border-radius:50px; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.05); padding: 12px 24px; font-size:13px; cursor:pointer;" onclick="document.getElementById('demoModal').classList.remove('hidden')">
+           👀 <span class="hi">ऐप कैसे काम करता है? (Demo)</span><span class="en">How app works? (Demo)</span>
+       </button>
     </div>
   </section>
 
@@ -1092,4 +1096,4 @@ window.onload = () => {
 };
 </script>
 </body>
-                           </html>
+  </html>
