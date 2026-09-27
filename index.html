@@ -173,7 +173,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 <!-- GENERAL APP ALERT -->
 <div id="appModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 24px; text-align:center;">
-    <p id="modalText" style="font-weight: 700; margin-bottom: 20px; color: #1e293b;"></p>
+    <p id="modalText" style="font-weight: 700; margin-bottom: 20px; color: #1e293b; white-space: pre-wrap;"></p>
     <div id="modalBtns"><button class="btn btn-primary" onclick="document.getElementById('appModal').classList.add('hidden')">OK</button></div>
   </div>
 </div>
@@ -454,7 +454,6 @@ function applyLang() {
 function load(key, def) { try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; } }
 function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 
-// 💡 STANDARD ALERT MODAL
 function appAlert(text) {
   return new Promise(res => {
     const m = document.getElementById('appModal');
@@ -464,7 +463,6 @@ function appAlert(text) {
   });
 }
 
-// 💡 NEW: CUSTOM CONFIRM MODAL
 function appConfirm(text) {
   return new Promise(res => {
     const m = document.getElementById('confirmModal');
@@ -482,6 +480,23 @@ async function shareApp() {
   const shareData = { title: t('कमेटी खाता', 'Group Khata'), text: t('💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप अभी डाउनलोड करें:\n\n', '💰 *Group Khata App*\n\nKeep your group records secure. Download app now:\n\n') + APP_LINK };
   try { if (navigator.share) { await navigator.share(shareData); } else { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); } } 
   catch (err) { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
+}
+
+// 💡 NEW: 100% FAIL-PROOF COPY UPI ID FUNCTION 💡
+function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            appAlert(t("✅ UPI ID कॉपी हो गई: \n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n" + text + "\n\nNow open your PhonePe or GPay to pay."));
+        });
+    } else {
+        let tempInput = document.createElement("input");
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        appAlert(t("✅ UPI ID कॉपी हो गई: \n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n" + text + "\n\nNow open your PhonePe or GPay to pay."));
+    }
 }
 
 function switchAuth(mode) {
@@ -843,6 +858,12 @@ async function loadDash() {
       if (leftEMIs < 0) leftEMIs = 0;
 
       let isMe = (m.phone && m.phone === currentUser.phone);
+      if(!m.phone && currentUser.name) {
+         let cN = currentUser.name.toLowerCase().trim();
+         let mN = m.name.toLowerCase().trim();
+         isMe = (cN === mN || mN.includes(cN) || cN.includes(mN));
+      }
+      
       let uniqueId = m.phone || m.name; 
 
       let confirmationTracker = `
@@ -864,22 +885,21 @@ async function loadDash() {
           payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${uniqueId}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
       }
       
+      // 💡 FIX: COPY UPI ID UI FOR MEMBERS 💡
       let payOnlineHtml = '';
       if (!isOwner) { 
           if (pendingDue > 0 && bc.upiId) {
               if (isMe) { 
-                  let btnText = t(`₹${pendingDue.toLocaleString('en-IN')} UPI से जमा करें`, `Pay ₹${pendingDue.toLocaleString('en-IN')} via UPI`);
-                  
-                  // 💡 FIX: DIRECT A TAG FOR UPI (100% WebView Compatible)
-                  let cleanUpi = bc.upiId.trim().replace(/\s/g, '');
-                  let cleanName = bc.ownerName.replace(/[^a-zA-Z0-9 ]/g, '').trim() || 'Committee';
-                  let formatAmt = Number(pendingDue).toFixed(2);
-                  let upiLink = `upi://pay?pa=${cleanUpi}&pn=${encodeURIComponent(cleanName)}&am=${formatAmt}&cu=INR`;
-
-                  payOnlineHtml = `<div class="pay-action" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border);">
-                      <a href="${upiLink}" style="background:var(--success); color:white; text-decoration:none; display:flex; align-items:center; justify-content:center; padding:12px 16px; border-radius:12px; width:100%; font-weight:800; box-shadow:0 4px 10px rgba(5,150,105,0.3); font-size:14px;">
-                          📱 ${btnText}
-                      </a>
+                  payOnlineHtml = `
+                  <div style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); text-align:center;">
+                      <p style="font-size:12px; color:var(--muted); margin-bottom:8px; font-weight:700;">
+                          <span class="hi">ऑनलाइन पेमेंट के लिए नीचे दी गई UPI ID कॉपी करें:</span>
+                          <span class="en">Copy the UPI ID below for online payment:</span>
+                      </p>
+                      <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                          <code style="background:#e2e8f0; padding:8px 12px; border-radius:8px; font-size:14px; font-weight:800; color:var(--primary-dark); user-select:all;">${bc.upiId}</code>
+                          <button onclick="copyToClipboard('${bc.upiId}')" style="background:var(--accent); color:white; border:none; padding:8px 12px; border-radius:8px; font-weight:800; cursor:pointer; box-shadow:0 2px 5px rgba(59,130,246,0.3);">📋 Copy</button>
+                      </div>
                   </div>`;
               }
           } else if (pendingDue === 0) {
