@@ -5,25 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>कमेटी खाता - Group Khata</title>
 <meta name="description" content="आपकी कमेटी • आपका हिसाब • सुरक्षित ऑनलाइन">
-<meta name="theme-color" content="#1e3a8a">
+<meta name="theme-color" content="#064e3b">
 <style>
-/* 🌟 PREMIUM APP THEME - MATCHING THE DESIGN */
+/* 🌿 PREMIUM GREEN/TEAL THEME - MATCHING THE DESIGN */
 :root { 
-  --primary: #4f46e5;      
-  --primary-dark: #1e3a8a; 
-  --accent: #3b82f6;       
-  --bg-top: #0f172a;       
-  --bg-mid: #1e40af;       
-  --bg-bottom: #10b981;    
+  --primary: #059669;      /* Emerald 600 */
+  --primary-dark: #064e3b; /* Emerald 900 */
+  --accent: #10b981;       /* Emerald 500 */
+  --bg-top: #022c22;       /* Very Dark Green */
+  --bg-mid: #064e3b;       /* Dark Green */
+  --bg-bottom: #ecfdf5;    /* Very Light Green */
   --card: #ffffff; 
+  --card-cream: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%); /* Pale yellow to white */
   --input-bg: #f8fafc; 
-  --text: #1e293b; 
-  --muted: #64748b; 
+  --text: #0f172a; 
+  --muted: #475569; 
   --border: #e2e8f0; 
   --success: #059669; 
   --danger: #e11d48; 
-  --radius: 24px; 
-  --shadow: 0 10px 30px rgba(0,0,0,0.08); 
+  --radius: 20px; 
+  --shadow: 0 10px 25px rgba(0,0,0,0.06); 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -34,72 +35,71 @@ body { background: #f1f5f9; color: var(--text); min-height: 100vh; padding-botto
 body.lang-hi .en { display: none !important; }
 body.lang-en .hi { display: none !important; }
 
-/* 🎨 DYNAMIC APP BACKGROUND */
+/* 🎨 DYNAMIC NATURE APP BACKGROUND */
 .app-bg {
-  position: fixed; top: 0; left: 0; right: 0; height: 350px;
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 60%, var(--accent) 100%);
-  border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+  position: fixed; top: 0; left: 0; right: 0; height: 100vh;
+  background-color: #f1f5f9;
+  background-image: 
+    radial-gradient(ellipse at 50% 100%, #d1fae5 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 25%, transparent 45%);
   z-index: 0; pointer-events: none;
-}
-.app-bg::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
-  background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.4) 100%);
-  border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
 }
 
 /* TOP BAR */
 .topbar { display: flex; justify-content: space-between; align-items: center; padding: 25px 20px 20px; position: relative; z-index: 10; color: white; }
 .topbar-text { display: flex; align-items: center; gap: 10px; }
-.topbar-icon { background: white; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-.topbar-text h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-.topbar-text p { font-size: 11px; opacity: 0.9; margin-top: 2px; font-weight: 600; }
-.topbar-share { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; backdrop-filter: blur(5px); }
+.topbar-icon { background: #ecfdf5; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #34d399;}
+.topbar-text h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.topbar-text p { font-size: 11px; opacity: 0.9; margin-top: 2px; font-weight: 600; color: #a7f3d0;}
+.topbar-share { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; backdrop-filter: blur(5px); transition: background 0.2s;}
+.topbar-share:active { background: rgba(255,255,255,0.3); }
 
 main { max-width: 480px; margin: 10px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; }
 
 /* CARDS */
-.card { background: var(--card); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow); border: none; }
-.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+.card { background: var(--card); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.03); }
+.card.cream-card { background: var(--card-cream); border: 1px solid #fef3c7; }
+.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; color: var(--primary-dark); }
 
 /* INPUTS WITH ICONS */
 .field { margin-bottom: 16px; position: relative; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
 .input-wrap { position: relative; display: flex; align-items: center; }
-.input-ico { position: absolute; left: 16px; font-size: 18px; color: var(--muted); opacity: 0.7; }
-.input-wrap input, .input-wrap select { width: 100%; padding: 15px 16px 15px 45px; border-radius: 16px; border: 1px solid transparent; font-size: 14px; background: var(--input-bg); color: var(--text); font-weight: 600; transition: all 0.2s; }
-.input-wrap input:focus, .input-wrap select:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1); }
-input.no-ico, select.no-ico { padding-left: 16px; border: 1px solid var(--border); }
-input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
+.input-ico { position: absolute; left: 16px; font-size: 18px; color: var(--primary); opacity: 0.8; }
+.input-wrap input, .input-wrap select { width: 100%; padding: 15px 16px 15px 45px; border-radius: 14px; border: 1px solid var(--border); font-size: 14px; background: #fff; color: var(--text); font-weight: 600; transition: all 0.2s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+.input-wrap input:focus, .input-wrap select:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
+input.no-ico, select.no-ico { padding-left: 16px; border: 1px solid var(--border); border-radius: 12px;}
+input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); outline:none;}
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 /* BUTTONS */
-.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: transform 0.2s; text-align: center; }
+.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
 .btn:active { transform: scale(0.96); }
-.btn-primary { background: linear-gradient(90deg, #6366f1, #3b82f6); color: #fff; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); }
-.btn-secondary { background: var(--input-bg); color: var(--primary-dark); font-weight: 700; }
+.btn-primary { background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff; box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3); }
+.btn-secondary { background: var(--primary-dark); color: white; font-weight: 800; box-shadow: 0 4px 10px rgba(6, 78, 59, 0.2); }
 .btn-sm { padding: 8px 16px; font-size: 12px; width: auto; border-radius: 8px; }
 
 /* AUTH TABS */
-.tabs { display: flex; background: var(--input-bg); border-radius: 50px; padding: 6px; margin-bottom: 24px; }
+.tabs { display: flex; background: var(--input-bg); border-radius: 50px; padding: 6px; margin-bottom: 24px; border: 1px solid var(--border); }
 .tabs button { flex: 1; padding: 12px; border: none; border-radius: 50px; background: transparent; font-size: 14px; font-weight: 800; color: var(--muted); cursor: pointer; transition: all 0.3s; }
-.tabs button.active { background: #fff; color: var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.tabs button.active { background: var(--primary); color: #fff; box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); }
 
 /* ALERTS */
 .msg { padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 14px; text-align: center; font-weight: 700; }
-.msg.err { background: #fee2e2; color: #e11d48; }
-.msg.ok { background: #d1fae5; color: #059669; }
+.msg.err { background: #fee2e2; color: #e11d48; border: 1px solid #fecaca;}
+.msg.ok { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0;}
 
-/* 💳 PREMIUM WALLET CARD */
-.wallet-card { background: linear-gradient(135deg, #0284c7, #1e3a8a); color: white; padding: 25px; border-radius: 20px; box-shadow: 0 15px 30px rgba(30, 58, 138, 0.4); margin-bottom: 20px; position: relative; overflow: hidden; }
+/* 💳 PREMIUM WALLET CARD (DARK GREEN / GOLD) */
+.wallet-card { background: linear-gradient(135deg, #022c22, #064e3b); color: white; padding: 25px; border-radius: 20px; box-shadow: 0 15px 30px rgba(2, 44, 34, 0.5); margin-bottom: 20px; position: relative; overflow: hidden; border: 1px solid #0f766e;}
 .wallet-card::before { content: ''; position: absolute; right: -20px; top: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.05); border-radius: 50%; }
 .wallet-card::after { content: ''; position: absolute; right: 40px; top: -50px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%; }
 .wallet-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.w-chip { width: 40px; height: 30px; background: linear-gradient(135deg, #fcd34d, #f59e0b); border-radius: 6px; position: relative; overflow: hidden; }
-.w-chip::after { content: ''; position: absolute; top: 10px; left: 0; right: 0; height: 1px; background: rgba(0,0,0,0.2); box-shadow: 0 8px 0 rgba(0,0,0,0.2); }
-.w-wifi { font-size: 24px; transform: rotate(90deg); opacity: 0.8; }
-.wallet-title { font-size: 12px; font-weight: 600; opacity: 0.8; margin-bottom: 4px; text-transform: uppercase; }
-.wallet-amt { font-size: 36px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 4px; }
-.wallet-num { font-family: monospace; font-size: 16px; letter-spacing: 2px; opacity: 0.9; margin-bottom: 15px; }
+.w-chip { width: 45px; height: 32px; background: linear-gradient(135deg, #fde68a, #d97706); border-radius: 6px; position: relative; overflow: hidden; border: 1px solid #b45309;}
+.w-chip::after { content: ''; position: absolute; top: 12px; left: 0; right: 0; height: 1px; background: rgba(0,0,0,0.3); box-shadow: 0 8px 0 rgba(0,0,0,0.3); }
+.w-wifi { font-size: 24px; transform: rotate(90deg); opacity: 0.8; color: #fde68a;}
+.wallet-title { font-size: 12px; font-weight: 700; opacity: 0.9; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;}
+.wallet-amt { font-size: 38px; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 4px; color: #fef3c7; text-shadow: 0 2px 5px rgba(0,0,0,0.3);}
+.wallet-num { font-family: monospace; font-size: 16px; letter-spacing: 2px; opacity: 0.9; margin-bottom: 15px; color: #d1fae5;}
 .wallet-bot { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; opacity: 0.8; }
 .mc-circles { display: flex; }
 .mc-circles div { width: 24px; height: 24px; border-radius: 50%; }
@@ -108,18 +108,18 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 
 /* DASHBOARD STATS */
 .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-.stat { background: #fff; border-radius: 16px; padding: 16px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-.stat b { display: block; font-size: 18px; color: var(--primary-dark); font-weight: 800; }
-.stat span { font-size: 11px; color: var(--muted); font-weight: 700; margin-top: 4px; display: block; }
-.stat-pool { grid-column: span 2; background: #dcfce7; border: 1px solid #a7f3d0; }
-.stat-pool b { color: #065f46; font-size: 24px; }
+.stat { background: #fff; border-radius: 16px; padding: 16px; text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border);}
+.stat b { display: flex; flex-direction:column; align-items:center; font-size: 18px; color: var(--primary-dark); font-weight: 800; gap:4px; }
+.stat span { font-size: 11px; color: var(--muted); font-weight: 700; margin-top: 6px; display: block; }
+.stat-pool { grid-column: span 2; background: #ecfdf5; border: 1px solid #a7f3d0; }
+.stat-pool b { color: #059669; font-size: 24px; flex-direction: row; justify-content:center;}
 
 /* MEMBERS LIST */
-.member { display: flex; flex-direction: column; padding: 16px; background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); }
+.member { display: flex; flex-direction: column; padding: 18px; background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s;}
 .member-top { display: flex; justify-content: space-between; align-items: center; }
-.mem-info { display: flex; align-items: center; gap: 12px; }
-.mem-num { width: 28px; height: 28px; background: var(--primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
-.member b { font-size: 15px; color: var(--text); font-weight: 800; }
+.mem-info { display: flex; align-items: center; gap: 14px; }
+.mem-num { width: 32px; height: 32px; background: var(--primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; box-shadow: 0 4px 8px rgba(6, 78, 59, 0.3);}
+.member b { font-size: 16px; color: var(--text); font-weight: 800; }
 .mem-stats { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; }
 .mem-stats .paid { color: var(--muted); }
 .mem-stats .due { color: var(--success); }
@@ -127,42 +127,45 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 .pay-action { display: flex; justify-content: flex-end; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
 
 /* BOTTOM NAV */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 12px 0 calc(12px + env(safe-area-inset-bottom)); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.05); }
-.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 700; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.bottom-nav button .ico { font-size: 22px; transition: all 0.2s; }
-.bottom-nav button.active { color: var(--accent); }
-.bottom-nav button.active .ico { transform: translateY(-4px); }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-around; padding: 12px 0 calc(12px + env(safe-area-inset-bottom)); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.08); border-top: 1px solid var(--border);}
+.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.bottom-nav button .ico { font-size: 22px; transition: all 0.2s; filter: grayscale(1); opacity:0.6;}
+.bottom-nav button.active { color: var(--primary); }
+.bottom-nav button.active .ico { transform: translateY(-4px); filter: grayscale(0); opacity:1;}
 
 /* AUTO CALCULATOR BOX */
-.calc-box { background: #dcfce7; border-radius: 16px; padding: 16px; margin-top: 16px; border: 1px solid #a7f3d0; }
-.calc-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #065f46; margin-bottom: 8px; }
-.calc-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; color: #065f46; margin-top: 12px; padding-top: 12px; border-top: 1px solid #a7f3d0; }
+.calc-box { background: #ecfdf5; border-radius: 16px; padding: 16px; margin-top: 16px; border: 1px solid #a7f3d0; }
+.calc-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #064e3b; margin-bottom: 8px; }
+.calc-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; color: #059669; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #a7f3d0; }
 
 .hidden { display: none !important; }
-.bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 16px; margin-bottom: 12px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.03); cursor: pointer; }
-.bc-icon { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-right: 14px; }
-.bc-color-1 { background: #dcfce7; color: #059669; }
-.bc-color-2 { background: #f3e8ff; color: #7e22ce; }
-.bc-color-3 { background: #ffedd5; color: #ea580c; }
+
+/* LIST ITEMS MATCHING IMAGE */
+.bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 16px; margin-bottom: 12px; background: #fff; box-shadow: var(--shadow); cursor: pointer; border: 1px solid var(--border);}
+.bc-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 14px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);}
+.bc-color-1 { background: linear-gradient(135deg, #a7f3d0, #34d399); color: #064e3b; }
+.bc-color-2 { background: linear-gradient(135deg, #ddd6fe, #a78bfa); color: #4c1d95; }
+.bc-color-3 { background: linear-gradient(135deg, #fed7aa, #fb923c); color: #7c2d12; }
 .bc-info { flex: 1; }
-.bc-info b { display: block; font-size: 16px; color: var(--primary-dark); margin-bottom: 4px; }
+.bc-info b { display: block; font-size: 16px; color: var(--primary-dark); margin-bottom: 4px; font-weight:800;}
 .bc-info span { font-size: 12px; color: var(--muted); font-weight: 600; }
 
 /* MEMBERS INPUT ROW UPDATE */
-.mem-row { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.02); margin-bottom: 12px; border: 1px solid var(--border); }
-.mem-input-group { display: flex; align-items: center; gap: 10px; }
-.mem-input-group .num { width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; color: var(--primary-dark); font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.mem-input-group input { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px; background: #fff; }
-.mem-input-group input:focus { border-color: var(--accent); outline: none; }
+.mem-row { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 16px; background: #fff; margin-bottom: 12px; border: 1px solid var(--border); box-shadow: var(--shadow);}
+.mem-input-group { display: flex; align-items: center; gap: 12px; }
+.mem-input-group .num { width: 34px; height: 34px; border-radius: 50%; background: var(--primary-dark); color: white; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 8px rgba(6, 78, 59, 0.3);}
+.mem-input-group input { flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border); font-size: 14px; background: var(--input-bg); font-weight:600;}
+.mem-input-group input:focus { border-color: var(--accent); outline: none; background: #fff;}
 
 /* MODALS */
-.modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.modal-box { background: #fff; border-radius: 24px; padding: 30px 20px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+.modal-bg { position: fixed; inset: 0; background: rgba(2, 44, 34, 0.85); backdrop-filter: blur(8px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal-box { background: #fff; border-radius: 24px; padding: 30px 20px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
 #winnerModal .modal-box { background: linear-gradient(180deg, #fffbeb, #fef3c7); border: 2px solid #fde68a; }
 .win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
-#winAmount { background: #f59e0b; color: white; padding: 8px 20px; border-radius: 12px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); }
+#winAmount { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 10px 24px; border-radius: 16px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(217, 119, 6, 0.4); border: 2px solid #fcd34d;}
 
-.win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2); transition: transform 0.2s;}
+.win-icon-btn:active { transform: scale(0.9);}
 #editModal .modal-box { padding: 24px; text-align: left; }
 </style>
 </head>
@@ -183,8 +186,8 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   <div class="modal-box" style="padding: 24px; text-align:center;">
     <p id="confirmText" style="font-weight: 800; margin-bottom: 20px; color: #1e293b; white-space: pre-wrap; font-size:16px;"></p>
     <div style="display:flex; gap:10px; justify-content:center;">
-       <button class="btn" style="background: #e5e7eb; color: #475569;" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
-       <button class="btn btn-primary" style="background: var(--primary);" id="confirmYes"><span class="hi">हाँ, पक्का</span><span class="en">Yes, Sure</span></button>
+       <button class="btn" style="background: #e2e8f0; color: #475569;" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+       <button class="btn btn-primary" id="confirmYes"><span class="hi">हाँ, पक्का</span><span class="en">Yes, Sure</span></button>
     </div>
   </div>
 </div>
@@ -194,13 +197,13 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
   <div class="modal-box">
     <div style="position: absolute; right: 15px; top: 15px; font-size: 20px; cursor: pointer; color: #92400e;" onclick="document.getElementById('winnerModal').classList.add('hidden')">✖</div>
     <div class="win-trophy">🏆</div>
-    <h2 style="color: #ea580c; font-size: 28px; font-weight: 900; margin-bottom: 5px;">Winner!</h2>
+    <h2 style="color: #d97706; font-size: 28px; font-weight: 900; margin-bottom: 5px;">Winner!</h2>
     <p style="font-size: 22px; font-weight: 800; color: #92400e;" id="winName">Name</p>
     <p style="color: #b45309; font-size: 14px; font-weight: 600;"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Group opened for them!</span></p>
     <div id="winAmount">₹0</div>
     <p style="color: #b45309; font-size: 13px; font-weight: 700; margin-bottom: 20px;"><span class="hi">क्या आप वॉलेट से पैसे देना चाहते हैं?</span><span class="en">Do you want to pay from Wallet?</span></p>
     <div style="display:flex; gap:10px;">
-       <button class="btn" style="background: #e5e7eb; color: #475569;" onclick="document.getElementById('winnerModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+       <button class="btn" style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a;" onclick="document.getElementById('winnerModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
        <button class="btn" style="background: #059669; color: white; box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);" onclick="confirmWinner()"><span class="hi">हाँ, दे दिए</span><span class="en">Yes, Paid</span></button>
     </div>
   </div>
@@ -209,13 +212,13 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 <!-- EDIT MODAL -->
 <div id="editModal" class="modal-bg hidden">
   <div class="modal-box">
-    <h2 style="color: var(--primary-dark); font-size: 18px; margin-bottom: 15px;"><span class="hi">कमेटी जानकारी एडिट करें</span><span class="en">Edit Group Details</span></h2>
+    <h2 style="color: var(--primary-dark); font-size: 18px; margin-bottom: 15px; text-align:center;"><span class="hi">कमेटी जानकारी एडिट करें</span><span class="en">Edit Group Details</span></h2>
     <div class="field"><label><span class="hi">किस्त राशि (₹)</span><span class="en">Installment Amount (₹)</span></label><input class="no-ico" type="number" id="editAmt" oninput="editAutoCalc()"></div>
     <div class="field"><label><span class="hi">कुल किश्तें</span><span class="en">Total Installments</span></label><input class="no-ico" type="number" id="editInst" oninput="editAutoCalc()"></div>
-    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background: #f1f5f9; color: var(--success); font-weight: 800;"></div>
+    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background: #ecfdf5; color: var(--success); font-weight: 800;"></div>
     <div class="field"><label><span class="hi">UPI ID (ऑप्शनल)</span><span class="en">UPI ID (Optional)</span></label><input class="no-ico" type="text" id="editUpi" placeholder="mobilenumber@upi"></div>
     <div style="display:flex; gap:10px; margin-top: 20px;">
-       <button class="btn" style="background: #e5e7eb; color: #475569;" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+       <button class="btn" style="background: #e2e8f0; color: #475569;" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
        <button class="btn btn-primary" onclick="saveEdit()"><span class="hi">सेव करें</span><span class="en">Save</span></button>
     </div>
   </div>
@@ -223,7 +226,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 
 <div class="topbar">
   <div class="topbar-text">
-    <div class="topbar-icon"><span style="font-size: 24px;">👥</span></div>
+    <div class="topbar-icon"><span style="font-size: 24px;">🌿</span></div>
     <div>
        <h1><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h1>
        <p><span class="hi">सुरक्षित • सरल • ऑटोमैटिक</span><span class="en">Secure • Simple • Auto</span></p>
@@ -238,10 +241,10 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 <main>
   <!-- AUTHENTICATION -->
   <section id="auth">
-    <div class="card" style="text-align: center; padding-top: 30px;">
-      <div style="font-size: 40px; margin-bottom: 10px;">👤</div>
-      <h2 style="justify-content:center; font-size: 22px; margin-bottom: 8px;"><span class="hi">सुरक्षित प्रवेश</span><span class="en">Secure Login</span></h2>
-      <p style="font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 24px;"><span class="hi">अपने अकाउंट में वापस आएं</span><span class="en">Welcome back to your account</span></p>
+    <div class="card cream-card" style="text-align: center; padding-top: 30px;">
+      <div style="font-size: 44px; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">🌿</div>
+      <h2 style="justify-content:center; font-size: 24px; margin-bottom: 8px;"><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h2>
+      <p style="font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 24px;"><span class="hi">आपकी कमेटी • आपका हिसाब</span><span class="en">Secure Group Management</span></p>
       
       <div class="tabs" id="authTabs">
         <button id="tabReg" class="active" onclick="switchAuth('register')"><span class="hi">नया अकाउंट</span><span class="en">New Account</span></button>
@@ -271,7 +274,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
           </div>
         </div>
         <button id="authBtn" class="btn btn-primary" style="margin-top: 10px;" onclick="doAuth()"><span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span></button>
-        <p style="text-align:center; margin-top:20px;"><button class="link-btn" onclick="showForgot()"><span class="hi">पासवर्ड भूल गए?</span><span class="en">Forgot Password?</span></button></p>
+        <p style="text-align:center; margin-top:20px;"><button class="link-btn" style="color:var(--primary); font-weight:700; background:none; border:none; cursor:pointer;" onclick="showForgot()"><span class="hi">पासवर्ड भूल गए?</span><span class="en">Forgot Password?</span></button></p>
       </div>
       
       <div id="authForgot" class="hidden">
@@ -279,36 +282,36 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
         <div class="field"><div class="input-wrap"><span class="input-ico">📱</span><input class="lang-input" id="forgotPhone" type="tel" data-hi="मोबाइल नंबर" data-en="Mobile Number" placeholder="मोबाइल नंबर" maxlength="10"></div></div>
         <div class="field"><div class="input-wrap"><span class="input-ico">🔒</span><input class="lang-input" id="forgotPass" type="password" data-hi="नया पासवर्ड" data-en="New Password" placeholder="नया पासवर्ड"></div></div>
         <button class="btn btn-primary" style="margin-top: 10px;" onclick="doForgot()"><span class="hi">पासवर्ड बदलें</span><span class="en">Change Password</span></button>
-        <p style="text-align:center; margin-top:20px;"><button class="link-btn" onclick="hideForgot()"><span class="hi">← वापस जाएं</span><span class="en">← Go Back</span></button></p>
+        <p style="text-align:center; margin-top:20px;"><button class="link-btn" style="color:var(--primary); font-weight:700; background:none; border:none; cursor:pointer;" onclick="hideForgot()"><span class="hi">← वापस जाएं</span><span class="en">← Go Back</span></button></p>
       </div>
     </div>
   </section>
 
   <!-- HOME PAGE -->
   <section id="home" class="hidden">
-    <div class="card" style="background: linear-gradient(135deg, #fff, #f8fafc);">
+    <div class="card cream-card">
       <div style="font-size: 40px; margin-bottom: 10px;">👋</div>
       <h2 style="font-size: 22px;">Welcome</h2>
       <p style="margin-bottom: 20px; font-size: 14px; font-weight: 600; color: var(--muted);"><span class="hi">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</span><span class="en">Create a new group or check old ones in the list.</span></p>
-      <button class="btn btn-primary" style="border-radius: 14px;" onclick="show('create')"><span class="hi">➕ नई कमेटी बनाएं</span><span class="en">➕ Create New Group</span></button>
+      <button class="btn btn-primary" onclick="show('create')"><span class="hi">➕ नई कमेटी बनाएं</span><span class="en">➕ Create New Group</span></button>
     </div>
     <div class="card">
       <h2 style="font-size: 18px;"><span class="hi">🔑 कोड द्वारा प्रवेश</span><span class="en">🔑 Enter via Code</span></h2>
       <p style="font-size:12px; color:var(--muted); font-weight:700; margin-bottom:16px;"><span class="hi">कमेटी का Access Code डालें:</span><span class="en">Enter Group Access Code:</span></p>
       <div class="field"><input class="no-ico lang-input" id="accessCode" data-hi="Code (उदा. A1B2C3D4)" data-en="Code (e.g. A1B2C3D4)" placeholder="Code (उदा. A1B2C3D4)" style="text-transform: uppercase;"></div>
-      <button class="btn btn-secondary" style="border-radius: 14px; background: #e2e8f0; color: var(--primary-dark);" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter Group</span></button>
+      <button class="btn btn-secondary" style="border-radius: 16px;" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter Group</span></button>
     </div>
   </section>
 
   <!-- PROFILE -->
   <section id="profile" class="hidden">
-    <div class="card" style="text-align: center; padding: 40px 20px; background: linear-gradient(180deg, #f8fafc, #fff);">
-      <div style="width: 80px; height: 80px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 15px; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);">👤</div>
+    <div class="card cream-card" style="text-align: center; padding: 40px 20px;">
+      <div style="width: 80px; height: 80px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 15px; box-shadow: 0 10px 20px rgba(5, 150, 105, 0.3);">👤</div>
       <h2 id="profName" style="justify-content: center; font-size: 24px; margin-bottom: 6px;">Name</h2>
       <p id="profPhone" style="font-size: 15px; color: var(--muted); font-weight: 700; margin-bottom: 30px; letter-spacing: 1px;">+91 0000000000</p>
       <div class="stats" style="margin-bottom: 30px;">
-         <div class="stat" style="background: #f1f5f9;"><b id="profCount" style="color: var(--accent);">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
-         <div class="stat" style="background: #f1f5f9;"><b id="profRole" style="color: var(--accent);">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
+         <div class="stat" style="background: #fff;"><b id="profCount" style="color: var(--primary);">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
+         <div class="stat" style="background: #fff;"><b id="profRole" style="color: var(--primary);">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
       </div>
       <button class="btn" onclick="appLogout()" style="color: white; background: var(--danger); box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3);"><span class="hi">🚪 सुरक्षित लॉगआउट</span><span class="en">🚪 Secure Logout</span></button>
     </div>
@@ -325,8 +328,8 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 
   <!-- CREATE NEW BC -->
   <section id="create" class="hidden">
-    <div class="card">
-      <h2><span style="color:var(--accent);">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
+    <div class="card cream-card">
+      <h2><span style="color:var(--primary);">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
       <div class="field">
         <label><span class="hi">कमेटी का नाम *</span><span class="en">Group Name *</span></label>
         <input class="no-ico lang-input" id="bcName" data-hi="जैसे: गांव कमेटी 2026" data-en="e.g. Village Group 2026" placeholder="जैसे: गांव कमेटी 2026">
@@ -346,7 +349,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 
       <div class="row">
         <div class="field"><label><span class="hi">कुल किश्तें *</span><span class="en">Total Installs *</span></label><input class="no-ico lang-input" id="totalInst" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="autoCalc()"></div>
-        <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" id="totalPool" type="number" readonly style="background: #f1f5f9; color: var(--success); font-weight: 800;" placeholder="Auto"></div>
+        <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" id="totalPool" type="number" readonly style="background: #fff; color: var(--success); font-weight: 800;" placeholder="Auto"></div>
       </div>
 
       <div class="calc-box">
@@ -356,7 +359,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
          <div class="calc-total"><span><span class="hi">कुल पूरा राशि</span><span class="en">Total Pool</span></span><span id="c-pool">₹ 0</span></div>
       </div>
 
-      <div style="margin-top: 24px; padding-top:20px; border-top: 1px solid var(--border);">
+      <div style="margin-top: 24px; padding-top:20px; border-top: 1px dashed var(--border);">
         <div class="field"><label><span class="hi">मालिक का नाम *</span><span class="en">Owner Name *</span></label><input class="no-ico lang-input" id="ownerName" data-hi="संचालक का नाम" data-en="Admin Name" placeholder="संचालक का नाम"></div>
         <div class="field"><label><span class="hi">मालिक का मोबाइल *</span><span class="en">Owner Mobile *</span></label><input class="no-ico lang-input" id="ownerPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Mobile" placeholder="10 अंकों का नंबर" maxlength="10"></div>
         <div class="field">
@@ -368,7 +371,7 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
     </div>
     
     <div class="card">
-      <h2><span style="color:var(--accent);">👥</span> <span class="hi">सदस्य जोड़ें</span><span class="en">Add Members</span></h2>
+      <h2><span style="color:var(--primary);">👥</span> <span class="hi">सदस्य जोड़ें</span><span class="en">Add Members</span></h2>
       <div class="field"><label><span class="hi">कुल सदस्य संख्या</span><span class="en">Total Members</span></label><input class="no-ico lang-input" id="memberCount" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
       <div id="memberInputs" style="margin-top: 16px;"></div>
     </div>
@@ -385,8 +388,8 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding: 0 4px;">
          <h2 style="margin:0; font-size: 18px; font-weight: 800; color:white;"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
          <div style="display:flex; gap:8px;">
-           <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:white; color:var(--primary-dark); font-weight: 800; border-radius:50px;">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
-           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px;"><span class="hi">+ अगली किश्त</span><span class="en">+ Next Round</span></button>
+           <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:white; color:var(--primary-dark); font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
+           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><span class="hi">+ अगली किश्त</span><span class="en">+ Next Round</span></button>
          </div>
       </div>
       <div id="members"></div>
@@ -395,9 +398,9 @@ input.no-ico:focus, select.no-ico:focus { border-color: var(--accent); }
 
   <!-- ADMIN PANEL -->
   <section id="admin" class="hidden">
-    <div class="card" style="border-left: 4px solid var(--accent);">
-      <h2 style="color: var(--accent);">👑 Admin Dashboard</h2>
-      <div class="msg ok" style="margin-bottom: 0; background: #f8fafc; border:none;">✓ Admin ID Verified</div>
+    <div class="card cream-card" style="border-left: 4px solid var(--primary);">
+      <h2 style="color: var(--primary-dark);">👑 Admin Dashboard</h2>
+      <div class="msg ok" style="margin-bottom: 0; background: #fff; border:none; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">✓ Admin ID Verified</div>
     </div>
     <div class="card" style="background: #fff1f2; border-color: #fecaca; border-left: 4px solid var(--danger);">
       <h2 style="color: var(--danger);"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete Group</span></h2>
@@ -482,11 +485,11 @@ async function shareApp() {
   catch (err) { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
 }
 
-// 💡 NEW: 100% FAIL-PROOF COPY UPI ID FUNCTION 💡
+// 💡 100% FAIL-PROOF COPY UPI ID FUNCTION
 function copyToClipboard(text) {
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(() => {
-            appAlert(t("✅ UPI ID कॉपी हो गई: \n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n" + text + "\n\nNow open your PhonePe or GPay to pay."));
+            appAlert(t("✅ UPI ID कॉपी हो गई: \n\n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n\n" + text + "\n\nNow open your PhonePe or GPay to pay."));
         });
     } else {
         let tempInput = document.createElement("input");
@@ -495,7 +498,7 @@ function copyToClipboard(text) {
         tempInput.select();
         document.execCommand("copy");
         document.body.removeChild(tempInput);
-        appAlert(t("✅ UPI ID कॉपी हो गई: \n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n" + text + "\n\nNow open your PhonePe or GPay to pay."));
+        appAlert(t("✅ UPI ID कॉपी हो गई: \n\n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n\n" + text + "\n\nNow open your PhonePe or GPay to pay."));
     }
 }
 
@@ -605,7 +608,7 @@ function buildMemberInputs() {
            <span class="num">${i}</span>
            <input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' का नाम *', 'Member '+i+' Name *')}">
        </div>
-       <div class="mem-input-group" style="padding-left: 44px;">
+       <div class="mem-input-group" style="padding-left: 46px;">
            <span style="font-size:16px;">📱</span>
            <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल नंबर *" data-en="Mobile Number *" placeholder="${t('मोबाइल नंबर *', 'Mobile Number *')}">
        </div>
@@ -768,7 +771,7 @@ async function loadDash() {
     const bc = currentBCData;
     
     if(bc.isDeleted) {
-        document.getElementById('walletBlock').innerHTML = `<div class="card" style="text-align:center; color:red;">❌ ${t('यह कमेटी डिलीट कर दी गई है।', 'This Group is deleted.')}</div>`;
+        document.getElementById('walletBlock').innerHTML = `<div class="card cream-card" style="text-align:center; color:red;">❌ ${t('यह कमेटी डिलीट कर दी गई है।', 'This Group is deleted.')}</div>`;
         document.getElementById('memberCard').classList.add('hidden');
         return;
     }
@@ -805,15 +808,13 @@ async function loadDash() {
 
     const totalMembers = bc.members.length;
     let totalInstalls = Number(bc.totalInst) || totalMembers;
-    
-    let upiText = bc.upiId ? `<br><span style="color:#dcfce7; font-size:12px;">UPI: ${bc.upiId}</span>` : '';
 
     document.getElementById('walletBlock').innerHTML = `
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; color:white;">
-         <div style="width:40px; height:40px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px;">👥</div>
+         <div style="width:40px; height:40px; background:#ecfdf5; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; box-shadow:0 4px 10px rgba(0,0,0,0.2);">👥</div>
          <div>
-            <h2 style="font-size:18px; font-weight:800; margin-bottom:2px;">${bc.name}</h2>
-            <p style="font-size:11px; opacity:0.8; font-weight:600;">Code: ${bc.code}</p>
+            <h2 style="font-size:18px; font-weight:800; margin-bottom:2px; text-shadow:0 2px 4px rgba(0,0,0,0.5);">${bc.name}</h2>
+            <p style="font-size:11px; opacity:0.9; font-weight:600; color:#a7f3d0;">Code: ${bc.code}</p>
          </div>
       </div>
       
@@ -833,19 +834,22 @@ async function loadDash() {
       
       <div class="stats">
         <div class="stat">
-          <b style="color: var(--primary); display:flex; align-items:center; justify-content:center; gap:6px;"><span style="font-size:14px;">🏦</span> ₹${bc.amount}</b>
+          <b style="color: var(--primary);"><span style="font-size:16px;">🏦</span> ₹${bc.amount}</b>
           <span style="color: var(--muted);">${t('किस्त', 'Inst.')}</span>
         </div>
         <div class="stat">
-          <b style="color: var(--primary); display:flex; align-items:center; justify-content:center; gap:6px;"><span style="font-size:14px;">⏳</span> ${bc.currentRound} / ${totalInstalls}</b>
+          <b style="color: var(--primary);"><span style="font-size:16px;">⏳</span> ${bc.currentRound} / ${totalInstalls}</b>
           <span style="color: var(--muted);">${t('चल रही किश्त', 'Current Round')}</span>
         </div>
         <div class="stat stat-pool">
-          <b style="font-size:22px; margin-bottom:4px;">₹${Number(bc.totalPool || (bc.amount * totalMembers)).toLocaleString('en-IN')}</b>
+          <b style="font-size:24px; margin-bottom:4px;">₹${Number(bc.totalPool || (bc.amount * totalMembers)).toLocaleString('en-IN')}</b>
           <span>${t('कमेटी खुलने पर मिलेगा', 'Total Pool Amount')}</span>
         </div>
       </div>
-      <p style="text-align: center; margin: 20px 0; font-size: 14px; font-weight: 800; color:white;">Code: <b style="color: white; background: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 8px;">${bc.code}</b><br><span style="color:#cbd5e1; font-size:12px; display:inline-block; margin-top: 8px;">संचालक: ${bc.ownerName}</span>${upiText}</p>
+      <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 16px; margin: 20px 0; text-align:center; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);">
+         <div style="font-size: 14px; font-weight: 800; color:white; margin-bottom:4px;">Code: <b style="color: #fde68a; letter-spacing:1px;">${bc.code}</b></div>
+         <div style="color:#d1fae5; font-size:12px; font-weight:600;">संचालक: ${bc.ownerName}</div>
+      </div>
     `;
     
     document.getElementById('members').innerHTML = bc.members.map((m,i) => {
@@ -867,14 +871,14 @@ async function loadDash() {
       let uniqueId = m.phone || m.name; 
 
       let confirmationTracker = `
-        <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
+        <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 10px; border-radius: 12px; margin-top: 12px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
            <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा हो गई | <b>${leftEMIs}</b> किश्त बाकी</span>
            <span class="en">✅ <b>${m.paidRounds}</b> EMI Successful | <b>${leftEMIs}</b> EMI Left</span>
         </div>`;
 
       if(m.hasWon) {
            confirmationTracker = `
-           <div style="background: #dcfce7; border: 1px solid #34d399; padding: 8px 12px; border-radius: 8px; margin-top: 10px; text-align: center; font-size: 13px; font-weight: 800; color: #065f46;">
+           <div style="background: #ecfdf5; border: 1px solid #34d399; padding: 10px; border-radius: 12px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669; box-shadow: inset 0 2px 4px rgba(5,150,105,0.1);">
               <span class="hi">🎉 बधाई! आपकी कमेटी खुल चुकी है।</span>
               <span class="en">🎉 Congrats! Your group is opened.</span>
            </div>`;
@@ -882,51 +886,52 @@ async function loadDash() {
       
       let payBtnHtml = '';
       if(isOwner && pendingDue > 0) {
-          payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#854d0e; font-weight:800;" onclick="markPaidAdvance('${uniqueId}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
+          payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#b45309; font-weight:800; box-shadow:0 2px 5px rgba(217,119,6,0.2);" onclick="markPaidAdvance('${uniqueId}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
       }
       
-      // 💡 FIX: COPY UPI ID UI FOR MEMBERS 💡
+      // 💡 NEW: COPY UPI ID LOGIC FOR MEMBERS 💡
       let payOnlineHtml = '';
       if (!isOwner) { 
           if (pendingDue > 0 && bc.upiId) {
               if (isMe) { 
                   payOnlineHtml = `
-                  <div style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); text-align:center;">
-                      <p style="font-size:12px; color:var(--muted); margin-bottom:8px; font-weight:700;">
-                          <span class="hi">ऑनलाइन पेमेंट के लिए नीचे दी गई UPI ID कॉपी करें:</span>
-                          <span class="en">Copy the UPI ID below for online payment:</span>
+                  <div style="margin-top:16px; padding-top:16px; border-top:1px dashed var(--border); text-align:center;">
+                      <p style="font-size:12px; color:var(--primary-dark); margin-bottom:10px; font-weight:800;">
+                          <span class="hi">💳 ऑनलाइन पेमेंट के लिए UPI ID कॉपी करें:</span>
+                          <span class="en">💳 Copy UPI ID for online payment:</span>
                       </p>
-                      <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                          <code style="background:#e2e8f0; padding:8px 12px; border-radius:8px; font-size:14px; font-weight:800; color:var(--primary-dark); user-select:all;">${bc.upiId}</code>
-                          <button onclick="copyToClipboard('${bc.upiId}')" style="background:var(--accent); color:white; border:none; padding:8px 12px; border-radius:8px; font-weight:800; cursor:pointer; box-shadow:0 2px 5px rgba(59,130,246,0.3);">📋 Copy</button>
+                      <div style="display:flex; align-items:center; justify-content:space-between; background:var(--input-bg); border:1px solid var(--accent); border-radius:12px; padding:6px 6px 6px 12px;">
+                          <code style="font-size:14px; font-weight:700; color:var(--primary-dark); user-select:all; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${bc.upiId}</code>
+                          <button onclick="copyToClipboard('${bc.upiId}')" style="background:var(--primary); color:white; border:none; padding:10px 16px; border-radius:10px; font-weight:800; cursor:pointer; box-shadow:0 4px 10px rgba(5,150,105,0.3); flex-shrink:0;">📋 Copy</button>
                       </div>
+                      <p style="font-size:11px; color:var(--muted); margin-top:8px; font-weight:600;">(कॉपी करके अपने GPay या PhonePe में पेस्ट करें)</p>
                   </div>`;
               }
           } else if (pendingDue === 0) {
               if (isMe) {
-                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 10px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669;">
+                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #34d399; padding: 12px; border-radius: 12px; margin-top: 14px; text-align: center; font-size: 13px; font-weight: 800; color: #059669; box-shadow: 0 4px 10px rgba(5,150,105,0.1);">
                       <span class="hi">✅ आपकी किश्त का भुगतान पूरा हुआ</span>
                       <span class="en">✅ Your Payment Clear for this round</span>
                   </div>`;
               } else if (isOwner) {
-                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 8px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 11px; font-weight: 800; color: #059669;">
+                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #34d399; padding: 8px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 11px; font-weight: 800; color: #059669;">
                       ✅ Payment Clear
                   </div>`;
               }
           }
       }
 
-      let winBtn = `<div class="win-btn-disabled">🏆</div>`;
+      let winBtn = `<div class="win-btn-disabled" style="opacity:0.3;">🏆</div>`;
       if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${uniqueId}')" title="${t('विजेता बनाएं', 'Set Winner')}">🏆</button>`;
-      else if(m.hasWon) winBtn = `<div style="font-size:24px;" title="Winner">🎉</div>`;
+      else if(m.hasWon) winBtn = `<div style="font-size:28px; filter: drop-shadow(0 2px 4px rgba(217,119,6,0.4));" title="Winner">🎉</div>`;
 
       let nameDisplay = `<b>${m.name}</b>`;
       if(isOwner) {
-          nameDisplay = `<input type="text" value="${m.name}" style="font-weight:800; font-size:15px; border:none; background:transparent; padding:0; margin:0; width:120px;" onchange="editMemberName('${uniqueId}', this.value)" title="${t('नाम बदलने के लिए यहाँ क्लिक करें','Click to edit name')}">`;
+          nameDisplay = `<input type="text" value="${m.name}" style="font-weight:800; font-size:16px; border:none; background:transparent; padding:0; margin:0; width:130px; color:var(--primary-dark);" onchange="editMemberName('${uniqueId}', this.value)" title="${t('नाम बदलने के लिए यहाँ क्लिक करें','Click to edit name')}">`;
       }
       
-      let phoneDisplay = m.phone ? `<div style="font-size:10px; color:var(--muted); font-weight:600; margin-top:2px;">📱 ${m.phone}</div>` : '';
-      let cardStyle = isMe ? 'border: 2px solid var(--accent); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);' : '';
+      let phoneDisplay = m.phone ? `<div style="font-size:10px; color:var(--muted); font-weight:700; margin-top:4px;">📱 ${m.phone}</div>` : '';
+      let cardStyle = isMe ? 'border: 2px solid var(--accent); box-shadow: 0 8px 20px rgba(16,185,129,0.15); background: #f8fafc;' : '';
 
       return `
       <div class="member" style="${cardStyle}">
@@ -936,13 +941,13 @@ async function loadDash() {
              <div>
                 ${nameDisplay}
                 ${isOwner ? phoneDisplay : ''}
-                <div style="font-size:11px; color:var(--muted); font-weight:600; margin-top:4px;">${t('जमा', 'Paid')}: ₹${totalPaidByMem.toLocaleString('en-IN')}</div>
+                <div style="font-size:12px; color:var(--muted); font-weight:700; margin-top:4px;">${t('जमा', 'Paid')}: <span style="color:var(--text);">₹${totalPaidByMem.toLocaleString('en-IN')}</span></div>
              </div>
            </div>
-           <div style="display:flex; align-items:center; gap:12px;">
+           <div style="display:flex; align-items:center; gap:14px;">
               <div style="text-align:right;">
-                 <div style="font-size:10px; color:var(--muted); font-weight:700;">${t('बाकी है', 'Due')}:</div>
-                 <div class="due ${pendingDue>0?'red':''}" style="font-size:14px; font-weight:800;">₹${pendingDue.toLocaleString('en-IN')}</div>
+                 <div style="font-size:11px; color:var(--muted); font-weight:800;">${t('बाकी है', 'Due')}:</div>
+                 <div class="due ${pendingDue>0?'red':''}" style="font-size:15px; font-weight:900;">₹${pendingDue.toLocaleString('en-IN')}</div>
               </div>
               ${winBtn}
            </div>
@@ -1038,4 +1043,4 @@ window.onload = () => {
 };
 </script>
 </body>
-</html>
+                                                                                                                                                                                                                                 </html>
