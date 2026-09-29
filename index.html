@@ -4,298 +4,356 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>कमेटी खाता • Group Khata</title>
-<meta name="theme-color" content="#0b4d3a">
+<meta name="theme-color" content="#0b5d3f">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; -webkit-tap-highlight-color:transparent; }
-body { background:#e8f3ed; color:#0b3b2b; min-height:100vh; padding-bottom:110px; overflow-x:hidden; -webkit-user-select:none; user-select:none; }
-input,textarea,select { -webkit-user-select:auto; user-select:auto; }
-body.lang-hi .en { display:none !important; }
-body.lang-en .hi { display:none !important; }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#e8f3ec;color:#0b3b2b;min-height:100vh;padding-bottom:100px;overflow-x:hidden;-webkit-user-select:none;user-select:none}
+input,textarea,select{-webkit-user-select:auto;user-select:auto}
+body.lang-hi .en{display:none!important}
+body.lang-en .hi{display:none!important}
 
-/* ---- BACKGROUND ---- */
-.bg-app {
-  position:fixed; inset:0;
-  background: linear-gradient(180deg,#0b4d3a 0%, #0e6b4d 22%, #d9ece4 45%, #e8f3ed 100%);
-  z-index:-1;
+/* ===== HEADER ===== */
+.header{
+  background:linear-gradient(180deg,#0b5d3f 0%,#0d7a52 70%,#0e8a5c 100%);
+  padding:14px 18px 60px;
+  border-bottom-left-radius:28px;
+  border-bottom-right-radius:28px;
+  position:relative;
+  overflow:hidden;
 }
+.header::before{
+  content:'';position:absolute;right:-40px;top:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,0.04);
+}
+.header::after{
+  content:'🍃';position:absolute;right:20px;bottom:-10px;
+  font-size:70px;opacity:0.15;transform:rotate(-20deg);
+}
+.header-row{display:flex;align-items:center;gap:12px;position:relative;z-index:2}
+.logo-circle{
+  width:56px;height:56px;background:#f0faf4;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;flex-shrink:0;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  border:2px solid #a7e0c5;
+}
+.header-title{flex:1;min-width:0}
+.header-title h1{color:#fff;font-size:20px;font-weight:800;letter-spacing:-0.3px;line-height:1.15}
+.header-title p{color:#b8e6d0;font-size:11.5px;font-weight:600;margin-top:3px;letter-spacing:0.3px}
+.header-btns{display:flex;gap:8px;flex-shrink:0}
+.hbtn{
+  background:#fff;border:none;padding:10px 14px;border-radius:30px;
+  font-size:12.5px;font-weight:800;color:#0b3b2b;
+  display:flex;align-items:center;gap:6px;cursor:pointer;
+  box-shadow:0 3px 10px rgba(0,0,0,0.12);
+  white-space:nowrap;
+}
+.hbtn:active{transform:scale(0.94)}
+.hbtn .globe{font-size:15px;color:#0b5d3f}
+.hbtn .flag{font-size:15px}
 
-/* ---- TOP HEADER ---- */
-.top-header {
-  background: linear-gradient(180deg,#0b4d3a 0%, #0e6b4d 100%);
-  padding: 12px 18px 55px;
-  border-radius: 0 0 32px 32px;
+/* ===== MAIN ===== */
+main{max-width:480px;margin:-45px auto 0;padding:0 14px 20px;position:relative;z-index:5}
+
+/* ===== WELCOME CARD ===== */
+.welcome{
+  background:#fefaf0;
+  border-radius:22px;
+  padding:18px 16px 16px;
+  margin-bottom:14px;
+  border:1.5px solid #f5e6b8;
+  box-shadow:0 8px 24px -10px rgba(180,120,30,0.2);
+  position:relative;
+  overflow:hidden;
+}
+.welcome-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.welcome-icon{font-size:36px;line-height:1;flex-shrink:0}
+.welcome-mid{flex:1;min-width:0}
+.welcome-mid h2{font-size:17px;font-weight:900;color:#7c2d12;margin-bottom:4px}
+.welcome-mid p{font-size:12px;color:#92400e;font-weight:600;line-height:1.5}
+.welcome-visual{position:relative;flex-shrink:0;width:70px;text-align:center}
+.welcome-visual .plant{font-size:44px;line-height:1;margin-bottom:-8px;position:relative;z-index:2}
+.welcome-visual .coins{font-size:34px;line-height:1;margin-top:-14px}
+.welcome-quote{
+  position:absolute;right:-5px;top:-5px;
+  font-size:9.5px;color:#7c2d12;font-weight:800;line-height:1.25;
+  background:#fef3c7;padding:5px 7px;border-radius:10px;
+  border:1px solid #fcd34d;
+  text-align:center;width:62px;
+  transform:rotate(3deg);
+  box-shadow:0 3px 8px rgba(180,120,30,0.15);
+}
+.welcome-quote::after{
+  content:'';position:absolute;bottom:-2px;right:8px;
+  width:20px;height:1.5px;background:#7c2d12;border-radius:2px;
+}
+.btn-new{
+  width:100%;padding:16px;border:none;border-radius:50px;
+  background:linear-gradient(90deg,#0d7a52,#0e8a5c);
+  color:#fff;font-size:16px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(13,122,82,0.35);
+}
+.btn-new:active{transform:scale(0.97)}
+.btn-new .plus{font-size:22px;font-weight:400}
+.btn-new .arrow{font-size:18px;opacity:0.9}
+
+/* ===== CODE CARD ===== */
+.code-card{
+  background:#f0faf4;
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:14px;
+  border:1.5px solid #c8e9d6;
+}
+.code-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.code-key{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,#0d7a52,#0e8a5c);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:#fff;flex-shrink:0;
+  box-shadow:0 4px 12px rgba(13,122,82,0.25);
   position:relative;
 }
-.top-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
-.brand-wrap { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
-.brand-logo {
-  width:50px; height:50px; background:#e8f3ed; border-radius:50%;
-  display:flex; align-items:center; justify-content:center; font-size:26px;
-  box-shadow:0 6px 14px rgba(0,0,0,0.2); border:2px solid #a7e0c5; flex-shrink:0;
+.code-key::before{
+  content:'';position:absolute;inset:-3px;
+  border-radius:50%;border:1.5px dashed #7dd3a8;
 }
-.brand-text h1 { color:#fff; font-size:19px; font-weight:800; letter-spacing:-0.3px; line-height:1.15; }
-.brand-text p { color:#a7e0c5; font-size:11px; font-weight:600; margin-top:2px; letter-spacing:0.3px; }
-.top-btns { display:flex; gap:8px; flex-shrink:0; }
-.pill {
-  background:rgba(255,255,255,0.95); border:none; padding:9px 14px; border-radius:30px;
-  font-size:12px; font-weight:800; color:#0b3b2b; display:flex; align-items:center; gap:5px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.15); cursor:pointer; white-space:nowrap;
+.code-head-txt h3{font-size:16px;font-weight:900;color:#0b3b2b;margin-bottom:2px}
+.code-head-txt p{font-size:11.5px;color:#5a7d6e;font-weight:600}
+.code-row{display:flex;gap:8px;align-items:center}
+.code-row input{
+  flex:1;min-width:0;
+  padding:14px 16px;
+  border-radius:30px;
+  border:1.5px solid #c8e9d6;
+  background:#fff;
+  font-size:13.5px;font-weight:700;
+  color:#0b3b2b;
+  text-transform:uppercase;
+  letter-spacing:0.8px;
+  outline:none;
 }
-.pill:active { transform:scale(0.94); }
-.flag { font-size:14px; }
-
-/* ---- MAIN ---- */
-main { max-width:480px; margin:-40px auto 0; padding:0 16px 20px; position:relative; z-index:5; }
-
-/* ---- WELCOME CARD ---- */
-.welcome-card {
-  background:#fffbeb; border-radius:24px; padding:20px 18px; margin-bottom:16px;
-  border:1.5px solid #fde68a; box-shadow:0 10px 25px -8px rgba(180,120,30,0.15); position:relative; overflow:hidden;
+.code-row input::placeholder{color:#9bb7aa;font-weight:600;text-transform:none;letter-spacing:0}
+.code-row input:focus{border-color:#0e8a5c;box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
+.code-row button{
+  padding:14px 18px;
+  border:none;border-radius:30px;
+  background:linear-gradient(90deg,#0b5d3f,#0d7a52);
+  color:#fff;font-size:13px;font-weight:800;
+  display:flex;align-items:center;gap:5px;
+  cursor:pointer;white-space:nowrap;
+  box-shadow:0 6px 14px rgba(11,93,63,0.28);
 }
-.welcome-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:14px; }
-.welcome-left h2 { font-size:18px; font-weight:900; color:#7c2d12; margin-bottom:4px; display:flex; align-items:center; gap:6px; }
-.welcome-left p { font-size:12px; color:#92400e; font-weight:600; line-height:1.5; }
-.welcome-emoji { font-size:38px; flex-shrink:0; }
-.welcome-right-img { text-align:right; flex-shrink:0; }
-.welcome-right-img .plant { font-size:40px; line-height:1; }
-.welcome-right-img .quote { font-size:10px; color:#92400e; font-weight:800; margin-top:2px; line-height:1.3; }
+.code-row button:active{transform:scale(0.95)}
 
-.btn-create-big {
-  width:100%; padding:16px; border:none; border-radius:50px;
-  background:linear-gradient(90deg,#047857,#059669); color:#fff;
-  font-size:16px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px;
-  box-shadow:0 8px 20px rgba(5,150,105,0.35); cursor:pointer;
+/* ===== SECTION TITLE ===== */
+.sec-title{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;padding:0 4px;
 }
-.btn-create-big:active { transform:scale(0.97); }
-
-/* ---- CODE CARD ---- */
-.code-card {
-  background:#ffffff; border-radius:24px; padding:18px; margin-bottom:16px;
-  border:1.5px solid #b7e0c5; box-shadow:0 8px 20px -8px rgba(5,80,50,0.1);
+.sec-title h2{
+  font-size:15.5px;font-weight:900;color:#0b3b2b;
+  display:flex;align-items:center;gap:8px;
 }
-.code-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
-.code-icon-circle {
-  width:46px; height:46px; border-radius:50%; background:linear-gradient(135deg,#059669,#047857);
-  display:flex; align-items:center; justify-content:center; font-size:22px; color:#fff; flex-shrink:0;
-  box-shadow:0 6px 14px rgba(5,150,105,0.3);
+.sec-title .dots{display:inline-flex;gap:3px;flex-shrink:0}
+.sec-title .dots span{width:5px;height:5px;border-radius:50%;background:#0e8a5c}
+.sec-title a{font-size:12px;font-weight:800;color:#0e8a5c;text-decoration:none;cursor:pointer}
+
+/* ===== TILES GRID ===== */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.tile{
+  background:#fff;border-radius:18px;padding:14px 12px 14px;
+  cursor:pointer;position:relative;
+  border:1.5px solid #e6f2ec;
+  box-shadow:0 4px 14px -8px rgba(5,80,50,0.12);
+  transition:0.15s;
+  min-height:118px;
+  display:flex;flex-direction:column;
 }
-.code-head h3 { font-size:16px; font-weight:800; color:#0b3b2b; margin-bottom:2px; }
-.code-head p { font-size:11px; color:#3d6b5c; font-weight:600; }
-.code-row { display:flex; gap:8px; }
-.code-row input {
-  flex:1; padding:14px 16px; border-radius:14px; border:1.5px solid #d9ece4;
-  font-size:14px; font-weight:700; background:#f5faf7; color:#0b3b2b;
-  text-transform:uppercase; letter-spacing:1px; outline:none; min-width:0;
+.tile:active{transform:scale(0.97)}
+.tile-ico{
+  width:50px;height:50px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:10px;
 }
-.code-row input:focus { border-color:#059669; background:#fff; box-shadow:0 0 0 4px rgba(5,150,105,0.08); }
-.code-row button {
-  padding:14px 20px; border:none; border-radius:14px; background:#0b4d3a; color:#fff;
-  font-size:14px; font-weight:800; display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap;
-  box-shadow:0 6px 14px rgba(11,77,58,0.25);
+.tile h4{font-size:13.5px;font-weight:800;color:#0b3b2b;line-height:1.2;margin-bottom:3px}
+.tile p{font-size:10.5px;color:#7a9a8c;font-weight:600;line-height:1.3;flex:1}
+.tile .arr{position:absolute;bottom:12px;right:12px;font-size:15px;font-weight:900}
+.tile.t1 .tile-ico{background:#d8e8f8}
+.tile.t1 .arr{color:#2563eb}
+.tile.t2 .tile-ico{background:#ede4fd}
+.tile.t2 .arr{color:#7c3aed}
+.tile.t3 .tile-ico{background:#fef0d6}
+.tile.t3 .arr{color:#d97706}
+.tile.t4 .tile-ico{background:#d5f2e2}
+.tile.t4 .arr{color:#0e8a5c}
+.tile.t5 .tile-ico{background:#fce0e0}
+.tile.t5 .arr{color:#dc2626}
+.tile.t6 .tile-ico{background:#d5f2e2}
+.tile.t6 .arr{color:#0e8a5c}
+.tile.t7 .tile-ico{background:#ede4fd}
+.tile.t7 .arr{color:#7c3aed}
+
+/* ===== FEEDBACK CARD ===== */
+.fb-card{
+  background:#f0faf4;border-radius:20px;padding:14px;
+  display:flex;align-items:center;gap:12px;
+  border:1.5px solid #c8e9d6;
+  cursor:pointer;margin-bottom:14px;
 }
-.code-row button:active { transform:scale(0.96); }
-
-/* ---- SECTION TITLE ---- */
-.section-title { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; padding:0 4px; }
-.section-title h2 { font-size:16px; font-weight:900; color:#0b3b2b; display:flex; align-items:center; gap:8px; }
-.section-title .dots { display:inline-flex; gap:3px; }
-.section-title .dots span { width:6px; height:6px; border-radius:50%; background:#059669; }
-.section-title a { font-size:12px; font-weight:800; color:#059669; text-decoration:none; cursor:pointer; }
-
-/* ---- QUICK TILES GRID ---- */
-.tiles-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
-.tile {
-  background:#fff; border-radius:20px; padding:16px 14px; cursor:pointer;
-  border:1.5px solid #e2efe9; box-shadow:0 6px 16px -8px rgba(5,80,50,0.1);
-  transition:0.2s; position:relative; overflow:hidden;
+.fb-ico{
+  width:48px;height:48px;border-radius:50%;
+  background:#fef3c7;display:flex;align-items:center;justify-content:center;
+  font-size:26px;flex-shrink:0;
 }
-.tile:active { transform:scale(0.97); }
-.tile-icon {
-  width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center;
-  font-size:24px; margin-bottom:12px;
+.fb-txt{flex:1;min-width:0}
+.fb-txt h4{font-size:14.5px;font-weight:900;color:#0b3b2b;margin-bottom:2px}
+.fb-txt p{font-size:11px;color:#5a7d6e;font-weight:600}
+.fb-arr{font-size:20px;color:#0b3b2b;font-weight:900}
+.fb-people{
+  display:flex;align-items:center;gap:4px;
+  font-size:9px;color:#0b3b2b;font-weight:800;
+  background:#fff;padding:6px 8px;border-radius:12px;
+  border:1px solid #c8e9d6;
+  line-height:1.2;text-align:center;flex-shrink:0;
 }
-.tile h4 { font-size:14px; font-weight:800; color:#0b3b2b; margin-bottom:3px; line-height:1.2; }
-.tile p { font-size:10.5px; color:#6b8f82; font-weight:600; line-height:1.3; }
-.tile .arrow { position:absolute; bottom:14px; right:14px; font-size:16px; font-weight:800; }
-.tile.t1 .tile-icon { background:#dbeafe; }
-.tile.t1 .arrow { color:#2563eb; }
-.tile.t2 .tile-icon { background:#ede9fe; }
-.tile.t2 .arrow { color:#7c3aed; }
-.tile.t3 .tile-icon { background:#fef3c7; }
-.tile.t3 .arrow { color:#d97706; }
-.tile.t4 .tile-icon { background:#d1fae5; }
-.tile.t4 .arrow { color:#047857; }
-.tile.t5 .tile-icon { background:#fee2e2; }
-.tile.t5 .arrow { color:#dc2626; }
-.tile.t6 .tile-icon { background:#d1fae5; }
-.tile.t6 .arrow { color:#047857; }
-.tile.t7 .tile-icon { background:#ede9fe; }
-.tile.t7 .arrow { color:#7c3aed; }
+.fb-people .pp{font-size:20px}
 
-/* ---- FEEDBACK CARD ---- */
-.feedback-card {
-  background:#f5faf7; border-radius:22px; padding:16px; margin-bottom:16px;
-  display:flex; align-items:center; gap:12px; border:1.5px solid #d9ece4; cursor:pointer;
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;width:100%;
+  background:#fff;
+  border-top-left-radius:26px;border-top-right-radius:26px;
+  display:flex;justify-content:space-around;
+  padding:12px 0 14px;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom));
+  z-index:999;
+  box-shadow:0 -6px 24px rgba(0,30,15,0.08);
 }
-.fb-icon { width:48px; height:48px; background:#fef3c7; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; }
-.fb-text { flex:1; min-width:0; }
-.fb-text h4 { font-size:14px; font-weight:800; color:#0b3b2b; margin-bottom:2px; }
-.fb-text p { font-size:11px; color:#6b8f82; font-weight:600; }
-.fb-arrow { font-size:20px; color:#0b3b2b; font-weight:800; }
-
-/* ---- CARDS (generic) ---- */
-.card {
-  background:#fff; border-radius:24px; padding:20px; margin-bottom:16px;
-  border:1.5px solid #e2efe9; box-shadow:0 8px 22px -10px rgba(5,80,50,0.1); width:100%;
+.bottom-nav button{
+  flex:1;background:none;border:none;
+  font-size:10.5px;font-weight:800;color:#9ab3a7;
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;
+  position:relative;padding-bottom:8px;
 }
-.card-cream { background:#fffbeb; border-color:#fde68a; }
-.card h2 { font-size:17px; font-weight:800; color:#0b3b2b; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-
-/* ---- FIELDS ---- */
-.field { margin-bottom:14px; width:100%; }
-.field label { display:block; font-size:12px; font-weight:700; color:#3d6b5c; margin-bottom:6px; }
-.input-wrap { position:relative; display:flex; align-items:center; width:100%; }
-.input-ico { position:absolute; left:16px; font-size:17px; color:#059669; z-index:2; }
-input, select, textarea { width:100%; box-sizing:border-box; max-width:100%; min-width:0; }
-.input-wrap input, .input-wrap select {
-  width:100%; padding:14px 16px 14px 46px; border-radius:14px; border:1.5px solid #d9ece4;
-  font-size:14px; background:#f9fdfb; color:#0b3b2b; font-weight:600; outline:none; transition:0.2s;
+.bottom-nav button .ico{font-size:22px;filter:grayscale(1);opacity:0.5;transition:0.2s}
+.bottom-nav button.active{color:#0e8a5c}
+.bottom-nav button.active .ico{filter:grayscale(0);opacity:1}
+.bottom-nav button.active::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:32px;height:3px;background:#0e8a5c;border-radius:3px;
 }
-.input-wrap input:focus, .input-wrap select:focus { border-color:#059669; background:#fff; box-shadow:0 0 0 4px rgba(5,150,105,0.1); }
-.no-ico { width:100%; padding:14px 16px; border:1.5px solid #d9ece4; border-radius:14px; font-size:14px; background:#f9fdfb; color:#0b3b2b; font-weight:600; outline:none; }
-.no-ico:focus { border-color:#059669; background:#fff; box-shadow:0 0 0 4px rgba(5,150,105,0.1); }
-.row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 
-/* ---- BUTTONS ---- */
-.btn { width:100%; padding:15px; border:none; border-radius:50px; font-size:15px; font-weight:800; cursor:pointer; transition:0.2s; }
-.btn:active { transform:scale(0.96); }
-.btn-primary { background:linear-gradient(90deg,#047857,#059669); color:#fff; box-shadow:0 8px 20px rgba(5,150,105,0.3); }
-.btn-secondary { background:#0b4d3a; color:#fff; box-shadow:0 6px 14px rgba(11,77,58,0.2); }
-.btn-sm { padding:8px 14px; font-size:12px; width:auto; border-radius:10px; }
-
-/* ---- TABS ---- */
-.tabs { display:flex; background:#eef7f2; border-radius:50px; padding:5px; margin-bottom:20px; border:1px solid #d0e8dd; }
-.tabs button { flex:1; padding:12px; border:none; border-radius:50px; background:transparent; font-size:13px; font-weight:800; color:#3d6b5c; cursor:pointer; transition:0.2s; }
-.tabs button.active { background:linear-gradient(90deg,#047857,#059669); color:#fff; box-shadow:0 4px 10px rgba(5,150,105,0.25); }
-
-/* ---- MSG ---- */
-.msg { padding:12px 16px; border-radius:14px; margin-bottom:14px; font-size:13px; text-align:center; font-weight:700; }
-.msg.err { background:#fee9e9; color:#b91c1c; border:1px solid #fecaca; }
-.msg.ok { background:#e1f7ec; color:#047857; border:1px solid #a7e0c5; }
-
-/* ---- WALLET ---- */
-.wallet-card {
-  background:linear-gradient(135deg,#0b4d3a 0%, #0e6b4d 100%); color:#fff; padding:22px;
-  border-radius:24px; box-shadow:0 14px 30px -10px rgba(11,77,58,0.4); margin-bottom:16px; position:relative; overflow:hidden;
-}
-.wallet-card::before { content:''; position:absolute; right:-30px; top:-40px; width:160px; height:160px; background:rgba(255,255,255,0.06); border-radius:50%; }
-.wallet-card::after { content:''; position:absolute; right:50px; top:-60px; width:120px; height:120px; background:rgba(255,255,255,0.05); border-radius:50%; }
-.wallet-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; position:relative; z-index:2; }
-.w-chip { width:44px; height:30px; background:linear-gradient(135deg,#fde68a,#d97706); border-radius:7px; border:1px solid #b45309; }
-.w-wifi { font-size:22px; opacity:0.85; color:#fde68a; transform:rotate(90deg); }
-.wallet-title { font-size:11px; font-weight:700; letter-spacing:1.5px; opacity:0.85; text-transform:uppercase; margin-bottom:6px; position:relative; z-index:2; }
-.wallet-amt { font-size:38px; font-weight:900; color:#fef3c7; margin-bottom:14px; position:relative; z-index:2; text-shadow:0 2px 5px rgba(0,0,0,0.25); line-height:1; }
-.wallet-num { font-family:monospace; font-size:14px; letter-spacing:2px; color:#a7e0c5; position:relative; z-index:2; }
-.wallet-bot { display:flex; justify-content:space-between; align-items:center; font-size:10px; font-weight:600; opacity:0.85; margin-top:12px; position:relative; z-index:2; }
-
-/* ---- STATS ---- */
-.stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
-.stat { background:#fff; border-radius:18px; padding:16px 12px; text-align:center; border:1.5px solid #e2efe9; box-shadow:0 6px 14px -8px rgba(5,80,50,0.08); }
-.stat b { display:block; font-size:18px; color:#0b4d3a; font-weight:900; margin-bottom:6px; }
-.stat span { font-size:11px; color:#6b8f82; font-weight:700; }
-.stat-pool { grid-column:span 2; background:#e1f7ec; border-color:#a7e0c5; }
-.stat-pool b { color:#047857; font-size:24px; }
-
-/* ---- MEMBERS ---- */
-.member { background:#fff; border-radius:20px; padding:16px; margin-bottom:12px; border:1.5px solid #e2efe9; box-shadow:0 6px 16px -8px rgba(5,80,50,0.08); }
-.member-top { display:flex; justify-content:space-between; align-items:center; }
-.mem-info { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
-.mem-num { width:36px; height:36px; background:#0b4d3a; color:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex-shrink:0; box-shadow:0 4px 10px rgba(11,77,58,0.25); }
-.member b { font-size:15px; color:#0b3b2b; font-weight:800; }
-.due { color:#047857; font-weight:900; }
-.due.red { color:#dc2626; }
-
-/* ---- BOTTOM NAV ---- */
-.bottom-nav {
-  position:fixed; bottom:0; left:0; right:0; width:100%; background:#fff;
-  border-top-left-radius:26px; border-top-right-radius:26px;
-  display:flex; justify-content:space-around; padding:10px 0 14px;
-  padding-bottom:calc(10px + env(safe-area-inset-bottom));
-  z-index:999; box-shadow:0 -8px 24px rgba(0,30,15,0.08); border-top:1px solid #d9ece4;
-}
-.bottom-nav button { flex:1; background:none; border:none; font-size:11px; font-weight:800; color:#8aa79c; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:5px; position:relative; }
-.bottom-nav button .ico { font-size:22px; filter:grayscale(1); opacity:0.55; transition:0.2s; }
-.bottom-nav button.active { color:#059669; }
-.bottom-nav button.active .ico { filter:grayscale(0); opacity:1; transform:translateY(-3px); }
-.bottom-nav button.active::after { content:''; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%); width:28px; height:3px; background:#059669; border-radius:3px; }
-
-/* ---- MODALS ---- */
-.modal-bg { position:fixed; inset:0; background:rgba(11,77,58,0.6); backdrop-filter:blur(6px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; }
-.modal-box { background:#fff; border-radius:26px; padding:26px 20px; max-width:360px; width:100%; box-shadow:0 25px 50px -12px rgba(0,0,0,0.3); position:relative; }
-.modal-box h2 { font-size:18px; font-weight:800; color:#0b3b2b; }
-.chat-box { height:250px; overflow-y:auto; background:#f5faf7; border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:8px; border:1px solid #d9ece4; margin-bottom:14px; }
-.msg-bubble { max-width:85%; padding:11px 14px; border-radius:16px; font-size:13px; line-height:1.5; font-weight:600; }
-.msg-ai { background:#e6f3ed; color:#0b3b2b; align-self:flex-start; border-bottom-left-radius:5px; }
-.msg-user { background:#059669; color:#fff; align-self:flex-end; border-bottom-right-radius:5px; }
-.ai-options { display:flex; flex-wrap:wrap; gap:7px; justify-content:center; }
-.ai-opt-btn { background:#fff; border:1.5px solid #b7e0c5; color:#0b3b2b; padding:8px 12px; border-radius:30px; font-size:11.5px; font-weight:800; cursor:pointer; }
-.ai-opt-btn:active { background:#e1f7ec; }
-.win-icon-btn { background:#fef3c7; border:none; border-radius:12px; width:36px; height:36px; font-size:16px; cursor:pointer; }
-.hidden { display:none !important; }
-.ledger-table { width:100%; border-collapse:collapse; font-size:12px; text-align:left; }
-.ledger-table th { background:#e1f7ec; padding:10px 6px; font-weight:800; color:#0b4d3a; position:sticky; top:0; }
-.ledger-table td { padding:10px 6px; border-bottom:1px solid #e2efe9; }
-.ledger-table tr:last-child td { border-bottom:none; }
-code { -webkit-user-select:all; user-select:all; }
-.empty-state { text-align:center; padding:30px 20px; color:#3d6b5c; font-weight:700; }
-
-/* ---- AI FAB ---- */
-.ai-fab { position:fixed; bottom:110px; right:18px; width:54px; height:54px; background:linear-gradient(135deg,#059669,#047857); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:26px; color:#fff; box-shadow:0 6px 18px rgba(5,150,105,0.4); cursor:pointer; z-index:90; border:2px solid #fff; }
-.ai-fab:active { transform:scale(0.9); }
-
-/* ---- ADMIN BADGE ---- */
-.admin-badge {
-  background:linear-gradient(90deg,#f59e0b,#d97706); color:#fff; font-size:10px; font-weight:900;
-  padding:3px 8px; border-radius:20px; letter-spacing:0.5px; display:inline-block; margin-left:6px;
-  box-shadow:0 3px 8px rgba(217,119,6,0.3);
-}
+/* ===== OTHER SECTIONS (cards, forms) ===== */
+.card{background:#fff;border-radius:22px;padding:20px;margin-bottom:14px;border:1.5px solid #e6f2ec;box-shadow:0 6px 20px -10px rgba(5,80,50,0.1)}
+.card-cream{background:#fefaf0;border-color:#f5e6b8}
+.card h2{font-size:17px;font-weight:800;color:#0b3b2b;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.field{margin-bottom:14px;width:100%}
+.field label{display:block;font-size:12px;font-weight:700;color:#5a7d6e;margin-bottom:6px}
+.input-wrap{position:relative;display:flex;align-items:center;width:100%}
+.input-ico{position:absolute;left:16px;font-size:17px;color:#0e8a5c;z-index:2}
+input,select,textarea{width:100%;box-sizing:border-box;max-width:100%;min-width:0}
+.input-wrap input,.input-wrap select{width:100%;padding:14px 16px 14px 46px;border-radius:14px;border:1.5px solid #d5e8de;font-size:14px;background:#f8fcfa;color:#0b3b2b;font-weight:600;outline:none}
+.input-wrap input:focus,.input-wrap select:focus{border-color:#0e8a5c;background:#fff;box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
+.no-ico{width:100%;padding:14px 16px;border:1.5px solid #d5e8de;border-radius:14px;font-size:14px;background:#f8fcfa;color:#0b3b2b;font-weight:600;outline:none}
+.no-ico:focus{border-color:#0e8a5c;background:#fff;box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{width:100%;padding:15px;border:none;border-radius:50px;font-size:15px;font-weight:800;cursor:pointer;transition:0.15s}
+.btn:active{transform:scale(0.96)}
+.btn-primary{background:linear-gradient(90deg,#0d7a52,#0e8a5c);color:#fff;box-shadow:0 8px 20px rgba(13,122,82,0.3)}
+.btn-secondary{background:#0b5d3f;color:#fff;box-shadow:0 6px 14px rgba(11,93,63,0.2)}
+.btn-sm{padding:8px 14px;font-size:12px;width:auto;border-radius:10px}
+.tabs{display:flex;background:#eaf5ee;border-radius:50px;padding:5px;margin-bottom:20px;border:1px solid #d5e8de}
+.tabs button{flex:1;padding:12px;border:none;border-radius:50px;background:transparent;font-size:13px;font-weight:800;color:#5a7d6e;cursor:pointer}
+.tabs button.active{background:linear-gradient(90deg,#0d7a52,#0e8a5c);color:#fff;box-shadow:0 4px 10px rgba(13,122,82,0.25)}
+.msg{padding:12px 16px;border-radius:14px;margin-bottom:14px;font-size:13px;text-align:center;font-weight:700}
+.msg.err{background:#fee9e9;color:#b91c1c;border:1px solid #fecaca}
+.msg.ok{background:#d5f2e2;color:#0e8a5c;border:1px solid #a7e0c5}
+.wallet-card{background:linear-gradient(135deg,#0b5d3f,#0d7a52);color:#fff;padding:22px;border-radius:22px;box-shadow:0 14px 30px -10px rgba(11,93,63,0.4);margin-bottom:14px;position:relative;overflow:hidden}
+.wallet-card::before{content:'';position:absolute;right:-30px;top:-40px;width:160px;height:160px;background:rgba(255,255,255,0.06);border-radius:50%}
+.wallet-card::after{content:'';position:absolute;right:50px;top:-60px;width:120px;height:120px;background:rgba(255,255,255,0.05);border-radius:50%}
+.wallet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:relative;z-index:2}
+.w-chip{width:44px;height:30px;background:linear-gradient(135deg,#fde68a,#d97706);border-radius:7px;border:1px solid #b45309}
+.w-wifi{font-size:22px;opacity:0.85;color:#fde68a;transform:rotate(90deg)}
+.wallet-title{font-size:11px;font-weight:700;letter-spacing:1.5px;opacity:0.85;text-transform:uppercase;margin-bottom:6px;position:relative;z-index:2}
+.wallet-amt{font-size:36px;font-weight:900;color:#fef3c7;margin-bottom:14px;position:relative;z-index:2;line-height:1}
+.wallet-num{font-family:monospace;font-size:13px;letter-spacing:2px;color:#a7e0c5;position:relative;z-index:2}
+.wallet-bot{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:600;opacity:0.85;margin-top:12px;position:relative;z-index:2}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.stat{background:#fff;border-radius:18px;padding:14px 12px;text-align:center;border:1.5px solid #e6f2ec;box-shadow:0 4px 14px -8px rgba(5,80,50,0.1)}
+.stat b{display:block;font-size:18px;color:#0b5d3f;font-weight:900;margin-bottom:6px}
+.stat span{font-size:11px;color:#7a9a8c;font-weight:700}
+.stat-pool{grid-column:span 2;background:#d5f2e2;border-color:#a7e0c5}
+.stat-pool b{color:#0e8a5c;font-size:22px}
+.member{background:#fff;border-radius:18px;padding:16px;margin-bottom:12px;border:1.5px solid #e6f2ec;box-shadow:0 4px 14px -8px rgba(5,80,50,0.1)}
+.member-top{display:flex;justify-content:space-between;align-items:center}
+.mem-info{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.mem-num{width:36px;height:36px;background:#0b5d3f;color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.member b{font-size:15px;color:#0b3b2b;font-weight:800}
+.due{color:#0e8a5c;font-weight:900}
+.due.red{color:#dc2626}
+.modal-bg{position:fixed;inset:0;background:rgba(11,77,58,0.6);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:#fff;border-radius:24px;padding:24px 20px;max-width:360px;width:100%;box-shadow:0 25px 50px -12px rgba(0,0,0,0.3);position:relative}
+.modal-box h2{font-size:18px;font-weight:800;color:#0b3b2b}
+.chat-box{height:250px;overflow-y:auto;background:#f5faf7;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;border:1px solid #d5e8de;margin-bottom:14px}
+.msg-bubble{max-width:85%;padding:11px 14px;border-radius:16px;font-size:13px;line-height:1.5;font-weight:600}
+.msg-ai{background:#e6f3ed;color:#0b3b2b;align-self:flex-start;border-bottom-left-radius:5px}
+.msg-user{background:#0e8a5c;color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.ai-options{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+.ai-opt-btn{background:#fff;border:1.5px solid #a7e0c5;color:#0b3b2b;padding:8px 12px;border-radius:30px;font-size:11.5px;font-weight:800;cursor:pointer}
+.ai-opt-btn:active{background:#d5f2e2}
+.win-icon-btn{background:#fef3c7;border:none;border-radius:12px;width:36px;height:36px;font-size:16px;cursor:pointer}
+.hidden{display:none!important}
+.ledger-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}
+.ledger-table th{background:#d5f2e2;padding:10px 6px;font-weight:800;color:#0b5d3f;position:sticky;top:0}
+.ledger-table td{padding:10px 6px;border-bottom:1px solid #e6f2ec}
+.empty-state{text-align:center;padding:30px 20px;color:#5a7d6e;font-weight:700}
+code{-webkit-user-select:all;user-select:all}
+.ai-fab{position:fixed;bottom:100px;right:16px;width:52px;height:52px;background:linear-gradient(135deg,#0d7a52,#0e8a5c);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;box-shadow:0 6px 18px rgba(13,122,82,0.4);cursor:pointer;z-index:90;border:2px solid #fff}
+.ai-fab:active{transform:scale(0.9)}
+#backArrow{width:38px;height:38px;background:rgba(255,255,255,0.95);border-radius:12px;display:none;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#0b5d3f;cursor:pointer;flex-shrink:0}
+.admin-badge{background:linear-gradient(90deg,#f59e0b,#d97706);color:#fff;font-size:10px;font-weight:900;padding:3px 8px;border-radius:20px;margin-left:6px}
 </style>
 </head>
 <body class="lang-hi">
-<div class="bg-app"></div>
 
-<!-- ============= TOP HEADER ============= -->
-<div class="top-header">
-  <div class="top-row">
-    <div class="brand-wrap">
-      <div id="backArrow" style="display:none; width:36px; height:36px; background:rgba(255,255,255,0.95); border-radius:12px; display:none; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:#0b4d3a; cursor:pointer; flex-shrink:0;" onclick="goBack()">←</div>
-      <div class="brand-logo">🌿</div>
-      <div class="brand-text">
-        <h1><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h1>
-        <p><span class="hi">सुरक्षित • सरल • भरोसेमंद</span><span class="en">Secure • Simple • Trusted</span></p>
-      </div>
+<!-- ============ HEADER ============ -->
+<div class="header">
+  <div class="header-row">
+    <div id="backArrow" onclick="goBack()">←</div>
+    <div class="logo-circle">🌿</div>
+    <div class="header-title">
+      <h1><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h1>
+      <p><span class="hi">सुरक्षित • सरल • भरोसेमंद</span><span class="en">Secure • Simple • Trusted</span></p>
     </div>
-    <div class="top-btns">
-      <button class="pill" id="langToggleBtn" onclick="toggleLang()">🌐 EN</button>
-      <button class="pill" onclick="shareApp()"><span class="flag">🇮🇳</span> <span class="hi">शेयर</span><span class="en">Share</span></button>
+    <div class="header-btns">
+      <button class="hbtn" id="langToggleBtn" onclick="toggleLang()"><span class="globe">🌐</span> EN</button>
+      <button class="hbtn" onclick="shareApp()"><span class="flag">🇮🇳</span> <span class="hi">शेयर</span><span class="en">Share</span></button>
     </div>
   </div>
 </div>
 
 <main>
 
-<!-- ============= AUTH SECTION ============= -->
-<section id="auth">
-  <div class="welcome-card" style="text-align:center;">
-    <div style="font-size:44px; margin-bottom:10px;">🌿</div>
-    <h2 style="font-size:22px; font-weight:900; color:#7c2d12; margin-bottom:6px; justify-content:center; display:flex;">कमेटी खाता</h2>
-    <p style="font-size:13px; color:#92400e; font-weight:700; margin-bottom:20px;">सुरक्षित • सरल • भरोसेमंद</p>
-    <div class="tabs" id="authTabs">
+<!-- ============ AUTH ============ -->
+<section id="auth" class="hidden">
+  <div class="welcome">
+    <div class="welcome-top">
+      <div class="welcome-icon">🌿</div>
+      <div class="welcome-mid">
+        <h2><span class="hi">स्वागत है!</span><span class="en">Welcome!</span></h2>
+        <p><span class="hi">कमेटी खाता में आपका स्वागत है</span><span class="en">Welcome to Group Khata</span></p>
+      </div>
+    </div>
+    <div class="tabs" id="authTabs" style="margin-bottom:16px">
       <button id="tabReg" class="active" onclick="switchAuth('register')"><span class="hi">नया अकाउंट</span><span class="en">New Account</span></button>
       <button id="tabLogin" onclick="switchAuth('login')"><span class="hi">लॉगिन</span><span class="en">Login</span></button>
     </div>
     <div id="authMsg"></div>
-    <div id="authNormal" style="text-align:left;">
+    <div id="authNormal">
       <div class="field">
         <div class="input-wrap"><span class="input-ico">📱</span>
           <input class="lang-input" id="authPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Number" placeholder="10 अंकों का नंबर" maxlength="10">
@@ -313,260 +371,246 @@ code { -webkit-user-select:all; user-select:all; }
           </div>
         </div>
       </div>
-      <button id="authBtn" class="btn btn-primary" style="margin-top:6px;" onclick="doAuth()"><span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span></button>
-      <p style="text-align:center; margin-top:16px;"><button style="background:none; border:none; color:#059669; font-weight:800; cursor:pointer;" onclick="showForgot()"><span class="hi">पासवर्ड भूल गए?</span><span class="en">Forgot Password?</span></button></p>
+      <button id="authBtn" class="btn btn-primary" style="margin-top:6px" onclick="doAuth()"><span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span></button>
+      <p style="text-align:center;margin-top:14px"><button style="background:none;border:none;color:#0e8a5c;font-weight:800;cursor:pointer;font-size:13px" onclick="showForgot()"><span class="hi">पासवर्ड भूल गए?</span><span class="en">Forgot Password?</span></button></p>
     </div>
-    <div id="authForgot" class="hidden" style="text-align:left;">
-      <p style="font-size:13px; font-weight:800; color:#059669; margin-bottom:16px; text-align:center;"><span class="hi">नया पासवर्ड सेट करें</span><span class="en">Set New Password</span></p>
+    <div id="authForgot" class="hidden">
+      <p style="font-size:13px;font-weight:800;color:#0e8a5c;margin-bottom:14px;text-align:center"><span class="hi">नया पासवर्ड सेट करें</span><span class="en">Set New Password</span></p>
       <div class="field"><div class="input-wrap"><span class="input-ico">📱</span><input class="lang-input" id="forgotPhone" type="tel" data-hi="मोबाइल नंबर" data-en="Mobile Number" placeholder="मोबाइल नंबर" maxlength="10"></div></div>
       <div class="field"><div class="input-wrap"><span class="input-ico">🔒</span><input class="lang-input" id="forgotPass" type="password" data-hi="नया पासवर्ड" data-en="New Password" placeholder="नया पासवर्ड"></div></div>
       <button class="btn btn-primary" onclick="doForgot()"><span class="hi">पासवर्ड बदलें</span><span class="en">Change Password</span></button>
-      <p style="text-align:center; margin-top:16px;"><button style="background:none; border:none; color:#059669; font-weight:800; cursor:pointer;" onclick="hideForgot()"><span class="hi">← वापस जाएं</span><span class="en">← Go Back</span></button></p>
+      <p style="text-align:center;margin-top:14px"><button style="background:none;border:none;color:#0e8a5c;font-weight:800;cursor:pointer;font-size:13px" onclick="hideForgot()"><span class="hi">← वापस जाएं</span><span class="en">← Go Back</span></button></p>
     </div>
   </div>
 </section>
 
-<!-- ============= HOME ============= -->
+<!-- ============ HOME ============ -->
 <section id="home" class="hidden">
 
   <!-- Welcome Card -->
-  <div class="welcome-card">
+  <div class="welcome">
     <div class="welcome-top">
-      <div class="welcome-left">
-        <h2>👋 <span class="hi">नमस्कार!</span><span class="en">Welcome!</span></h2>
+      <div class="welcome-icon">👋</div>
+      <div class="welcome-mid">
+        <h2><span class="hi">नमस्कार!</span><span class="en">Welcome!</span></h2>
         <p><span class="hi">कमेटी खाता में आपका स्वागत है<br>निवेश करें, बचत करें, मिलकर आगे बढ़ें</span><span class="en">Welcome to Group Khata<br>Invest, Save, Grow together</span></p>
       </div>
-      <div class="welcome-emoji">🪴</div>
-      <div class="welcome-right-img">
-        <div class="plant">🌱</div>
-        <div class="quote"><span class="hi">मिलकर<br>बचत ही<br>सुरक्षा है</span><span class="en">Save<br>Together<br>Stay Safe</span></div>
+      <div class="welcome-visual">
+        <div class="welcome-quote">
+          <span class="hi">मिलकर<br>बचत ही<br>सुरक्षा है</span>
+          <span class="en">Save<br>Together<br>Stay Safe</span>
+        </div>
+        <div class="plant">🪴</div>
+        <div class="coins">🪙</div>
       </div>
     </div>
-    <button class="btn-create-big" onclick="show('create')">
-      <span style="font-size:20px;">＋</span>
+    <button class="btn-new" onclick="show('create')">
+      <span class="plus">＋</span>
       <span class="hi">नई कमेटी बनाएँ</span><span class="en">Create New Group</span>
-      <span style="font-size:18px;">›</span>
+      <span class="arrow">›</span>
     </button>
   </div>
 
-  <!-- Code Entry -->
+  <!-- Code Card -->
   <div class="code-card">
     <div class="code-head">
-      <div class="code-icon-circle">🔑</div>
-      <div>
+      <div class="code-key">🔑</div>
+      <div class="code-head-txt">
         <h3><span class="hi">कोड से प्रवेश करें</span><span class="en">Enter via Code</span></h3>
         <p><span class="hi">अपना Access Code दर्ज करें</span><span class="en">Enter your Access Code</span></p>
       </div>
     </div>
     <div class="code-row">
-      <input class="lang-input" id="accessCode" data-hi="CODE (उदा. A1B2C3D4)" data-en="CODE (e.g. A1B2C3D4)" placeholder="CODE (उदा. A1B2C3D4)" style="text-transform:uppercase;">
-      <button onclick="join()">
-        <span style="font-size:16px;">→</span>
-        <span class="hi">प्रवेश करें</span><span class="en">Enter</span>
-      </button>
+      <input class="lang-input" id="accessCode" data-hi="CODE (उदा. A1B2C3D4)" data-en="CODE (e.g. A1B2C3D4)" placeholder="CODE (उदा. A1B2C3D4)">
+      <button onclick="join()">→ <span class="hi">प्रवेश करें</span><span class="en">Enter</span></button>
     </div>
   </div>
 
-  <!-- Section: Categories -->
-  <div class="section-title">
-    <h2><span class="dots"><span></span><span></span></span> <span class="hi">श्रेणियाँ / मुख्य सेवाएँ</span><span class="en">Categories / Services</span></h2>
+  <!-- Section Title -->
+  <div class="sec-title">
+    <h2><span class="dots"><span></span><span></span></span> <span class="hi">श्रेणियाँ / मुख्य सेवाएँ</span><span class="en">Categories</span></h2>
     <a onclick="show('mylist')"><span class="hi">सभी देखें →</span><span class="en">View All →</span></a>
   </div>
 
-  <div class="tiles-grid">
+  <!-- Tiles -->
+  <div class="tiles">
     <div class="tile t1" onclick="show('mylist')">
-      <div class="tile-icon">👥</div>
+      <div class="tile-ico">👥</div>
       <h4><span class="hi">मेरी कमेटियाँ</span><span class="en">My Groups</span></h4>
       <p><span class="hi">मेरी बनाई कमेटियाँ</span><span class="en">Groups I created</span></p>
-      <span class="arrow">→</span>
+      <span class="arr">→</span>
     </div>
     <div class="tile t2" onclick="show('mylist')">
-      <div class="tile-icon">📋</div>
+      <div class="tile-ico">📄</div>
       <h4><span class="hi">सभी कमेटियाँ</span><span class="en">All Groups</span></h4>
       <p><span class="hi">सभी कमेटियों की सूची</span><span class="en">List of all groups</span></p>
-      <span class="arrow">→</span>
+      <span class="arr">→</span>
     </div>
     <div class="tile t3" onclick="show('mylist')">
-      <div class="tile-icon">💰</div>
+      <div class="tile-ico">💰</div>
       <h4><span class="hi">किस्त / भुगतान</span><span class="en">Installments</span></h4>
       <p><span class="hi">किस्त जमा करें</span><span class="en">Pay installments</span></p>
-      <span class="arrow">→</span>
+      <span class="arr">→</span>
     </div>
     <div class="tile t4" onclick="show('mylist')">
-      <div class="tile-icon">📊</div>
+      <div class="tile-ico">📊</div>
       <h4><span class="hi">हिसाब-किताब</span><span class="en">Ledger</span></h4>
       <p><span class="hi">पूरी जानकारी</span><span class="en">Complete records</span></p>
-      <span class="arrow">→</span>
+      <span class="arr">→</span>
     </div>
     <div class="tile t5" onclick="show('profile')">
-      <div class="tile-icon">👤</div>
+      <div class="tile-ico">👤</div>
       <h4><span class="hi">सदस्य</span><span class="en">Members</span></h4>
       <p><span class="hi">सदस्य सूची</span><span class="en">Member list</span></p>
-      <span class="arrow">→</span>
+      <span class="arr">→</span>
     </div>
-    <div class="tile t6" onclick="show('admin')" id="excelTile">
-      <div class="tile-icon">📗</div>
+    <div class="tile t6" id="excelTile" onclick="show('admin')">
+      <div class="tile-ico">📗</div>
       <h4>Excel Backup</h4>
       <p><span class="hi">डेटा का बैकअप</span><span class="en">Data backup</span></p>
-      <span class="arrow">→</span>
+      <span class="arr">→</span>
     </div>
     <div class="tile t7" onclick="show('profile')">
-      <div class="tile-icon">⚙️</div>
+      <div class="tile-ico">⚙️</div>
       <h4><span class="hi">सेटिंग</span><span class="en">Settings</span></h4>
       <p><span class="hi">ऐप सेटिंग्स</span><span class="en">App settings</span></p>
-      <span class="arrow">→</span>
+      <span class="arr">→</span>
     </div>
   </div>
 
-  <!-- Feedback Card -->
-  <div class="feedback-card" onclick="document.getElementById('feedbackModal').classList.remove('hidden')">
-    <div class="fb-icon">💡</div>
-    <div class="fb-text">
+  <!-- Feedback -->
+  <div class="fb-card" onclick="document.getElementById('feedbackModal').classList.remove('hidden')">
+    <div class="fb-ico">💡</div>
+    <div class="fb-txt">
       <h4><span class="hi">सुझाव या शिकायत दें</span><span class="en">Give Feedback</span></h4>
-      <p><span class="hi">ऐप में क्या सुधार होना चाहिए?</span><span class="en">What should improve in the app?</span></p>
+      <p><span class="hi">ऐप में क्या सुधार होना चाहिए?</span><span class="en">What should improve?</span></p>
     </div>
-    <div class="fb-arrow">›</div>
+    <div class="fb-arr">›</div>
+    <div class="fb-people">
+      <span class="pp">👥</span>
+      <span><span class="hi">आपका<br>सहयोग<br>महत्वपूर्ण</span><span class="en">Your<br>support<br>matters</span></span>
+    </div>
   </div>
-
 </section>
 
-<!-- ============= MY LIST ============= -->
+<!-- ============ MY LIST ============ -->
 <section id="mylist" class="hidden">
-  <div style="display:flex; align-items:center; margin-bottom:16px; padding:0 4px;">
-    <span style="font-size:24px; margin-right:10px;">📋</span>
-    <h2 style="font-size:20px; font-weight:900; color:#0b3b2b;"><span class="hi">मेरी कमेटियाँ</span><span class="en">My Groups</span></h2>
+  <div style="display:flex;align-items:center;margin-bottom:14px;padding:0 4px">
+    <span style="font-size:24px;margin-right:10px">📋</span>
+    <h2 style="font-size:20px;font-weight:900;color:#0b3b2b"><span class="hi">मेरी कमेटियाँ</span><span class="en">My Groups</span></h2>
   </div>
   <div id="bcList"></div>
 </section>
 
-<!-- ============= CREATE ============= -->
+<!-- ============ CREATE ============ -->
 <section id="create" class="hidden">
   <div class="card card-cream">
-    <h2><span style="color:#059669;">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
-    <div class="field">
-      <label><span class="hi">कमेटी का नाम *</span><span class="en">Group Name *</span></label>
-      <input class="no-ico lang-input" id="bcName" data-hi="जैसे: गांव कमेटी 2026" data-en="e.g. Village Group 2026" placeholder="जैसे: गांव कमेटी 2026">
-    </div>
+    <h2><span style="color:#0e8a5c">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
+    <div class="field"><label><span class="hi">कमेटी का नाम *</span><span class="en">Group Name *</span></label><input class="no-ico lang-input" id="bcName" data-hi="जैसे: गांव कमेटी 2026" data-en="e.g. Village Group 2026" placeholder="जैसे: गांव कमेटी 2026"></div>
     <div class="row">
-      <div class="field"><label><span class="hi">किस्त राशि (₹) *</span><span class="en">Inst. Amount (₹) *</span></label><input class="no-ico lang-input" id="bcAmount" type="number" data-hi="उदा. 1000" data-en="e.g. 1000" placeholder="उदा. 1000" oninput="autoCalc()"></div>
-      <div class="field">
-        <label><span class="hi">किस्त का समय</span><span class="en">Frequency</span></label>
-        <select class="no-ico" id="freq">
-          <option value="weekly">हफ़्ता / Weekly</option>
-          <option value="biweekly">15 दिन / 15 Days</option>
-          <option value="monthly">महीना / Monthly</option>
-        </select>
+      <div class="field"><label><span class="hi">किस्त राशि (₹) *</span><span class="en">Inst. (₹) *</span></label><input class="no-ico lang-input" id="bcAmount" type="number" data-hi="उदा. 1000" data-en="e.g. 1000" placeholder="उदा. 1000" oninput="autoCalc()"></div>
+      <div class="field"><label><span class="hi">किस्त का समय</span><span class="en">Frequency</span></label>
+        <select class="no-ico" id="freq"><option value="weekly">हफ़्ता / Weekly</option><option value="biweekly">15 दिन / 15 Days</option><option value="monthly">महीना / Monthly</option></select>
       </div>
     </div>
     <div class="row">
       <div class="field"><label><span class="hi">कुल किश्तें *</span><span class="en">Total Installs *</span></label><input class="no-ico lang-input" id="totalInst" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="autoCalc()"></div>
-      <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" id="totalPool" type="number" readonly style="background:#e1f7ec; color:#047857; font-weight:800;" placeholder="Auto"></div>
+      <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" id="totalPool" type="number" readonly style="background:#d5f2e2;color:#0e8a5c;font-weight:800" placeholder="Auto"></div>
     </div>
-    <div style="background:#e1f7ec; border-radius:18px; padding:16px; margin-top:16px; border:1px solid #a7e0c5;">
-      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; color:#047857; font-weight:800;">⚙️ <span class="hi">ऑटो कैलकुलेटर</span><span class="en">Auto Calculator</span></div>
-      <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; color:#0b3b2b; margin-bottom:6px;"><span><span class="hi">किस्त राशि</span><span class="en">Inst. Amount</span></span><span id="c-amt">₹ 0</span></div>
-      <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; color:#0b3b2b; margin-bottom:6px;"><span><span class="hi">कुल किश्तें</span><span class="en">Total Installs</span></span><span id="c-inst">0</span></div>
-      <div style="display:flex; justify-content:space-between; font-size:16px; font-weight:900; color:#047857; margin-top:10px; padding-top:10px; border-top:1px dashed #a7e0c5;"><span><span class="hi">कुल पूरा राशि</span><span class="en">Total Pool</span></span><span id="c-pool">₹ 0</span></div>
+    <div style="background:#d5f2e2;border-radius:16px;padding:14px;margin-top:14px;border:1px solid #a7e0c5">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#0e8a5c;font-weight:800;font-size:13px">⚙️ <span class="hi">ऑटो कैलकुलेटर</span><span class="en">Auto Calculator</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#0b3b2b;margin-bottom:6px"><span><span class="hi">किस्त राशि</span><span class="en">Inst.</span></span><span id="c-amt">₹ 0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#0b3b2b;margin-bottom:6px"><span><span class="hi">कुल किश्तें</span><span class="en">Total</span></span><span id="c-inst">0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:900;color:#0e8a5c;margin-top:8px;padding-top:8px;border-top:1px dashed #a7e0c5"><span><span class="hi">कुल राशि</span><span class="en">Total Pool</span></span><span id="c-pool">₹ 0</span></div>
     </div>
-    <div style="margin-top:22px; padding-top:18px; border-top:1px dashed #d9ece4;">
+    <div style="margin-top:20px;padding-top:16px;border-top:1px dashed #e6f2ec">
       <div class="field"><label><span class="hi">मालिक का नाम *</span><span class="en">Owner Name *</span></label><input class="no-ico lang-input" id="ownerName" data-hi="संचालक का नाम" data-en="Admin Name" placeholder="संचालक का नाम"></div>
       <div class="field"><label><span class="hi">मालिक का मोबाइल *</span><span class="en">Owner Mobile *</span></label><input class="no-ico lang-input" id="ownerPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Mobile" placeholder="10 अंकों का नंबर" maxlength="10"></div>
-      <div class="field">
-        <label><span class="hi">UPI ID (ऑनलाइन पेमेंट के लिए - Optional)</span><span class="en">UPI ID (Optional)</span></label>
-        <input class="no-ico lang-input" id="upiId" data-hi="उदा. 9876543210@ybl" data-en="e.g. 9876543210@ybl" placeholder="उदा. 9876543210@ybl">
-      </div>
+      <div class="field"><label><span class="hi">UPI ID (Optional)</span><span class="en">UPI ID (Optional)</span></label><input class="no-ico lang-input" id="upiId" data-hi="उदा. 9876543210@ybl" data-en="e.g. 9876543210@ybl" placeholder="उदा. 9876543210@ybl"></div>
       <div class="field"><label><span class="hi">शुरुआत तिथि</span><span class="en">Start Date</span></label><input class="no-ico" id="startDate" type="date"></div>
     </div>
   </div>
   <div class="card">
-    <h2><span style="color:#059669;">👥</span> <span class="hi">सदस्य जोड़ें</span><span class="en">Add Members</span></h2>
+    <h2><span style="color:#0e8a5c">👥</span> <span class="hi">सदस्य जोड़ें</span><span class="en">Add Members</span></h2>
     <div class="field"><label><span class="hi">कुल सदस्य संख्या</span><span class="en">Total Members</span></label><input class="no-ico lang-input" id="memberCount" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
-    <div id="memberInputs" style="margin-top:16px;"></div>
+    <div id="memberInputs" style="margin-top:14px"></div>
   </div>
-  <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px;" id="createBtn"><span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span></button>
-  <div id="created" class="card hidden" style="background:#e1f7ec; text-align:center;"></div>
+  <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px" id="createBtn"><span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span></button>
+  <div id="created" class="card hidden" style="background:#d5f2e2;text-align:center"></div>
 </section>
 
-<!-- ============= DASHBOARD ============= -->
+<!-- ============ DASHBOARD ============ -->
 <section id="dashboard" class="hidden">
   <div id="walletBlock"></div>
-  <div id="ledgerCardBlock" class="card card-cream hidden" style="margin-bottom:16px; text-align:center; padding:18px;">
-    <h3 style="color:#0b3b2b; font-size:15px; font-weight:800; margin-bottom:6px;">📊 <span class="hi">कमेटी का पक्का हिसाब</span><span class="en">Group Ledger</span></h3>
-    <p style="font-size:12px; color:#6b8f82; margin-bottom:12px; font-weight:600;"><span class="hi">सभी सदस्यों का पूरा रिकॉर्ड देखें।</span><span class="en">View complete payment record.</span></p>
-    <button class="btn btn-primary" style="padding:12px; font-size:14px; border-radius:14px;" onclick="viewLedger()">👀 <span class="hi">पक्का हिसाब देखें</span><span class="en">View Final Ledger</span></button>
+  <div id="ledgerCardBlock" class="card card-cream hidden" style="text-align:center;padding:16px">
+    <h3 style="color:#0b3b2b;font-size:15px;font-weight:800;margin-bottom:6px">📊 <span class="hi">कमेटी का पक्का हिसाब</span><span class="en">Group Ledger</span></h3>
+    <p style="font-size:12px;color:#5a7d6e;margin-bottom:12px;font-weight:600"><span class="hi">सभी सदस्यों का पूरा रिकॉर्ड देखें।</span><span class="en">View complete record.</span></p>
+    <button class="btn btn-primary" style="padding:12px;font-size:14px;border-radius:14px" onclick="viewLedger()">👀 <span class="hi">पक्का हिसाब देखें</span><span class="en">View Final Ledger</span></button>
   </div>
-  <div style="margin-bottom:16px;" id="memberCard">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding:0 4px;">
-      <h2 style="margin:0; font-size:17px; font-weight:900; color:#0b3b2b;"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
-      <div style="display:flex; gap:8px;">
-        <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:#fff; color:#0b3b2b; border:1.5px solid #d9ece4;">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
-        <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef3c7; color:#b45309;">+ <span class="hi">अगली किश्त</span><span class="en">+ Next</span></button>
+  <div style="margin-bottom:14px" id="memberCard">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:0 4px">
+      <h2 style="margin:0;font-size:17px;font-weight:900;color:#0b3b2b"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
+      <div style="display:flex;gap:6px">
+        <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:#fff;color:#0b3b2b;border:1.5px solid #d5e8de">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
+        <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef3c7;color:#b45309">+ <span class="hi">अगली किश्त</span><span class="en">+ Next</span></button>
       </div>
     </div>
     <div id="members"></div>
   </div>
 </section>
 
-<!-- ============= PROFILE ============= -->
+<!-- ============ PROFILE ============ -->
 <section id="profile" class="hidden">
-  <div class="card card-cream" style="text-align:center; padding:36px 20px;">
-    <div style="width:80px; height:80px; background:linear-gradient(135deg,#059669,#047857); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px; margin:0 auto 15px; box-shadow:0 10px 20px rgba(5,150,105,0.25);">👤</div>
-    <h2 id="profName" style="justify-content:center; font-size:22px; margin-bottom:6px; text-align:center;">Name</h2>
-    <p id="profPhone" style="font-size:14px; color:#3d6b5c; font-weight:700; margin-bottom:26px; letter-spacing:1px; text-align:center;">+91 0000000000</p>
-    <div class="stats" style="margin-bottom:26px;">
-      <div class="stat"><b id="profCount" style="color:#059669;">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
-      <div class="stat"><b id="profRole" style="color:#059669;">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
+  <div class="card card-cream" style="text-align:center;padding:32px 20px">
+    <div style="width:80px;height:80px;background:linear-gradient(135deg,#0d7a52,#0e8a5c);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 15px;box-shadow:0 10px 20px rgba(13,122,82,0.25)">👤</div>
+    <h2 id="profName" style="justify-content:center;font-size:22px;margin-bottom:6px;text-align:center">Name</h2>
+    <p id="profPhone" style="font-size:14px;color:#5a7d6e;font-weight:700;margin-bottom:24px;letter-spacing:1px;text-align:center">+91 0000000000</p>
+    <div class="stats" style="margin-bottom:24px">
+      <div class="stat"><b id="profCount" style="color:#0e8a5c">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
+      <div class="stat"><b id="profRole" style="color:#0e8a5c">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
     </div>
-    <button class="btn" onclick="appLogout()" style="background:#dc2626; color:#fff; box-shadow:0 8px 18px rgba(220,38,38,0.25);">🚪 <span class="hi">सुरक्षित लॉगआउट</span><span class="en">Secure Logout</span></button>
+    <button class="btn" onclick="appLogout()" style="background:#dc2626;color:#fff;box-shadow:0 8px 18px rgba(220,38,38,0.25)">🚪 <span class="hi">सुरक्षित लॉगआउट</span><span class="en">Secure Logout</span></button>
   </div>
-  <div class="card" style="padding:16px; cursor:pointer;" onclick="document.getElementById('feedbackModal').classList.remove('hidden')">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div style="font-size:24px; background:#fef3c7; padding:10px; border-radius:14px;">💡</div>
+  <div class="card" style="padding:16px;cursor:pointer" onclick="document.getElementById('feedbackModal').classList.remove('hidden')">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-size:24px;background:#fef3c7;padding:10px;border-radius:14px">💡</div>
       <div>
-        <b style="color:#0b3b2b; font-size:15px;"><span class="hi">सुझाव या शिकायत दें</span><span class="en">Give Feedback</span></b>
-        <p style="font-size:11px; color:#6b8f82; margin-top:2px;"><span class="hi">ऐप में क्या सुधार होना चाहिए?</span><span class="en">Help us improve</span></p>
+        <b style="color:#0b3b2b;font-size:15px"><span class="hi">सुझाव या शिकायत दें</span><span class="en">Give Feedback</span></b>
+        <p style="font-size:11px;color:#5a7d6e;margin-top:2px"><span class="hi">ऐप में क्या सुधार होना चाहिए?</span><span class="en">Help us improve</span></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============= ADMIN PANEL ============= -->
+<!-- ============ ADMIN ============ -->
 <section id="admin" class="hidden">
-  <div class="card card-cream" style="border-left:4px solid #059669;">
-    <h2 style="color:#0b3b2b;">👑 Admin Dashboard <span class="admin-badge">ADMIN</span></h2>
-    <div class="msg ok" style="margin:0; background:#fff; border:none; text-align:left; padding:0;">✓ Admin ID Verified</div>
+  <div class="card card-cream" style="border-left:4px solid #0e8a5c">
+    <h2 style="color:#0b3b2b">👑 Admin Dashboard <span class="admin-badge">ADMIN</span></h2>
+    <div class="msg ok" style="margin:0;background:#fff;border:none;text-align:left;padding:0">✓ Admin ID Verified</div>
   </div>
-
-  <!-- ALL GROUPS LIST (Admin Only) -->
   <div class="card">
-    <h2 style="color:#0b3b2b;">📋 <span class="hi">सभी कमेटियाँ (Admin View)</span><span class="en">All Groups (Admin View)</span></h2>
-    <p style="font-size:12px; color:#6b8f82; margin-bottom:14px; font-weight:600;"><span class="hi">नीचे सभी बनी हुई कमेटियों की पूरी सूची है। किसी पर क्लिक करके manage करें।</span><span class="en">Complete list of all groups. Click to manage.</span></p>
+    <h2 style="color:#0b3b2b">📋 <span class="hi">सभी कमेटियाँ</span><span class="en">All Groups</span></h2>
+    <p style="font-size:12px;color:#5a7d6e;margin-bottom:12px;font-weight:600"><span class="hi">किसी भी कमेटी पर क्लिक करके manage करें।</span><span class="en">Click any group to manage.</span></p>
     <div id="adminAllList"></div>
-    <button class="btn btn-primary" style="margin-top:8px; border-radius:14px;" onclick="loadAllGroups()">
-      🔄 <span class="hi">सभी कमेटियाँ रिफ्रेश करें</span><span class="en">Refresh All Groups</span>
-    </button>
+    <button class="btn btn-primary" style="margin-top:8px;border-radius:14px" onclick="loadAllGroups()">🔄 <span class="hi">रिफ्रेश करें</span><span class="en">Refresh</span></button>
   </div>
-
-  <!-- MASTER EXCEL BACKUP -->
-  <div class="card card-cream" style="border-left:4px solid #059669;">
-    <h2 style="color:#0b3b2b;">📊 Master Excel Backup</h2>
-    <p style="margin-bottom:12px; font-size:12px; color:#6b8f82; font-weight:600;"><span class="hi">किसी भी कमेटी का Code डालकर Excel डाउनलोड करें:</span><span class="en">Enter Code to download Excel:</span></p>
-    <div class="field"><input class="no-ico" id="adminExcelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:#fff; text-transform:uppercase;"></div>
-    <button class="btn btn-primary" style="border-radius:14px;" onclick="adminDownloadExcel()"><span class="hi">📥 Excel फाइल डाउनलोड करें</span><span class="en">📥 Download Excel Sheet</span></button>
+  <div class="card card-cream" style="border-left:4px solid #0e8a5c">
+    <h2 style="color:#0b3b2b">📊 Master Excel Backup</h2>
+    <p style="margin-bottom:12px;font-size:12px;color:#5a7d6e;font-weight:600"><span class="hi">किसी भी कमेटी का Code डालकर Excel डाउनलोड करें:</span><span class="en">Enter Code to download Excel:</span></p>
+    <div class="field"><input class="no-ico" id="adminExcelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:#fff;text-transform:uppercase"></div>
+    <button class="btn btn-primary" style="border-radius:14px" onclick="adminDownloadExcel()"><span class="hi">📥 Excel डाउनलोड करें</span><span class="en">📥 Download Excel</span></button>
   </div>
-
-  <!-- DELETE GROUP -->
-  <div class="card" style="background:#fee9e9; border-color:#fecaca; border-left:4px solid #dc2626;">
-    <h2 style="color:#dc2626;"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete Group</span></h2>
-    <p style="margin-bottom:14px; font-size:12px; color:#9f1239; font-weight:600;"><span class="hi">गलत बनी कमेटी का कोड डालकर डिलीट करें।</span><span class="en">Enter Code to permanently delete.</span></p>
-    <div class="field"><input class="no-ico" id="adminDelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:#fff; text-transform:uppercase;"></div>
-    <button class="btn" style="background:#dc2626; color:#fff; border-radius:14px;" onclick="adminDeleteBC()"><span class="hi">🗑️ डाटा डिलीट करें</span><span class="en">🗑️ Delete Data</span></button>
+  <div class="card" style="background:#fee9e9;border-color:#fecaca;border-left:4px solid #dc2626">
+    <h2 style="color:#dc2626"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete Group</span></h2>
+    <p style="margin-bottom:14px;font-size:12px;color:#9f1239;font-weight:600"><span class="hi">गलत बनी कमेटी का कोड डालकर डिलीट करें।</span><span class="en">Enter Code to permanently delete.</span></p>
+    <div class="field"><input class="no-ico" id="adminDelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:#fff;text-transform:uppercase"></div>
+    <button class="btn" style="background:#dc2626;color:#fff;border-radius:14px" onclick="adminDeleteBC()"><span class="hi">🗑️ डाटा डिलीट करें</span><span class="en">🗑️ Delete Data</span></button>
   </div>
 </section>
 
 </main>
 
-<!-- ============= BOTTOM NAV ============= -->
+<!-- ============ BOTTOM NAV ============ -->
 <nav id="mainNav" class="bottom-nav hidden">
   <button id="nav-home" onclick="show('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
   <button id="nav-create" onclick="show('create')"><div class="ico">➕</div><span class="hi">नई</span><span class="en">New</span></button>
@@ -578,35 +622,30 @@ code { -webkit-user-select:all; user-select:all; }
 <!-- AI FAB -->
 <div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
-<!-- ============= MODALS ============= -->
+<!-- MODALS -->
 <div id="appModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:center;">
-    <p id="modalText" style="font-weight:700; margin-bottom:20px; color:#1e2f2a; white-space:pre-wrap; font-size:15px;"></p>
+  <div class="modal-box" style="text-align:center">
+    <p id="modalText" style="font-weight:700;margin-bottom:20px;color:#1e2f2a;white-space:pre-wrap;font-size:15px"></p>
     <button class="btn btn-primary" onclick="document.getElementById('appModal').classList.add('hidden')">OK</button>
   </div>
 </div>
-
 <div id="confirmModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:center;">
-    <p id="confirmText" style="font-weight:800; margin-bottom:20px; color:#1e2f2a; white-space:pre-wrap; font-size:16px;"></p>
-    <div style="display:flex; gap:10px;">
-      <button class="btn" style="background:#eef7f2; color:#3d6b5c;" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+  <div class="modal-box" style="text-align:center">
+    <p id="confirmText" style="font-weight:800;margin-bottom:20px;color:#1e2f2a;white-space:pre-wrap;font-size:16px"></p>
+    <div style="display:flex;gap:10px">
+      <button class="btn" style="background:#eaf5ee;color:#5a7d6e" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
       <button class="btn btn-primary" id="confirmYes"><span class="hi">हाँ, पक्का</span><span class="en">Yes, Sure</span></button>
     </div>
   </div>
 </div>
-
 <div id="aiModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:left;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+  <div class="modal-box" style="text-align:left">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
       <h2>🤖 <span class="hi">AI सहायता</span><span class="en">AI Help</span></h2>
-      <div style="font-size:24px; cursor:pointer; color:#dc2626;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
+      <div style="font-size:24px;cursor:pointer;color:#dc2626" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
     </div>
     <div class="chat-box" id="aiChat">
-      <div class="msg-bubble msg-ai">
-        <span class="hi">नमस्ते! मैं आपका AI असिस्टेंट हूँ। ऐप के बारे में सवाल पूछें। 👇</span>
-        <span class="en">Hello! Ask me anything about the app. 👇</span>
-      </div>
+      <div class="msg-bubble msg-ai"><span class="hi">नमस्ते! ऐप के बारे में सवाल पूछें। 👇</span><span class="en">Hi! Ask about the app. 👇</span></div>
     </div>
     <div class="ai-options">
       <button class="ai-opt-btn" onclick="askAI('secure')"><span class="hi">🔒 सुरक्षित?</span><span class="en">🔒 Secure?</span></button>
@@ -616,133 +655,93 @@ code { -webkit-user-select:all; user-select:all; }
     </div>
   </div>
 </div>
-
 <div id="feedbackModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:left;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+  <div class="modal-box" style="text-align:left">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
       <h2>💡 <span class="hi">सुझाव / शिकायत</span><span class="en">Feedback</span></h2>
-      <div style="font-size:24px; cursor:pointer; color:#dc2626;" onclick="document.getElementById('feedbackModal').classList.add('hidden')">✖</div>
+      <div style="font-size:24px;cursor:pointer;color:#dc2626" onclick="document.getElementById('feedbackModal').classList.add('hidden')">✖</div>
     </div>
-    <p style="font-size:12px; color:#6b8f82; margin-bottom:12px; font-weight:600;">
-      <span class="hi">सीधे एडमिन के WhatsApp पर जाएगा।</span>
-      <span class="en">Will be sent directly to Admin's WhatsApp.</span>
-    </p>
-    <textarea id="feedbackText" rows="4" style="width:100%; padding:14px; border-radius:16px; border:1.5px solid #b7e0c5; font-size:14px; margin-bottom:15px; background:#f9fdfb; resize:none; outline:none; font-family:inherit;" placeholder="अपनी बात यहाँ लिखें..."></textarea>
+    <p style="font-size:12px;color:#5a7d6e;margin-bottom:12px;font-weight:600"><span class="hi">सीधे एडमिन के WhatsApp पर जाएगा।</span><span class="en">Sent directly to Admin's WhatsApp.</span></p>
+    <textarea id="feedbackText" rows="4" style="width:100%;padding:14px;border-radius:16px;border:1.5px solid #a7e0c5;font-size:14px;margin-bottom:15px;background:#f8fcfa;resize:none;outline:none;font-family:inherit" placeholder="अपनी बात यहाँ लिखें..."></textarea>
     <button class="btn btn-primary" onclick="submitFeedback()"><span class="hi">📤 एडमिन को भेजें</span><span class="en">📤 Send to Admin</span></button>
   </div>
 </div>
-
 <div id="ledgerModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:left; max-width:400px;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+  <div class="modal-box" style="text-align:left;max-width:400px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
       <h2>📊 <span class="hi">पक्का हिसाब</span><span class="en">Final Ledger</span></h2>
-      <div style="font-size:24px; cursor:pointer; color:#dc2626;" onclick="document.getElementById('ledgerModal').classList.add('hidden')">✖</div>
+      <div style="font-size:24px;cursor:pointer;color:#dc2626" onclick="document.getElementById('ledgerModal').classList.add('hidden')">✖</div>
     </div>
-    <div style="max-height:250px; overflow-y:auto; border:1px solid #d9ece4; border-radius:16px; margin-bottom:15px;">
+    <div style="max-height:250px;overflow-y:auto;border:1px solid #d5e8de;border-radius:16px;margin-bottom:15px">
       <table class="ledger-table" id="ledgerTableData"></table>
     </div>
-    <button class="btn btn-primary" onclick="requestExcelFromAdmin()" style="background:#b45309; box-shadow:0 6px 14px rgba(180,83,9,0.2);">📩 <span class="hi">Excel फ़ाइल मंगाएं (WhatsApp)</span><span class="en">Request Excel (WhatsApp)</span></button>
+    <button class="btn btn-primary" onclick="requestExcelFromAdmin()" style="background:#b45309;box-shadow:0 6px 14px rgba(180,83,9,0.2)">📩 <span class="hi">Excel फ़ाइल मंगाएं</span><span class="en">Request Excel</span></button>
   </div>
 </div>
-
 <div id="winnerModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:center; background:linear-gradient(180deg,#fffbeb,#fef3c7);">
-    <div style="position:absolute; right:15px; top:15px; font-size:20px; cursor:pointer; color:#92400e;" onclick="document.getElementById('winnerModal').classList.add('hidden')">✖</div>
-    <div style="font-size:70px; margin-bottom:6px;">🏆</div>
-    <h2 style="color:#b45309; font-size:28px; font-weight:900;">Winner!</h2>
-    <p style="font-size:22px; font-weight:800; color:#92400e;" id="winName">Name</p>
-    <p style="color:#b45309; font-size:14px;"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Group opened!</span></p>
-    <div id="winAmount" style="background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; padding:12px 24px; border-radius:18px; font-size:32px; display:inline-block; margin:15px 0; font-weight:900;">₹0</div>
-    <p style="color:#92400e; font-size:13px; font-weight:700; margin-bottom:20px;"><span class="hi">क्या वॉलेट से पैसे देना चाहते हैं?</span><span class="en">Pay from Wallet?</span></p>
-    <div style="display:flex; gap:10px;">
-      <button class="btn" style="background:#fef3c7; color:#b45309;" onclick="document.getElementById('winnerModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+  <div class="modal-box" style="text-align:center;background:linear-gradient(180deg,#fefaf0,#fef3c7)">
+    <div style="position:absolute;right:15px;top:15px;font-size:20px;cursor:pointer;color:#92400e" onclick="document.getElementById('winnerModal').classList.add('hidden')">✖</div>
+    <div style="font-size:70px;margin-bottom:6px">🏆</div>
+    <h2 style="color:#b45309;font-size:28px;font-weight:900">Winner!</h2>
+    <p style="font-size:22px;font-weight:800;color:#92400e" id="winName">Name</p>
+    <p style="color:#b45309;font-size:14px"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Group opened!</span></p>
+    <div id="winAmount" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:12px 24px;border-radius:18px;font-size:32px;display:inline-block;margin:15px 0;font-weight:900">₹0</div>
+    <p style="color:#92400e;font-size:13px;font-weight:700;margin-bottom:20px"><span class="hi">क्या वॉलेट से पैसे देना चाहते हैं?</span><span class="en">Pay from Wallet?</span></p>
+    <div style="display:flex;gap:10px">
+      <button class="btn" style="background:#fef3c7;color:#b45309" onclick="document.getElementById('winnerModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
       <button class="btn btn-primary" onclick="confirmWinner()"><span class="hi">हाँ, दे दिए</span><span class="en">Yes, Paid</span></button>
     </div>
   </div>
 </div>
-
 <div id="editModal" class="modal-bg hidden">
   <div class="modal-box">
-    <h2 style="text-align:center; margin-bottom:15px;"><span class="hi">कमेटी जानकारी एडिट करें</span><span class="en">Edit Group Details</span></h2>
+    <h2 style="text-align:center;margin-bottom:15px"><span class="hi">कमेटी एडिट करें</span><span class="en">Edit Group</span></h2>
     <div class="field"><label><span class="hi">किस्त राशि (₹)</span><span class="en">Installment (₹)</span></label><input class="no-ico" type="number" id="editAmt" oninput="editAutoCalc()"></div>
     <div class="field"><label><span class="hi">कुल किश्तें</span><span class="en">Total Installments</span></label><input class="no-ico" type="number" id="editInst" oninput="editAutoCalc()"></div>
-    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background:#e1f7ec; color:#047857; font-weight:800;"></div>
-    <div class="field"><label><span class="hi">UPI ID (ऑप्शनल)</span><span class="en">UPI ID (Optional)</span></label><input class="no-ico" type="text" id="editUpi" placeholder="mobilenumber@upi"></div>
-    <div style="display:flex; gap:10px; margin-top:18px;">
-      <button class="btn" style="background:#eef7f2; color:#3d6b5c;" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background:#d5f2e2;color:#0e8a5c;font-weight:800"></div>
+    <div class="field"><label><span class="hi">UPI ID</span><span class="en">UPI ID</span></label><input class="no-ico" type="text" id="editUpi" placeholder="mobilenumber@upi"></div>
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="btn" style="background:#eaf5ee;color:#5a7d6e" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
       <button class="btn btn-primary" onclick="saveEdit()"><span class="hi">सेव करें</span><span class="en">Save</span></button>
     </div>
   </div>
 </div>
 
-<div id="demoModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:left;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
-      <h2>👀 <span class="hi">ऐप कैसे चलाएं?</span><span class="en">How App Works?</span></h2>
-      <div style="font-size:24px; cursor:pointer; color:#dc2626;" onclick="document.getElementById('demoModal').classList.add('hidden')">✖</div>
-    </div>
-    <div style="background:#f5faf7; padding:12px; border-radius:14px; margin-bottom:10px; border:1px solid #d9ece4;">
-      <b style="color:#059669; font-size:13px; display:block; margin-bottom:4px;">1️⃣ <span class="hi">कमेटी बनाएं</span><span class="en">Create Group</span></b>
-      <p style="font-size:11.5px; color:#6b8f82;"><span class="hi">संचालक जानकारी भरें।</span><span class="en">Owner fills details.</span></p>
-    </div>
-    <div style="text-align:center; color:#059669; margin-bottom:10px;">⬇</div>
-    <div style="background:#f5faf7; padding:12px; border-radius:14px; margin-bottom:10px; border:1px solid #d9ece4;">
-      <b style="color:#059669; font-size:13px; display:block; margin-bottom:4px;">2️⃣ <span class="hi">कोड शेयर करें</span><span class="en">Share Code</span></b>
-      <p style="font-size:11.5px; color:#6b8f82;"><span class="hi">8 अंकों का Code भेजें।</span><span class="en">Share 8-digit code.</span></p>
-    </div>
-    <div style="text-align:center; color:#059669; margin-bottom:10px;">⬇</div>
-    <div style="background:#f5faf7; padding:12px; border-radius:14px; margin-bottom:10px; border:1px solid #d9ece4;">
-      <b style="color:#059669; font-size:13px; display:block; margin-bottom:4px;">3️⃣ <span class="hi">कोड डालकर जुड़ें</span><span class="en">Join via Code</span></b>
-      <p style="font-size:11.5px; color:#6b8f82;"><span class="hi">सदस्य Code डालें।</span><span class="en">Members enter code.</span></p>
-    </div>
-    <div style="text-align:center; color:#059669; margin-bottom:10px;">⬇</div>
-    <div style="background:#e1f7ec; padding:12px; border-radius:14px; margin-bottom:18px; border:1px solid #a7e0c5;">
-      <b style="color:#047857; font-size:13px; display:block; margin-bottom:4px;">4️⃣ <span class="hi">ऑनलाइन पेमेंट</span><span class="en">Online Payment</span></b>
-      <p style="font-size:11.5px; color:#0b3b2b;"><span class="hi">UPI से पेमेंट करें।</span><span class="en">Pay via UPI.</span></p>
-    </div>
-    <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('hidden')"><span class="hi">✅ समझ गया</span><span class="en">✅ Got it</span></button>
-  </div>
-</div>
-
 <script>
-/* ============================================================
-   CORE APP LOGIC
-   ============================================================ */
+/* ===== CONFIG ===== */
 const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
 const ADMIN_PHONE = '7318259001';
 const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr';
-const KEYS = { session: 'kk_session', joined: 'kk_joined', current: 'kk_current' };
+const KEYS = { session:'kk_session', joined:'kk_joined', current:'kk_current' };
 let currentBCData = null;
 let currentLang = localStorage.getItem('kk_lang') || 'hi';
 let navHistory = [];
 let currentUserIsAdmin = false;
 
-function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
-function cleanPhone(p) { if (!p) return ""; return String(p).replace(/\D/g, '').slice(-10); }
-function load(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } }
-function save(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
-function genCode() { return Math.random().toString(36).substring(2, 10).toUpperCase(); }
+function t(h,e){ return currentLang === 'hi' ? h : e; }
+function cleanPhone(p){ if(!p) return ''; return String(p).replace(/\D/g,'').slice(-10); }
+function load(k,d){ try{ return JSON.parse(localStorage.getItem(k)) || d; }catch{ return d; } }
+function save(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
+function genCode(){ return Math.random().toString(36).substring(2,10).toUpperCase(); }
 
-function toggleLang() { currentLang = currentLang === 'hi' ? 'en' : 'hi'; applyLang(); }
-
-function applyLang() {
+function toggleLang(){ currentLang = currentLang === 'hi' ? 'en' : 'hi'; applyLang(); }
+function applyLang(){
   localStorage.setItem('kk_lang', currentLang);
   document.body.className = 'lang-' + currentLang;
-  document.getElementById('langToggleBtn').innerHTML = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
+  document.getElementById('langToggleBtn').innerHTML = currentLang === 'hi' ? '<span class="globe">🌐</span> EN' : '<span class="globe">🌐</span> HI';
   document.querySelectorAll('.lang-input').forEach(el => {
-    if (el.getAttribute('data-' + currentLang)) el.placeholder = el.getAttribute('data-' + currentLang);
+    if(el.getAttribute('data-' + currentLang)) el.placeholder = el.getAttribute('data-' + currentLang);
   });
-  if (!document.getElementById('dashboard').classList.contains('hidden')) loadDash();
-  if (!document.getElementById('mylist').classList.contains('hidden')) renderMyList();
-  if (!document.getElementById('admin').classList.contains('hidden')) loadAllGroups();
-  if (!document.getElementById('create').classList.contains('hidden')) autoCalc();
+  if(!document.getElementById('dashboard').classList.contains('hidden')) loadDash();
+  if(!document.getElementById('mylist').classList.contains('hidden')) renderMyList();
+  if(!document.getElementById('admin').classList.contains('hidden')) loadAllGroups();
+  if(!document.getElementById('create').classList.contains('hidden')) autoCalc();
   const isReg = document.getElementById('tabReg').classList.contains('active');
   document.getElementById('authBtn').innerHTML = isReg
     ? '<span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span>'
     : '<span class="hi">लॉगिन करें</span><span class="en">Login</span>';
 }
-
-function appAlert(text) {
+function appAlert(text){
   return new Promise(res => {
     const m = document.getElementById('appModal');
     document.getElementById('modalText').textContent = text;
@@ -750,7 +749,7 @@ function appAlert(text) {
     m.querySelector('.btn').onclick = () => { m.classList.add('hidden'); res(); };
   });
 }
-function appConfirm(text) {
+function appConfirm(text){
   return new Promise(res => {
     const m = document.getElementById('confirmModal');
     document.getElementById('confirmText').innerText = text;
@@ -759,298 +758,240 @@ function appConfirm(text) {
     document.getElementById('confirmNo').onclick = () => { m.classList.add('hidden'); res(false); };
   });
 }
-
-async function shareApp() {
-  const shareData = {
-    title: t('कमेटी खाता', 'Group Khata'),
-    text: t('💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप डाउनलोड करें:\n\n', '💰 *Group Khata App*\n\nKeep your group records secure. Download now:\n\n') + APP_LINK
-  };
-  try { if (navigator.share) await navigator.share(shareData);
-        else window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
-  catch { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
+async function shareApp(){
+  const sd = { title:t('कमेटी खाता','Group Khata'),
+    text:t('💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप डाउनलोड करें:\n\n','💰 *Group Khata App*\n\nKeep group records secure. Download:\n\n') + APP_LINK };
+  try{ if(navigator.share) await navigator.share(sd); else window.location.href='https://wa.me/?text='+encodeURIComponent(sd.text); }
+  catch{ window.location.href='https://wa.me/?text='+encodeURIComponent(sd.text); }
 }
-
-function submitFeedback() {
-  let text = document.getElementById('feedbackText').value.trim();
-  if (!text) return appAlert(t('कृपया सुझाव या शिकायत लिखें!', 'Please write your feedback!'));
-  let s = load(KEYS.session, {});
-  let msg = `*Group Khata - Feedback* 💡\n\n*From:* ${s.name || 'User'} (${s.phone || 'Unknown'})\n*Message:* ${text}`;
-  window.open(`https://wa.me/91${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+function submitFeedback(){
+  let txt = document.getElementById('feedbackText').value.trim();
+  if(!txt) return appAlert(t('कृपया सुझाव लिखें!','Please write feedback!'));
+  let s = load(KEYS.session,{});
+  let msg = `*Group Khata - Feedback* 💡\n\n*From:* ${s.name||'User'} (${s.phone||'Unknown'})\n*Message:* ${txt}`;
+  window.open(`https://wa.me/91${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`,'_blank');
   document.getElementById('feedbackModal').classList.add('hidden');
   document.getElementById('feedbackText').value = '';
 }
-
-function copyToClipboard(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(() => appAlert(t("✅ UPI ID कॉपी हो गई: \n\n" + text, "✅ UPI ID Copied: \n\n" + text)));
+function copyToClipboard(text){
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(()=>appAlert(t('✅ UPI ID कॉपी: \n\n'+text,'✅ UPI ID Copied: \n\n'+text)));
   } else {
-    let i = document.createElement("input"); i.value = text;
-    document.body.appendChild(i); i.select(); document.execCommand("copy");
-    document.body.removeChild(i);
-    appAlert(t("✅ UPI ID कॉपी हो गई: \n\n" + text, "✅ UPI ID Copied: \n\n" + text));
+    let i = document.createElement('input'); i.value = text; document.body.appendChild(i);
+    i.select(); document.execCommand('copy'); document.body.removeChild(i);
+    appAlert(t('✅ UPI ID कॉपी: \n\n'+text,'✅ UPI ID Copied: \n\n'+text));
   }
 }
-
-/* -------- AI CHAT -------- */
-function askAI(type) {
+function askAI(type){
   const chat = document.getElementById('aiChat');
-  let qText = "", aText = "";
-  if (type === 'secure') { qText = t('🔒 क्या यह ऐप सुरक्षित है?', '🔒 Is this app secure?');
-    aText = t('✅ जी हाँ, यह 100% सुरक्षित है। आपका डेटा एन्क्रिप्टेड सर्वर पर सेव होता है।', '✅ Yes, 100% secure. Data saved on encrypted servers.'); }
-  else if (type === 'pay') { qText = t('💳 ऑनलाइन पेमेंट कैसे करें?', '💳 How to pay online?');
-    aText = t('💳 जब किश्त बाकी होगी, UPI ID और कॉपी बटन दिखेगा।', '💳 When due, UPI ID and copy button will appear.'); }
-  else if (type === 'data') { qText = t('☁️ डेटा खो गया तो?', '☁️ What if data is lost?');
-    aText = t('☁️ डेटा क्लाउड सर्वर पर सुरक्षित रहता है।', '☁️ Data is safe on cloud servers.'); }
-  else if (type === 'use') { qText = t('✅ ऐप का इस्तेमाल कैसे करें?', '✅ How to use?');
-    aText = t('✅ 1. कमेटी बनाएं।<br>2. कोड शेयर करें।<br>3. सदस्य जुड़ें।<br>4. ऑनलाइन पेमेंट करें!', '✅ 1. Create group.<br>2. Share code.<br>3. Members join.<br>4. Pay online!'); }
-  chat.innerHTML += `<div class="msg-bubble msg-user">${qText}</div>`;
+  let q='',a='';
+  if(type==='secure'){ q=t('🔒 सुरक्षित?','🔒 Secure?'); a=t('✅ हाँ, 100% सुरक्षित। एन्क्रिप्टेड सर्वर।','✅ Yes, 100% secure. Encrypted servers.'); }
+  else if(type==='pay'){ q=t('💳 पेमेंट?','💳 Pay?'); a=t('💳 किश्त बाकी होने पर UPI ID दिखेगा। कॉपी करके GPay/PhonePe में पेस्ट करें।','💳 When due, UPI ID will show. Copy & paste in GPay/PhonePe.'); }
+  else if(type==='data'){ q=t('☁️ डेटा?','☁️ Data?'); a=t('☁️ डेटा क्लाउड सर्वर पर सुरक्षित है। Excel मंगा सकते हैं।','☁️ Data safe on cloud. You can request Excel.'); }
+  else if(type==='use'){ q=t('✅ कैसे?','✅ How?'); a=t('✅ 1. कमेटी बनाएं<br>2. कोड शेयर करें<br>3. सदस्य जुड़ें<br>4. ऑनलाइन पेमेंट!','✅ 1. Create group<br>2. Share code<br>3. Members join<br>4. Pay online!'); }
+  chat.innerHTML += `<div class="msg-bubble msg-user">${q}</div>`;
   chat.scrollTop = chat.scrollHeight;
-  document.querySelectorAll('.ai-opt-btn').forEach(b => b.disabled = true);
-  setTimeout(() => {
-    chat.innerHTML += `<div class="msg-bubble msg-ai">${aText}</div>`;
+  document.querySelectorAll('.ai-opt-btn').forEach(b=>b.disabled=true);
+  setTimeout(()=>{
+    chat.innerHTML += `<div class="msg-bubble msg-ai">${a}</div>`;
     chat.scrollTop = chat.scrollHeight;
-    document.querySelectorAll('.ai-opt-btn').forEach(b => b.disabled = false);
-  }, 700);
+    document.querySelectorAll('.ai-opt-btn').forEach(b=>b.disabled=false);
+  },700);
 }
-
-/* -------- LEDGER -------- */
-function viewLedger() {
-  if (!currentBCData) return;
+function viewLedger(){
+  if(!currentBCData) return;
   let h = `<tr><th>Name</th><th>Paid</th><th>Due</th></tr>`;
-  currentBCData.members.forEach(m => {
-    let paid = (m.paidRounds || 0) * currentBCData.amount;
-    let due = Math.max(0, (currentBCData.currentRound || 1) * currentBCData.amount - paid);
-    h += `<tr><td>${m.name}</td><td style="color:#6b8f82;">₹${paid}</td><td style="color:${due > 0 ? '#dc2626' : '#047857'}; font-weight:800;">₹${due}</td></tr>`;
+  currentBCData.members.forEach(m=>{
+    let paid = (m.paidRounds||0)*currentBCData.amount;
+    let due = Math.max(0,(currentBCData.currentRound||1)*currentBCData.amount - paid);
+    h += `<tr><td>${m.name}</td><td style="color:#5a7d6e">₹${paid}</td><td style="color:${due>0?'#dc2626':'#0e8a5c'};font-weight:800">₹${due}</td></tr>`;
   });
   document.getElementById('ledgerTableData').innerHTML = h;
   document.getElementById('ledgerModal').classList.remove('hidden');
 }
-function requestExcelFromAdmin() {
-  if (!currentBCData) return;
-  let s = load(KEYS.session, {});
-  let msg = `*Group Khata - Data Request* 📊\n\n*Committee:* ${currentBCData.name}\n*Code:* ${currentBCData.code}\n*Requested By:* ${s.name || 'User'}`;
-  window.open(`https://wa.me/91${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+function requestExcelFromAdmin(){
+  if(!currentBCData) return;
+  let s = load(KEYS.session,{});
+  let msg = `*Group Khata - Data Request* 📊\n\n*Committee:* ${currentBCData.name}\n*Code:* ${currentBCData.code}\n*Requested By:* ${s.name||'User'}`;
+  window.open(`https://wa.me/91${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`,'_blank');
 }
-
-/* -------- ADMIN EXCEL -------- */
-function generateCSV(bc) {
-  let csv = "\uFEFF";
-  csv += "कमेटी का नाम:," + bc.name + "\nकमेटी कोड:," + bc.code + "\nसंचालक:," + bc.ownerName + "\nकिस्त राशि:," + bc.amount + "\n\n";
-  csv += "क्र.सं.,सदस्य,मोबाइल,जमा किश्तें,कुल जमा,बाकी,स्थिति\n";
-  bc.members.forEach((m, i) => {
-    let paid = (m.paidRounds || 0) * bc.amount;
-    let due = Math.max(0, (bc.currentRound || 1) * bc.amount - paid);
-    let st = m.hasWon ? "खुल गई" : (due === 0 ? "क्लियर" : "बाकी");
-    csv += `${i + 1},${m.name},${m.phone || 'N/A'},${m.paidRounds || 0},${paid},${due},${st}\n`;
+function generateCSV(bc){
+  let csv = '\uFEFF';
+  csv += 'कमेटी का नाम:,'+bc.name+'\nकमेटी कोड:,'+bc.code+'\nसंचालक:,'+bc.ownerName+'\nकिस्त राशि:,'+bc.amount+'\n\n';
+  csv += 'क्र.सं.,सदस्य,मोबाइल,जमा किश्तें,कुल जमा,बाकी,स्थिति\n';
+  bc.members.forEach((m,i)=>{
+    let paid = (m.paidRounds||0)*bc.amount;
+    let due = Math.max(0,(bc.currentRound||1)*bc.amount - paid);
+    let st = m.hasWon?'खुल गई':(due===0?'क्लियर':'बाकी');
+    csv += `${i+1},${m.name},${m.phone||'N/A'},${m.paidRounds||0},${paid},${due},${st}\n`;
   });
   return csv;
 }
-async function adminDownloadExcel() {
+async function adminDownloadExcel(){
   const code = document.getElementById('adminExcelCode').value.trim().toUpperCase();
-  if (!code) return appAlert(t("कृपया Code डालें!", "Enter Code!"));
-  try {
+  if(!code) return appAlert(t('कृपया Code डालें!','Enter Code!'));
+  try{
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if (!res.ok) throw 0;
+    if(!res.ok) throw 0;
     const data = (await res.json()).data;
-    if (data.isDeleted) return appAlert(t("यह कमेटी डिलीट हो चुकी है!", "Group deleted!"));
+    if(data.isDeleted) return appAlert(t('यह कमेटी डिलीट हो चुकी है!','Group deleted!'));
     let csv = generateCSV(data);
-    let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    let a = document.createElement("a");
+    let blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    let a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = data.name + "_Backup.csv";
+    a.download = data.name+'_Backup.csv';
     a.style.visibility = 'hidden';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    appAlert(t("✅ Excel डाउनलोड हो गया!", "✅ Excel downloaded!"));
+    appAlert(t('✅ Excel डाउनलोड हो गया!','✅ Excel downloaded!'));
     document.getElementById('adminExcelCode').value = '';
-  } catch { appAlert(t("गलत कोड या डेटा उपलब्ध नहीं!", "Invalid Code!")); }
+  } catch { appAlert(t('गलत कोड या डेटा उपलब्ध नहीं!','Invalid Code!')); }
 }
-
-/* -------- ADMIN: LOAD ALL GROUPS -------- */
-async function loadAllGroups() {
-  const container = document.getElementById('adminAllList');
-  container.innerHTML = `<div class="empty-state">${t('लोड हो रहा है...', 'Loading...')}</div>`;
-  try {
+async function loadAllGroups(){
+  const c = document.getElementById('adminAllList');
+  c.innerHTML = `<div class="empty-state">${t('लोड हो रहा है...','Loading...')}</div>`;
+  try{
     const res = await fetch(`${API_URL}/api/bcs`);
-    if (!res.ok) throw 0;
+    if(!res.ok) throw 0;
     const json = await res.json();
-    const all = (json.data || []).filter(g => !g.isDeleted);
-    if (all.length === 0) {
-      container.innerHTML = `<div class="empty-state"><div style="font-size:40px; margin-bottom:8px;">📋</div><p>${t('कोई कमेटी नहीं है', 'No groups yet')}</p></div>`;
-      return;
-    }
-    container.innerHTML = all.map((g, i) => `
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; border-radius:16px; margin-bottom:10px; background:#f5faf7; border:1.5px solid #d9ece4; cursor:pointer;" onclick="save(KEYS.current, '${g.code}'); show('dashboard')">
-        <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
-          <div style="width:44px; height:44px; border-radius:14px; background:linear-gradient(135deg,#059669,#047857); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;">${['👥','💼','🏆','💰'][i % 4]}</div>
-          <div style="min-width:0; flex:1;">
-            <b style="display:block; font-size:14px; color:#0b3b2b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${g.name}</b>
-            <span style="font-size:11px; color:#6b8f82;">Code: ${g.code} • ${g.members ? g.members.length : 0} members</span>
+    const all = (json.data||[]).filter(g=>!g.isDeleted);
+    if(all.length===0){ c.innerHTML = `<div class="empty-state"><div style="font-size:40px;margin-bottom:8px">📋</div><p>${t('कोई कमेटी नहीं है','No groups yet')}</p></div>`; return; }
+    c.innerHTML = all.map((g,i)=>`
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:14px;margin-bottom:10px;background:#f0faf4;border:1.5px solid #d5e8de;cursor:pointer" onclick="save(KEYS.current,'${g.code}');show('dashboard')">
+        <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0d7a52,#0e8a5c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${['👥','💼','🏆','💰'][i%4]}</div>
+          <div style="min-width:0;flex:1">
+            <b style="display:block;font-size:14px;color:#0b3b2b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.name}</b>
+            <span style="font-size:11px;color:#5a7d6e">Code: ${g.code} • ${g.members?g.members.length:0} members</span>
           </div>
         </div>
-        <span style="font-size:18px; color:#8aa79c;">›</span>
+        <span style="font-size:18px;color:#8aa79c">›</span>
       </div>
     `).join('');
-  } catch {
-    container.innerHTML = `<div class="empty-state">❌ ${t('लोड नहीं हो पाया', 'Failed to load')}</div>`;
-  }
+  } catch { c.innerHTML = `<div class="empty-state">❌ ${t('लोड नहीं हो पाया','Failed to load')}</div>`; }
 }
-
-/* -------- AUTH -------- */
-function switchAuth(mode) {
+function switchAuth(mode){
   const isReg = mode === 'register';
   document.getElementById('tabReg').classList.toggle('active', isReg);
   document.getElementById('tabLogin').classList.toggle('active', !isReg);
-  if (isReg) {
-    document.getElementById('regExtra').classList.remove('hidden');
-    document.getElementById('authBtn').innerHTML = '<span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span>';
-  } else {
-    document.getElementById('regExtra').classList.add('hidden');
-    document.getElementById('authBtn').innerHTML = '<span class="hi">लॉगिन करें</span><span class="en">Login</span>';
-  }
+  if(isReg){ document.getElementById('regExtra').classList.remove('hidden');
+    document.getElementById('authBtn').innerHTML = '<span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span>'; }
+  else { document.getElementById('regExtra').classList.add('hidden');
+    document.getElementById('authBtn').innerHTML = '<span class="hi">लॉगिन करें</span><span class="en">Login</span>'; }
   document.getElementById('authMsg').innerHTML = '';
 }
-async function doAuth() {
+async function doAuth(){
   const phone = document.getElementById('authPhone').value.trim();
   const pass = document.getElementById('authPass').value.trim();
   const name = document.getElementById('authName').value.trim();
   const isReg = document.getElementById('tabReg').classList.contains('active');
   const msg = document.getElementById('authMsg');
-  if (phone.length !== 10) return msg.innerHTML = `<div class="msg err">${t('सही 10 अंकों का नंबर डालें', 'Enter valid 10-digit number')}</div>`;
-  if (pass.length < 4) return msg.innerHTML = `<div class="msg err">${t('पासवर्ड कम से कम 4 अक्षर', 'Password 4+ chars')}</div>`;
-  document.getElementById('authBtn').textContent = t("प्रतीक्षा...", "Please wait...");
-  try {
-    const res = await fetch(`${API_URL}/api/auth`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, pass, name, isRegister: isReg })
-    });
+  if(phone.length !== 10) return msg.innerHTML = `<div class="msg err">${t('सही 10 अंकों का नंबर डालें','Enter valid 10-digit number')}</div>`;
+  if(pass.length < 4) return msg.innerHTML = `<div class="msg err">${t('पासवर्ड कम से कम 4 अक्षर','Password 4+ chars')}</div>`;
+  document.getElementById('authBtn').textContent = t('प्रतीक्षा...','Please wait...');
+  try{
+    const res = await fetch(`${API_URL}/api/auth`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,pass,name,isRegister:isReg})});
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Error");
-    save(KEYS.session, { phone, name: data.user.name });
-    msg.innerHTML = `<div class="msg ok">${t('सफल!', 'Success!')}</div>`;
-    setTimeout(enterApp, 600);
-  } catch (e) { msg.innerHTML = `<div class="msg err">${e.message}</div>`; }
+    if(!res.ok) throw new Error(data.error||'Error');
+    save(KEYS.session,{phone,name:data.user.name});
+    msg.innerHTML = `<div class="msg ok">${t('सफल!','Success!')}</div>`;
+    setTimeout(enterApp,600);
+  } catch(e){ msg.innerHTML = `<div class="msg err">${e.message}</div>`; }
   applyLang();
 }
-function showForgot() {
-  document.getElementById('authNormal').classList.add('hidden');
-  document.getElementById('authTabs').classList.add('hidden');
-  document.getElementById('authForgot').classList.remove('hidden');
-}
-function hideForgot() {
-  document.getElementById('authNormal').classList.remove('hidden');
-  document.getElementById('authTabs').classList.remove('hidden');
-  document.getElementById('authForgot').classList.add('hidden');
-}
-async function doForgot() {
+function showForgot(){ document.getElementById('authNormal').classList.add('hidden'); document.getElementById('authTabs').classList.add('hidden'); document.getElementById('authForgot').classList.remove('hidden'); }
+function hideForgot(){ document.getElementById('authNormal').classList.remove('hidden'); document.getElementById('authTabs').classList.remove('hidden'); document.getElementById('authForgot').classList.add('hidden'); }
+async function doForgot(){
   const phone = document.getElementById('forgotPhone').value;
   const pass = document.getElementById('forgotPass').value;
-  if (phone.length !== 10 || pass.length < 4) return appAlert(t('सही जानकारी डालें', 'Enter valid details'));
-  try {
-    const res = await fetch(`${API_URL}/api/forgot`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, newPass: pass })
-    });
-    if (!res.ok) throw new Error(t("नंबर रजिस्टर नहीं", "Number not registered"));
-    appAlert(t("✅ पासवर्ड बदल गया।", "✅ Password Changed."));
+  if(phone.length !== 10 || pass.length < 4) return appAlert(t('सही जानकारी डालें','Enter valid details'));
+  try{
+    const res = await fetch(`${API_URL}/api/forgot`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,newPass:pass})});
+    if(!res.ok) throw new Error(t('नंबर रजिस्टर नहीं','Number not registered'));
+    appAlert(t('✅ पासवर्ड बदल गया।','✅ Password Changed.'));
     hideForgot(); switchAuth('login');
-  } catch (e) { appAlert("Error: " + e.message); }
+  } catch(e){ appAlert('Error: '+e.message); }
 }
-
-function enterApp() {
-  const s = load(KEYS.session, null);
-  if (!s) return;
+function enterApp(){
+  const s = load(KEYS.session,null);
+  if(!s) return;
   document.getElementById('auth').classList.add('hidden');
   document.getElementById('mainNav').classList.remove('hidden');
   document.getElementById('profName').textContent = s.name;
-  document.getElementById('profPhone').textContent = "+91 " + s.phone;
-  document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
+  document.getElementById('profPhone').textContent = '+91 '+s.phone;
+  document.getElementById('profCount').textContent = load(KEYS.joined,[]).length;
   currentUserIsAdmin = (cleanPhone(s.phone) === cleanPhone(ADMIN_PHONE));
-  if (currentUserIsAdmin) {
+  if(currentUserIsAdmin){
     document.getElementById('nav-admin').classList.remove('hidden');
     document.getElementById('profRole').innerHTML = `<span class="hi">मुख्य एडमिन 👑</span><span class="en">Main Admin 👑</span>`;
-    document.getElementById('excelTile').style.display = 'block';
+    document.getElementById('excelTile').style.display = 'flex';
   } else {
     document.getElementById('nav-admin').classList.add('hidden');
     document.getElementById('profRole').innerHTML = `<span class="hi">कमेटी सदस्य</span><span class="en">Member</span>`;
     document.getElementById('excelTile').style.display = 'none';
   }
   let lastTab = localStorage.getItem('kk_last_tab') || 'home';
-  if (lastTab === 'admin' && !currentUserIsAdmin) lastTab = 'home';
+  if(lastTab === 'admin' && !currentUserIsAdmin) lastTab = 'home';
   show(lastTab);
 }
-function appLogout() {
-  localStorage.removeItem(KEYS.session);
-  localStorage.removeItem('kk_last_tab');
-  location.reload();
-}
-function show(id, isBack = false) {
-  if (id === 'admin' && !currentUserIsAdmin) { id = 'home'; }
+function appLogout(){ localStorage.removeItem(KEYS.session); localStorage.removeItem('kk_last_tab'); location.reload(); }
+function show(id, isBack=false){
+  if(id === 'admin' && !currentUserIsAdmin) id = 'home';
   document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
   const el = document.getElementById(id);
-  if (el) el.classList.remove('hidden');
-  if (!isBack) {
-    if (navHistory.length === 0 || navHistory[navHistory.length - 1] !== id) navHistory.push(id);
+  if(el) el.classList.remove('hidden');
+  if(!isBack){ if(navHistory.length===0 || navHistory[navHistory.length-1] !== id) navHistory.push(id); }
+  if(id==='home' || id==='auth'){ document.getElementById('backArrow').style.display = 'none'; navHistory=[id]; }
+  else { document.getElementById('backArrow').style.display = 'flex'; }
+  if(id==='profile') document.getElementById('profCount').textContent = load(KEYS.joined,[]).length;
+  if(id==='create'){
+    const s = load(KEYS.session,{});
+    if(!document.getElementById('ownerName').value) document.getElementById('ownerName').value = s.name||'';
+    if(!document.getElementById('ownerPhone').value) document.getElementById('ownerPhone').value = s.phone||'';
   }
-  if (id === 'home' || id === 'auth') {
-    document.getElementById('backArrow').style.display = 'none';
-    navHistory = [id];
-  } else {
-    document.getElementById('backArrow').style.display = 'flex';
-  }
-  if (id === 'profile') document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
-  if (id === 'create') {
-    const s = load(KEYS.session, {});
-    if (!document.getElementById('ownerName').value) document.getElementById('ownerName').value = s.name || "";
-    if (!document.getElementById('ownerPhone').value) document.getElementById('ownerPhone').value = s.phone || "";
-  }
-  ['home','mylist','create','profile','admin'].forEach(n => {
-    const b = document.getElementById('nav-' + n);
-    if (b) b.classList.toggle('active', n === id);
+  ['home','mylist','create','profile','admin'].forEach(n=>{
+    const b = document.getElementById('nav-'+n);
+    if(b) b.classList.toggle('active', n===id);
   });
   localStorage.setItem('kk_last_tab', id);
-  if (id === 'dashboard') loadDash();
-  if (id === 'mylist') renderMyList();
-  if (id === 'admin') loadAllGroups();
-  window.scrollTo(0, 0);
+  if(id==='dashboard') loadDash();
+  if(id==='mylist') renderMyList();
+  if(id==='admin') loadAllGroups();
+  window.scrollTo(0,0);
 }
-function goBack() {
-  if (navHistory.length > 1) {
-    navHistory.pop();
-    show(navHistory[navHistory.length - 1], true);
-  } else { show('home'); }
+function goBack(){
+  if(navHistory.length > 1){ navHistory.pop(); show(navHistory[navHistory.length-1], true); }
+  else { show('home'); }
 }
-
-/* -------- CALC & CREATE -------- */
-function autoCalc() {
-  let a = Number(document.getElementById('bcAmount').value) || 0;
-  let i = Number(document.getElementById('totalInst').value) || 0;
-  let tot = a * i;
+function autoCalc(){
+  let a = Number(document.getElementById('bcAmount').value)||0;
+  let i = Number(document.getElementById('totalInst').value)||0;
+  let tot = a*i;
   document.getElementById('totalPool').value = tot;
-  document.getElementById('c-amt').textContent = '₹ ' + a.toLocaleString('en-IN');
+  document.getElementById('c-amt').textContent = '₹ '+a.toLocaleString('en-IN');
   document.getElementById('c-inst').textContent = i;
-  document.getElementById('c-pool').textContent = '₹ ' + tot.toLocaleString('en-IN');
+  document.getElementById('c-pool').textContent = '₹ '+tot.toLocaleString('en-IN');
 }
-function buildMemberInputs() {
-  let c = Number(document.getElementById('memberCount').value) || 0;
-  if (c > 100) c = 100;
+function buildMemberInputs(){
+  let c = Number(document.getElementById('memberCount').value)||0;
+  if(c>100) c=100;
   let h = '';
-  for (let i = 1; i <= c; i++) {
+  for(let i=1;i<=c;i++){
     h += `
-    <div style="display:flex; flex-direction:column; gap:8px; padding:16px; border-radius:18px; background:#fff; margin-bottom:10px; border:1.5px solid #d9ece4;">
-      <div style="display:flex; align-items:center; gap:12px;">
-        <span style="width:34px; height:34px; border-radius:12px; background:#0b4d3a; color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">${i}</span>
-        <input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य ' + i + ' का नाम *', 'Member ' + i + ' Name *')}" style="flex:1; padding:13px; border-radius:12px; border:1.5px solid #d9ece4; font-size:14px; background:#f9fdfb; font-weight:600; outline:none;">
+    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;background:#fff;margin-bottom:10px;border:1.5px solid #d5e8de">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:32px;height:32px;border-radius:10px;background:#0b5d3f;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">${i}</span>
+        <input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' का नाम *','Member '+i+' Name *')}" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid #d5e8de;font-size:14px;background:#f8fcfa;font-weight:600;outline:none">
       </div>
-      <div style="display:flex; align-items:center; gap:12px; padding-left:46px;">
-        <span style="font-size:16px;">📱</span>
-        <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल नंबर *" data-en="Mobile Number *" placeholder="${t('मोबाइल नंबर *', 'Mobile Number *')}" style="flex:1; padding:13px; border-radius:12px; border:1.5px solid #d9ece4; font-size:14px; background:#f9fdfb; font-weight:600; outline:none;">
+      <div style="display:flex;align-items:center;gap:10px;padding-left:42px">
+        <span style="font-size:16px">📱</span>
+        <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल नंबर *" data-en="Mobile Number *" placeholder="${t('मोबाइल नंबर *','Mobile Number *')}" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid #d5e8de;font-size:14px;background:#f8fcfa;font-weight:600;outline:none">
       </div>
     </div>`;
   }
   document.getElementById('memberInputs').innerHTML = h;
   autoCalc();
 }
-async function createBC() {
+async function createBC(){
   const name = document.getElementById('bcName').value;
   const amount = document.getElementById('bcAmount').value;
   const freqVal = document.getElementById('freq').value;
@@ -1063,152 +1004,134 @@ async function createBC() {
   const nameInps = document.querySelectorAll('.mem-name');
   const phoneInps = document.querySelectorAll('.mem-phone');
   let members = [], hasError = false;
-  for (let i = 0; i < nameInps.length; i++) {
+  for(let i=0;i<nameInps.length;i++){
     let n = nameInps[i].value.trim(), p = phoneInps[i].value.trim();
-    if (n || p) {
-      if (!n || p.length !== 10) hasError = true;
-      if (n && p.length === 10) members.push({ name: n, phone: p, paidRounds: 0, hasWon: false });
+    if(n||p){
+      if(!n||p.length!==10) hasError = true;
+      if(n && p.length===10) members.push({name:n,phone:p,paidRounds:0,hasWon:false});
     }
   }
-  if (!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert(t('कृपया सभी जानकारी भरें!', 'Please fill all details!'));
-  if (!ownerName || ownerPhone.length !== 10) return appAlert(t('मालिक का नाम और 10 अंकों का नंबर दर्ज़ करें!', 'Enter valid Owner Name & Phone!'));
-  if (hasError) return appAlert(t('सभी सदस्यों की जानकारी सही भरें!', 'Enter valid details for all members!'));
+  if(!name||!amount||!totalInst||!totalPool||members.length===0) return appAlert(t('कृपया सभी जानकारी भरें!','Fill all details!'));
+  if(!ownerName||ownerPhone.length!==10) return appAlert(t('मालिक का नाम और 10 अंकों का नंबर दर्ज़ करें!','Enter valid Owner Name & Phone!'));
+  if(hasError) return appAlert(t('सभी सदस्यों की जानकारी सही भरें!','Enter valid details for all members!'));
   const code = genCode();
-  const bcData = {
-    code, name, amount: Number(amount), freqText, freqVal,
-    totalInst: Number(totalInst), totalPool: Number(totalPool),
-    ownerName, ownerPhone, upiId,
-    startDate: document.getElementById('startDate').value,
-    currentRound: 1, walletBalance: 0, members
-  };
-  document.getElementById('createBtn').textContent = t("सेव हो रहा है...", "Saving...");
-  try {
-    await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bcData) });
-    let joined = load(KEYS.joined, []);
-    joined.push(code); save(KEYS.joined, joined);
-    save(KEYS.current, code);
+  const bcData = { code, name, amount:Number(amount), freqText, freqVal, totalInst:Number(totalInst), totalPool:Number(totalPool), ownerName, ownerPhone, upiId, startDate:document.getElementById('startDate').value, currentRound:1, walletBalance:0, members };
+  document.getElementById('createBtn').textContent = t('सेव हो रहा है...','Saving...');
+  try{
+    await fetch(`${API_URL}/api/bcs`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(bcData)});
+    let joined = load(KEYS.joined,[]); joined.push(code); save(KEYS.joined, joined); save(KEYS.current, code);
     document.getElementById('bcName').value = '';
     document.getElementById('memberInputs').innerHTML = '';
     document.getElementById('memberCount').value = '';
     document.getElementById('created').classList.remove('hidden');
     document.getElementById('created').innerHTML = `
-      <h2 style="color:#047857; font-weight:900; margin-bottom:10px;">✅ ${t('सुरक्षित!', 'Saved!')}</h2>
-      <div style="font-size:24px; font-weight:900; letter-spacing:3px; background:#fff; padding:12px; border-radius:14px; color:#0b3b2b; border:1.5px dashed #34d399; margin-bottom:12px;">${code}</div>
-      <button class="btn btn-primary" onclick="show('dashboard')">${t('कमेटी खोलें', 'Open Group')}</button>`;
-  } catch { appAlert(t("सेव नहीं हो पाया", "Save failed")); }
+      <h2 style="color:#0e8a5c;font-weight:900;margin-bottom:10px">✅ ${t('सुरक्षित!','Saved!')}</h2>
+      <div style="font-size:24px;font-weight:900;letter-spacing:3px;background:#fff;padding:12px;border-radius:14px;color:#0b3b2b;border:1.5px dashed #34d399;margin-bottom:12px">${code}</div>
+      <button class="btn btn-primary" onclick="show('dashboard')">${t('कमेटी खोलें','Open Group')}</button>`;
+  } catch { appAlert(t('सेव नहीं हो पाया','Save failed')); }
   document.getElementById('createBtn').innerHTML = `<span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span>`;
   applyLang();
 }
-
-/* -------- JOIN -------- */
-async function join() {
+async function join(){
   const code = document.getElementById('accessCode').value.trim().toUpperCase();
-  const user = load(KEYS.session, {});
-  if (!code) return;
-  try {
+  const user = load(KEYS.session,{});
+  if(!code) return;
+  try{
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if (!res.ok) throw 0;
+    if(!res.ok) throw 0;
     const data = (await res.json()).data;
-    if (data.isDeleted) return appAlert(t("यह कमेटी डिलीट हो चुकी है।", "This Group is deleted."));
-    let isOwner = (cleanPhone(data.ownerPhone) === cleanPhone(user.phone)) || (cleanPhone(user.phone) === cleanPhone(ADMIN_PHONE));
-    let isMember = data.members.some(m => cleanPhone(m.phone) === cleanPhone(user.phone));
-    if (!isOwner && !isMember && !currentUserIsAdmin) return appAlert(t("आपका नंबर रजिस्टर नहीं है।", "Your number is not registered."));
-    let joined = load(KEYS.joined, []);
-    if (!joined.includes(code)) { joined.push(code); save(KEYS.joined, joined); }
+    if(data.isDeleted) return appAlert(t('यह कमेटी डिलीट हो चुकी है।','Group deleted.'));
+    let isOwner = (cleanPhone(data.ownerPhone)===cleanPhone(user.phone)) || (cleanPhone(user.phone)===cleanPhone(ADMIN_PHONE));
+    let isMember = data.members.some(m=>cleanPhone(m.phone)===cleanPhone(user.phone));
+    if(!isOwner && !isMember && !currentUserIsAdmin) return appAlert(t('आपका नंबर रजिस्टर नहीं है।','Your number is not registered.'));
+    let joined = load(KEYS.joined,[]);
+    if(!joined.includes(code)){ joined.push(code); save(KEYS.joined, joined); }
     save(KEYS.current, code);
     document.getElementById('accessCode').value = '';
     show('dashboard');
-  } catch { appAlert(t("गलत Code!", "Invalid Code!")); }
+  } catch { appAlert(t('गलत Code!','Invalid Code!')); }
 }
-
-/* -------- MY LIST -------- */
-async function renderMyList() {
-  const codes = load(KEYS.joined, []);
+async function renderMyList(){
+  const codes = load(KEYS.joined,[]);
   let html = '';
-  document.getElementById('bcList').innerHTML = `<div class="empty-state">${t('लोड हो रहा है...', 'Loading...')}</div>`;
-  let colors = ['#dbeafe', '#ede9fe', '#fef3c7', '#d1fae5'];
-  let iconArr = ['👥','💼','🏆','💰'];
-  for (let i = 0; i < codes.length; i++) {
-    try {
+  document.getElementById('bcList').innerHTML = `<div class="empty-state">${t('लोड हो रहा है...','Loading...')}</div>`;
+  let colors = ['#d8e8f8','#ede4fd','#fef0d6','#d5f2e2'];
+  let icons = ['👥','💼','🏆','💰'];
+  for(let i=0;i<codes.length;i++){
+    try{
       let res = await fetch(`${API_URL}/api/bcs?code=${codes[i]}`);
-      if (!res.ok) continue;
+      if(!res.ok) continue;
       let bc = (await res.json()).data;
-      if (bc.isDeleted) {
-        let joined = load(KEYS.joined, []);
-        save(KEYS.joined, joined.filter(x => x !== bc.code));
-        continue;
-      }
+      if(bc.isDeleted){ let joined = load(KEYS.joined,[]); save(KEYS.joined, joined.filter(x=>x!==bc.code)); continue; }
       html += `
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; border-radius:20px; margin-bottom:12px; background:#fff; box-shadow:0 6px 16px -8px rgba(5,80,50,0.1); border:1.5px solid #e2efe9; cursor:pointer;" onclick="save(KEYS.current, '${bc.code}'); show('dashboard')">
-        <div style="display:flex; align-items:center; gap:14px; flex:1; min-width:0;">
-          <div style="width:50px; height:50px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:24px; background:${colors[i % 4]}; flex-shrink:0;">${iconArr[i % 4]}</div>
-          <div style="min-width:0; flex:1;">
-            <b style="display:block; font-size:15px; color:#0b3b2b; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${bc.name}</b>
-            <span style="font-size:11px; color:#6b8f82; font-weight:600;">Code: ${bc.code}</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:18px;margin-bottom:10px;background:#fff;border:1.5px solid #e6f2ec;cursor:pointer;box-shadow:0 4px 14px -8px rgba(5,80,50,0.1)" onclick="save(KEYS.current,'${bc.code}');show('dashboard')">
+        <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
+          <div style="width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;background:${colors[i%4]};flex-shrink:0">${icons[i%4]}</div>
+          <div style="min-width:0;flex:1">
+            <b style="display:block;font-size:15px;color:#0b3b2b;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bc.name}</b>
+            <span style="font-size:11px;color:#5a7d6e;font-weight:600">Code: ${bc.code}</span>
           </div>
         </div>
-        <span style="font-size:20px; color:#8aa79c;">›</span>
+        <span style="font-size:20px;color:#8aa79c">›</span>
       </div>`;
     } catch {}
   }
-  document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size:50px; margin-bottom:12px;">📋</div><p>${t('कोई कमेटी नहीं है', 'No Group Found')}</p></div>`;
+  document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><div style="font-size:50px;margin-bottom:12px">📋</div><p>${t('कोई कमेटी नहीं है','No Group Found')}</p></div>`;
 }
-
-/* -------- DASHBOARD -------- */
-async function saveBCState() {
-  try {
-    await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(currentBCData) });
+async function saveBCState(){
+  try{
+    await fetch(`${API_URL}/api/bcs`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(currentBCData)});
     loadDash();
-  } catch { appAlert(t("सेव करने में त्रुटि।", "Error saving.")); }
+  } catch { appAlert(t('सेव करने में त्रुटि।','Error saving.')); }
 }
-function openEditModal() {
-  if (!currentBCData) return;
+function openEditModal(){
+  if(!currentBCData) return;
   document.getElementById('editAmt').value = currentBCData.amount;
   document.getElementById('editInst').value = currentBCData.totalInst || currentBCData.members.length;
   document.getElementById('editPool').value = currentBCData.totalPool || (currentBCData.amount * currentBCData.members.length);
   document.getElementById('editUpi').value = currentBCData.upiId || '';
   document.getElementById('editModal').classList.remove('hidden');
 }
-function editAutoCalc() {
-  let a = Number(document.getElementById('editAmt').value) || 0;
-  let i = Number(document.getElementById('editInst').value) || 0;
-  document.getElementById('editPool').value = a * i;
+function editAutoCalc(){
+  let a = Number(document.getElementById('editAmt').value)||0;
+  let i = Number(document.getElementById('editInst').value)||0;
+  document.getElementById('editPool').value = a*i;
 }
-async function saveEdit() {
+async function saveEdit(){
   let a = Number(document.getElementById('editAmt').value);
   let i = Number(document.getElementById('editInst').value);
   let p = Number(document.getElementById('editPool').value);
   let u = document.getElementById('editUpi').value.trim();
-  if (a <= 0 || i <= 0 || p <= 0) return appAlert(t('सही जानकारी भरें', 'Enter valid details'));
+  if(a<=0||i<=0||p<=0) return appAlert(t('सही जानकारी भरें','Enter valid details'));
   currentBCData.amount = a; currentBCData.totalInst = i; currentBCData.totalPool = p; currentBCData.upiId = u;
   document.getElementById('editModal').classList.add('hidden');
-  document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('सेव हो रहा है...', 'Saving...')}</div>`;
+  document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('सेव हो रहा है...','Saving...')}</div>`;
   await saveBCState();
 }
-async function loadDash() {
-  const code = load(KEYS.current, null);
-  const user = load(KEYS.session, {});
-  document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('लोड हो रहा है...', 'Loading...')}</div>`;
-  document.getElementById('members').innerHTML = "";
-  try {
+async function loadDash(){
+  const code = load(KEYS.current,null);
+  const user = load(KEYS.session,{});
+  document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('लोड हो रहा है...','Loading...')}</div>`;
+  document.getElementById('members').innerHTML = '';
+  try{
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     currentBCData = (await res.json()).data;
     const bc = currentBCData;
-    if (bc.isDeleted) {
-      document.getElementById('walletBlock').innerHTML = `<div class="card card-cream" style="text-align:center; color:#dc2626;">❌ ${t('यह कमेटी डिलीट कर दी गई है।', 'This Group is deleted.')}</div>`;
+    if(bc.isDeleted){
+      document.getElementById('walletBlock').innerHTML = `<div class="card card-cream" style="text-align:center;color:#dc2626">❌ ${t('यह कमेटी डिलीट कर दी गई है।','This Group is deleted.')}</div>`;
       document.getElementById('memberCard').classList.add('hidden');
       document.getElementById('ledgerCardBlock').classList.add('hidden');
       return;
     }
-    if (bc.currentRound === undefined) bc.currentRound = 1;
-    if (bc.walletBalance === undefined) bc.walletBalance = 0;
-    bc.members.forEach(m => {
-      if (m.paidRounds === undefined) { m.paidRounds = m.paid ? 1 : 0; if (m.paid) bc.walletBalance += Number(bc.amount); }
-      if (m.hasWon === undefined) m.hasWon = false;
+    if(bc.currentRound === undefined) bc.currentRound = 1;
+    if(bc.walletBalance === undefined) bc.walletBalance = 0;
+    bc.members.forEach(m=>{
+      if(m.paidRounds === undefined){ m.paidRounds = m.paid?1:0; if(m.paid) bc.walletBalance += Number(bc.amount); }
+      if(m.hasWon === undefined) m.hasWon = false;
     });
-    const isOwner = (cleanPhone(bc.ownerPhone) === cleanPhone(user.phone)) || (cleanPhone(user.phone) === cleanPhone(ADMIN_PHONE));
+    const isOwner = (cleanPhone(bc.ownerPhone)===cleanPhone(user.phone)) || (cleanPhone(user.phone)===cleanPhone(ADMIN_PHONE));
     document.getElementById('memberCard').classList.remove('hidden');
-    if (isOwner) {
+    if(isOwner){
       document.getElementById('nextRoundBtn').classList.remove('hidden');
       document.getElementById('editBtn').classList.remove('hidden');
       document.getElementById('ledgerCardBlock').classList.remove('hidden');
@@ -1217,108 +1140,94 @@ async function loadDash() {
       document.getElementById('editBtn').classList.add('hidden');
       document.getElementById('ledgerCardBlock').classList.add('hidden');
     }
-    let sd = new Date(bc.startDate);
-    let ed = new Date(sd);
-    let inst = Number(bc.totalInst) || 0;
-    if (bc.freqVal === 'weekly') ed.setDate(ed.getDate() + inst * 7);
-    else if (bc.freqVal === 'biweekly') ed.setDate(ed.getDate() + inst * 15);
-    else if (bc.freqVal === 'monthly') ed.setMonth(ed.getMonth() + inst);
-    let fmt = (d) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-    let dateStr = `📅 ${t('शुरू', 'Start')}: ${fmt(sd)} | ${t('खत्म', 'End')}: ${fmt(ed)}`;
+    let sd = new Date(bc.startDate); let ed = new Date(sd);
+    let inst = Number(bc.totalInst)||0;
+    if(bc.freqVal==='weekly') ed.setDate(ed.getDate()+inst*7);
+    else if(bc.freqVal==='biweekly') ed.setDate(ed.getDate()+inst*15);
+    else if(bc.freqVal==='monthly') ed.setMonth(ed.getMonth()+inst);
+    let fmt = (d)=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    let dateStr = `📅 ${t('शुरू','Start')}: ${fmt(sd)} | ${t('खत्म','End')}: ${fmt(ed)}`;
     const tm = bc.members.length;
-    let ti = Number(bc.totalInst) || tm;
-
+    let ti = Number(bc.totalInst)||tm;
     document.getElementById('walletBlock').innerHTML = `
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; padding:0 4px;">
-        <div style="width:44px; height:44px; background:#e1f7ec; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; border:1.5px solid #a7e0c5;">👥</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:0 4px">
+        <div style="width:44px;height:44px;background:#d5f2e2;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;border:1.5px solid #a7e0c5">👥</div>
         <div>
-          <h2 style="font-size:18px; font-weight:900; margin-bottom:2px; color:#0b3b2b;">${bc.name}</h2>
-          <p style="font-size:11px; color:#6b8f82; font-weight:700;">Code: ${bc.code}</p>
+          <h2 style="font-size:18px;font-weight:900;margin-bottom:2px;color:#0b3b2b">${bc.name}</h2>
+          <p style="font-size:11px;color:#5a7d6e;font-weight:700">Code: ${bc.code}</p>
         </div>
       </div>
       <div class="wallet-card">
         <div class="wallet-top"><div class="w-chip"></div><div class="w-wifi">🛜</div></div>
-        <div class="wallet-title">${t('कमेटी वॉलेट', 'GROUP WALLET')}</div>
-        <div class="wallet-amt"><span style="font-size:24px; margin-right:4px;">₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
+        <div class="wallet-title">${t('कमेटी वॉलेट','GROUP WALLET')}</div>
+        <div class="wallet-amt"><span style="font-size:24px;margin-right:4px">₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
         <div class="wallet-num">Available Balance</div>
         <div class="wallet-bot">
           <div>${dateStr}</div>
-          <div style="display:flex; gap:3px;">
-            <div style="width:22px; height:22px; border-radius:50%; background:#fde68a;"></div>
-            <div style="width:22px; height:22px; border-radius:50%; background:#f59e0b; margin-left:-8px;"></div>
+          <div style="display:flex;gap:3px">
+            <div style="width:22px;height:22px;border-radius:50%;background:#fde68a"></div>
+            <div style="width:22px;height:22px;border-radius:50%;background:#f59e0b;margin-left:-8px"></div>
           </div>
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><b style="color:#059669;">🏦 ₹${bc.amount}</b><span>${t('किस्त', 'Inst.')}</span></div>
-        <div class="stat"><b style="color:#059669;">⏳ ${bc.currentRound} / ${ti}</b><span>${t('चल रही किश्त', 'Current Round')}</span></div>
-        <div class="stat stat-pool">
-          <b style="font-size:24px;">₹${Number(bc.totalPool || bc.amount * tm).toLocaleString('en-IN')}</b>
-          <span>${t('कमेटी खुलने पर मिलेगा', 'Total Pool')}</span>
-        </div>
+        <div class="stat"><b style="color:#0e8a5c">🏦 ₹${bc.amount}</b><span>${t('किस्त','Inst.')}</span></div>
+        <div class="stat"><b style="color:#0e8a5c">⏳ ${bc.currentRound} / ${ti}</b><span>${t('चल रही किश्त','Current Round')}</span></div>
+        <div class="stat stat-pool"><b style="font-size:24px">₹${Number(bc.totalPool||bc.amount*tm).toLocaleString('en-IN')}</b><span>${t('कमेटी खुलने पर मिलेगा','Total Pool')}</span></div>
       </div>
-      <div style="background:#fff; padding:12px; border-radius:18px; margin:16px 0; text-align:center; border:1.5px solid #e2efe9;">
-        <div style="font-size:14px; font-weight:800; color:#0b3b2b; margin-bottom:2px;">Code: <b style="color:#059669; letter-spacing:1px;">${bc.code}</b></div>
-        <div style="color:#6b8f82; font-size:12px; font-weight:600;">${t('संचालक','Owner')}: ${bc.ownerName}</div>
+      <div style="background:#fff;padding:12px;border-radius:18px;margin:14px 0;text-align:center;border:1.5px solid #e6f2ec">
+        <div style="font-size:14px;font-weight:800;color:#0b3b2b;margin-bottom:2px">Code: <b style="color:#0e8a5c;letter-spacing:1px">${bc.code}</b></div>
+        <div style="color:#5a7d6e;font-size:12px;font-weight:600">${t('संचालक','Owner')}: ${bc.ownerName}</div>
       </div>
     `;
-
-    document.getElementById('members').innerHTML = bc.members.map((m, i) => {
-      let paid = m.paidRounds * bc.amount;
-      let due = Math.max(0, bc.currentRound * bc.amount - paid);
+    document.getElementById('members').innerHTML = bc.members.map((m,i)=>{
+      let paid = m.paidRounds*bc.amount;
+      let due = Math.max(0, bc.currentRound*bc.amount - paid);
       let left = Math.max(0, ti - m.paidRounds);
-      let isMe = cleanPhone(m.phone) === cleanPhone(user.phone);
-      if (!m.phone && user.name) {
+      let isMe = cleanPhone(m.phone)===cleanPhone(user.phone);
+      if(!m.phone && user.name){
         let cN = user.name.toLowerCase().trim(), mN = m.name.toLowerCase().trim();
-        isMe = (cN === mN || mN.includes(cN) || cN.includes(mN));
+        isMe = (cN===mN || mN.includes(cN) || cN.includes(mN));
       }
       let uid = m.phone || m.name;
-      let tracker = `
-        <div style="background:#f5faf7; border:1px dashed #b7e0c5; padding:10px; border-radius:14px; margin-top:12px; text-align:center; font-size:12px; font-weight:700; color:#0b3b2b;">
-          <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा | <b>${left}</b> बाकी</span>
-          <span class="en">✅ <b>${m.paidRounds}</b> Paid | <b>${left}</b> Left</span>
-        </div>`;
-      if (m.hasWon) tracker = `
-        <div style="background:#e1f7ec; border:1px solid #a7e0c5; padding:10px; border-radius:14px; margin-top:12px; text-align:center; font-size:13px; font-weight:800; color:#047857;">
-          <span class="hi">🎉 बधाई! कमेटी खुल चुकी है।</span><span class="en">🎉 Congrats! Group opened.</span>
-        </div>`;
+      let tracker = `<div style="background:#f0faf4;border:1px dashed #a7e0c5;padding:10px;border-radius:14px;margin-top:12px;text-align:center;font-size:12px;font-weight:700;color:#0b3b2b">
+        <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा | <b>${left}</b> बाकी</span>
+        <span class="en">✅ <b>${m.paidRounds}</b> Paid | <b>${left}</b> Left</span></div>`;
+      if(m.hasWon) tracker = `<div style="background:#d5f2e2;border:1px solid #a7e0c5;padding:10px;border-radius:14px;margin-top:12px;text-align:center;font-size:13px;font-weight:800;color:#0e8a5c">
+        <span class="hi">🎉 बधाई! कमेटी खुल चुकी है।</span><span class="en">🎉 Congrats! Group opened.</span></div>`;
       let payBtn = '';
-      if (isOwner && due > 0) payBtn = `<div style="display:flex; justify-content:flex-end; margin-top:10px; padding-top:10px; border-top:1px dashed #d9ece4;"><button class="btn btn-sm" style="background:#fef3c7; color:#b45309; font-weight:800;" onclick="markPaidAdvance('${uid}')">➕ ${t('अगली किश्त जमा करें','Pay Installment')}</button></div>`;
+      if(isOwner && due > 0) payBtn = `<div style="display:flex;justify-content:flex-end;margin-top:10px;padding-top:10px;border-top:1px dashed #e6f2ec"><button class="btn btn-sm" style="background:#fef3c7;color:#b45309;font-weight:800" onclick="markPaidAdvance('${uid}')">➕ ${t('अगली किश्त जमा करें','Pay Installment')}</button></div>`;
       let online = '';
-      if (!isOwner && due > 0 && bc.upiId && isMe) {
-        online = `
-        <div style="margin-top:14px; padding-top:14px; border-top:1px dashed #d9ece4; text-align:center;">
-          <p style="font-size:12px; color:#0b3b2b; margin-bottom:10px; font-weight:700;">💳 UPI ID:</p>
-          <div style="display:flex; align-items:center; justify-content:space-between; background:#f5faf7; border:1.5px solid #a7e0c5; border-radius:14px; padding:6px 6px 6px 12px;">
-            <code style="font-size:13px; font-weight:800; color:#0b3b2b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${bc.upiId}</code>
-            <button onclick="copyToClipboard('${bc.upiId}')" style="background:#059669; color:#fff; border:none; padding:10px 14px; border-radius:10px; font-weight:800; cursor:pointer; flex-shrink:0;">📋 Copy</button>
-          </div>
-        </div>`;
-      } else if (!isOwner && due === 0 && isMe) {
-        online = `<div style="background:#e1f7ec; border:1px solid #a7e0c5; padding:12px; border-radius:14px; margin-top:12px; text-align:center; font-size:12px; font-weight:800; color:#047857;">✅ ${t('आपकी किश्त पूरी हुई','Payment Clear')}</div>`;
+      if(!isOwner && due > 0 && bc.upiId && isMe){
+        online = `<div style="margin-top:14px;padding-top:14px;border-top:1px dashed #e6f2ec;text-align:center">
+          <p style="font-size:12px;color:#0b3b2b;margin-bottom:10px;font-weight:700">💳 UPI ID:</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:#f0faf4;border:1.5px solid #a7e0c5;border-radius:14px;padding:6px 6px 6px 12px">
+            <code style="font-size:13px;font-weight:800;color:#0b3b2b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bc.upiId}</code>
+            <button onclick="copyToClipboard('${bc.upiId}')" style="background:#0e8a5c;color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer;flex-shrink:0">📋 Copy</button>
+          </div></div>`;
+      } else if(!isOwner && due === 0 && isMe){
+        online = `<div style="background:#d5f2e2;border:1px solid #a7e0c5;padding:12px;border-radius:14px;margin-top:12px;text-align:center;font-size:12px;font-weight:800;color:#0e8a5c">✅ ${t('आपकी किश्त पूरी हुई','Payment Clear')}</div>`;
       }
-      let winBtn = `<div style="opacity:0.2;">🏆</div>`;
-      if (isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${uid}')">🏆</button>`;
-      else if (m.hasWon) winBtn = `<div style="font-size:26px;">🎉</div>`;
+      let winBtn = `<div style="opacity:0.2">🏆</div>`;
+      if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${uid}')">🏆</button>`;
+      else if(m.hasWon) winBtn = `<div style="font-size:26px">🎉</div>`;
       let nameDisp = `<b>${m.name}</b>`;
-      if (isOwner) nameDisp = `<input type="text" value="${m.name}" style="font-weight:800; font-size:15px; border:none; background:transparent; padding:0; margin:0; width:130px; color:#0b3b2b; outline:none;" onchange="editMemberName('${uid}', this.value)">`;
-      let phoneDisp = m.phone ? `<div style="font-size:10px; color:#6b8f82; font-weight:700; margin-top:4px;">📱 ${m.phone}</div>` : '';
-      let cStyle = isMe ? 'border:2px solid #059669; background:#f5faf7;' : '';
-      return `
-      <div class="member" style="${cStyle}">
-        <div class="member-top" style="margin-bottom:0;">
+      if(isOwner) nameDisp = `<input type="text" value="${m.name}" style="font-weight:800;font-size:15px;border:none;background:transparent;padding:0;margin:0;width:130px;color:#0b3b2b;outline:none" onchange="editMemberName('${uid}', this.value)">`;
+      let phoneDisp = m.phone ? `<div style="font-size:10px;color:#5a7d6e;font-weight:700;margin-top:4px">📱 ${m.phone}</div>` : '';
+      let cStyle = isMe ? 'border:2px solid #0e8a5c;background:#f8fcfa;' : '';
+      return `<div class="member" style="${cStyle}">
+        <div class="member-top" style="margin-bottom:0">
           <div class="mem-info">
-            <div class="mem-num">${i + 1}</div>
-            <div style="min-width:0; flex:1;">
-              ${nameDisp}
-              ${isOwner ? phoneDisp : ''}
-              <div style="font-size:12px; color:#6b8f82; font-weight:700; margin-top:4px;">${t('जमा','Paid')}: <span style="color:#0b3b2b;">₹${paid.toLocaleString('en-IN')}</span></div>
+            <div class="mem-num">${i+1}</div>
+            <div style="min-width:0;flex:1">
+              ${nameDisp}${isOwner?phoneDisp:''}
+              <div style="font-size:12px;color:#5a7d6e;font-weight:700;margin-top:4px">${t('जमा','Paid')}: <span style="color:#0b3b2b">₹${paid.toLocaleString('en-IN')}</span></div>
             </div>
           </div>
-          <div style="display:flex; align-items:center; gap:12px; flex-shrink:0;">
-            <div style="text-align:right;">
-              <div style="font-size:11px; color:#6b8f82; font-weight:800;">${t('बाकी है','Due')}:</div>
-              <div class="due ${due > 0 ? 'red' : ''}" style="font-size:15px;">₹${due.toLocaleString('en-IN')}</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+            <div style="text-align:right">
+              <div style="font-size:11px;color:#5a7d6e;font-weight:800">${t('बाकी है','Due')}:</div>
+              <div class="due ${due>0?'red':''}" style="font-size:15px">₹${due.toLocaleString('en-IN')}</div>
             </div>
             ${winBtn}
           </div>
@@ -1328,71 +1237,70 @@ async function loadDash() {
     }).join('');
   } catch { show('mylist'); }
 }
-async function editMemberName(id, newName) {
-  if (!newName.trim()) return;
+async function editMemberName(id, newName){
+  if(!newName.trim()) return;
   let m = currentBCData.members.find(x => (x.phone || x.name) === id);
-  if (m) { m.name = newName.trim(); await saveBCState(); }
+  if(m){ m.name = newName.trim(); await saveBCState(); }
 }
-async function markPaidAdvance(id) {
-  if (!currentBCData) return;
+async function markPaidAdvance(id){
+  if(!currentBCData) return;
   let m = currentBCData.members.find(x => (x.phone || x.name) === id);
-  if (m) {
+  if(m){
     m.paidRounds += 1;
     currentBCData.walletBalance += Number(currentBCData.amount);
     document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('अपडेट हो रहा है...','Updating...')}</div>`;
     await saveBCState();
   }
 }
-async function startNextRound() {
-  if (!await appConfirm(t("अगली किश्त चालू करें?", "Start next round?"))) return;
+async function startNextRound(){
+  if(!await appConfirm(t('अगली किश्त चालू करें?','Start next round?'))) return;
   currentBCData.currentRound += 1;
   document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('अपडेट...','Updating...')}</div>`;
   await saveBCState();
 }
-let pendingWinnerId = "";
-function declareWinner(id) {
+let pendingWinnerId = '';
+function declareWinner(id){
   pendingWinnerId = id;
   let m = currentBCData.members.find(x => (x.phone || x.name) === id);
-  document.getElementById('winName').textContent = m ? m.name : "Winner";
-  document.getElementById('winAmount').textContent = Number(currentBCData.totalPool || 0).toLocaleString('en-IN');
+  document.getElementById('winName').textContent = m ? m.name : 'Winner';
+  document.getElementById('winAmount').textContent = Number(currentBCData.totalPool||0).toLocaleString('en-IN');
   document.getElementById('winnerModal').classList.remove('hidden');
 }
-async function confirmWinner() {
+async function confirmWinner(){
   let m = currentBCData.members.find(x => (x.phone || x.name) === pendingWinnerId);
-  if (m && !m.hasWon) {
+  if(m && !m.hasWon){
     m.hasWon = true;
-    currentBCData.walletBalance -= Number(currentBCData.totalPool || 0);
+    currentBCData.walletBalance -= Number(currentBCData.totalPool||0);
     document.getElementById('winnerModal').classList.add('hidden');
     document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('अपडेट...','Updating...')}</div>`;
     await saveBCState();
   }
 }
-async function adminDeleteBC() {
+async function adminDeleteBC(){
   const code = document.getElementById('adminDelCode').value.trim().toUpperCase();
-  if (!code) return appAlert(t("कृपया Code डालें!", "Enter Code!"));
-  if (!await appConfirm(t("⚠️ कमेटी हमेशा के लिए डिलीट करें?", "⚠️ Delete permanently?"))) return;
-  try {
+  if(!code) return appAlert(t('कृपया Code डालें!','Enter Code!'));
+  if(!await appConfirm(t('⚠️ कमेटी हमेशा के लिए डिलीट करें?','⚠️ Delete permanently?'))) return;
+  try{
     const getRes = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if (!getRes.ok) return appAlert(t("कोड मौजूद नहीं!", "Code not found!"));
+    if(!getRes.ok) return appAlert(t('कोड मौजूद नहीं!','Code not found!'));
     const ex = (await getRes.json()).data;
-    ex.name = "❌ Deleted"; ex.members = []; ex.isDeleted = true; ex.amount = 0;
-    await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(ex) });
-    appAlert(t("✅ डिलीट हो गई!", "✅ Deleted!"));
-    let joined = load(KEYS.joined, []);
-    save(KEYS.joined, joined.filter(c => c !== code));
-    if (load(KEYS.current) === code) localStorage.removeItem(KEYS.current);
+    ex.name = '❌ Deleted'; ex.members = []; ex.isDeleted = true; ex.amount = 0;
+    await fetch(`${API_URL}/api/bcs`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ex)});
+    appAlert(t('✅ डिलीट हो गई!','✅ Deleted!'));
+    let joined = load(KEYS.joined,[]);
+    save(KEYS.joined, joined.filter(c=>c!==code));
+    if(load(KEYS.current)===code) localStorage.removeItem(KEYS.current);
     document.getElementById('adminDelCode').value = '';
     loadAllGroups();
-  } catch { appAlert("Error"); }
+  } catch { appAlert('Error'); }
 }
-
 window.onload = () => {
   applyLang();
-  document.getElementById('startDate').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('startDate').value = new Date().toISOString().slice(0,10);
   const s = load(KEYS.session, null);
-  if (s) enterApp();
+  if(s) enterApp();
   else { document.getElementById('auth').classList.remove('hidden'); switchAuth('register'); }
 };
 </script>
 </body>
-  </html>
+                                                                                                      </html>
