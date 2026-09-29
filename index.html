@@ -1,1438 +1,689 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>कमेटी खाता - Group Khata</title>
-<meta name="description" content="आपकी कमेटी • आपका हिसाब • सुरक्षित ऑनलाइन">
-<meta name="theme-color" content="#064e3b">
-<style>
-/* 🌟 PREMIUM APP THEME - MATCHING THE DESIGN */
-:root { 
-  --primary: #059669;      
-  --primary-dark: #064e3b; 
-  --accent: #10b981;       
-  --bg-top: #022c22;       
-  --bg-mid: #064e3b;       
-  --bg-bottom: #ecfdf5;    
-  --card: #ffffff; 
-  --card-cream: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%); 
-  --input-bg: #f8fafc; 
-  --text: #0f172a; 
-  --muted: #475569; 
-  --border: #e2e8f0; 
-  --success: #059669; 
-  --danger: #e11d48; 
-  --radius: 20px; 
-  --shadow: 0 10px 25px rgba(0,0,0,0.06); 
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>कमेटी खाता • Group Khata</title>
+  <meta name="description" content="सुरक्षित और सरल कमेटी प्रबंधन">
+  <meta name="theme-color" content="#0b3b2b">
+  <style>
+    /* ---------- SIMPLE & ELEGANT RESET ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-  -webkit-tap-highlight-color: transparent; 
-}
+    body {
+      background: #f0f4f3;
+      color: #1e2f2a;
+      min-height: 100vh;
+      padding-bottom: 100px;
+      overflow-x: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+    }
 
-/* 💡 FIXED SCROLL PADDING & TEXT SELECTION LOCK FOR NATIVE FEEL 💡 */
-body { 
-  background: #f1f5f9; 
-  color: var(--text); 
-  min-height: 100vh; 
-  padding-bottom: 110px; 
-  overflow-x: hidden; 
-  
-  /* 🚀 PREVENT TEXT SELECTION 🚀 */
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Safari */
-  -khtml-user-select: none;    /* Konqueror HTML */
-  -moz-user-select: none;      /* Old versions of Firefox */
-  -ms-user-select: none;       /* Internet Explorer/Edge */
-  user-select: none;           /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
+    input, textarea, select, button {
+      -webkit-user-select: auto;
+      user-select: auto;
+    }
 
-/* ALLOW TEXT SELECTION ONLY IN INPUTS & TEXTAREAS */
-input, textarea, select {
-  -webkit-user-select: auto;
-  -khtml-user-select: auto;
-  -moz-user-select: auto;
-  -ms-user-select: auto;
-  user-select: auto;
-}
+    /* language toggle */
+    body.lang-hi .en { display: none !important; }
+    body.lang-en .hi { display: none !important; }
 
-/* 🌐 LANGUAGE TOGGLE LOGIC */
-body.lang-hi .en { display: none !important; }
-body.lang-en .hi { display: none !important; }
+    /* ---------- SOOTHING BACKGROUND ---------- */
+    .bg-soft {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 10% 90%, rgba(5, 150, 105, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #daf1e9 0%, #f0f4f3 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
 
-/* 🎨 DYNAMIC NATURE APP BACKGROUND */
-.app-bg {
-  position: fixed; top: 0; left: 0; right: 0; height: 100vh;
-  background-color: #f1f5f9;
-  background-image: 
-    radial-gradient(ellipse at 50% 100%, #d1fae5 0%, transparent 60%),
-    linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 25%, transparent 45%);
-  z-index: 0; pointer-events: none;
-}
+    /* ---------- TOP BAR (simplified) ---------- */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px 8px;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-/* TOP BAR WITH BACK ARROW */
-.topbar { display: flex; justify-content: space-between; align-items: center; padding: 25px 20px 20px; position: relative; z-index: 10; color: white; }
-.topbar-text { display: flex; align-items: center; gap: 10px; }
-.topbar-icon { background: #ecfdf5; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #34d399;}
-.topbar-text h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.topbar-text p { font-size: 11px; opacity: 0.9; margin-top: 2px; font-weight: 600; color: #a7f3d0;}
-.topbar-share { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; backdrop-filter: blur(5px); transition: background 0.2s;}
-.topbar-share:active { background: rgba(255,255,255,0.3); }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-/* 🔙 BACK ARROW STYLING */
-#backArrow { font-size: 26px; margin-right: 12px; cursor: pointer; padding-right: 12px; border-right: 1px solid rgba(255,255,255,0.2); font-weight: bold; transition: transform 0.2s;}
-#backArrow:active { transform: scale(0.9); }
+    .brand-icon {
+      background: #ffffffd9;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 6px 14px rgba(5, 78, 59, 0.12);
+      backdrop-filter: blur(4px);
+      border: 1px solid #c6e9d9;
+    }
 
-main { max-width: 480px; margin: 10px auto 0; padding: 0 16px 20px; position: relative; z-index: 10; overflow: hidden; }
+    .brand h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0b3b2b;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
 
-/* CARDS */
-.card { background: var(--card); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.03); width: 100%; box-sizing: border-box; }
-.card.cream-card { background: var(--card-cream); border: 1px solid #fef3c7; }
-.card h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; color: var(--primary-dark); }
+    .brand p {
+      font-size: 10px;
+      color: #3d6b5c;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
 
-/* INPUTS WITH ICONS & PROPER WIDTH */
-.field { margin-bottom: 16px; position: relative; width: 100%; }
-.field label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
-.input-wrap { position: relative; display: flex; align-items: center; width: 100%; }
-.input-ico { position: absolute; left: 16px; font-size: 18px; color: var(--primary); opacity: 0.8; }
+    .top-actions {
+      display: flex;
+      gap: 6px;
+    }
 
-/* GLOBALLY FIX ALL INPUT WIDTHS SO THEY DON'T OVERFLOW */
-input, select, textarea { width: 100%; box-sizing: border-box; max-width: 100%; min-width: 0; }
+    .pill-btn {
+      background: #ffffff;
+      border: 1px solid #c6e9d9;
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0b3b2b;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 8px rgba(0, 40, 20, 0.04);
+      transition: 0.2s;
+      cursor: pointer;
+      white-space: nowrap;
+    }
 
-.input-wrap input, .input-wrap select { width: 100%; padding: 15px 16px 15px 45px; border-radius: 14px; border: 1px solid var(--border); font-size: 14px; background: #fff; color: var(--text); font-weight: 600; transition: all 0.2s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-.input-wrap input:focus, .input-wrap select:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
+    .pill-btn:active { transform: scale(0.95); background: #ecfdf5; }
 
-.no-ico { width: 100%; padding: 15px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 14px; background: #fff; color: var(--text); font-weight: 600; box-sizing: border-box;}
-.no-ico:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); outline:none;}
+    #backArrow {
+      background: #ffffffd0;
+      border: 1px solid #c6e9d9;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 600;
+      color: #0b3b2b;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      margin-right: 4px;
+    }
 
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
+    /* ---------- MAIN CONTAINER ---------- */
+    main {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 8px 16px 20px;
+      position: relative;
+      z-index: 5;
+    }
 
-/* BUTTONS */
-.btn { width: 100%; padding: 16px; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
-.btn:active { transform: scale(0.96); }
-.btn-primary { background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff; box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3); }
-.btn-secondary { background: var(--primary-dark); color: white; font-weight: 800; box-shadow: 0 4px 10px rgba(6, 78, 59, 0.2); }
-.btn-sm { padding: 8px 16px; font-size: 12px; width: auto; border-radius: 8px; }
+    /* ---------- CARDS (soft & clean) ---------- */
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 22px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 22px rgba(0, 40, 25, 0.04);
+      border: 1px solid #e2efe9;
+      width: 100%;
+      transition: 0.2s;
+    }
 
-/* AUTH TABS */
-.tabs { display: flex; background: var(--input-bg); border-radius: 50px; padding: 6px; margin-bottom: 24px; border: 1px solid var(--border); }
-.tabs button { flex: 1; padding: 12px; border: none; border-radius: 50px; background: transparent; font-size: 14px; font-weight: 800; color: var(--muted); cursor: pointer; transition: all 0.3s; }
-.tabs button.active { background: var(--primary); color: #fff; box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); }
+    .card-cream {
+      background: #ffffff;
+      border: 1px solid #e2efe9;
+    }
 
-/* ALERTS */
-.msg { padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 14px; text-align: center; font-weight: 700; }
-.msg.err { background: #fee2e2; color: #e11d48; border: 1px solid #fecaca;}
-.msg.ok { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0;}
+    .card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0b3b2b;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.2px;
+    }
 
-/* 💳 PREMIUM WALLET CARD */
-.wallet-card { background: linear-gradient(135deg, #022c22, #064e3b); color: white; padding: 25px; border-radius: 20px; box-shadow: 0 15px 30px rgba(2, 44, 34, 0.5); margin-bottom: 20px; position: relative; overflow: hidden; border: 1px solid #0f766e;}
-.wallet-card::before { content: ''; position: absolute; right: -20px; top: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.05); border-radius: 50%; }
-.wallet-card::after { content: ''; position: absolute; right: 40px; top: -50px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%; }
-.wallet-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.w-chip { width: 45px; height: 32px; background: linear-gradient(135deg, #fde68a, #d97706); border-radius: 6px; position: relative; overflow: hidden; border: 1px solid #b45309;}
-.w-chip::after { content: ''; position: absolute; top: 12px; left: 0; right: 0; height: 1px; background: rgba(0,0,0,0.3); box-shadow: 0 8px 0 rgba(0,0,0,0.3); }
-.w-wifi { font-size: 24px; transform: rotate(90deg); opacity: 0.8; color: #fde68a;}
-.wallet-title { font-size: 12px; font-weight: 700; opacity: 0.9; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;}
-.wallet-amt { font-size: 38px; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 4px; color: #fef3c7; text-shadow: 0 2px 5px rgba(0,0,0,0.3);}
-.wallet-num { font-family: monospace; font-size: 16px; letter-spacing: 2px; opacity: 0.9; margin-bottom: 15px; color: #d1fae5;}
-.wallet-bot { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; opacity: 0.8; }
+    /* ---------- FORM ELEMENTS (friendly) ---------- */
+    .field { margin-bottom: 16px; width: 100%; }
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #3d6b5c;
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+    }
 
-/* DASHBOARD STATS */
-.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-.stat { background: #fff; border-radius: 16px; padding: 16px; text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border);}
-.stat b { display: flex; flex-direction:column; align-items:center; font-size: 18px; color: var(--primary-dark); font-weight: 800; gap:4px; }
-.stat span { font-size: 11px; color: var(--muted); font-weight: 700; margin-top: 6px; display: block; }
-.stat-pool { grid-column: span 2; background: #ecfdf5; border: 1px solid #a7f3d0; }
-.stat-pool b { color: #059669; font-size: 24px; flex-direction: row; justify-content:center;}
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background: #f9fdfb;
+      border-radius: 16px;
+      border: 1.5px solid #d9ece4;
+      transition: 0.2s;
+    }
 
-/* MEMBERS LIST */
-.member { display: flex; flex-direction: column; padding: 18px; background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s;}
-.member-top { display: flex; justify-content: space-between; align-items: center; }
-.mem-info { display: flex; align-items: center; gap: 14px; }
-.mem-num { width: 32px; height: 32px; background: var(--primary-dark); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; box-shadow: 0 4px 8px rgba(6, 78, 59, 0.3);}
-.member b { font-size: 16px; color: var(--text); font-weight: 800; }
-.due { color: var(--success); }
-.due.red { color: var(--danger); }
-.pay-action { display: flex; justify-content: flex-end; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+    .input-wrap:focus-within {
+      border-color: #059669;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.08);
+    }
 
-/* BOTTOM NAV (100% FIXED & SAFE) */
-.bottom-nav { 
-  position: fixed !important; 
-  bottom: 0px !important; 
-  left: 0; 
-  right: 0; 
-  width: 100%;
-  background: #fff; 
-  border-top-left-radius: 24px; 
-  border-top-right-radius: 24px; 
-  display: flex; 
-  justify-content: space-around; 
-  padding: 12px 0 16px; 
-  padding-bottom: calc(12px + env(safe-area-inset-bottom)); 
-  z-index: 999999 !important; 
-  box-shadow: 0 -10px 25px rgba(0,0,0,0.08); 
-  border-top: 1px solid var(--border);
-}
-.bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; font-weight: 800; color: #94a3b8; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.bottom-nav button .ico { font-size: 22px; transition: all 0.2s; filter: grayscale(1); opacity:0.6;}
-.bottom-nav button.active { color: var(--primary); }
-.bottom-nav button.active .ico { transform: translateY(-4px); filter: grayscale(0); opacity:1;}
+    .input-ico {
+      position: absolute;
+      left: 16px;
+      font-size: 18px;
+      color: #3d6b5c;
+      opacity: 0.7;
+    }
 
-/* AUTO CALCULATOR BOX */
-.calc-box { background: #ecfdf5; border-radius: 16px; padding: 16px; margin-top: 16px; border: 1px solid #a7f3d0; }
-.calc-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #064e3b; margin-bottom: 8px; }
-.calc-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; color: #059669; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #a7f3d0; }
+    .input-wrap input, .input-wrap select {
+      width: 100%;
+      padding: 15px 16px 15px 48px;
+      border: none;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1e2f2a;
+      outline: none;
+      border-radius: 16px;
+    }
 
-.hidden { display: none !important; }
+    .input-wrap input::placeholder { color: #9bb7ad; font-weight: 400; }
 
-/* LIST ITEMS */
-.bc-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 16px; margin-bottom: 12px; background: #fff; box-shadow: var(--shadow); cursor: pointer; border: 1px solid var(--border);}
-.bc-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 14px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);}
-.bc-color-1 { background: linear-gradient(135deg, #a7f3d0, #34d399); color: #064e3b; }
-.bc-color-2 { background: linear-gradient(135deg, #ddd6fe, #a78bfa); color: #4c1d95; }
-.bc-color-3 { background: linear-gradient(135deg, #fed7aa, #fb923c); color: #7c2d12; }
-.bc-info { flex: 1; }
-.bc-info b { display: block; font-size: 16px; color: var(--primary-dark); margin-bottom: 4px; font-weight:800;}
-.bc-info span { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .no-ico {
+      width: 100%;
+      padding: 15px 18px;
+      border: 1.5px solid #d9ece4;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 500;
+      background: #f9fdfb;
+      color: #1e2f2a;
+      outline: none;
+      transition: 0.2s;
+    }
 
-/* MEMBERS INPUT ROW */
-.mem-row { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 16px; background: #fff; margin-bottom: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); box-sizing: border-box; width: 100%;}
-.mem-input-group { display: flex; align-items: center; gap: 12px; width: 100%;}
-.mem-input-group .num { width: 34px; height: 34px; border-radius: 50%; background: var(--primary-dark); color: white; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 8px rgba(6, 78, 59, 0.3);}
-.mem-input-group input { flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border); font-size: 14px; background: var(--input-bg); font-weight:600; box-sizing: border-box;}
-.mem-input-group input:focus { border-color: var(--accent); outline: none; background: #fff;}
+    .no-ico:focus {
+      border-color: #059669;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.08);
+    }
 
-/* MODALS */
-.modal-bg { position: fixed; inset: 0; background: rgba(2, 44, 34, 0.85); backdrop-filter: blur(8px); z-index: 9999999; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.modal-box { background: #fff; border-radius: 24px; padding: 30px 20px; max-width: 350px; width: 100%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative; overflow: hidden; box-sizing: border-box;}
-#winnerModal .modal-box { background: linear-gradient(180deg, #fffbeb, #fef3c7); border: 2px solid #fde68a; }
-.win-trophy { font-size: 80px; filter: drop-shadow(0 10px 10px rgba(217, 119, 6, 0.3)); margin-bottom: 10px; }
-#winAmount { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 10px 24px; border-radius: 16px; font-size: 32px; display: inline-block; margin: 15px 0; font-weight: 900; box-shadow: 0 8px 15px rgba(217, 119, 6, 0.4); border: 2px solid #fcd34d;}
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
 
-.win-icon-btn { background: #fef08a; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2); transition: transform 0.2s;}
-.win-icon-btn:active { transform: scale(0.9);}
+    /* ---------- BUTTONS ---------- */
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 40px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      letter-spacing: -0.2px;
+    }
 
-/* 🤖 AI CHATBOT CSS */
-.ai-fab { 
-   position: fixed !important; 
-   bottom: 120px !important; 
-   right: 20px; 
-   width: 56px; 
-   height: 56px; 
-   background: linear-gradient(135deg, #10b981, #059669); 
-   border-radius: 50%; 
-   display: flex; 
-   align-items: center; 
-   justify-content: center; 
-   font-size: 28px; 
-   color: white; 
-   box-shadow: 0 4px 15px rgba(5,150,105,0.4); 
-   cursor: pointer; 
-   z-index: 99990; 
-   transition: transform 0.2s; 
-   border: 2px solid #fff;
-}
-.ai-fab:active { transform: scale(0.9); }
-.chat-box { height: 260px; overflow-y: auto; background: #f8fafc; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); margin-bottom: 15px;}
-.msg-bubble { max-width: 85%; padding: 12px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; font-weight: 600;}
-.msg-ai { background: #e2e8f0; color: var(--primary-dark); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
-.msg-user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 2px 4px rgba(5,150,105,0.2);}
-.ai-options { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;}
-.ai-opt-btn { background: #fff; border: 1px solid var(--accent); color: var(--primary-dark); padding: 8px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(16,185,129,0.1);}
-.ai-opt-btn:active { background: var(--accent); color: #fff;}
+    .btn:active { transform: scale(0.96); }
 
-/* ALLOW COPYING OF UPI ID ONLY */
-code {
-  -webkit-user-select: all;
-  -ms-user-select: all;
-  user-select: all;
-}
-</style>
+    .btn-primary {
+      background: #059669;
+      color: white;
+      box-shadow: 0 8px 18px rgba(5, 150, 105, 0.25);
+    }
+
+    .btn-primary:active { background: #047857; }
+
+    .btn-secondary {
+      background: #0b3b2b;
+      color: white;
+      box-shadow: 0 6px 14px rgba(11, 59, 43, 0.15);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 12px;
+      width: auto;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+    /* ---------- AUTH TABS (clean) ---------- */
+    .tabs {
+      display: flex;
+      background: #eef7f2;
+      border-radius: 40px;
+      padding: 5px;
+      margin-bottom: 22px;
+      border: 1px solid #d0e8dd;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 40px;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 700;
+      color: #3d6b5c;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .tabs button.active {
+      background: #059669;
+      color: white;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2);
+    }
+
+    /* ---------- ALERTS & MESSAGES ---------- */
+    .msg {
+      padding: 14px 16px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .msg.err { background: #fee9e9; color: #b91c1c; border: 1px solid #fecaca; }
+    .msg.ok { background: #e1f7ec; color: #047857; border: 1px solid #a7e0c5; }
+
+    /* ---------- WALLET CARD (redesigned, softer) ---------- */
+    .wallet-card {
+      background: linear-gradient(145deg, #0b3b2b, #1c5e4a);
+      color: white;
+      padding: 24px;
+      border-radius: 28px;
+      box-shadow: 0 14px 28px -8px rgba(11, 59, 43, 0.3);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #2e7d64;
+    }
+
+    .wallet-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .w-chip {
+      width: 44px;
+      height: 30px;
+      background: linear-gradient(135deg, #fde68a, #d97706);
+      border-radius: 8px;
+      border: 1px solid #b45309;
+      position: relative;
+      overflow: hidden;
+    }
+    .w-chip::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(0,0,0,0.2);
+      box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .w-wifi { font-size: 22px; opacity: 0.9; color: #fde68a; transform: rotate(90deg); }
+    .wallet-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px; }
+    .wallet-amt { font-size: 38px; font-weight: 800; color: #fef9e7; margin-bottom: 12px; line-height: 1.1; }
+    .wallet-num { font-family: monospace; font-size: 14px; letter-spacing: 1px; color: #b7e0d0; }
+    .wallet-bot { display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; opacity: 0.8; margin-top: 12px; }
+
+    /* ---------- STATS GRID ---------- */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 16px 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 30, 15, 0.02);
+      border: 1px solid #e2efe9;
+    }
+
+    .stat b {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0b3b2b;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .stat span { font-size: 12px; color: #4d7568; font-weight: 600; }
+
+    .stat-pool {
+      grid-column: span 2;
+      background: #e1f7ec;
+      border: 1px solid #b7e0c5;
+    }
+    .stat-pool b { font-size: 28px; color: #047857; }
+
+    /* ---------- MEMBER CARDS (clean) ---------- */
+    .member {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 18px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 14px rgba(0, 30, 15, 0.02);
+      border: 1px solid #e2efe9;
+      transition: 0.2s;
+    }
+
+    .member-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mem-info { display: flex; align-items: center; gap: 12px; }
+
+    .mem-num {
+      width: 36px;
+      height: 36px;
+      background: #0b3b2b;
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 8px rgba(11, 59, 43, 0.15);
+    }
+
+    .member b { font-size: 16px; font-weight: 700; color: #1e2f2a; }
+
+    .due { color: #047857; font-weight: 800; }
+    .due.red { color: #b91c1c; }
+
+    .pay-action { display: flex; justify-content: flex-end; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #c6e9d9; }
+
+    /* ---------- BOTTOM NAV (clear) ---------- */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 16px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+      z-index: 999;
+      box-shadow: 0 -6px 20px rgba(0, 30, 15, 0.06);
+      border-top: 1px solid #d9ece4;
+    }
+
+    .bottom-nav button {
+      flex: 1;
+      background: none;
+      border: none;
+      font-size: 11px;
+      font-weight: 700;
+      color: #8aa79c;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: 0.2s;
+    }
+
+    .bottom-nav button .ico {
+      font-size: 24px;
+      filter: grayscale(0.5);
+      opacity: 0.7;
+      transition: 0.2s;
+    }
+
+    .bottom-nav button.active { color: #059669; }
+    .bottom-nav button.active .ico { filter: grayscale(0); opacity: 1; transform: translateY(-2px); }
+
+    /* ---------- HIDE UTILITY ---------- */
+    .hidden { display: none !important; }
+
+    /* ---------- AI FAB ---------- */
+    .ai-fab {
+      position: fixed;
+      bottom: 110px;
+      right: 18px;
+      width: 54px;
+      height: 54px;
+      background: #059669;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: white;
+      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
+      cursor: pointer;
+      z-index: 90;
+      border: 2px solid white;
+      transition: 0.2s;
+    }
+    .ai-fab:active { transform: scale(0.92); }
+
+    /* ---------- CHAT / MODALS ---------- */
+    .chat-box {
+      height: 260px;
+      overflow-y: auto;
+      background: #f5faf7;
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 1px solid #d9ece4;
+      margin-bottom: 15px;
+    }
+
+    .msg-bubble {
+      max-width: 85%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .msg-ai {
+      background: #e6f3ed;
+      color: #0b3b2b;
+      align-self: flex-start;
+      border-bottom-left-radius: 6px;
+    }
+
+    .msg-user {
+      background: #059669;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 6px;
+    }
+
+    .ai-options { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+    .ai-opt-btn {
+      background: white;
+      border: 1.5px solid #b7e0c5;
+      color: #0b3b2b;
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .ai-opt-btn:active { background: #e1f7ec; }
+
+    /* ---------- MODALS (clean) ---------- */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 59, 43, 0.5);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 28px;
+      padding: 28px 22px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    /* ---------- MISC ---------- */
+    code {
+      -webkit-user-select: all;
+      user-select: all;
+    }
+
+    .empty-state { color: white; text-align: center; padding: 20px; }
+
+    /* small adjustments */
+    .link-btn { background: none; border: none; color: #059669; font-weight: 700; cursor: pointer; }
+  </style>
 </head>
 <body class="lang-hi">
 
-<div class="app-bg"></div>
+<div class="bg-soft"></div>
 
-<!-- 🤖 AI FAB BUTTON -->
+<!-- AI Assistant FAB -->
 <div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
-<!-- GENERAL APP ALERT -->
+<!-- GENERAL ALERT MODAL -->
 <div id="appModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 24px; text-align:center;">
-    <p id="modalText" style="font-weight: 700; margin-bottom: 20px; color: #1e293b; white-space: pre-wrap;"></p>
+    <p id="modalText" style="font-weight: 600; margin-bottom: 22px; color: #1e2f2a; white-space: pre-wrap; font-size: 15px;"></p>
     <div id="modalBtns"><button class="btn btn-primary" onclick="document.getElementById('appModal').classList.add('hidden')">OK</button></div>
   </div>
 </div>
 
-<!-- PREMIUM CONFIRM MODAL -->
+<!-- CONFIRM MODAL -->
 <div id="confirmModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 24px; text-align:center;">
-    <p id="confirmText" style="font-weight: 800; margin-bottom: 20px; color: #1e293b; white-space: pre-wrap; font-size:16px;"></p>
+    <p id="confirmText" style="font-weight: 700; margin-bottom: 22px; color: #1e2f2a; white-space: pre-wrap; font-size:16px;"></p>
     <div style="display:flex; gap:10px; justify-content:center;">
-       <button class="btn" style="background: #e2e8f0; color: #475569;" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+       <button class="btn" style="background: #eef7f2; color: #3d6b5c;" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
        <button class="btn btn-primary" id="confirmYes"><span class="hi">हाँ, पक्का</span><span class="en">Yes, Sure</span></button>
     </div>
   </div>
 </div>
 
-<!-- 🤖 SMART AI ASSISTANT MODAL (LANGUAGE AWARE) 🤖 -->
+<!-- AI MODAL -->
 <div id="aiModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 20px; text-align:left;">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-       <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 <span class="hi">AI सहायता (Help)</span><span class="en">AI Help Guide</span></h2>
-       <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
+       <h2 style="color: #0b3b2b; font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">🤖 <span class="hi">AI सहायता</span><span class="en">AI Help</span></h2>
+       <div style="font-size: 24px; cursor: pointer; color: #b91c1c; line-height:1;" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
     </div>
-    
     <div class="chat-box" id="aiChat">
        <div class="msg-bubble msg-ai">
            <span class="hi">नमस्ते! मैं आपका AI असिस्टेंट हूँ। आप मुझसे ऐप की सिक्योरिटी और इस्तेमाल के बारे में सवाल पूछ सकते हैं। 👇</span>
-           <span class="en">Hello! I am your AI Assistant. You can ask me questions about app security and usage below. 👇</span>
+           <span class="en">Hello! I am your AI Assistant. Ask me about app security and usage. 👇</span>
        </div>
     </div>
-    
     <div class="ai-options">
-       <button class="ai-opt-btn" onclick="askAI('secure')">
-           <span class="hi">🔒 क्या यह ऐप सुरक्षित है?</span><span class="en">🔒 Is this app secure?</span>
-       </button>
-       <button class="ai-opt-btn" onclick="askAI('pay')">
-           <span class="hi">💳 ऑनलाइन पेमेंट कैसे करें?</span><span class="en">💳 How to pay online?</span>
-       </button>
-       <button class="ai-opt-btn" onclick="askAI('data')">
-           <span class="hi">☁️ डेटा खो गया तो क्या होगा?</span><span class="en">☁️ What if data is lost?</span>
-       </button>
-       <button class="ai-opt-btn" onclick="askAI('use')">
-           <span class="hi">✅ ऐप का इस्तेमाल कैसे करें?</span><span class="en">✅ How to use the app?</span>
-       </button>
+       <button class="ai-opt-btn" onclick="askAI('secure')"><span class="hi">🔒 सुरक्षित?</span><span class="en">🔒 Secure?</span></button>
+       <button class="ai-opt-btn" onclick="askAI('pay')"><span class="hi">💳 पेमेंट?</span><span class="en">💳 Pay?</span></button>
+       <button class="ai-opt-btn" onclick="askAI('data')"><span class="hi">☁️ डेटा?</span><span class="en">☁️ Data?</span></button>
+       <button class="ai-opt-btn" onclick="askAI('use')"><span class="hi">✅ कैसे?</span><span class="en">✅ How?</span></button>
     </div>
   </div>
 </div>
 
-<!-- 💡 FEEDBACK MODAL (DIRECT WHATSAPP) -->
+<!-- FEEDBACK MODAL -->
 <div id="feedbackModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 24px; text-align:left;">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-       <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">💡 <span class="hi">सुझाव / शिकायत</span><span class="en">Feedback</span></h2>
-       <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('feedbackModal').classList.add('hidden')">✖</div>
+       <h2 style="color: #0b3b2b; font-size: 18px; margin:0;">💡 <span class="hi">सुझाव / शिकायत</span><span class="en">Feedback</span></h2>
+       <div style="font-size: 24px; cursor: pointer; color: #b91c1c;" onclick="document.getElementById('feedbackModal').classList.add('hidden')">✖</div>
     </div>
-    <p style="font-size:12px; color:var(--muted); margin-bottom:12px; font-weight:600; line-height:1.4;">
-       <span class="hi">ऐप में क्या कमी है या आप क्या नया फीचर चाहते हैं? आपका मैसेज सीधे मेन एडमिन के WhatsApp पर जाएगा।</span>
-       <span class="en">What's missing or what new feature do you want? This will be sent directly to Admin via WhatsApp.</span>
+    <p style="font-size:12px; color:#3d6b5c; margin-bottom:12px; font-weight:500;">
+       <span class="hi">ऐप में क्या कमी है? सीधे एडमिन के WhatsApp पर जाएगा।</span>
+       <span class="en">What's missing? Sent directly to Admin via WhatsApp.</span>
     </p>
-    <textarea id="feedbackText" rows="4" style="width:100%; box-sizing:border-box; padding:12px; border-radius:12px; border:1px solid var(--accent); font-size:14px; margin-bottom:15px; background:var(--input-bg); resize:none; font-family:inherit; outline:none;" placeholder="अपनी बात यहाँ लिखें..."></textarea>
+    <textarea id="feedbackText" rows="4" style="width:100%; padding:14px; border-radius:16px; border:1.5px solid #b7e0c5; font-size:14px; margin-bottom:15px; background:#f9fdfb; resize:none; outline:none;" placeholder="अपनी बात यहाँ लिखें..."></textarea>
     <button class="btn btn-primary" onclick="submitFeedback()">
        <span class="hi">📤 एडमिन को भेजें</span><span class="en">📤 Send to Admin</span>
     </button>
   </div>
 </div>
 
-<!-- 💡 NEW: VIEW LEDGER MODAL (FOR OWNER TO REQUEST DATA) 💡 -->
+<!-- LEDGER MODAL -->
 <div id="ledgerModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 24px; text-align:left; max-width: 400px;">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-       <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">📊 <span class="hi">पक्का हिसाब</span><span class="en">Final Ledger</span></h2>
-       <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('ledgerModal').classList.add('hidden')">✖</div>
+       <h2 style="color: #0b3b2b; font-size: 18px; margin:0;">📊 <span class="hi">पक्का हिसाब</span><span class="en">Final Ledger</span></h2>
+       <div style="font-size: 24px; cursor: pointer; color: #b91c1c;" onclick="document.getElementById('ledgerModal').classList.add('hidden')">✖</div>
     </div>
-    
-    <div style="max-height: 250px; overflow-y: auto; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px;">
-       <table class="ledger-table" id="ledgerTableData" style="width:100%; border-collapse: collapse; font-size:12px; text-align:left;">
-          <!-- Populated dynamically -->
-       </table>
+    <div style="max-height: 250px; overflow-y: auto; border: 1px solid #d9ece4; border-radius: 16px; margin-bottom: 15px;">
+       <table id="ledgerTableData" style="width:100%; border-collapse: collapse; font-size:12px; text-align:left;"></table>
     </div>
-    
-    <button class="btn btn-primary" onclick="requestExcelFromAdmin()" style="background: linear-gradient(90deg, #b45309, #d97706); box-shadow: 0 4px 15px rgba(217,119,6,0.3);">
-       📩 <span class="hi">Excel फ़ाइल मंगाएं (WhatsApp)</span><span class="en">Request Excel via WhatsApp</span>
+    <button class="btn btn-primary" onclick="requestExcelFromAdmin()" style="background: #b45309; box-shadow: 0 6px 14px rgba(180, 83, 9, 0.2);">
+       📩 <span class="hi">Excel फ़ाइल मंगाएं (WhatsApp)</span><span class="en">Request Excel (WhatsApp)</span>
     </button>
   </div>
 </div>
 
-<!-- SMART DEMO MODAL -->
+<!-- DEMO MODAL -->
 <div id="demoModal" class="modal-bg hidden">
   <div class="modal-box" style="padding: 24px; text-align:left;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-       <h2 style="color: var(--primary-dark); font-size: 18px; margin:0; display:flex; align-items:center; gap:8px;">
-           👀 <span class="hi">ऐप कैसे चलाएं?</span><span class="en">How App Works?</span>
-       </h2>
-       <div style="font-size: 24px; cursor: pointer; color: var(--danger); line-height:1;" onclick="document.getElementById('demoModal').classList.add('hidden')">✖</div>
-    </div>
-    <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
-       <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">1️⃣ <span class="hi">कमेटी बनाएं</span><span class="en">Create Group</span></b>
-       <p style="font-size:12px; color:var(--muted); line-height:1.4;"><span class="hi">संचालक 'नई कमेटी' में जाकर जानकारी और सदस्यों के नंबर डालकर सेव करें।</span><span class="en">Owner saves the group with member details.</span></p>
-    </div>
-    <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
-    <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
-       <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">2️⃣ <span class="hi">कोड शेयर करें</span><span class="en">Share Code</span></b>
-       <p style="font-size:12px; color:var(--muted); line-height:1.4;"><span class="hi">कमेटी सेव होने के बाद एक 8 अंकों का Code मिलेगा, उसे सदस्यों को WhatsApp पर भेजें।</span><span class="en">Share the 8-digit code with members.</span></p>
-    </div>
-    <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
-    <div style="margin-bottom:12px; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid var(--border);">
-       <b style="color:var(--primary); font-size:14px; display:block; margin-bottom:4px;">3️⃣ <span class="hi">कोड डालकर जुड़ें</span><span class="en">Join via Code</span></b>
-       <p style="font-size:12px; color:var(--muted); line-height:1.4;"><span class="hi">सदस्य होम पेज पर वह Code डालकर कमेटी में प्रवेश करेंगे।</span><span class="en">Members join by entering the code on the home screen.</span></p>
-    </div>
-    <div style="text-align:center; color:var(--accent); font-size:16px; margin-bottom:12px; font-weight:900;">⬇</div>
-    <div style="margin-bottom:20px; background:#ecfdf5; padding:12px; border-radius:12px; border:1px solid #34d399;">
-       <b style="color:#059669; font-size:14px; display:block; margin-bottom:4px;">4️⃣ <span class="hi">ऑनलाइन पेमेंट</span><span class="en">Online Payment</span></b>
-       <p style="font-size:12px; color:#064e3b; line-height:1.4; font-weight:600;"><span class="hi">सदस्यों को उनके नाम के नीचे '📱 Pay' बटन दिखेगा। क्लिक करके सीधे UPI से पेमेंट करें!</span><span class="en">Members click '📱 Pay' to pay dues securely via UPI.</span></p>
-    </div>
-    <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('hidden')"><span class="hi">✅ समझ गया</span><span class="en">✅ Got it</span></button>
-  </div>
-</div>
-
-<!-- WINNER MODAL -->
-<div id="winnerModal" class="modal-bg hidden">
-  <div class="modal-box">
-    <div style="position: absolute; right: 15px; top: 15px; font-size: 20px; cursor: pointer; color: #92400e;" onclick="document.getElementById('winnerModal').classList.add('hidden')">✖</div>
-    <div class="win-trophy">🏆</div>
-    <h2 style="color: #d97706; font-size: 28px; font-weight: 900; margin-bottom: 5px;">Winner!</h2>
-    <p style="font-size: 22px; font-weight: 800; color: #92400e;" id="winName">Name</p>
-    <p style="color: #b45309; font-size: 14px; font-weight: 600;"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Group opened for them!</span></p>
-    <div id="winAmount">₹0</div>
-    <p style="color: #b45309; font-size: 13px; font-weight: 700; margin-bottom: 20px;"><span class="hi">क्या आप वॉलेट से पैसे देना चाहते हैं?</span><span class="en">Do you want to pay from Wallet?</span></p>
-    <div style="display:flex; gap:10px;">
-       <button class="btn" style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a;" onclick="document.getElementById('winnerModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
-       <button class="btn" style="background: #059669; color: white; box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);" onclick="confirmWinner()"><span class="hi">हाँ, दे दिए</span><span class="en">Yes, Paid</span></button>
-    </div>
-  </div>
-</div>
-
-<!-- EDIT MODAL -->
-<div id="editModal" class="modal-bg hidden">
-  <div class="modal-box">
-    <h2 style="color: var(--primary-dark); font-size: 18px; margin-bottom: 15px; text-align:center;"><span class="hi">कमेटी जानकारी एडिट करें</span><span class="en">Edit Group Details</span></h2>
-    <div class="field"><label><span class="hi">किस्त राशि (₹)</span><span class="en">Installment Amount (₹)</span></label><input class="no-ico" type="number" id="editAmt" oninput="editAutoCalc()"></div>
-    <div class="field"><label><span class="hi">कुल किश्तें</span><span class="en">Total Installments</span></label><input class="no-ico" type="number" id="editInst" oninput="editAutoCalc()"></div>
-    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background: #ecfdf5; color: var(--success); font-weight: 800;"></div>
-    <div class="field"><label><span class="hi">UPI ID (ऑप्शनल)</span><span class="en">UPI ID (Optional)</span></label><input class="no-ico" type="text" id="editUpi" placeholder="mobilenumber@upi"></div>
-    <div style="display:flex; gap:10px; margin-top: 20px;">
-       <button class="btn" style="background: #e2e8f0; color: #475569;" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
-       <button class="btn btn-primary" onclick="saveEdit()"><span class="hi">सेव करें</span><span class="en">Save</span></button>
-    </div>
-  </div>
-</div>
-
-<!-- TOP BAR WITH BACK ARROW -->
-<div class="topbar">
-  <div class="topbar-text">
-    <div id="backArrow" style="display:none;" onclick="goBack()">←</div>
-    <div class="topbar-icon"><span style="font-size: 24px;">🌿</span></div>
-    <div>
-       <h1><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h1>
-       <p><span class="hi">सुरक्षित • सरल • ऑटोमैटिक</span><span class="en">Secure • Simple • Auto</span></p>
-    </div>
-  </div>
-  <div style="display:flex; gap:8px;">
-    <button class="topbar-share" id="langToggleBtn" onclick="toggleLang()">🌐 EN</button>
-    <button class="topbar-share" onclick="shareApp()">📤 <span class="hi">शेयर</span><span class="en">Share</span></button>
-  </div>
-</div>
-
-<main>
-  <!-- AUTHENTICATION -->
-  <section id="auth">
-    <div class="card cream-card" style="text-align: center; padding-top: 30px;">
-      <div style="font-size: 44px; margin-bottom: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">🌿</div>
-      <h2 style="justify-content:center; font-size: 24px; margin-bottom: 8px;"><span class="hi">कमेटी खाता</span><span class="en">Group Khata</span></h2>
-      <p style="font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 24px;"><span class="hi">आपकी कमेटी • आपका हिसाब</span><span class="en">Secure Group Management</span></p>
-      
-      <div class="tabs" id="authTabs">
-        <button id="tabReg" class="active" onclick="switchAuth('register')"><span class="hi">नया अकाउंट</span><span class="en">New Account</span></button>
-        <button id="tabLogin" onclick="switchAuth('login')"><span class="hi">लॉगिन</span><span class="en">Login</span></button>
-      </div>
-      <div id="authMsg"></div>
-      
-      <div id="authNormal">
-        <div class="field">
-          <div class="input-wrap">
-            <span class="input-ico">📱</span>
-            <input class="lang-input" id="authPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Number" placeholder="10 अंकों का नंबर" maxlength="10">
-          </div>
-        </div>
-        <div class="field">
-          <div class="input-wrap">
-            <span class="input-ico">🔒</span>
-            <input class="lang-input" id="authPass" type="password" data-hi="कम से कम 4 अक्षर" data-en="Min 4 characters" placeholder="कम से कम 4 अक्षर">
-          </div>
-        </div>
-        <div id="regExtra">
-          <div class="field">
-            <div class="input-wrap">
-              <span class="input-ico">👤</span>
-              <input class="lang-input" id="authName" data-hi="अपना पूरा नाम लिखें" data-en="Enter Full Name" placeholder="अपना पूरा नाम लिखें">
-            </div>
-          </div>
-        </div>
-        <button id="authBtn" class="btn btn-primary" style="margin-top: 10px;" onclick="doAuth()"><span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span></button>
-        <p style="text-align:center; margin-top:20px;"><button class="link-btn" style="color:var(--primary); font-weight:700; background:none; border:none; cursor:pointer;" onclick="showForgot()"><span class="hi">पासवर्ड भूल गए?</span><span class="en">Forgot Password?</span></button></p>
-      </div>
-      
-      <div id="authForgot" class="hidden">
-        <p style="font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 20px;"><span class="hi">नया पासवर्ड सेट करें</span><span class="en">Set New Password</span></p>
-        <div class="field"><div class="input-wrap"><span class="input-ico">📱</span><input class="lang-input" id="forgotPhone" type="tel" data-hi="मोबाइल नंबर" data-en="Mobile Number" placeholder="मोबाइल नंबर" maxlength="10"></div></div>
-        <div class="field"><div class="input-wrap"><span class="input-ico">🔒</span><input class="lang-input" id="forgotPass" type="password" data-hi="नया पासवर्ड" data-en="New Password" placeholder="नया पासवर्ड"></div></div>
-        <button class="btn btn-primary" style="margin-top: 10px;" onclick="doForgot()"><span class="hi">पासवर्ड बदलें</span><span class="en">Change Password</span></button>
-        <p style="text-align:center; margin-top:20px;"><button class="link-btn" style="color:var(--primary); font-weight:700; background:none; border:none; cursor:pointer;" onclick="hideForgot()"><span class="hi">← वापस जाएं</span><span class="en">← Go Back</span></button></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOME PAGE -->
-  <section id="home" class="hidden">
-    <div class="card cream-card">
-      <div style="font-size: 40px; margin-bottom: 10px;">👋</div>
-      <h2 style="font-size: 22px;">Welcome</h2>
-      <p style="margin-bottom: 20px; font-size: 14px; font-weight: 600; color: var(--muted);"><span class="hi">नई कमेटी बनाएं या लिस्ट में जाकर पुरानी कमेटी देखें।</span><span class="en">Create a new group or check old ones in the list.</span></p>
-      <button class="btn btn-primary" onclick="show('create')"><span class="hi">➕ नई कमेटी बनाएं</span><span class="en">➕ Create New Group</span></button>
-    </div>
-    <div class="card">
-      <h2 style="font-size: 18px;"><span class="hi">🔑 कोड द्वारा प्रवेश</span><span class="en">🔑 Enter via Code</span></h2>
-      <p style="font-size:12px; color:var(--muted); font-weight:700; margin-bottom:16px;"><span class="hi">कमेटी का Access Code डालें:</span><span class="en">Enter Group Access Code:</span></p>
-      <div class="field"><input class="no-ico lang-input" id="accessCode" data-hi="Code (उदा. A1B2C3D4)" data-en="Code (e.g. A1B2C3D4)" placeholder="Code (उदा. A1B2C3D4)" style="text-transform: uppercase;"></div>
-      <button class="btn btn-secondary" style="border-radius: 16px;" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter Group</span></button>
-    </div>
-
-    <!-- DEMO BUTTON -->
-    <div style="text-align:center; margin-top: 10px;">
-       <button style="background:#e2e8f0; color:var(--primary-dark); font-weight:800; border-radius:50px; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.05); padding: 12px 24px; font-size:13px; cursor:pointer;" onclick="document.getElementById('demoModal').classList.remove('hidden')">
-           👀 <span class="hi">ऐप कैसे काम करता है? (Demo)</span><span class="en">How app works? (Demo)</span>
-       </button>
-    </div>
-  </section>
-
-  <!-- PROFILE WITH FEEDBACK BUTTON -->
-  <section id="profile" class="hidden">
-    <div class="card cream-card" style="text-align: center; padding: 40px 20px;">
-      <div style="width: 80px; height: 80px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 15px; box-shadow: 0 10px 20px rgba(5, 150, 105, 0.3);">👤</div>
-      <h2 id="profName" style="justify-content: center; font-size: 24px; margin-bottom: 6px;">Name</h2>
-      <p id="profPhone" style="font-size: 15px; color: var(--muted); font-weight: 700; margin-bottom: 30px; letter-spacing: 1px;">+91 0000000000</p>
-      <div class="stats" style="margin-bottom: 30px;">
-         <div class="stat" style="background: #fff;"><b id="profCount" style="color: var(--primary);">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
-         <div class="stat" style="background: #fff;"><b id="profRole" style="color: var(--primary);">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
-      </div>
-      <button class="btn" onclick="appLogout()" style="color: white; background: var(--danger); box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3);"><span class="hi">🚪 सुरक्षित लॉगआउट</span><span class="en">🚪 Secure Logout</span></button>
-    </div>
-
-    <!-- FEEDBACK BUTTON IN PROFILE -->
-    <div class="card" style="margin-top: 15px; padding: 15px; border-radius: 16px; text-align: left; cursor:pointer;" onclick="document.getElementById('feedbackModal').classList.remove('hidden')">
-       <div style="display:flex; align-items:center; gap:12px;">
-          <div style="font-size:24px; background:#fef3c7; padding:10px; border-radius:12px;">💡</div>
-          <div>
-             <b style="color:var(--primary-dark); font-size:15px;"><span class="hi">सुझाव या शिकायत दें</span><span class="en">Give Feedback</span></b>
-             <p style="font-size:11px; color:var(--muted); margin-top:2px;"><span class="hi">ऐप में क्या सुधार होना चाहिए? (सीधे एडमिन को भेजें)</span><span class="en">Help us improve the app</span></p>
-          </div>
-       </div>
-    </div>
-  </section>
-
-  <!-- MY LIST -->
-  <section id="mylist" class="hidden">
-    <div style="display:flex; align-items:center; margin-bottom:20px; color:white;">
-       <span style="font-size:24px; margin-right:10px;">📋</span>
-       <h2 style="font-size:20px; font-weight:800;"><span class="hi">मेरी कमेटियाँ</span><span class="en">My Groups</span></h2>
-    </div>
-    <div id="bcList"></div>
-  </section>
-
-  <!-- CREATE NEW BC -->
-  <section id="create" class="hidden">
-    <div class="card cream-card">
-      <h2><span style="color:var(--primary);">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
-      <div class="field">
-        <label><span class="hi">कमेटी का नाम *</span><span class="en">Group Name *</span></label>
-        <input class="no-ico lang-input" id="bcName" data-hi="जैसे: गांव कमेटी 2026" data-en="e.g. Village Group 2026" placeholder="जैसे: गांव कमेटी 2026">
-      </div>
-      
-      <div class="row">
-        <div class="field"><label><span class="hi">किस्त राशि (₹) *</span><span class="en">Inst. Amount (₹) *</span></label><input class="no-ico lang-input" id="bcAmount" type="number" data-hi="उदा. 1000" data-en="e.g. 1000" placeholder="उदा. 1000" oninput="autoCalc()"></div>
-        <div class="field">
-          <label><span class="hi">किस्त का समय</span><span class="en">Frequency</span></label>
-          <select class="no-ico" id="freq">
-            <option value="weekly">हफ़्ता / Weekly</option>
-            <option value="biweekly">15 दिन / 15 Days</option>
-            <option value="monthly">महीना / Monthly</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field"><label><span class="hi">कुल किश्तें *</span><span class="en">Total Installs *</span></label><input class="no-ico lang-input" id="totalInst" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="autoCalc()"></div>
-        <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" id="totalPool" type="number" readonly style="background: #fff; color: var(--success); font-weight: 800;" placeholder="Auto"></div>
-      </div>
-
-      <div class="calc-box">
-         <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; color:#065f46; font-weight:800;"><span style="font-size:18px;">⚙️</span> <span class="hi">ऑटो कैलकुलेटर</span><span class="en">Auto Calculator</span></div>
-         <div class="calc-row"><span><span class="hi">किस्त राशि</span><span class="en">Inst. Amount</span></span><span id="c-amt">₹ 0</span></div>
-         <div class="calc-row"><span><span class="hi">कुल किश्तें</span><span class="en">Total Installs</span></span><span id="c-inst">0</span></div>
-         <div class="calc-total"><span><span class="hi">कुल पूरा राशि</span><span class="en">Total Pool</span></span><span id="c-pool">₹ 0</span></div>
-      </div>
-
-      <div style="margin-top: 24px; padding-top:20px; border-top: 1px dashed var(--border);">
-        <div class="field"><label><span class="hi">मालिक का नाम *</span><span class="en">Owner Name *</span></label><input class="no-ico lang-input" id="ownerName" data-hi="संचालक का नाम" data-en="Admin Name" placeholder="संचालक का नाम"></div>
-        <div class="field"><label><span class="hi">मालिक का मोबाइल *</span><span class="en">Owner Mobile *</span></label><input class="no-ico lang-input" id="ownerPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Mobile" placeholder="10 अंकों का नंबर" maxlength="10"></div>
-        <div class="field">
-           <label><span class="hi">UPI ID (ऑनलाइन पेमेंट के लिए - Optional)</span><span class="en">UPI ID (Optional for Online Pay)</span></label>
-           <input class="no-ico lang-input" id="upiId" data-hi="उदा. 9876543210@ybl" data-en="e.g. 9876543210@ybl" placeholder="उदा. 9876543210@ybl">
-        </div>
-        <div class="field"><label><span class="hi">शुरुआत तिथि</span><span class="en">Start Date</span></label><input class="no-ico" id="startDate" type="date"></div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h2><span style="color:var(--primary);">👥</span> <span class="hi">सदस्य जोड़ें</span><span class="en">Add Members</span></h2>
-      <div class="field"><label><span class="hi">कुल सदस्य संख्या</span><span class="en">Total Members</span></label><input class="no-ico lang-input" id="memberCount" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
-      <div id="memberInputs" style="margin-top: 16px;"></div>
-    </div>
-    
-    <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px;" id="createBtn"><span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span></button>
-    <div id="created" class="card hidden" style="background: #d1fae5; text-align:center;"></div>
-  </section>
-
-  <!-- DASHBOARD -->
-  <section id="dashboard" class="hidden">
-    <div id="walletBlock"></div>
-    
-    <!-- 💡 NEW: VIEW LEDGER CARD (INSTEAD OF DIRECT DOWNLOAD) 💡 -->
-    <div id="ledgerCardBlock" class="card cream-card hidden" style="margin-bottom: 20px; text-align:center; padding: 18px;">
-       <h3 style="color: var(--primary-dark); font-size: 15px; font-weight: 800; margin-bottom: 8px;">
-          📊 <span class="hi">कमेटी का पक्का हिसाब</span><span class="en">Group Ledger</span>
-       </h3>
-       <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px; font-weight: 600;">
-          <span class="hi">सभी सदस्यों का जमा और बाकी का पूरा रिकॉर्ड एक साथ देखें।</span>
-          <span class="en">View complete payment record of all members.</span>
-       </p>
-       <button class="btn btn-primary" style="padding: 12px; font-size: 14px; border-radius: 12px; background: linear-gradient(90deg, #059669, #10b981);" onclick="viewLedger()">
-          👀 <span class="hi">पक्का हिसाब देखें</span><span class="en">View Final Ledger</span>
-       </button>
-    </div>
-    
-    <div style="margin-bottom: 20px;" id="memberCard">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding: 0 4px;">
-         <h2 style="margin:0; font-size: 18px; font-weight: 800; color:white;"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
-         <div style="display:flex; gap:8px;">
-           <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:white; color:var(--primary-dark); font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
-           <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef08a; color:#b45309; font-weight: 800; border-radius:50px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">+ <span class="hi">अगली किश्त</span><span class="en">+ Next Round</span></button>
-         </div>
-      </div>
-      <div id="members"></div>
-    </div>
-  </section>
-
-  <!-- ADMIN PANEL -->
-  <section id="admin" class="hidden">
-    <div class="card cream-card" style="border-left: 4px solid var(--primary);">
-      <h2 style="color: var(--primary-dark);">👑 Admin Dashboard</h2>
-      <div class="msg ok" style="margin-bottom: 0; background: #fff; border:none; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">✓ Admin ID Verified</div>
-    </div>
-
-    <!-- ADMIN MASTER EXCEL BACKUP TOOL -->
-    <div class="card cream-card" style="border-left: 4px solid var(--accent);">
-      <h2 style="color: var(--primary-dark);">📊 Master Excel Backup</h2>
-      <p style="margin-bottom: 12px; font-size: 12px; font-weight: 700; color: var(--muted);"><span class="hi">किसी भी कमेटी का Code डालकर तुरंत उसकी Excel फाइल डाउनलोड करें:</span><span class="en">Enter Code to download any group Excel sheet:</span></p>
-      <div class="field"><input class="no-ico" id="adminExcelCode" placeholder="Code (उदा. A1B2C3D4)" style="background: white; text-transform:uppercase;"></div>
-      <button class="btn btn-primary" style="border-radius:14px; padding:14px;" onclick="adminDownloadExcel()"><span class="hi">📥 Excel फाइल डाउनलोड करें</span><span class="en">📥 Download Excel Sheet</span></button>
-    </div>
-
-    <div class="card" style="background: #fff1f2; border-color: #fecaca; border-left: 4px solid var(--danger);">
-      <h2 style="color: var(--danger);"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete Group</span></h2>
-      <p style="margin-bottom: 16px; font-size: 12px; font-weight: 700; color: #9f1239;"><span class="hi">गलत बनी हुई कमेटी का कोड डालकर उसे हमेशा के लिए डिलीट करें।</span><span class="en">Enter Code to permanently delete group.</span></p>
-      <div class="field"><input class="no-ico" id="adminDelCode" placeholder="Code (उदा. A1B2C3D4)" style="background: white; text-transform:uppercase;"></div>
-      <button class="btn" style="background: var(--danger); color:white; border-radius:14px;" onclick="adminDeleteBC()"><span class="hi">🗑️ डाटा डिलीट करें</span><span class="en">🗑️ Delete Data</span></button>
-    </div>
-  </section>
-</main>
-
-<!-- BOTTOM NAVIGATION -->
-<nav id="mainNav" class="bottom-nav hidden">
-  <button id="nav-home" onclick="show('home')"><div class="ico">🏠</div><span class="hi">होम</span><span class="en">Home</span></button>
-  <button id="nav-create" onclick="show('create')"><div class="ico">➕</div><span class="hi">नई</span><span class="en">New</span></button>
-  <button id="nav-mylist" onclick="show('mylist')"><div class="ico">📋</div><span class="hi">लिस्ट</span><span class="en">List</span></button>
-  <button id="nav-profile" onclick="show('profile')"><div class="ico">👤</div><span class="hi">प्रोफाइल</span><span class="en">Profile</span></button>
-  <button id="nav-admin" class="hidden" onclick="show('admin')"><div class="ico">👑</div>Admin</button>
-</nav>
-
-<script>
-const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
-const ADMIN_PHONE = '7318259001'; 
-const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr'; 
-const KEYS = { session: 'kk_session', joined: 'kk_joined', current: 'kk_current' };
-let currentBCData = null; 
-let currentLang = localStorage.getItem('kk_lang') || 'hi';
-let navHistory = []; 
-
-function t(hiText, enText) { return currentLang === 'hi' ? hiText : enText; }
-
-function cleanPhone(p) {
-    if(!p) return "";
-    return String(p).replace(/\D/g, '').slice(-10);
-}
-
-function toggleLang() {
-    currentLang = currentLang === 'hi' ? 'en' : 'hi';
-    applyLang();
-}
-
-function applyLang() {
-    localStorage.setItem('kk_lang', currentLang);
-    document.body.className = 'lang-' + currentLang;
-    document.getElementById('langToggleBtn').innerHTML = currentLang === 'hi' ? '🌐 EN' : '🌐 HI';
-    
-    document.querySelectorAll('.lang-input').forEach(el => {
-        el.placeholder = el.getAttribute('data-' + currentLang) || el.placeholder;
-    });
-    
-    if(!document.getElementById('dashboard').classList.contains('hidden')) loadDash();
-    if(!document.getElementById('mylist').classList.contains('hidden')) renderMyList();
-    if(!document.getElementById('create').classList.contains('hidden')) autoCalc();
-    
-    const isReg = document.getElementById('tabReg').classList.contains('active');
-    if (isReg) { document.getElementById('authBtn').innerHTML = '<span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span>'; } 
-    else { document.getElementById('authBtn').innerHTML = '<span class="hi">लॉगिन करें</span><span class="en">Login</span>'; }
-}
-
-function load(key, def) { try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; } }
-function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
-
-function appAlert(text) {
-  return new Promise(res => {
-    const m = document.getElementById('appModal');
-    document.getElementById('modalText').textContent = text;
-    m.classList.remove('hidden');
-    document.querySelector('#appModal .btn').onclick = () => { m.classList.add('hidden'); res(); };
-  });
-}
-
-function appConfirm(text) {
-  return new Promise(res => {
-    const m = document.getElementById('confirmModal');
-    document.getElementById('confirmText').innerText = text;
-    m.classList.remove('hidden');
-    
-    document.getElementById('confirmYes').onclick = () => { m.classList.add('hidden'); res(true); };
-    document.getElementById('confirmNo').onclick = () => { m.classList.add('hidden'); res(false); };
-  });
-}
-
-function genCode() { return Math.random().toString(36).substring(2, 10).toUpperCase(); }
-
-async function shareApp() {
-  const shareData = { title: t('कमेटी खाता', 'Group Khata'), text: t('💰 *कमेटी खाता ऐप*\n\nअपनी कमेटी का हिसाब सुरक्षित रखें। ऐप अभी डाउनलोड करें:\n\n', '💰 *Group Khata App*\n\nKeep your group records secure. Download app now:\n\n') + APP_LINK };
-  try { if (navigator.share) { await navigator.share(shareData); } else { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); } } 
-  catch (err) { window.location.href = 'https://wa.me/?text=' + encodeURIComponent(shareData.text); }
-}
-
-function submitFeedback() {
-    let text = document.getElementById('feedbackText').value.trim();
-    if(!text) return appAlert(t('कृपया सुझाव या शिकायत लिखें!', 'Please write your feedback!'));
-    
-    let s = load(KEYS.session, {});
-    let senderName = s.name ? s.name : "User";
-    let senderPhone = s.phone ? s.phone : "Unknown";
-    
-    let msg = `*Group Khata - Feedback* 💡\n\n*From:* ${senderName} (${senderPhone})\n*Message:* ${text}`;
-    let waLink = `https://wa.me/91${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`;
-    
-    window.open(waLink, '_blank');
-    
-    document.getElementById('feedbackModal').classList.add('hidden');
-    document.getElementById('feedbackText').value = '';
-}
-
-function copyToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-            appAlert(t("✅ UPI ID कॉपी हो गई: \n\n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n\n" + text + "\n\nNow open your PhonePe or GPay to pay."));
-        });
-    } else {
-        let tempInput = document.createElement("input");
-        tempInput.value = text;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
-        appAlert(t("✅ UPI ID कॉपी हो गई: \n\n" + text + "\n\nअब अपना PhonePe या GPay खोलकर पेमेंट करें।", "✅ UPI ID Copied: \n\n" + text + "\n\nNow open your PhonePe or GPay to pay."));
-    }
-}
-
-// 🤖 BILINGUAL AI CHATBOT LOGIC
-function askAI(type) {
-    const chat = document.getElementById('aiChat');
-    let qText = "";
-    let aText = "";
-
-    if (type === 'secure') {
-        qText = t('🔒 क्या यह ऐप सुरक्षित है?', '🔒 Is this app secure?');
-        aText = t('✅ जी हाँ, यह 100% सुरक्षित है। आपका सारा डेटा हमारे प्राइवेट और सुरक्षित सर्वर (Encrypted) पर सेव होता है। कोई भी बाहरी व्यक्ति इसे नहीं देख सकता।', '✅ Yes, it is 100% secure. All your data is encrypted and saved on our private secure servers. No outsider can access it.');
-    } else if (type === 'pay') {
-        qText = t('💳 ऑनलाइन पेमेंट कैसे करें?', '💳 How to pay online?');
-        aText = t('💳 जब आपकी किश्त बाकी होगी, तो आपको UPI ID और कॉपी बटन दिखेगा। उसे कॉपी करके सीधे PhonePe/GPay में पेस्ट करें और पेमेंट पूरा करें।', '💳 When your installment is due, you will see a UPI ID and a copy button. Copy it, paste it in PhonePe/GPay, and complete the payment.');
-    } else if (type === 'data') {
-        qText = t('☁️ डेटा खो गया तो क्या होगा?', '☁️ What if data is lost?');
-        aText = t('☁️ आपका डेटा हमारे सुरक्षित क्लाउड सर्वर पर रहता है। आप जब चाहें "पक्का हिसाब देखें" बटन दबाकर एडमिन से अपनी Excel फ़ाइल मांग सकते हैं।', '☁️ Your data is safe on our cloud servers. You can request the complete Excel record from the Admin anytime using the "View Final Ledger" button.');
-    } else if (type === 'use') {
-        qText = t('✅ ऐप का इस्तेमाल कैसे करें?', '✅ How to use the app?');
-        aText = t('✅ 1. संचालक "नई कमेटी" बनाएं। <br>2. 8 अंकों का कोड सबको भेजें। <br>3. मेंबर होम पेज पर कोड डालकर जुड़ें। <br>4. ऑनलाइन पेमेंट करें और हिसाब लाइव देखें!', '✅ 1. Admin creates a "New Group".<br>2. Share the 8-digit Code with everyone.<br>3. Members join by entering the code on Home.<br>4. Pay online and view live records!');
-    }
-
-    chat.innerHTML += `<div class="msg-bubble msg-user">${qText}</div>`;
-    chat.scrollTop = chat.scrollHeight;
-    document.querySelectorAll('.ai-opt-btn').forEach(b => b.disabled = true);
-    
-    setTimeout(() => {
-        chat.innerHTML += `<div class="msg-bubble msg-ai">${aText}</div>`;
-        chat.scrollTop = chat.scrollHeight;
-        document.querySelectorAll('.ai-opt-btn').forEach(b => b.disabled = false);
-    }, 800);
-}
-
-// 💡 VIEW LEDGER LOGIC
-function viewLedger() {
-    if(!currentBCData) return;
-    
-    let tableHTML = `<tr><th>Name</th><th>Paid (₹)</th><th>Due (₹)</th></tr>`;
-    
-    currentBCData.members.forEach(m => {
-        let paidAmt = (m.paidRounds || 0) * currentBCData.amount;
-        let targetPaid = (currentBCData.currentRound || 1) * currentBCData.amount;
-        let dueAmt = targetPaid - paidAmt;
-        if(dueAmt < 0) dueAmt = 0;
-        
-        tableHTML += `<tr><td>${m.name}</td><td style="color:var(--muted);">${paidAmt}</td><td style="color:${dueAmt>0?'var(--danger)':'var(--success)'}; font-weight:800;">${dueAmt}</td></tr>`;
-    });
-    
-    document.getElementById('ledgerTableData').innerHTML = tableHTML;
-    document.getElementById('ledgerModal').classList.remove('hidden');
-}
-
-// 💡 REQUEST EXCEL FROM ADMIN VIA WHATSAPP
-function requestExcelFromAdmin() {
-    if(!currentBCData) return;
-    let s = load(KEYS.session, {});
-    let senderName = s.name ? s.name : "Admin";
-    
-    let msg = `*Group Khata - Data Request* 📊\n\nBhai, mujhe is committee ki Excel sheet bhej do:\n*Committee Name:* ${currentBCData.name}\n*Code:* ${currentBCData.code}\n*Requested By:* ${senderName}`;
-    let waLink = `https://wa.me/91${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`;
-    
-    window.open(waLink, '_blank');
-}
-
-// 📊 ADMIN MASTER EXCEL DOWNLOAD
-function generateCSV(bc) {
-    let csv = "\uFEFF";
-    csv += "कमेटी का नाम:," + bc.name + "\n";
-    csv += "कमेटी कोड:," + bc.code + "\n";
-    csv += "संचालक (Owner):," + bc.ownerName + "\n";
-    csv += "कुल किश्त राशि:," + bc.amount + "\n\n";
-    csv += "क्र.सं.,सदस्य का नाम,मोबाइल नंबर,जमा किश्तें,कुल जमा (₹),बाकी राशि (₹),स्थिति\n";
-    
-    bc.members.forEach((m, index) => {
-        let paidAmt = (m.paidRounds || 0) * bc.amount;
-        let targetPaid = (bc.currentRound || 1) * bc.amount;
-        let dueAmt = targetPaid - paidAmt;
-        if(dueAmt < 0) dueAmt = 0;
-        let status = m.hasWon ? "कमेटी खुल गई" : (dueAmt === 0 ? "क्लियर" : "बाकी है");
-        
-        csv += `${index + 1},${m.name},${m.phone || 'N/A'},${m.paidRounds || 0},${paidAmt},${dueAmt},${status}\n`;
-    });
-    return csv;
-}
-
-async function adminDownloadExcel() {
-    const code = document.getElementById('adminExcelCode').value.trim().toUpperCase();
-    if(!code) return appAlert(t("कृपया कमेटी का Code डालें!", "Enter Group Code!"));
-    try {
-        const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-        if(!res.ok) throw new Error();
-        const data = (await res.json()).data;
-        if(data.isDeleted) return appAlert(t("यह कमेटी डिलीट हो चुकी है!", "Group deleted!"));
-        
-        let csv = generateCSV(data);
-        let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        let link = document.createElement("a");
-        let url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", data.name + "_Backup.csv");
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        appAlert(t("✅ Master Excel डाउनलोड हो गया!", "✅ Master Excel downloaded!"));
-        document.getElementById('adminExcelCode').value = '';
-    } catch(e) {
-        appAlert(t("गलत कोड या डेटा उपलब्ध नहीं है!", "Invalid Code or no data!"));
-    }
-}
-
-function switchAuth(mode) {
-  const isReg = mode === 'register';
-  document.getElementById('tabReg').classList.toggle('active', isReg);
-  document.getElementById('tabLogin').classList.toggle('active', !isReg);
-  if (isReg) { document.getElementById('regExtra').classList.remove('hidden'); document.getElementById('authBtn').innerHTML = '<span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span>'; } 
-  else { document.getElementById('regExtra').classList.add('hidden'); document.getElementById('authBtn').innerHTML = '<span class="hi">लॉगिन करें</span><span class="en">Login</span>'; }
-  document.getElementById('authMsg').innerHTML = '';
-}
-
-async function doAuth() {
-  const phone = document.getElementById('authPhone').value.trim();
-  const pass = document.getElementById('authPass').value.trim();
-  const name = document.getElementById('authName').value.trim();
-  const isReg = document.getElementById('tabReg').classList.contains('active');
-  const msg = document.getElementById('authMsg');
-  const btn = document.getElementById('authBtn');
-
-  if(phone.length !== 10) return msg.innerHTML = `<div class="msg err">${t('सही 10 अंकों का नंबर डालें', 'Enter valid 10-digit number')}</div>`;
-  if(pass.length < 4) return msg.innerHTML = `<div class="msg err">${t('पासवर्ड कम से कम 4 अक्षरों का रखें', 'Password must be 4+ characters')}</div>`;
-  
-  btn.textContent = t("प्रतीक्षा करें...", "Please wait...");
-  try {
-    const res = await fetch(`${API_URL}/api/auth`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, pass, name, isRegister: isReg }) });
-    const data = await res.json();
-    if(!res.ok) throw new Error(data.error || "Error");
-    save(KEYS.session, { phone, name: data.user.name });
-    msg.innerHTML = `<div class="msg ok">${t('सफलतापूर्वक हो गया!', 'Success!')}</div>`;
-    setTimeout(enterApp, 800);
-  } catch(e) { msg.innerHTML = `<div class="msg err">${e.message}</div>`; }
-  applyLang(); 
-}
-
-function showForgot() { document.getElementById('authNormal').classList.add('hidden'); document.getElementById('authTabs').classList.add('hidden'); document.getElementById('authForgot').classList.remove('hidden'); }
-function hideForgot() { document.getElementById('authNormal').classList.remove('hidden'); document.getElementById('authTabs').classList.remove('hidden'); document.getElementById('authForgot').classList.add('hidden'); }
-
-async function doForgot() {
-  const phone = document.getElementById('forgotPhone').value;
-  const pass = document.getElementById('forgotPass').value;
-  if(phone.length !== 10 || pass.length < 4) return appAlert(t('सही जानकारी डालें', 'Enter valid details'));
-  try {
-    const res = await fetch(`${API_URL}/api/forgot`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, newPass: pass }) });
-    if(!res.ok) throw new Error(t("नंबर रजिस्टर नहीं है", "Number not registered"));
-    appAlert(t("✅ पासवर्ड बदल गया।", "✅ Password Changed.")); hideForgot(); switchAuth('login');
-  } catch(e) { appAlert("Error: " + e.message); }
-}
-
-function enterApp() {
-  const s = load(KEYS.session, null);
-  if(!s) return;
-  document.getElementById('auth').classList.add('hidden');
-  document.getElementById('mainNav').classList.remove('hidden');
-  
-  document.getElementById('profName').textContent = s.name;
-  document.getElementById('profPhone').textContent = "+91 " + s.phone;
-  document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
-  
-  if (cleanPhone(s.phone) === cleanPhone(ADMIN_PHONE)) { 
-      document.getElementById('nav-admin').classList.remove('hidden'); 
-      document.getElementById('profRole').innerHTML = `<span class="hi">मुख्य एडमिन 👑</span><span class="en">Main Admin 👑</span>`; 
-  } else { 
-      document.getElementById('profRole').innerHTML = `<span class="hi">कमेटी सदस्य</span><span class="en">Member</span>`; 
-  }
-  
-  let lastTab = localStorage.getItem('kk_last_tab') || 'home';
-  show(lastTab);
-}
-
-function appLogout() { localStorage.removeItem(KEYS.session); localStorage.removeItem('kk_last_tab'); location.reload(); }
-
-function show(id, isBack = false) {
-  document.querySelectorAll('main > section').forEach(x => x.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-  
-  if(!isBack) {
-      if(navHistory.length === 0 || navHistory[navHistory.length - 1] !== id) {
-          navHistory.push(id);
-      }
-  }
-
-  if(id === 'home' || id === 'auth') {
-      document.getElementById('backArrow').style.display = 'none';
-      navHistory = [id]; 
-  } else {
-      document.getElementById('backArrow').style.display = 'block';
-  }
-
-  if(id === 'profile') document.getElementById('profCount').textContent = load(KEYS.joined, []).length;
-  if(id === 'create') {
-      const s = load(KEYS.session, {});
-      if(!document.getElementById('ownerName').value) document.getElementById('ownerName').value = s.name || "";
-      if(!document.getElementById('ownerPhone').value) document.getElementById('ownerPhone').value = s.phone || "";
-  }
-  
-  ['home','mylist','create','profile','admin'].forEach(n => { const b = document.getElementById('nav-'+n); if(b) b.classList.toggle('active', n === id); });
-  localStorage.setItem('kk_last_tab', id);
-  
-  if(id === 'dashboard') loadDash();
-  if(id === 'mylist') renderMyList();
-  window.scrollTo(0,0);
-}
-
-function goBack() {
-    if(navHistory.length > 1) {
-        navHistory.pop(); 
-        let prevPage = navHistory[navHistory.length - 1];
-        show(prevPage, true);
-    } else {
-        show('home');
-    }
-}
-
-function autoCalc() {
-  let amt = Number(document.getElementById('bcAmount').value) || 0;
-  let inst = Number(document.getElementById('totalInst').value) || 0;
-  let total = amt * inst;
-  
-  document.getElementById('totalPool').value = total;
-  document.getElementById('c-amt').textContent = '₹ ' + amt.toLocaleString('en-IN');
-  document.getElementById('c-inst').textContent = inst;
-  document.getElementById('c-pool').textContent = '₹ ' + total.toLocaleString('en-IN');
-}
-
-function buildMemberInputs() {
-  let c = Number(document.getElementById('memberCount').value) || 0;
-  if(c > 100) c = 100;
-  let h = '';
-  for(let i=1; i<=c; i++) {
-    h += `
-    <div class="mem-row">
-       <div class="mem-input-group">
-           <span class="num">${i}</span>
-           <input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' का नाम *', 'Member '+i+' Name *')}">
-       </div>
-       <div class="mem-input-group" style="padding-left: 46px;">
-           <span style="font-size:16px;">📱</span>
-           <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल नंबर *" data-en="Mobile Number *" placeholder="${t('मोबाइल नंबर *', 'Mobile Number *')}">
-       </div>
-    </div>`;
-  }
-  document.getElementById('memberInputs').innerHTML = h;
-  autoCalc(); 
-}
-
-async function createBC() {
-  const name = document.getElementById('bcName').value;
-  const amount = document.getElementById('bcAmount').value;
-  const freqVal = document.getElementById('freq').value;
-  const freqText = document.getElementById('freq').options[document.getElementById('freq').selectedIndex].text;
-  const totalInst = document.getElementById('totalInst').value;
-  const totalPool = document.getElementById('totalPool').value;
-  
-  const ownerName = document.getElementById('ownerName').value.trim();
-  const ownerPhone = document.getElementById('ownerPhone').value.trim();
-  const upiId = document.getElementById('upiId').value.trim(); 
-  
-  const nameInps = document.querySelectorAll('.mem-name');
-  const phoneInps = document.querySelectorAll('.mem-phone');
-  let members = [];
-  let hasError = false;
-  
-  for(let i=0; i<nameInps.length; i++) {
-      let n = nameInps[i].value.trim();
-      let p = phoneInps[i].value.trim();
-      if(n || p) { 
-          if(!n || p.length !== 10) { hasError = true; }
-          if(n && p.length === 10) members.push({ name: n, phone: p, paidRounds: 0, hasWon: false });
-      }
-  }
-  
-  if(!name || !amount || !totalInst || !totalPool || members.length === 0) return appAlert(t('कृपया सभी जानकारी भरें!', 'Please fill all details!'));
-  if(!ownerName || ownerPhone.length !== 10) return appAlert(t('कृपया मालिक का नाम और 10 अंकों का सही मोबाइल नंबर दर्ज़ करें!', 'Enter valid Owner Name & 10-digit Phone!'));
-  if(hasError) return appAlert(t('कृपया सभी सदस्यों का नाम और 10 अंकों का मोबाइल नंबर सही से भरें!', 'Please enter valid name & 10-digit phone for all members!'));
-
-  const code = genCode();
-  
-  const bcData = { 
-    code, name, amount: Number(amount), freqText, freqVal, totalInst: Number(totalInst), totalPool: Number(totalPool), 
-    ownerName, ownerPhone, upiId, startDate: document.getElementById('startDate').value,
-    currentRound: 1, walletBalance: 0, members 
-  };
-  
-  document.getElementById('createBtn').textContent = t("सेव हो रहा है...", "Saving...");
-  try {
-    await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bcData) });
-    let joined = load(KEYS.joined, []); joined.push(code); save(KEYS.joined, joined); save(KEYS.current, code);
-    
-    document.getElementById('bcName').value = ''; document.getElementById('memberInputs').innerHTML = ''; document.getElementById('memberCount').value = '';
-    document.getElementById('created').classList.remove('hidden');
-    document.getElementById('created').innerHTML = `<h2 style="color: #059669; font-weight:800; margin-bottom:10px;">✅ ${t('सुरक्षित!', 'Saved!')}</h2><div style="font-size:24px; font-weight:800; letter-spacing:3px; background:#fff; padding:10px; border-radius:10px; color:#065f46; border:1px dashed #34d399; margin-bottom:10px;">${code}</div><button class="btn btn-primary" style="background:#059669;" onclick="show('dashboard')">${t('कमेटी खोलें', 'Open Group')}</button>`;
-  } catch(e) { appAlert(t("सेव नहीं हो पाया", "Save failed")); }
-  document.getElementById('createBtn').innerHTML = `<span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span>`;
-  applyLang();
-}
-
-async function join() {
-  const code = document.getElementById('accessCode').value.trim().toUpperCase();
-  const currentUser = load(KEYS.session, {});
-  if(!code) return;
-  
-  try {
-    const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if(!res.ok) throw new Error();
-    const data = await res.json();
-    if(data.data.isDeleted) return appAlert(t("यह कमेटी डिलीट कर दी गई है।", "This Group is deleted."));
-    
-    let isOwner = (cleanPhone(data.data.ownerPhone) === cleanPhone(currentUser.phone)) || (cleanPhone(currentUser.phone) === cleanPhone(ADMIN_PHONE));
-    let isMember = data.data.members.some(m => cleanPhone(m.phone) === cleanPhone(currentUser.phone));
-    
-    if(!isOwner && !isMember) {
-        return appAlert(t("इस कमेटी में आपका नंबर रजिस्टर नहीं है। कृपया संचालक से संपर्क करें।", "Your number is not registered in this Group. Contact Admin."));
-    }
-
-    let joined = load(KEYS.joined, []);
-    if(!joined.includes(code)) { joined.push(code); save(KEYS.joined, joined); }
-    save(KEYS.current, code); document.getElementById('accessCode').value = ''; show('dashboard');
-  } catch(e) { appAlert(t("गलत Code!", "Invalid Code!")); }
-}
-
-async function renderMyList() {
-  const codes = load(KEYS.joined, []); let html = '';
-  document.getElementById('bcList').innerHTML = `<p class="empty-state" style="color:white;">${t('लोड हो रहा है...', 'Loading...')}</p>`;
-  let colors = ['bc-color-1', 'bc-color-2', 'bc-color-3'];
-  let iconArr = ['👥', '💼', '🏆'];
-  
-  for(let i=0; i<codes.length; i++) {
-    let c = codes[i];
-    try {
-      let res = await fetch(`${API_URL}/api/bcs?code=${c}`);
-      if(res.ok) {
-        let bc = (await res.json()).data;
-        if(bc.isDeleted) {
-           let joined = load(KEYS.joined, []); save(KEYS.joined, joined.filter(x => x !== bc.code)); continue;
-        }
-        let cClass = colors[i % 3]; let ico = iconArr[i % 3];
-        html += `<div class="bc-item" onclick="save(KEYS.current, '${bc.code}'); show('dashboard')">
-          <div style="display:flex; align-items:center;">
-             <div class="bc-icon ${cClass}">${ico}</div>
-             <div class="bc-info"><b>${bc.name}</b><span>Code: ${bc.code}</span></div>
-          </div>
-          <span style="font-size: 20px; color: var(--muted);">›</span></div>`;
-      }
-    } catch(e) {}
-  }
-  document.getElementById('bcList').innerHTML = html || `<div class="empty-state" style="color:white;"><div style="font-size: 50px; margin-bottom: 12px; filter: grayscale(1);">📋</div><p>${t('कोई कमेटी नहीं है', 'No Group Found')}</p></div>`;
-}
-
-async function saveBCState() {
-   try {
-     await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(currentBCData) });
-     loadDash(); 
-   } catch(e) { appAlert(t("सेव करने में त्रुटि।", "Error saving data.")); }
-}
-
-function openEditModal() {
-    if(!currentBCData) return;
-    document.getElementById('editAmt').value = currentBCData.amount;
-    document.getElementById('editInst').value = currentBCData.totalInst || currentBCData.members.length;
-    document.getElementById('editPool').value = currentBCData.totalPool || (currentBCData.amount * currentBCData.members.length);
-    document.getElementById('editUpi').value = currentBCData.upiId || ''; 
-    document.getElementById('editModal').classList.remove('hidden');
-}
-
-function editAutoCalc() {
-    let a = Number(document.getElementById('editAmt').value) || 0;
-    let i = Number(document.getElementById('editInst').value) || 0;
-    document.getElementById('editPool').value = a * i;
-}
-
-async function saveEdit() {
-    let a = Number(document.getElementById('editAmt').value);
-    let i = Number(document.getElementById('editInst').value);
-    let p = Number(document.getElementById('editPool').value);
-    let u = document.getElementById('editUpi').value.trim();
-    if(a <= 0 || i <= 0 || p <= 0) return appAlert(t('सही जानकारी भरें', 'Enter valid details'));
-    
-    currentBCData.amount = a;
-    currentBCData.totalInst = i;
-    currentBCData.totalPool = p;
-    currentBCData.upiId = u; 
-    document.getElementById('editModal').classList.add('hidden');
-    document.getElementById('walletBlock').innerHTML = `<div class='empty-state' style='color:white;'>${t('सेव हो रहा है...', 'Saving...')}</div>`;
-    await saveBCState();
-}
-
-async function loadDash() {
-  const code = load(KEYS.current, null);
-  const currentUser = load(KEYS.session, {});
-  document.getElementById('walletBlock').innerHTML = `<div class='empty-state' style='color:white;'>${t('लोड हो रहा है...', 'Loading...')}</div>`;
-  document.getElementById('members').innerHTML = "";
-  
-  try {
-    const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    currentBCData = (await res.json()).data;
-    const bc = currentBCData;
-    
-    if(bc.isDeleted) {
-        document.getElementById('walletBlock').innerHTML = `<div class="card cream-card" style="text-align:center; color:red;">❌ ${t('यह कमेटी डिलीट कर दी गई है।', 'This Group is deleted.')}</div>`;
-        document.getElementById('memberCard').classList.add('hidden');
-        document.getElementById('ledgerCardBlock').classList.add('hidden');
-        return;
-    }
-    
-    if(bc.currentRound === undefined) bc.currentRound = 1;
-    if(bc.walletBalance === undefined) bc.walletBalance = 0;
-    bc.members.forEach(m => {
-        if(m.paidRounds === undefined) { m.paidRounds = m.paid ? 1 : 0; if(m.paid) bc.walletBalance += Number(bc.amount); }
-        if(m.hasWon === undefined) m.hasWon = false;
-    });
-
-    const isOwner = (cleanPhone(bc.ownerPhone) === cleanPhone(currentUser.phone)) || (cleanPhone(currentUser.phone) === cleanPhone(ADMIN_PHONE));
-    document.getElementById('memberCard').classList.remove('hidden');
-
-    if(isOwner){ 
-        document.getElementById('nextRoundBtn').classList.remove('hidden'); 
-        document.getElementById('editBtn').classList.remove('hidden'); 
-        document.getElementById('ledgerCardBlock').classList.remove('hidden'); 
-    } 
-    else { 
-        document.getElementById('nextRoundBtn').classList.add('hidden'); 
-        document.getElementById('editBtn').classList.add('hidden'); 
-        document.getElementById('ledgerCardBlock').classList.add('hidden'); 
-    }
-
-    let startD = new Date(bc.startDate);
-    let endD = new Date(startD);
-    let inst = Number(bc.totalInst) || 0;
-    if(bc.freqVal === 'weekly') endD.setDate(endD.getDate() + (inst * 7));
-    else if(bc.freqVal === 'biweekly') endD.setDate(endD.getDate() + (inst * 15));
-    else if(bc.freqVal === 'monthly') endD.setMonth(endD.getMonth() + inst);
-    let formatD = (d) => d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
-    
-    let txtS = t('शुरू', 'Start'); let txtE = t('खत्म', 'End');
-    let dateStr = `📅 ${txtS}: ${formatD(startD)} | ${txtE}: ${formatD(endD)}`;
-
-    const totalMembers = bc.members.length;
-    let totalInstalls = Number(bc.totalInst) || totalMembers;
-
-    document.getElementById('walletBlock').innerHTML = `
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; color:white;">
-         <div style="width:40px; height:40px; background:#ecfdf5; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; box-shadow:0 4px 10px rgba(0,0,0,0.2);">👥</div>
-         <div>
-            <h2 style="font-size:18px; font-weight:800; margin-bottom:2px; text-shadow:0 2px 4px rgba(0,0,0,0.5);">${bc.name}</h2>
-            <p style="font-size:11px; opacity:0.9; font-weight:600; color:#a7f3d0;">Code: ${bc.code}</p>
-         </div>
-      </div>
-      
-      <div class="wallet-card">
-         <div class="wallet-top">
-            <div class="w-chip"></div>
-            <div class="w-wifi">🛜</div>
-         </div>
-         <div class="wallet-title">${t('कमेटी वॉलेट', 'GROUP WALLET')}</div>
-         <div class="wallet-amt"><span style="font-size:24px; margin-right:4px;">₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
-         <div class="wallet-num">Available Balance</div>
-         <div class="wallet-bot">
-            <div>${dateStr}</div>
-            <div class="mc-circles"><div class="mc-1"></div><div class="mc-2"></div></div>
-         </div>
-      </div>
-      
-      <div class="stats">
-        <div class="stat">
-          <b style="color: var(--primary);"><span style="font-size:16px;">🏦</span> ₹${bc.amount}</b>
-          <span style="color: var(--muted);">${t('किस्त', 'Inst.')}</span>
-        </div>
-        <div class="stat">
-          <b style="color: var(--primary);"><span style="font-size:16px;">⏳</span> ${bc.currentRound} / ${totalInstalls}</b>
-          <span style="color: var(--muted);">${t('चल रही किश्त', 'Current Round')}</span>
-        </div>
-        <div class="stat stat-pool">
-          <b style="font-size:24px; margin-bottom:4px;">₹${Number(bc.totalPool || (bc.amount * totalMembers)).toLocaleString('en-IN')}</b>
-          <span>${t('कमेटी खुलने पर मिलेगा', 'Total Pool Amount')}</span>
-        </div>
-      </div>
-      <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 16px; margin: 20px 0; text-align:center; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);">
-         <div style="font-size: 14px; font-weight: 800; color:white; margin-bottom:4px;">Code: <b style="color: #fde68a; letter-spacing:1px;">${bc.code}</b></div>
-         <div style="color:#d1fae5; font-size:12px; font-weight:600;">संचालक: ${bc.ownerName}</div>
-      </div>
-    `;
-    
-    document.getElementById('members').innerHTML = bc.members.map((m,i) => {
-      let totalPaidByMem = m.paidRounds * bc.amount;
-      let targetPaid = bc.currentRound * bc.amount;
-      let pendingDue = targetPaid - totalPaidByMem;
-      if(pendingDue < 0) pendingDue = 0;
-      
-      let leftEMIs = totalInstalls - m.paidRounds;
-      if (leftEMIs < 0) leftEMIs = 0;
-
-      let isMe = (cleanPhone(m.phone) === cleanPhone(currentUser.phone));
-      if(!m.phone && currentUser.name) {
-         let cN = currentUser.name.toLowerCase().trim();
-         let mN = m.name.toLowerCase().trim();
-         isMe = (cN === mN || mN.includes(cN) || cN.includes(mN));
-      }
-      
-      let uniqueId = m.phone || m.name; 
-
-      let confirmationTracker = `
-        <div style="background: var(--input-bg); border: 1px dashed var(--accent); padding: 10px; border-radius: 12px; margin-top: 12px; text-align: center; font-size: 12px; font-weight: 700; color: var(--primary-dark);">
-           <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा हो गई | <b>${leftEMIs}</b> किश्त बाकी</span>
-           <span class="en">✅ <b>${m.paidRounds}</b> EMI Successful | <b>${leftEMIs}</b> EMI Left</span>
-        </div>`;
-
-      if(m.hasWon) {
-           confirmationTracker = `
-           <div style="background: #ecfdf5; border: 1px solid #34d399; padding: 10px; border-radius: 12px; margin-top: 12px; text-align: center; font-size: 13px; font-weight: 800; color: #059669; box-shadow: inset 0 2px 4px rgba(5,150,105,0.1);">
-              <span class="hi">🎉 बधाई! आपकी कमेटी खुल चुकी है।</span>
-              <span class="en">🎉 Congrats! Your group is opened.</span>
-           </div>`;
-      }
-      
-      let payBtnHtml = '';
-      if(isOwner && pendingDue > 0) {
-          payBtnHtml = `<div class="pay-action"><button class="btn btn-sm" style="background:#fef08a; color:#b45309; font-weight:800; box-shadow:0 2px 5px rgba(217,119,6,0.2);" onclick="markPaidAdvance('${uniqueId}')">➕ ${t('अगली किश्त जमा करें', 'Pay Installment')}</button></div>`;
-      }
-      
-      let payOnlineHtml = '';
-      if (!isOwner) { 
-          if (pendingDue > 0 && bc.upiId) {
-              if (isMe) { 
-                  payOnlineHtml = `
-                  <div style="margin-top:16px; padding-top:16px; border-top:1px dashed var(--border); text-align:center;">
-                      <p style="font-size:12px; color:var(--primary-dark); margin-bottom:10px; font-weight:800;">
-                          <span class="hi">💳 ऑनलाइन पेमेंट के लिए UPI ID कॉपी करें:</span>
-                          <span class="en">💳 Copy UPI ID for online payment:</span>
-                      </p>
-                      <div style="display:flex; align-items:center; justify-content:space-between; background:var(--input-bg); border:1px solid var(--accent); border-radius:12px; padding:6px 6px 6px 12px;">
-                          <code style="font-size:14px; font-weight:700; color:var(--primary-dark); user-select:all; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${bc.upiId}</code>
-                          <button onclick="copyToClipboard('${bc.upiId}')" style="background:var(--primary); color:white; border:none; padding:10px 16px; border-radius:10px; font-weight:800; cursor:pointer; box-shadow:0 4px 10px rgba(5,150,105,0.3); flex-shrink:0;">📋 Copy</button>
-                      </div>
-                      <p style="font-size:11px; color:var(--muted); margin-top:8px; font-weight:600;">(कॉपी करके अपने GPay या PhonePe में पेस्ट करें)</p>
-                  </div>`;
-              }
-          } else if (pendingDue === 0) {
-              if (isMe) {
-                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #34d399; padding: 12px; border-radius: 12px; margin-top: 14px; text-align: center; font-size: 13px; font-weight: 800; color: #059669; box-shadow: 0 4px 10px rgba(5,150,105,0.1);">
-                      <span class="hi">✅ आपकी किश्त का भुगतान पूरा हुआ</span>
-                      <span class="en">✅ Your Payment Clear for this round</span>
-                  </div>`;
-              } else if (isOwner) {
-                  payOnlineHtml = `<div style="background: #ecfdf5; border: 1px solid #34d399; padding: 8px; border-radius: 8px; margin-top: 12px; text-align: center; font-size: 11px; font-weight: 800; color: #059669;">
-                      ✅ Payment Clear
-                  </div>`;
-              }
-          }
-      }
-
-      let winBtn = `<div class="win-btn-disabled" style="opacity:0.3;">🏆</div>`;
-      if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${uniqueId}')" title="${t('विजेता बनाएं', 'Set Winner')}">🏆</button>`;
-      else if(m.hasWon) winBtn = `<div style="font-size:28px; filter: drop-shadow(0 2px 4px rgba(217,119,6,0.4));" title="Winner">🎉</div>`;
-
-      let nameDisplay = `<b>${m.name}</b>`;
-      if(isOwner) {
-          nameDisplay = `<input type="text" value="${m.name}" style="font-weight:800; font-size:16px; border:none; background:transparent; padding:0; margin:0; width:130px; color:var(--primary-dark);" onchange="editMemberName('${uniqueId}', this.value)" title="${t('नाम बदलने के लिए यहाँ क्लिक करें','Click to edit name')}">`;
-      }
-      
-      let phoneDisplay = m.phone ? `<div style="font-size:10px; color:var(--muted); font-weight:700; margin-top:4px;">📱 ${m.phone}</div>` : '';
-      let cardStyle = isMe ? 'border: 2px solid var(--accent); box-shadow: 0 8px 20px rgba(16,185,129,0.15); background: #f8fafc;' : '';
-
-      return `
-      <div class="member" style="${cardStyle}">
-        <div class="member-top" style="margin-bottom:0;">
-           <div class="mem-info">
-             <div class="mem-num">${i+1}</div>
-             <div>
-                ${nameDisplay}
-                ${isOwner ? phoneDisplay : ''}
-                <div style="font-size:12px; color:var(--muted); font-weight:700; margin-top:4px;">${t('जमा', 'Paid')}: <span style="color:var(--text);">₹${totalPaidByMem.toLocaleString('en-IN')}</span></div>
-             </div>
-           </div>
-           <div style="display:flex; align-items:center; gap:14px;">
-              <div style="text-align:right;">
-                 <div style="font-size:11px; color:var(--muted); font-weight:800;">${t('बाकी है', 'Due')}:</div>
-                 <div class="due ${pendingDue>0?'red':''}" style="font-size:15px; font-weight:900;">₹${pendingDue.toLocaleString('en-IN')}</div>
-              </div>
-              ${winBtn}
-           </div>
-        </div>
-        ${confirmationTracker}
-        ${payBtnHtml}
-        ${payOnlineHtml}
-      </div>`;
-    }).join('');
-
-  } catch(e) { show('mylist'); }
-}
-
-async function editMemberName(id, newName) {
-    if(!newName.trim()) return;
-    let m = currentBCData.members.find(x => (x.phone || x.name) === id);
-    if(m) {
-        m.name = newName.trim();
-        await saveBCState();
-    }
-}
-
-async function markPaidAdvance(id) {
-    if(!currentBCData) return;
-    let m = currentBCData.members.find(x => (x.phone || x.name) === id);
-    if(m) {
-        m.paidRounds += 1;
-        currentBCData.walletBalance += Number(currentBCData.amount);
-        document.getElementById('walletBlock').innerHTML = `<div class='empty-state' style='color:white;'>${t('अपडेट हो रहा है...', 'Updating...')}</div>`;
-        await saveBCState();
-    }
-}
-
-async function startNextRound() {
-    let ans = await appConfirm(t("क्या आप वाकई अगली किश्त चालू करना चाहते हैं?", "Start next round?"));
-    if(!ans) return;
-    
-    currentBCData.currentRound += 1;
-    document.getElementById('walletBlock').innerHTML = `<div class='empty-state' style='color:white;'>${t('अपडेट हो रहा है...', 'Updating...')}</div>`;
-    await saveBCState();
-}
-
-let pendingWinnerId = "";
-function declareWinner(id) {
-  pendingWinnerId = id;
-  let m = currentBCData.members.find(x => (x.phone || x.name) === id);
-  document.getElementById('winName').textContent = m ? m.name : "Winner";
-  document.getElementById('winAmount').textContent = Number(currentBCData.totalPool || 0).toLocaleString('en-IN');
-  document.getElementById('winnerModal').classList.remove('hidden');
-}
-
-async function confirmWinner() {
-   let m = currentBCData.members.find(x => (x.phone || x.name) === pendingWinnerId);
-   if(m && !m.hasWon) {
-       m.hasWon = true;
-       currentBCData.walletBalance -= Number(currentBCData.totalPool || 0);
-       document.getElementById('winnerModal').classList.add('hidden');
-       document.getElementById('walletBlock').innerHTML = `<div class='empty-state' style='color:white;'>${t('अपडेट हो रहा है...', 'Updating...')}</div>`;
-       await saveBCState();
-   }
-}
-
-async function adminDeleteBC() {
-  const code = document.getElementById('adminDelCode').value.trim().toUpperCase();
-  if(!code) return appAlert(t("कृपया कमेटी का Code डालें!", "Enter Group Code!"));
-  
-  let ans = await appConfirm(t("⚠️ चेतावनी!\nक्या आप सच में कमेटी डिलीट करना चाहते हैं?", "⚠️ Warning!\nDelete this Group permanently?"));
-  if(!ans) return;
-  
-  try {
-    const getRes = await fetch(`${API_URL}/api/bcs?code=${code}`);
-    if(!getRes.ok) return appAlert(t("यह कोड मौजूद नहीं है!", "Code not found!"));
-    const existingData = (await getRes.json()).data;
-    existingData.name = "❌ Deleted";
-    existingData.members = [];
-    existingData.isDeleted = true;
-    existingData.amount = 0;
-    await fetch(`${API_URL}/api/bcs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(existingData) });
-    appAlert(t("✅ कमेटी डिलीट हो गई!", "✅ Group Deleted!"));
-    let joined = load(KEYS.joined, []);
-    joined = joined.filter(c => c !== code);
-    save(KEYS.joined, joined);
-    if(load(KEYS.current) === code) localStorage.removeItem(KEYS.current);
-    document.getElementById('adminDelCode').value = '';
-  } catch(e) { appAlert("Error"); }
-}
-
-window.onload = () => {
-  applyLang(); 
-  const s = load(KEYS.session, null);
-  document.getElementById('startDate').value = new Date().toISOString().slice(0,10);
-  if(s) { enterApp(); } else { document.getElementById('auth').classList.remove('hidden'); switchAuth('register'); }
-};
-</script>
-</body>
-                                                                                                                                                                                                                                           </html>
+    <div style="display:flex; justify-content:space
