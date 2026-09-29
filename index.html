@@ -7,19 +7,94 @@
 <meta name="theme-color" content="#0b5d3f">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:#e8f3ec;color:#0b3b2b;min-height:100vh;padding-bottom:100px;overflow-x:hidden;-webkit-user-select:none;user-select:none}
+
+/* ===== LIGHT THEME (default) ===== */
+:root{
+  --bg:#e8f3ec;
+  --text:#0b3b2b;
+  --text-muted:#5a7d6e;
+  --text-soft:#7a9a8c;
+  --card:#ffffff;
+  --card-cream:#fefaf0;
+  --card-cream-border:#f5e6b8;
+  --card-border:#e6f2ec;
+  --input-bg:#f8fcfa;
+  --input-border:#d5e8de;
+  --green-dark:#0b5d3f;
+  --green:#0d7a52;
+  --green-light:#0e8a5c;
+  --green-soft:#d5f2e2;
+  --green-soft-border:#a7e0c5;
+  --green-pale:#f0faf4;
+  --green-pale-border:#c8e9d6;
+  --header-from:#0b5d3f;
+  --header-mid:#0d7a52;
+  --header-to:#0e8a5c;
+  --header-sub:#b8e6d0;
+  --shadow:rgba(5,80,50,0.1);
+  --nav-bg:#ffffff;
+  --nav-inactive:#9ab3a7;
+  --modal-bg:#ffffff;
+  --modal-overlay:rgba(11,77,58,0.6);
+  --danger:#dc2626;
+  --warn:#b45309;
+}
+
+/* ===== DARK THEME ===== */
+body.dark-mode{
+  --bg:#0a1712;
+  --text:#e6f5ee;
+  --text-muted:#8fb3a3;
+  --text-soft:#6b8f7f;
+  --card:#142620;
+  --card-cream:#1a2e27;
+  --card-cream-border:#2a4a3d;
+  --card-border:#24453a;
+  --input-bg:#0f2119;
+  --input-border:#2a4a3d;
+  --green-dark:#0d7a52;
+  --green:#0e8a5c;
+  --green-light:#10a06b;
+  --green-soft:#1a3a2c;
+  --green-soft-border:#2a6b50;
+  --green-pale:#122820;
+  --green-pale-border:#2a5a44;
+  --header-from:#062b1e;
+  --header-mid:#0b4d37;
+  --header-to:#0d6b4a;
+  --header-sub:#7fbfa0;
+  --shadow:rgba(0,0,0,0.4);
+  --nav-bg:#142620;
+  --nav-inactive:#6b8f7f;
+  --modal-bg:#1a2e27;
+  --modal-overlay:rgba(0,0,0,0.75);
+  --danger:#f87171;
+  --warn:#fbbf24;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding-bottom:100px;
+  overflow-x:hidden;
+  -webkit-user-select:none;
+  user-select:none;
+  transition:background 0.3s ease, color 0.3s ease;
+}
 input,textarea,select{-webkit-user-select:auto;user-select:auto}
 body.lang-hi .en{display:none!important}
 body.lang-en .hi{display:none!important}
 
 /* ===== HEADER ===== */
 .header{
-  background:linear-gradient(180deg,#0b5d3f 0%,#0d7a52 70%,#0e8a5c 100%);
-  padding:14px 18px 60px;
+  background:linear-gradient(180deg,var(--header-from) 0%,var(--header-mid) 70%,var(--header-to) 100%);
+  padding:14px 16px 60px;
   border-bottom-left-radius:28px;
   border-bottom-right-radius:28px;
   position:relative;
   overflow:hidden;
+  transition:background 0.3s ease;
 }
 .header::before{
   content:'';position:absolute;right:-40px;top:-40px;
@@ -30,67 +105,75 @@ body.lang-en .hi{display:none!important}
   content:'🍃';position:absolute;right:20px;bottom:-10px;
   font-size:70px;opacity:0.15;transform:rotate(-20deg);
 }
-.header-row{display:flex;align-items:center;gap:12px;position:relative;z-index:2}
+.header-row{display:flex;align-items:center;gap:10px;position:relative;z-index:2}
 .logo-circle{
-  width:56px;height:56px;background:#f0faf4;border-radius:50%;
+  width:52px;height:52px;background:#f0faf4;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:30px;flex-shrink:0;
+  font-size:28px;flex-shrink:0;
   box-shadow:0 4px 12px rgba(0,0,0,0.15);
   border:2px solid #a7e0c5;
 }
 .header-title{flex:1;min-width:0}
-.header-title h1{color:#fff;font-size:20px;font-weight:800;letter-spacing:-0.3px;line-height:1.15}
-.header-title p{color:#b8e6d0;font-size:11.5px;font-weight:600;margin-top:3px;letter-spacing:0.3px}
-.header-btns{display:flex;gap:8px;flex-shrink:0}
+.header-title h1{color:#fff;font-size:19px;font-weight:800;letter-spacing:-0.3px;line-height:1.15}
+.header-title p{color:var(--header-sub);font-size:11px;font-weight:600;margin-top:3px;letter-spacing:0.3px}
+.header-btns{display:flex;gap:6px;flex-shrink:0}
 .hbtn{
-  background:#fff;border:none;padding:10px 14px;border-radius:30px;
-  font-size:12.5px;font-weight:800;color:#0b3b2b;
-  display:flex;align-items:center;gap:6px;cursor:pointer;
+  background:rgba(255,255,255,0.95);border:none;padding:9px 11px;border-radius:30px;
+  font-size:12px;font-weight:800;color:#0b3b2b;
+  display:flex;align-items:center;gap:5px;cursor:pointer;
   box-shadow:0 3px 10px rgba(0,0,0,0.12);
   white-space:nowrap;
+  transition:transform 0.15s;
 }
 .hbtn:active{transform:scale(0.94)}
-.hbtn .globe{font-size:15px;color:#0b5d3f}
-.hbtn .flag{font-size:15px}
+.hbtn .globe{font-size:14px}
+.hbtn .flag{font-size:14px}
+.hbtn .theme-ico{font-size:15px}
 
 /* ===== MAIN ===== */
 main{max-width:480px;margin:-45px auto 0;padding:0 14px 20px;position:relative;z-index:5}
 
 /* ===== WELCOME CARD ===== */
 .welcome{
-  background:#fefaf0;
+  background:var(--card-cream);
   border-radius:22px;
   padding:18px 16px 16px;
   margin-bottom:14px;
-  border:1.5px solid #f5e6b8;
-  box-shadow:0 8px 24px -10px rgba(180,120,30,0.2);
+  border:1.5px solid var(--card-cream-border);
+  box-shadow:0 8px 24px -10px var(--shadow);
   position:relative;
   overflow:hidden;
+  transition:background 0.3s ease, border-color 0.3s ease;
 }
-.welcome-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
-.welcome-icon{font-size:36px;line-height:1;flex-shrink:0}
+.welcome-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:14px}
+.welcome-icon{font-size:34px;line-height:1;flex-shrink:0}
 .welcome-mid{flex:1;min-width:0}
-.welcome-mid h2{font-size:17px;font-weight:900;color:#7c2d12;margin-bottom:4px}
-.welcome-mid p{font-size:12px;color:#92400e;font-weight:600;line-height:1.5}
-.welcome-visual{position:relative;flex-shrink:0;width:70px;text-align:center}
-.welcome-visual .plant{font-size:44px;line-height:1;margin-bottom:-8px;position:relative;z-index:2}
-.welcome-visual .coins{font-size:34px;line-height:1;margin-top:-14px}
+.welcome-mid h2{font-size:17px;font-weight:900;color:#7c2d12;margin-bottom:4px;transition:color 0.3s}
+body.dark-mode .welcome-mid h2{color:#fcd34d}
+.welcome-mid p{font-size:11.5px;color:#92400e;font-weight:600;line-height:1.5;transition:color 0.3s}
+body.dark-mode .welcome-mid p{color:#fde68a}
+.welcome-visual{position:relative;flex-shrink:0;width:66px;text-align:center}
+.welcome-visual .plant{font-size:42px;line-height:1;margin-bottom:-8px;position:relative;z-index:2}
+.welcome-visual .coins{font-size:32px;line-height:1;margin-top:-14px}
 .welcome-quote{
   position:absolute;right:-5px;top:-5px;
-  font-size:9.5px;color:#7c2d12;font-weight:800;line-height:1.25;
+  font-size:9px;color:#7c2d12;font-weight:800;line-height:1.25;
   background:#fef3c7;padding:5px 7px;border-radius:10px;
   border:1px solid #fcd34d;
-  text-align:center;width:62px;
+  text-align:center;width:60px;
   transform:rotate(3deg);
   box-shadow:0 3px 8px rgba(180,120,30,0.15);
+  transition:all 0.3s;
 }
+body.dark-mode .welcome-quote{background:#3a2c0a;color:#fcd34d;border-color:#78350f}
 .welcome-quote::after{
   content:'';position:absolute;bottom:-2px;right:8px;
   width:20px;height:1.5px;background:#7c2d12;border-radius:2px;
 }
+body.dark-mode .welcome-quote::after{background:#fcd34d}
 .btn-new{
   width:100%;padding:16px;border:none;border-radius:50px;
-  background:linear-gradient(90deg,#0d7a52,#0e8a5c);
+  background:linear-gradient(90deg,var(--green),var(--green-light));
   color:#fff;font-size:16px;font-weight:800;
   display:flex;align-items:center;justify-content:center;gap:10px;
   cursor:pointer;
@@ -102,47 +185,49 @@ main{max-width:480px;margin:-45px auto 0;padding:0 14px 20px;position:relative;z
 
 /* ===== CODE CARD ===== */
 .code-card{
-  background:#f0faf4;
+  background:var(--green-pale);
   border-radius:20px;
   padding:16px;
   margin-bottom:14px;
-  border:1.5px solid #c8e9d6;
+  border:1.5px solid var(--green-pale-border);
+  transition:background 0.3s ease, border-color 0.3s ease;
 }
 .code-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .code-key{
-  width:48px;height:48px;border-radius:50%;
-  background:linear-gradient(135deg,#0d7a52,#0e8a5c);
+  width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--green-light));
   display:flex;align-items:center;justify-content:center;
-  font-size:24px;color:#fff;flex-shrink:0;
+  font-size:22px;color:#fff;flex-shrink:0;
   box-shadow:0 4px 12px rgba(13,122,82,0.25);
   position:relative;
 }
 .code-key::before{
   content:'';position:absolute;inset:-3px;
-  border-radius:50%;border:1.5px dashed #7dd3a8;
+  border-radius:50%;border:1.5px dashed var(--green-soft-border);
 }
-.code-head-txt h3{font-size:16px;font-weight:900;color:#0b3b2b;margin-bottom:2px}
-.code-head-txt p{font-size:11.5px;color:#5a7d6e;font-weight:600}
+.code-head-txt h3{font-size:15.5px;font-weight:900;color:var(--text);margin-bottom:2px}
+.code-head-txt p{font-size:11px;color:var(--text-muted);font-weight:600}
 .code-row{display:flex;gap:8px;align-items:center}
 .code-row input{
   flex:1;min-width:0;
   padding:14px 16px;
   border-radius:30px;
-  border:1.5px solid #c8e9d6;
-  background:#fff;
-  font-size:13.5px;font-weight:700;
-  color:#0b3b2b;
+  border:1.5px solid var(--input-border);
+  background:var(--card);
+  font-size:13px;font-weight:700;
+  color:var(--text);
   text-transform:uppercase;
   letter-spacing:0.8px;
   outline:none;
+  transition:all 0.3s;
 }
-.code-row input::placeholder{color:#9bb7aa;font-weight:600;text-transform:none;letter-spacing:0}
-.code-row input:focus{border-color:#0e8a5c;box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
+.code-row input::placeholder{color:var(--text-soft);font-weight:600;text-transform:none;letter-spacing:0}
+.code-row input:focus{border-color:var(--green-light);box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
 .code-row button{
-  padding:14px 18px;
+  padding:14px 16px;
   border:none;border-radius:30px;
-  background:linear-gradient(90deg,#0b5d3f,#0d7a52);
-  color:#fff;font-size:13px;font-weight:800;
+  background:linear-gradient(90deg,var(--green-dark),var(--green));
+  color:#fff;font-size:12.5px;font-weight:800;
   display:flex;align-items:center;gap:5px;
   cursor:pointer;white-space:nowrap;
   box-shadow:0 6px 14px rgba(11,93,63,0.28);
@@ -155,33 +240,34 @@ main{max-width:480px;margin:-45px auto 0;padding:0 14px 20px;position:relative;z
   margin-bottom:12px;padding:0 4px;
 }
 .sec-title h2{
-  font-size:15.5px;font-weight:900;color:#0b3b2b;
+  font-size:15px;font-weight:900;color:var(--text);
   display:flex;align-items:center;gap:8px;
 }
 .sec-title .dots{display:inline-flex;gap:3px;flex-shrink:0}
-.sec-title .dots span{width:5px;height:5px;border-radius:50%;background:#0e8a5c}
-.sec-title a{font-size:12px;font-weight:800;color:#0e8a5c;text-decoration:none;cursor:pointer}
+.sec-title .dots span{width:5px;height:5px;border-radius:50%;background:var(--green-light)}
+.sec-title a{font-size:12px;font-weight:800;color:var(--green-light);text-decoration:none;cursor:pointer}
 
 /* ===== TILES GRID ===== */
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .tile{
-  background:#fff;border-radius:18px;padding:14px 12px 14px;
+  background:var(--card);border-radius:18px;padding:14px 12px 14px;
   cursor:pointer;position:relative;
-  border:1.5px solid #e6f2ec;
-  box-shadow:0 4px 14px -8px rgba(5,80,50,0.12);
-  transition:0.15s;
-  min-height:118px;
+  border:1.5px solid var(--card-border);
+  box-shadow:0 4px 14px -8px var(--shadow);
+  transition:0.15s, background 0.3s;
+  min-height:116px;
   display:flex;flex-direction:column;
 }
 .tile:active{transform:scale(0.97)}
 .tile-ico{
-  width:50px;height:50px;border-radius:14px;
+  width:48px;height:48px;border-radius:14px;
   display:flex;align-items:center;justify-content:center;
-  font-size:26px;margin-bottom:10px;
+  font-size:24px;margin-bottom:10px;
 }
-.tile h4{font-size:13.5px;font-weight:800;color:#0b3b2b;line-height:1.2;margin-bottom:3px}
-.tile p{font-size:10.5px;color:#7a9a8c;font-weight:600;line-height:1.3;flex:1}
+.tile h4{font-size:13px;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:3px}
+.tile p{font-size:10.5px;color:var(--text-soft);font-weight:600;line-height:1.3;flex:1}
 .tile .arr{position:absolute;bottom:12px;right:12px;font-size:15px;font-weight:900}
+
 .tile.t1 .tile-ico{background:#d8e8f8}
 .tile.t1 .arr{color:#2563eb}
 .tile.t2 .tile-ico{background:#ede4fd}
@@ -197,82 +283,96 @@ main{max-width:480px;margin:-45px auto 0;padding:0 14px 20px;position:relative;z
 .tile.t7 .tile-ico{background:#ede4fd}
 .tile.t7 .arr{color:#7c3aed}
 
+body.dark-mode .tile.t1 .tile-ico{background:#1e3a5f}
+body.dark-mode .tile.t2 .tile-ico{background:#3a2a5f}
+body.dark-mode .tile.t3 .tile-ico{background:#5a3a10}
+body.dark-mode .tile.t4 .tile-ico{background:#1a3a2c}
+body.dark-mode .tile.t5 .tile-ico{background:#4a1a1a}
+body.dark-mode .tile.t6 .tile-ico{background:#1a3a2c}
+body.dark-mode .tile.t7 .tile-ico{background:#3a2a5f}
+
 /* ===== FEEDBACK CARD ===== */
 .fb-card{
-  background:#f0faf4;border-radius:20px;padding:14px;
-  display:flex;align-items:center;gap:12px;
-  border:1.5px solid #c8e9d6;
+  background:var(--green-pale);border-radius:20px;padding:14px;
+  display:flex;align-items:center;gap:10px;
+  border:1.5px solid var(--green-pale-border);
   cursor:pointer;margin-bottom:14px;
+  transition:background 0.3s, border-color 0.3s;
 }
 .fb-ico{
-  width:48px;height:48px;border-radius:50%;
+  width:46px;height:46px;border-radius:50%;
   background:#fef3c7;display:flex;align-items:center;justify-content:center;
-  font-size:26px;flex-shrink:0;
+  font-size:24px;flex-shrink:0;
 }
+body.dark-mode .fb-ico{background:#3a2c0a}
 .fb-txt{flex:1;min-width:0}
-.fb-txt h4{font-size:14.5px;font-weight:900;color:#0b3b2b;margin-bottom:2px}
-.fb-txt p{font-size:11px;color:#5a7d6e;font-weight:600}
-.fb-arr{font-size:20px;color:#0b3b2b;font-weight:900}
+.fb-txt h4{font-size:14px;font-weight:900;color:var(--text);margin-bottom:2px}
+.fb-txt p{font-size:10.5px;color:var(--text-muted);font-weight:600}
+.fb-arr{font-size:20px;color:var(--text);font-weight:900}
 .fb-people{
   display:flex;align-items:center;gap:4px;
-  font-size:9px;color:#0b3b2b;font-weight:800;
-  background:#fff;padding:6px 8px;border-radius:12px;
-  border:1px solid #c8e9d6;
+  font-size:8.5px;color:var(--text);font-weight:800;
+  background:var(--card);padding:6px 8px;border-radius:12px;
+  border:1px solid var(--green-pale-border);
   line-height:1.2;text-align:center;flex-shrink:0;
+  transition:background 0.3s;
 }
-.fb-people .pp{font-size:20px}
+.fb-people .pp{font-size:18px}
 
 /* ===== BOTTOM NAV ===== */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;width:100%;
-  background:#fff;
+  background:var(--nav-bg);
   border-top-left-radius:26px;border-top-right-radius:26px;
   display:flex;justify-content:space-around;
   padding:12px 0 14px;
   padding-bottom:calc(12px + env(safe-area-inset-bottom));
   z-index:999;
-  box-shadow:0 -6px 24px rgba(0,30,15,0.08);
+  box-shadow:0 -6px 24px var(--shadow);
+  transition:background 0.3s;
 }
 .bottom-nav button{
   flex:1;background:none;border:none;
-  font-size:10.5px;font-weight:800;color:#9ab3a7;
+  font-size:10.5px;font-weight:800;color:var(--nav-inactive);
   cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;
   position:relative;padding-bottom:8px;
+  transition:color 0.3s;
 }
 .bottom-nav button .ico{font-size:22px;filter:grayscale(1);opacity:0.5;transition:0.2s}
-.bottom-nav button.active{color:#0e8a5c}
+.bottom-nav button.active{color:var(--green-light)}
 .bottom-nav button.active .ico{filter:grayscale(0);opacity:1}
 .bottom-nav button.active::after{
   content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:32px;height:3px;background:#0e8a5c;border-radius:3px;
+  width:32px;height:3px;background:var(--green-light);border-radius:3px;
 }
 
-/* ===== OTHER SECTIONS (cards, forms) ===== */
-.card{background:#fff;border-radius:22px;padding:20px;margin-bottom:14px;border:1.5px solid #e6f2ec;box-shadow:0 6px 20px -10px rgba(5,80,50,0.1)}
-.card-cream{background:#fefaf0;border-color:#f5e6b8}
-.card h2{font-size:17px;font-weight:800;color:#0b3b2b;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+/* ===== CARDS ===== */
+.card{background:var(--card);border-radius:22px;padding:20px;margin-bottom:14px;border:1.5px solid var(--card-border);box-shadow:0 6px 20px -10px var(--shadow);transition:background 0.3s, border-color 0.3s}
+.card-cream{background:var(--card-cream);border-color:var(--card-cream-border)}
+.card h2{font-size:17px;font-weight:800;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .field{margin-bottom:14px;width:100%}
-.field label{display:block;font-size:12px;font-weight:700;color:#5a7d6e;margin-bottom:6px}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px}
 .input-wrap{position:relative;display:flex;align-items:center;width:100%}
-.input-ico{position:absolute;left:16px;font-size:17px;color:#0e8a5c;z-index:2}
+.input-ico{position:absolute;left:16px;font-size:17px;color:var(--green-light);z-index:2}
 input,select,textarea{width:100%;box-sizing:border-box;max-width:100%;min-width:0}
-.input-wrap input,.input-wrap select{width:100%;padding:14px 16px 14px 46px;border-radius:14px;border:1.5px solid #d5e8de;font-size:14px;background:#f8fcfa;color:#0b3b2b;font-weight:600;outline:none}
-.input-wrap input:focus,.input-wrap select:focus{border-color:#0e8a5c;background:#fff;box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
-.no-ico{width:100%;padding:14px 16px;border:1.5px solid #d5e8de;border-radius:14px;font-size:14px;background:#f8fcfa;color:#0b3b2b;font-weight:600;outline:none}
-.no-ico:focus{border-color:#0e8a5c;background:#fff;box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
+.input-wrap input,.input-wrap select{width:100%;padding:14px 16px 14px 46px;border-radius:14px;border:1.5px solid var(--input-border);font-size:14px;background:var(--input-bg);color:var(--text);font-weight:600;outline:none;transition:all 0.3s}
+.input-wrap input:focus,.input-wrap select:focus{border-color:var(--green-light);background:var(--card);box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
+.no-ico{width:100%;padding:14px 16px;border:1.5px solid var(--input-border);border-radius:14px;font-size:14px;background:var(--input-bg);color:var(--text);font-weight:600;outline:none;transition:all 0.3s}
+.no-ico:focus{border-color:var(--green-light);background:var(--card);box-shadow:0 0 0 3px rgba(14,138,92,0.1)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .btn{width:100%;padding:15px;border:none;border-radius:50px;font-size:15px;font-weight:800;cursor:pointer;transition:0.15s}
 .btn:active{transform:scale(0.96)}
-.btn-primary{background:linear-gradient(90deg,#0d7a52,#0e8a5c);color:#fff;box-shadow:0 8px 20px rgba(13,122,82,0.3)}
-.btn-secondary{background:#0b5d3f;color:#fff;box-shadow:0 6px 14px rgba(11,93,63,0.2)}
+.btn-primary{background:linear-gradient(90deg,var(--green),var(--green-light));color:#fff;box-shadow:0 8px 20px rgba(13,122,82,0.3)}
+.btn-secondary{background:var(--green-dark);color:#fff;box-shadow:0 6px 14px rgba(11,93,63,0.2)}
 .btn-sm{padding:8px 14px;font-size:12px;width:auto;border-radius:10px}
-.tabs{display:flex;background:#eaf5ee;border-radius:50px;padding:5px;margin-bottom:20px;border:1px solid #d5e8de}
-.tabs button{flex:1;padding:12px;border:none;border-radius:50px;background:transparent;font-size:13px;font-weight:800;color:#5a7d6e;cursor:pointer}
-.tabs button.active{background:linear-gradient(90deg,#0d7a52,#0e8a5c);color:#fff;box-shadow:0 4px 10px rgba(13,122,82,0.25)}
+.tabs{display:flex;background:var(--green-pale);border-radius:50px;padding:5px;margin-bottom:20px;border:1px solid var(--input-border)}
+.tabs button{flex:1;padding:12px;border:none;border-radius:50px;background:transparent;font-size:13px;font-weight:800;color:var(--text-muted);cursor:pointer;transition:all 0.3s}
+.tabs button.active{background:linear-gradient(90deg,var(--green),var(--green-light));color:#fff;box-shadow:0 4px 10px rgba(13,122,82,0.25)}
 .msg{padding:12px 16px;border-radius:14px;margin-bottom:14px;font-size:13px;text-align:center;font-weight:700}
 .msg.err{background:#fee9e9;color:#b91c1c;border:1px solid #fecaca}
-.msg.ok{background:#d5f2e2;color:#0e8a5c;border:1px solid #a7e0c5}
-.wallet-card{background:linear-gradient(135deg,#0b5d3f,#0d7a52);color:#fff;padding:22px;border-radius:22px;box-shadow:0 14px 30px -10px rgba(11,93,63,0.4);margin-bottom:14px;position:relative;overflow:hidden}
+body.dark-mode .msg.err{background:#3a1a1a;color:#fca5a5;border-color:#7f1d1d}
+.msg.ok{background:var(--green-soft);color:var(--green-light);border:1px solid var(--green-soft-border)}
+.wallet-card{background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;padding:22px;border-radius:22px;box-shadow:0 14px 30px -10px rgba(11,93,63,0.4);margin-bottom:14px;position:relative;overflow:hidden}
 .wallet-card::before{content:'';position:absolute;right:-30px;top:-40px;width:160px;height:160px;background:rgba(255,255,255,0.06);border-radius:50%}
 .wallet-card::after{content:'';position:absolute;right:50px;top:-60px;width:120px;height:120px;background:rgba(255,255,255,0.05);border-radius:50%}
 .wallet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:relative;z-index:2}
@@ -283,39 +383,46 @@ input,select,textarea{width:100%;box-sizing:border-box;max-width:100%;min-width:
 .wallet-num{font-family:monospace;font-size:13px;letter-spacing:2px;color:#a7e0c5;position:relative;z-index:2}
 .wallet-bot{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:600;opacity:0.85;margin-top:12px;position:relative;z-index:2}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.stat{background:#fff;border-radius:18px;padding:14px 12px;text-align:center;border:1.5px solid #e6f2ec;box-shadow:0 4px 14px -8px rgba(5,80,50,0.1)}
-.stat b{display:block;font-size:18px;color:#0b5d3f;font-weight:900;margin-bottom:6px}
-.stat span{font-size:11px;color:#7a9a8c;font-weight:700}
-.stat-pool{grid-column:span 2;background:#d5f2e2;border-color:#a7e0c5}
-.stat-pool b{color:#0e8a5c;font-size:22px}
-.member{background:#fff;border-radius:18px;padding:16px;margin-bottom:12px;border:1.5px solid #e6f2ec;box-shadow:0 4px 14px -8px rgba(5,80,50,0.1)}
+.stat{background:var(--card);border-radius:18px;padding:14px 12px;text-align:center;border:1.5px solid var(--card-border);box-shadow:0 4px 14px -8px var(--shadow);transition:background 0.3s}
+.stat b{display:block;font-size:18px;color:var(--green-dark);font-weight:900;margin-bottom:6px}
+body.dark-mode .stat b{color:var(--green-light)}
+.stat span{font-size:11px;color:var(--text-soft);font-weight:700}
+.stat-pool{grid-column:span 2;background:var(--green-soft);border-color:var(--green-soft-border)}
+.stat-pool b{color:var(--green-light);font-size:22px}
+.member{background:var(--card);border-radius:18px;padding:16px;margin-bottom:12px;border:1.5px solid var(--card-border);box-shadow:0 4px 14px -8px var(--shadow);transition:background 0.3s}
 .member-top{display:flex;justify-content:space-between;align-items:center}
 .mem-info{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
-.mem-num{width:36px;height:36px;background:#0b5d3f;color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
-.member b{font-size:15px;color:#0b3b2b;font-weight:800}
-.due{color:#0e8a5c;font-weight:900}
-.due.red{color:#dc2626}
-.modal-bg{position:fixed;inset:0;background:rgba(11,77,58,0.6);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
-.modal-box{background:#fff;border-radius:24px;padding:24px 20px;max-width:360px;width:100%;box-shadow:0 25px 50px -12px rgba(0,0,0,0.3);position:relative}
-.modal-box h2{font-size:18px;font-weight:800;color:#0b3b2b}
-.chat-box{height:250px;overflow-y:auto;background:#f5faf7;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;border:1px solid #d5e8de;margin-bottom:14px}
+.mem-num{width:36px;height:36px;background:var(--green-dark);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.member b{font-size:15px;color:var(--text);font-weight:800}
+.due{color:var(--green-light);font-weight:900}
+.due.red{color:var(--danger)}
+.modal-bg{position:fixed;inset:0;background:var(--modal-overlay);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(--modal-bg);border-radius:24px;padding:24px 20px;max-width:360px;width:100%;box-shadow:0 25px 50px -12px rgba(0,0,0,0.3);position:relative;transition:background 0.3s}
+.modal-box h2{font-size:18px;font-weight:800;color:var(--text)}
+.chat-box{height:250px;overflow-y:auto;background:var(--input-bg);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--input-border);margin-bottom:14px}
 .msg-bubble{max-width:85%;padding:11px 14px;border-radius:16px;font-size:13px;line-height:1.5;font-weight:600}
-.msg-ai{background:#e6f3ed;color:#0b3b2b;align-self:flex-start;border-bottom-left-radius:5px}
-.msg-user{background:#0e8a5c;color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.msg-ai{background:var(--green-soft);color:var(--text);align-self:flex-start;border-bottom-left-radius:5px}
+.msg-user{background:var(--green-light);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
 .ai-options{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
-.ai-opt-btn{background:#fff;border:1.5px solid #a7e0c5;color:#0b3b2b;padding:8px 12px;border-radius:30px;font-size:11.5px;font-weight:800;cursor:pointer}
-.ai-opt-btn:active{background:#d5f2e2}
+.ai-opt-btn{background:var(--card);border:1.5px solid var(--green-soft-border);color:var(--text);padding:8px 12px;border-radius:30px;font-size:11.5px;font-weight:800;cursor:pointer}
+.ai-opt-btn:active{background:var(--green-soft)}
 .win-icon-btn{background:#fef3c7;border:none;border-radius:12px;width:36px;height:36px;font-size:16px;cursor:pointer}
+body.dark-mode .win-icon-btn{background:#3a2c0a}
 .hidden{display:none!important}
-.ledger-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}
-.ledger-table th{background:#d5f2e2;padding:10px 6px;font-weight:800;color:#0b5d3f;position:sticky;top:0}
-.ledger-table td{padding:10px 6px;border-bottom:1px solid #e6f2ec}
-.empty-state{text-align:center;padding:30px 20px;color:#5a7d6e;font-weight:700}
+.ledger-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left;color:var(--text)}
+.ledger-table th{background:var(--green-soft);padding:10px 6px;font-weight:800;color:var(--green-dark);position:sticky;top:0}
+body.dark-mode .ledger-table th{color:var(--green-light)}
+.ledger-table td{padding:10px 6px;border-bottom:1px solid var(--card-border)}
+.empty-state{text-align:center;padding:30px 20px;color:var(--text-muted);font-weight:700}
 code{-webkit-user-select:all;user-select:all}
-.ai-fab{position:fixed;bottom:100px;right:16px;width:52px;height:52px;background:linear-gradient(135deg,#0d7a52,#0e8a5c);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;box-shadow:0 6px 18px rgba(13,122,82,0.4);cursor:pointer;z-index:90;border:2px solid #fff}
+.ai-fab{position:fixed;bottom:100px;right:16px;width:52px;height:52px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;box-shadow:0 6px 18px rgba(13,122,82,0.4);cursor:pointer;z-index:90;border:2px solid #fff}
+body.dark-mode .ai-fab{border-color:var(--card)}
 .ai-fab:active{transform:scale(0.9)}
-#backArrow{width:38px;height:38px;background:rgba(255,255,255,0.95);border-radius:12px;display:none;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#0b5d3f;cursor:pointer;flex-shrink:0}
+#backArrow{width:38px;height:38px;background:rgba(255,255,255,0.95);border-radius:12px;display:none;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--green-dark);cursor:pointer;flex-shrink:0}
 .admin-badge{background:linear-gradient(90deg,#f59e0b,#d97706);color:#fff;font-size:10px;font-weight:900;padding:3px 8px;border-radius:20px;margin-left:6px}
+
+/* Smooth transition for all themed elements */
+*,*::before,*::after{transition:background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;}
 </style>
 </head>
 <body class="lang-hi">
@@ -330,8 +437,9 @@ code{-webkit-user-select:all;user-select:all}
       <p><span class="hi">सुरक्षित • सरल • भरोसेमंद</span><span class="en">Secure • Simple • Trusted</span></p>
     </div>
     <div class="header-btns">
+      <button class="hbtn" onclick="toggleTheme()" id="themeBtn"><span class="theme-ico">🌙</span></button>
       <button class="hbtn" id="langToggleBtn" onclick="toggleLang()"><span class="globe">🌐</span> EN</button>
-      <button class="hbtn" onclick="shareApp()"><span class="flag">🇮🇳</span> <span class="hi">शेयर</span><span class="en">Share</span></button>
+      <button class="hbtn" onclick="shareApp()"><span class="flag">🇮🇳</span></button>
     </div>
   </div>
 </div>
@@ -372,14 +480,14 @@ code{-webkit-user-select:all;user-select:all}
         </div>
       </div>
       <button id="authBtn" class="btn btn-primary" style="margin-top:6px" onclick="doAuth()"><span class="hi">अकाउंट बनाएं</span><span class="en">Create Account</span></button>
-      <p style="text-align:center;margin-top:14px"><button style="background:none;border:none;color:#0e8a5c;font-weight:800;cursor:pointer;font-size:13px" onclick="showForgot()"><span class="hi">पासवर्ड भूल गए?</span><span class="en">Forgot Password?</span></button></p>
+      <p style="text-align:center;margin-top:14px"><button style="background:none;border:none;color:var(--green-light);font-weight:800;cursor:pointer;font-size:13px" onclick="showForgot()"><span class="hi">पासवर्ड भूल गए?</span><span class="en">Forgot Password?</span></button></p>
     </div>
     <div id="authForgot" class="hidden">
-      <p style="font-size:13px;font-weight:800;color:#0e8a5c;margin-bottom:14px;text-align:center"><span class="hi">नया पासवर्ड सेट करें</span><span class="en">Set New Password</span></p>
+      <p style="font-size:13px;font-weight:800;color:var(--green-light);margin-bottom:14px;text-align:center"><span class="hi">नया पासवर्ड सेट करें</span><span class="en">Set New Password</span></p>
       <div class="field"><div class="input-wrap"><span class="input-ico">📱</span><input class="lang-input" id="forgotPhone" type="tel" data-hi="मोबाइल नंबर" data-en="Mobile Number" placeholder="मोबाइल नंबर" maxlength="10"></div></div>
       <div class="field"><div class="input-wrap"><span class="input-ico">🔒</span><input class="lang-input" id="forgotPass" type="password" data-hi="नया पासवर्ड" data-en="New Password" placeholder="नया पासवर्ड"></div></div>
       <button class="btn btn-primary" onclick="doForgot()"><span class="hi">पासवर्ड बदलें</span><span class="en">Change Password</span></button>
-      <p style="text-align:center;margin-top:14px"><button style="background:none;border:none;color:#0e8a5c;font-weight:800;cursor:pointer;font-size:13px" onclick="hideForgot()"><span class="hi">← वापस जाएं</span><span class="en">← Go Back</span></button></p>
+      <p style="text-align:center;margin-top:14px"><button style="background:none;border:none;color:var(--green-light);font-weight:800;cursor:pointer;font-size:13px" onclick="hideForgot()"><span class="hi">← वापस जाएं</span><span class="en">← Go Back</span></button></p>
     </div>
   </div>
 </section>
@@ -387,12 +495,11 @@ code{-webkit-user-select:all;user-select:all}
 <!-- ============ HOME ============ -->
 <section id="home" class="hidden">
 
-  <!-- Welcome Card -->
   <div class="welcome">
     <div class="welcome-top">
-      <div class="welcome-icon">👋</div>
+      <div class="welcome-icon">🙏</div>
       <div class="welcome-mid">
-        <h2><span class="hi">नमस्कार!</span><span class="en">Welcome!</span></h2>
+        <h2><span class="hi">स्वागत है!</span><span class="en">Welcome!</span></h2>
         <p><span class="hi">कमेटी खाता में आपका स्वागत है<br>निवेश करें, बचत करें, मिलकर आगे बढ़ें</span><span class="en">Welcome to Group Khata<br>Invest, Save, Grow together</span></p>
       </div>
       <div class="welcome-visual">
@@ -411,7 +518,6 @@ code{-webkit-user-select:all;user-select:all}
     </button>
   </div>
 
-  <!-- Code Card -->
   <div class="code-card">
     <div class="code-head">
       <div class="code-key">🔑</div>
@@ -426,13 +532,11 @@ code{-webkit-user-select:all;user-select:all}
     </div>
   </div>
 
-  <!-- Section Title -->
   <div class="sec-title">
     <h2><span class="dots"><span></span><span></span></span> <span class="hi">श्रेणियाँ / मुख्य सेवाएँ</span><span class="en">Categories</span></h2>
     <a onclick="show('mylist')"><span class="hi">सभी देखें →</span><span class="en">View All →</span></a>
   </div>
 
-  <!-- Tiles -->
   <div class="tiles">
     <div class="tile t1" onclick="show('mylist')">
       <div class="tile-ico">👥</div>
@@ -478,7 +582,6 @@ code{-webkit-user-select:all;user-select:all}
     </div>
   </div>
 
-  <!-- Feedback -->
   <div class="fb-card" onclick="document.getElementById('feedbackModal').classList.remove('hidden')">
     <div class="fb-ico">💡</div>
     <div class="fb-txt">
@@ -497,7 +600,7 @@ code{-webkit-user-select:all;user-select:all}
 <section id="mylist" class="hidden">
   <div style="display:flex;align-items:center;margin-bottom:14px;padding:0 4px">
     <span style="font-size:24px;margin-right:10px">📋</span>
-    <h2 style="font-size:20px;font-weight:900;color:#0b3b2b"><span class="hi">मेरी कमेटियाँ</span><span class="en">My Groups</span></h2>
+    <h2 style="font-size:20px;font-weight:900;color:var(--text)"><span class="hi">मेरी कमेटियाँ</span><span class="en">My Groups</span></h2>
   </div>
   <div id="bcList"></div>
 </section>
@@ -505,7 +608,7 @@ code{-webkit-user-select:all;user-select:all}
 <!-- ============ CREATE ============ -->
 <section id="create" class="hidden">
   <div class="card card-cream">
-    <h2><span style="color:#0e8a5c">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
+    <h2><span style="color:var(--green-light)">➕</span> <span class="hi">नई कमेटी बनाएं</span><span class="en">Create New Group</span></h2>
     <div class="field"><label><span class="hi">कमेटी का नाम *</span><span class="en">Group Name *</span></label><input class="no-ico lang-input" id="bcName" data-hi="जैसे: गांव कमेटी 2026" data-en="e.g. Village Group 2026" placeholder="जैसे: गांव कमेटी 2026"></div>
     <div class="row">
       <div class="field"><label><span class="hi">किस्त राशि (₹) *</span><span class="en">Inst. (₹) *</span></label><input class="no-ico lang-input" id="bcAmount" type="number" data-hi="उदा. 1000" data-en="e.g. 1000" placeholder="उदा. 1000" oninput="autoCalc()"></div>
@@ -515,15 +618,15 @@ code{-webkit-user-select:all;user-select:all}
     </div>
     <div class="row">
       <div class="field"><label><span class="hi">कुल किश्तें *</span><span class="en">Total Installs *</span></label><input class="no-ico lang-input" id="totalInst" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="autoCalc()"></div>
-      <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" id="totalPool" type="number" readonly style="background:#d5f2e2;color:#0e8a5c;font-weight:800" placeholder="Auto"></div>
+      <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" id="totalPool" type="number" readonly style="background:var(--green-soft);color:var(--green-light);font-weight:800" placeholder="Auto"></div>
     </div>
-    <div style="background:#d5f2e2;border-radius:16px;padding:14px;margin-top:14px;border:1px solid #a7e0c5">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#0e8a5c;font-weight:800;font-size:13px">⚙️ <span class="hi">ऑटो कैलकुलेटर</span><span class="en">Auto Calculator</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#0b3b2b;margin-bottom:6px"><span><span class="hi">किस्त राशि</span><span class="en">Inst.</span></span><span id="c-amt">₹ 0</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#0b3b2b;margin-bottom:6px"><span><span class="hi">कुल किश्तें</span><span class="en">Total</span></span><span id="c-inst">0</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:900;color:#0e8a5c;margin-top:8px;padding-top:8px;border-top:1px dashed #a7e0c5"><span><span class="hi">कुल राशि</span><span class="en">Total Pool</span></span><span id="c-pool">₹ 0</span></div>
+    <div style="background:var(--green-soft);border-radius:16px;padding:14px;margin-top:14px;border:1px solid var(--green-soft-border)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;color:var(--green-light);font-weight:800;font-size:13px">⚙️ <span class="hi">ऑटो कैलकुलेटर</span><span class="en">Auto Calculator</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px"><span><span class="hi">किस्त राशि</span><span class="en">Inst.</span></span><span id="c-amt">₹ 0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px"><span><span class="hi">कुल किश्तें</span><span class="en">Total</span></span><span id="c-inst">0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:900;color:var(--green-light);margin-top:8px;padding-top:8px;border-top:1px dashed var(--green-soft-border)"><span><span class="hi">कुल राशि</span><span class="en">Total Pool</span></span><span id="c-pool">₹ 0</span></div>
     </div>
-    <div style="margin-top:20px;padding-top:16px;border-top:1px dashed #e6f2ec">
+    <div style="margin-top:20px;padding-top:16px;border-top:1px dashed var(--card-border)">
       <div class="field"><label><span class="hi">मालिक का नाम *</span><span class="en">Owner Name *</span></label><input class="no-ico lang-input" id="ownerName" data-hi="संचालक का नाम" data-en="Admin Name" placeholder="संचालक का नाम"></div>
       <div class="field"><label><span class="hi">मालिक का मोबाइल *</span><span class="en">Owner Mobile *</span></label><input class="no-ico lang-input" id="ownerPhone" type="tel" data-hi="10 अंकों का नंबर" data-en="10 Digit Mobile" placeholder="10 अंकों का नंबर" maxlength="10"></div>
       <div class="field"><label><span class="hi">UPI ID (Optional)</span><span class="en">UPI ID (Optional)</span></label><input class="no-ico lang-input" id="upiId" data-hi="उदा. 9876543210@ybl" data-en="e.g. 9876543210@ybl" placeholder="उदा. 9876543210@ybl"></div>
@@ -531,27 +634,27 @@ code{-webkit-user-select:all;user-select:all}
     </div>
   </div>
   <div class="card">
-    <h2><span style="color:#0e8a5c">👥</span> <span class="hi">सदस्य जोड़ें</span><span class="en">Add Members</span></h2>
+    <h2><span style="color:var(--green-light)">👥</span> <span class="hi">सदस्य जोड़ें</span><span class="en">Add Members</span></h2>
     <div class="field"><label><span class="hi">कुल सदस्य संख्या</span><span class="en">Total Members</span></label><input class="no-ico lang-input" id="memberCount" type="number" data-hi="उदा. 10" data-en="e.g. 10" placeholder="उदा. 10" oninput="buildMemberInputs()"></div>
     <div id="memberInputs" style="margin-top:14px"></div>
   </div>
   <button class="btn btn-primary" onclick="createBC()" style="margin-bottom:14px" id="createBtn"><span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span></button>
-  <div id="created" class="card hidden" style="background:#d5f2e2;text-align:center"></div>
+  <div id="created" class="card hidden" style="background:var(--green-soft);text-align:center"></div>
 </section>
 
 <!-- ============ DASHBOARD ============ -->
 <section id="dashboard" class="hidden">
   <div id="walletBlock"></div>
   <div id="ledgerCardBlock" class="card card-cream hidden" style="text-align:center;padding:16px">
-    <h3 style="color:#0b3b2b;font-size:15px;font-weight:800;margin-bottom:6px">📊 <span class="hi">कमेटी का पक्का हिसाब</span><span class="en">Group Ledger</span></h3>
-    <p style="font-size:12px;color:#5a7d6e;margin-bottom:12px;font-weight:600"><span class="hi">सभी सदस्यों का पूरा रिकॉर्ड देखें।</span><span class="en">View complete record.</span></p>
+    <h3 style="color:var(--text);font-size:15px;font-weight:800;margin-bottom:6px">📊 <span class="hi">कमेटी का पक्का हिसाब</span><span class="en">Group Ledger</span></h3>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;font-weight:600"><span class="hi">सभी सदस्यों का पूरा रिकॉर्ड देखें।</span><span class="en">View complete record.</span></p>
     <button class="btn btn-primary" style="padding:12px;font-size:14px;border-radius:14px" onclick="viewLedger()">👀 <span class="hi">पक्का हिसाब देखें</span><span class="en">View Final Ledger</span></button>
   </div>
   <div style="margin-bottom:14px" id="memberCard">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:0 4px">
-      <h2 style="margin:0;font-size:17px;font-weight:900;color:#0b3b2b"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
+      <h2 style="margin:0;font-size:17px;font-weight:900;color:var(--text)"><span class="hi">👥 सभी सदस्य</span><span class="en">👥 All Members</span></h2>
       <div style="display:flex;gap:6px">
-        <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:#fff;color:#0b3b2b;border:1.5px solid #d5e8de">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
+        <button id="editBtn" class="btn btn-sm hidden" onclick="openEditModal()" style="background:var(--card);color:var(--text);border:1.5px solid var(--input-border)">📝 <span class="hi">एडिट</span><span class="en">Edit</span></button>
         <button id="nextRoundBtn" class="btn btn-sm hidden" onclick="startNextRound()" style="background:#fef3c7;color:#b45309">+ <span class="hi">अगली किश्त</span><span class="en">+ Next</span></button>
       </div>
     </div>
@@ -562,21 +665,21 @@ code{-webkit-user-select:all;user-select:all}
 <!-- ============ PROFILE ============ -->
 <section id="profile" class="hidden">
   <div class="card card-cream" style="text-align:center;padding:32px 20px">
-    <div style="width:80px;height:80px;background:linear-gradient(135deg,#0d7a52,#0e8a5c);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 15px;box-shadow:0 10px 20px rgba(13,122,82,0.25)">👤</div>
+    <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--green),var(--green-light));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 15px;box-shadow:0 10px 20px rgba(13,122,82,0.25)">👤</div>
     <h2 id="profName" style="justify-content:center;font-size:22px;margin-bottom:6px;text-align:center">Name</h2>
-    <p id="profPhone" style="font-size:14px;color:#5a7d6e;font-weight:700;margin-bottom:24px;letter-spacing:1px;text-align:center">+91 0000000000</p>
+    <p id="profPhone" style="font-size:14px;color:var(--text-muted);font-weight:700;margin-bottom:24px;letter-spacing:1px;text-align:center">+91 0000000000</p>
     <div class="stats" style="margin-bottom:24px">
-      <div class="stat"><b id="profCount" style="color:#0e8a5c">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
-      <div class="stat"><b id="profRole" style="color:#0e8a5c">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
+      <div class="stat"><b id="profCount" style="color:var(--green-light)">0</b><span class="hi">जुड़ी कमेटियाँ</span><span class="en">Joined Groups</span></div>
+      <div class="stat"><b id="profRole" style="color:var(--green-light)">यूज़र</b><span class="hi">अकाउंट टाइप</span><span class="en">Account Type</span></div>
     </div>
-    <button class="btn" onclick="appLogout()" style="background:#dc2626;color:#fff;box-shadow:0 8px 18px rgba(220,38,38,0.25)">🚪 <span class="hi">सुरक्षित लॉगआउट</span><span class="en">Secure Logout</span></button>
+    <button class="btn" onclick="appLogout()" style="background:var(--danger);color:#fff;box-shadow:0 8px 18px rgba(220,38,38,0.25)">🚪 <span class="hi">सुरक्षित लॉगआउट</span><span class="en">Secure Logout</span></button>
   </div>
   <div class="card" style="padding:16px;cursor:pointer" onclick="document.getElementById('feedbackModal').classList.remove('hidden')">
     <div style="display:flex;align-items:center;gap:12px">
       <div style="font-size:24px;background:#fef3c7;padding:10px;border-radius:14px">💡</div>
       <div>
-        <b style="color:#0b3b2b;font-size:15px"><span class="hi">सुझाव या शिकायत दें</span><span class="en">Give Feedback</span></b>
-        <p style="font-size:11px;color:#5a7d6e;margin-top:2px"><span class="hi">ऐप में क्या सुधार होना चाहिए?</span><span class="en">Help us improve</span></p>
+        <b style="color:var(--text);font-size:15px"><span class="hi">सुझाव या शिकायत दें</span><span class="en">Give Feedback</span></b>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:2px"><span class="hi">ऐप में क्या सुधार होना चाहिए?</span><span class="en">Help us improve</span></p>
       </div>
     </div>
   </div>
@@ -584,27 +687,27 @@ code{-webkit-user-select:all;user-select:all}
 
 <!-- ============ ADMIN ============ -->
 <section id="admin" class="hidden">
-  <div class="card card-cream" style="border-left:4px solid #0e8a5c">
-    <h2 style="color:#0b3b2b">👑 Admin Dashboard <span class="admin-badge">ADMIN</span></h2>
-    <div class="msg ok" style="margin:0;background:#fff;border:none;text-align:left;padding:0">✓ Admin ID Verified</div>
+  <div class="card card-cream" style="border-left:4px solid var(--green-light)">
+    <h2 style="color:var(--text)">👑 Admin Dashboard <span class="admin-badge">ADMIN</span></h2>
+    <div class="msg ok" style="margin:0;background:var(--card);border:none;text-align:left;padding:0">✓ Admin ID Verified</div>
   </div>
   <div class="card">
-    <h2 style="color:#0b3b2b">📋 <span class="hi">सभी कमेटियाँ</span><span class="en">All Groups</span></h2>
-    <p style="font-size:12px;color:#5a7d6e;margin-bottom:12px;font-weight:600"><span class="hi">किसी भी कमेटी पर क्लिक करके manage करें।</span><span class="en">Click any group to manage.</span></p>
+    <h2 style="color:var(--text)">📋 <span class="hi">सभी कमेटियाँ</span><span class="en">All Groups</span></h2>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;font-weight:600"><span class="hi">किसी भी कमेटी पर क्लिक करके manage करें।</span><span class="en">Click any group to manage.</span></p>
     <div id="adminAllList"></div>
     <button class="btn btn-primary" style="margin-top:8px;border-radius:14px" onclick="loadAllGroups()">🔄 <span class="hi">रिफ्रेश करें</span><span class="en">Refresh</span></button>
   </div>
-  <div class="card card-cream" style="border-left:4px solid #0e8a5c">
-    <h2 style="color:#0b3b2b">📊 Master Excel Backup</h2>
-    <p style="margin-bottom:12px;font-size:12px;color:#5a7d6e;font-weight:600"><span class="hi">किसी भी कमेटी का Code डालकर Excel डाउनलोड करें:</span><span class="en">Enter Code to download Excel:</span></p>
-    <div class="field"><input class="no-ico" id="adminExcelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:#fff;text-transform:uppercase"></div>
+  <div class="card card-cream" style="border-left:4px solid var(--green-light)">
+    <h2 style="color:var(--text)">📊 Master Excel Backup</h2>
+    <p style="margin-bottom:12px;font-size:12px;color:var(--text-muted);font-weight:600"><span class="hi">किसी भी कमेटी का Code डालकर Excel डाउनलोड करें:</span><span class="en">Enter Code to download Excel:</span></p>
+    <div class="field"><input class="no-ico" id="adminExcelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:var(--card);text-transform:uppercase"></div>
     <button class="btn btn-primary" style="border-radius:14px" onclick="adminDownloadExcel()"><span class="hi">📥 Excel डाउनलोड करें</span><span class="en">📥 Download Excel</span></button>
   </div>
-  <div class="card" style="background:#fee9e9;border-color:#fecaca;border-left:4px solid #dc2626">
-    <h2 style="color:#dc2626"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete Group</span></h2>
-    <p style="margin-bottom:14px;font-size:12px;color:#9f1239;font-weight:600"><span class="hi">गलत बनी कमेटी का कोड डालकर डिलीट करें।</span><span class="en">Enter Code to permanently delete.</span></p>
-    <div class="field"><input class="no-ico" id="adminDelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:#fff;text-transform:uppercase"></div>
-    <button class="btn" style="background:#dc2626;color:#fff;border-radius:14px" onclick="adminDeleteBC()"><span class="hi">🗑️ डाटा डिलीट करें</span><span class="en">🗑️ Delete Data</span></button>
+  <div class="card" style="background:#fee9e9;border-color:#fecaca;border-left:4px solid var(--danger)">
+    <h2 style="color:var(--danger)"><span class="hi">🗑️ कमेटी डिलीट करें</span><span class="en">🗑️ Delete Group</span></h2>
+    <p style="margin-bottom:14px;font-size:12px;color:var(--danger);font-weight:600"><span class="hi">गलत बनी कमेटी का कोड डालकर डिलीट करें।</span><span class="en">Enter Code to permanently delete.</span></p>
+    <div class="field"><input class="no-ico" id="adminDelCode" placeholder="Code (उदा. A1B2C3D4)" style="background:var(--card);text-transform:uppercase"></div>
+    <button class="btn" style="background:var(--danger);color:#fff;border-radius:14px" onclick="adminDeleteBC()"><span class="hi">🗑️ डाटा डिलीट करें</span><span class="en">🗑️ Delete Data</span></button>
   </div>
 </section>
 
@@ -619,21 +722,20 @@ code{-webkit-user-select:all;user-select:all}
   <button id="nav-admin" class="hidden" onclick="show('admin')"><div class="ico">👑</div>Admin</button>
 </nav>
 
-<!-- AI FAB -->
 <div class="ai-fab" onclick="document.getElementById('aiModal').classList.remove('hidden')">🤖</div>
 
 <!-- MODALS -->
 <div id="appModal" class="modal-bg hidden">
   <div class="modal-box" style="text-align:center">
-    <p id="modalText" style="font-weight:700;margin-bottom:20px;color:#1e2f2a;white-space:pre-wrap;font-size:15px"></p>
+    <p id="modalText" style="font-weight:700;margin-bottom:20px;color:var(--text);white-space:pre-wrap;font-size:15px"></p>
     <button class="btn btn-primary" onclick="document.getElementById('appModal').classList.add('hidden')">OK</button>
   </div>
 </div>
 <div id="confirmModal" class="modal-bg hidden">
   <div class="modal-box" style="text-align:center">
-    <p id="confirmText" style="font-weight:800;margin-bottom:20px;color:#1e2f2a;white-space:pre-wrap;font-size:16px"></p>
+    <p id="confirmText" style="font-weight:800;margin-bottom:20px;color:var(--text);white-space:pre-wrap;font-size:16px"></p>
     <div style="display:flex;gap:10px">
-      <button class="btn" style="background:#eaf5ee;color:#5a7d6e" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+      <button class="btn" style="background:var(--green-pale);color:var(--text-muted)" id="confirmNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
       <button class="btn btn-primary" id="confirmYes"><span class="hi">हाँ, पक्का</span><span class="en">Yes, Sure</span></button>
     </div>
   </div>
@@ -642,7 +744,7 @@ code{-webkit-user-select:all;user-select:all}
   <div class="modal-box" style="text-align:left">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
       <h2>🤖 <span class="hi">AI सहायता</span><span class="en">AI Help</span></h2>
-      <div style="font-size:24px;cursor:pointer;color:#dc2626" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
+      <div style="font-size:24px;cursor:pointer;color:var(--danger)" onclick="document.getElementById('aiModal').classList.add('hidden')">✖</div>
     </div>
     <div class="chat-box" id="aiChat">
       <div class="msg-bubble msg-ai"><span class="hi">नमस्ते! ऐप के बारे में सवाल पूछें। 👇</span><span class="en">Hi! Ask about the app. 👇</span></div>
@@ -659,10 +761,10 @@ code{-webkit-user-select:all;user-select:all}
   <div class="modal-box" style="text-align:left">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
       <h2>💡 <span class="hi">सुझाव / शिकायत</span><span class="en">Feedback</span></h2>
-      <div style="font-size:24px;cursor:pointer;color:#dc2626" onclick="document.getElementById('feedbackModal').classList.add('hidden')">✖</div>
+      <div style="font-size:24px;cursor:pointer;color:var(--danger)" onclick="document.getElementById('feedbackModal').classList.add('hidden')">✖</div>
     </div>
-    <p style="font-size:12px;color:#5a7d6e;margin-bottom:12px;font-weight:600"><span class="hi">सीधे एडमिन के WhatsApp पर जाएगा।</span><span class="en">Sent directly to Admin's WhatsApp.</span></p>
-    <textarea id="feedbackText" rows="4" style="width:100%;padding:14px;border-radius:16px;border:1.5px solid #a7e0c5;font-size:14px;margin-bottom:15px;background:#f8fcfa;resize:none;outline:none;font-family:inherit" placeholder="अपनी बात यहाँ लिखें..."></textarea>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;font-weight:600"><span class="hi">सीधे एडमिन के WhatsApp पर जाएगा।</span><span class="en">Sent directly to Admin's WhatsApp.</span></p>
+    <textarea id="feedbackText" rows="4" style="width:100%;padding:14px;border-radius:16px;border:1.5px solid var(--green-soft-border);font-size:14px;margin-bottom:15px;background:var(--input-bg);color:var(--text);resize:none;outline:none;font-family:inherit" placeholder="अपनी बात यहाँ लिखें..."></textarea>
     <button class="btn btn-primary" onclick="submitFeedback()"><span class="hi">📤 एडमिन को भेजें</span><span class="en">📤 Send to Admin</span></button>
   </div>
 </div>
@@ -670,23 +772,23 @@ code{-webkit-user-select:all;user-select:all}
   <div class="modal-box" style="text-align:left;max-width:400px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
       <h2>📊 <span class="hi">पक्का हिसाब</span><span class="en">Final Ledger</span></h2>
-      <div style="font-size:24px;cursor:pointer;color:#dc2626" onclick="document.getElementById('ledgerModal').classList.add('hidden')">✖</div>
+      <div style="font-size:24px;cursor:pointer;color:var(--danger)" onclick="document.getElementById('ledgerModal').classList.add('hidden')">✖</div>
     </div>
-    <div style="max-height:250px;overflow-y:auto;border:1px solid #d5e8de;border-radius:16px;margin-bottom:15px">
+    <div style="max-height:250px;overflow-y:auto;border:1px solid var(--input-border);border-radius:16px;margin-bottom:15px">
       <table class="ledger-table" id="ledgerTableData"></table>
     </div>
     <button class="btn btn-primary" onclick="requestExcelFromAdmin()" style="background:#b45309;box-shadow:0 6px 14px rgba(180,83,9,0.2)">📩 <span class="hi">Excel फ़ाइल मंगाएं</span><span class="en">Request Excel</span></button>
   </div>
 </div>
 <div id="winnerModal" class="modal-bg hidden">
-  <div class="modal-box" style="text-align:center;background:linear-gradient(180deg,#fefaf0,#fef3c7)">
+  <div class="modal-box" style="text-align:center;background:linear-gradient(180deg,var(--card-cream),var(--card))">
     <div style="position:absolute;right:15px;top:15px;font-size:20px;cursor:pointer;color:#92400e" onclick="document.getElementById('winnerModal').classList.add('hidden')">✖</div>
     <div style="font-size:70px;margin-bottom:6px">🏆</div>
     <h2 style="color:#b45309;font-size:28px;font-weight:900">Winner!</h2>
-    <p style="font-size:22px;font-weight:800;color:#92400e" id="winName">Name</p>
-    <p style="color:#b45309;font-size:14px"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Group opened!</span></p>
+    <p style="font-size:22px;font-weight:800;color:var(--text)" id="winName">Name</p>
+    <p style="color:var(--text-muted);font-size:14px"><span class="hi">इनकी कमेटी खुल गई है!</span><span class="en">Group opened!</span></p>
     <div id="winAmount" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:12px 24px;border-radius:18px;font-size:32px;display:inline-block;margin:15px 0;font-weight:900">₹0</div>
-    <p style="color:#92400e;font-size:13px;font-weight:700;margin-bottom:20px"><span class="hi">क्या वॉलेट से पैसे देना चाहते हैं?</span><span class="en">Pay from Wallet?</span></p>
+    <p style="color:var(--text-muted);font-size:13px;font-weight:700;margin-bottom:20px"><span class="hi">क्या वॉलेट से पैसे देना चाहते हैं?</span><span class="en">Pay from Wallet?</span></p>
     <div style="display:flex;gap:10px">
       <button class="btn" style="background:#fef3c7;color:#b45309" onclick="document.getElementById('winnerModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
       <button class="btn btn-primary" onclick="confirmWinner()"><span class="hi">हाँ, दे दिए</span><span class="en">Yes, Paid</span></button>
@@ -698,10 +800,10 @@ code{-webkit-user-select:all;user-select:all}
     <h2 style="text-align:center;margin-bottom:15px"><span class="hi">कमेटी एडिट करें</span><span class="en">Edit Group</span></h2>
     <div class="field"><label><span class="hi">किस्त राशि (₹)</span><span class="en">Installment (₹)</span></label><input class="no-ico" type="number" id="editAmt" oninput="editAutoCalc()"></div>
     <div class="field"><label><span class="hi">कुल किश्तें</span><span class="en">Total Installments</span></label><input class="no-ico" type="number" id="editInst" oninput="editAutoCalc()"></div>
-    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background:#d5f2e2;color:#0e8a5c;font-weight:800"></div>
+    <div class="field"><label><span class="hi">खुलने पर मिलेगा</span><span class="en">Total Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background:var(--green-soft);color:var(--green-light);font-weight:800"></div>
     <div class="field"><label><span class="hi">UPI ID</span><span class="en">UPI ID</span></label><input class="no-ico" type="text" id="editUpi" placeholder="mobilenumber@upi"></div>
     <div style="display:flex;gap:10px;margin-top:18px">
-      <button class="btn" style="background:#eaf5ee;color:#5a7d6e" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+      <button class="btn" style="background:var(--green-pale);color:var(--text-muted)" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
       <button class="btn btn-primary" onclick="saveEdit()"><span class="hi">सेव करें</span><span class="en">Save</span></button>
     </div>
   </div>
@@ -712,7 +814,7 @@ code{-webkit-user-select:all;user-select:all}
 const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
 const ADMIN_PHONE = '7318259001';
 const APP_LINK = 'https://www.appcreator24.com/app4198202-u6xztr';
-const KEYS = { session:'kk_session', joined:'kk_joined', current:'kk_current' };
+const KEYS = { session:'kk_session', joined:'kk_joined', current:'kk_current', theme:'kk_theme' };
 let currentBCData = null;
 let currentLang = localStorage.getItem('kk_lang') || 'hi';
 let navHistory = [];
@@ -724,10 +826,28 @@ function load(k,d){ try{ return JSON.parse(localStorage.getItem(k)) || d; }catch
 function save(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
 function genCode(){ return Math.random().toString(36).substring(2,10).toUpperCase(); }
 
+/* ===== THEME ===== */
+function applyTheme(){
+  const theme = localStorage.getItem(KEYS.theme) || 'light';
+  if(theme === 'dark'){
+    document.body.classList.add('dark-mode');
+    document.getElementById('themeBtn').innerHTML = '<span class="theme-ico">☀️</span>';
+  } else {
+    document.body.classList.remove('dark-mode');
+    document.getElementById('themeBtn').innerHTML = '<span class="theme-ico">🌙</span>';
+  }
+}
+function toggleTheme(){
+  const cur = localStorage.getItem(KEYS.theme) || 'light';
+  localStorage.setItem(KEYS.theme, cur === 'light' ? 'dark' : 'light');
+  applyTheme();
+}
+
 function toggleLang(){ currentLang = currentLang === 'hi' ? 'en' : 'hi'; applyLang(); }
 function applyLang(){
   localStorage.setItem('kk_lang', currentLang);
-  document.body.className = 'lang-' + currentLang;
+  document.body.classList.remove('lang-hi','lang-en');
+  document.body.classList.add('lang-' + currentLang);
   document.getElementById('langToggleBtn').innerHTML = currentLang === 'hi' ? '<span class="globe">🌐</span> EN' : '<span class="globe">🌐</span> HI';
   document.querySelectorAll('.lang-input').forEach(el => {
     if(el.getAttribute('data-' + currentLang)) el.placeholder = el.getAttribute('data-' + currentLang);
@@ -804,7 +924,7 @@ function viewLedger(){
   currentBCData.members.forEach(m=>{
     let paid = (m.paidRounds||0)*currentBCData.amount;
     let due = Math.max(0,(currentBCData.currentRound||1)*currentBCData.amount - paid);
-    h += `<tr><td>${m.name}</td><td style="color:#5a7d6e">₹${paid}</td><td style="color:${due>0?'#dc2626':'#0e8a5c'};font-weight:800">₹${due}</td></tr>`;
+    h += `<tr><td>${m.name}</td><td style="color:var(--text-muted)">₹${paid}</td><td style="color:${due>0?'var(--danger)':'var(--green-light)'};font-weight:800">₹${due}</td></tr>`;
   });
   document.getElementById('ledgerTableData').innerHTML = h;
   document.getElementById('ledgerModal').classList.remove('hidden');
@@ -856,15 +976,15 @@ async function loadAllGroups(){
     const all = (json.data||[]).filter(g=>!g.isDeleted);
     if(all.length===0){ c.innerHTML = `<div class="empty-state"><div style="font-size:40px;margin-bottom:8px">📋</div><p>${t('कोई कमेटी नहीं है','No groups yet')}</p></div>`; return; }
     c.innerHTML = all.map((g,i)=>`
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:14px;margin-bottom:10px;background:#f0faf4;border:1.5px solid #d5e8de;cursor:pointer" onclick="save(KEYS.current,'${g.code}');show('dashboard')">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:14px;margin-bottom:10px;background:var(--green-pale);border:1.5px solid var(--green-pale-border);cursor:pointer" onclick="save(KEYS.current,'${g.code}');show('dashboard')">
         <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0">
-          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0d7a52,#0e8a5c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${['👥','💼','🏆','💰'][i%4]}</div>
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--green-light));color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${['👥','💼','🏆','💰'][i%4]}</div>
           <div style="min-width:0;flex:1">
-            <b style="display:block;font-size:14px;color:#0b3b2b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.name}</b>
-            <span style="font-size:11px;color:#5a7d6e">Code: ${g.code} • ${g.members?g.members.length:0} members</span>
+            <b style="display:block;font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.name}</b>
+            <span style="font-size:11px;color:var(--text-muted)">Code: ${g.code} • ${g.members?g.members.length:0} members</span>
           </div>
         </div>
-        <span style="font-size:18px;color:#8aa79c">›</span>
+        <span style="font-size:18px;color:var(--text-soft)">›</span>
       </div>
     `).join('');
   } catch { c.innerHTML = `<div class="empty-state">❌ ${t('लोड नहीं हो पाया','Failed to load')}</div>`; }
@@ -977,14 +1097,14 @@ function buildMemberInputs(){
   let h = '';
   for(let i=1;i<=c;i++){
     h += `
-    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;background:#fff;margin-bottom:10px;border:1.5px solid #d5e8de">
+    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;background:var(--card);margin-bottom:10px;border:1.5px solid var(--input-border)">
       <div style="display:flex;align-items:center;gap:10px">
-        <span style="width:32px;height:32px;border-radius:10px;background:#0b5d3f;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">${i}</span>
-        <input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' का नाम *','Member '+i+' Name *')}" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid #d5e8de;font-size:14px;background:#f8fcfa;font-weight:600;outline:none">
+        <span style="width:32px;height:32px;border-radius:10px;background:var(--green-dark);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">${i}</span>
+        <input class="mem-name lang-input" data-hi="सदस्य ${i} का नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' का नाम *','Member '+i+' Name *')}" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid var(--input-border);font-size:14px;background:var(--input-bg);color:var(--text);font-weight:600;outline:none">
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding-left:42px">
         <span style="font-size:16px">📱</span>
-        <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल नंबर *" data-en="Mobile Number *" placeholder="${t('मोबाइल नंबर *','Mobile Number *')}" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid #d5e8de;font-size:14px;background:#f8fcfa;font-weight:600;outline:none">
+        <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल नंबर *" data-en="Mobile Number *" placeholder="${t('मोबाइल नंबर *','Mobile Number *')}" style="flex:1;padding:12px;border-radius:12px;border:1.5px solid var(--input-border);font-size:14px;background:var(--input-bg);color:var(--text);font-weight:600;outline:none">
       </div>
     </div>`;
   }
@@ -1025,8 +1145,8 @@ async function createBC(){
     document.getElementById('memberCount').value = '';
     document.getElementById('created').classList.remove('hidden');
     document.getElementById('created').innerHTML = `
-      <h2 style="color:#0e8a5c;font-weight:900;margin-bottom:10px">✅ ${t('सुरक्षित!','Saved!')}</h2>
-      <div style="font-size:24px;font-weight:900;letter-spacing:3px;background:#fff;padding:12px;border-radius:14px;color:#0b3b2b;border:1.5px dashed #34d399;margin-bottom:12px">${code}</div>
+      <h2 style="color:var(--green-light);font-weight:900;margin-bottom:10px">✅ ${t('सुरक्षित!','Saved!')}</h2>
+      <div style="font-size:24px;font-weight:900;letter-spacing:3px;background:var(--card);padding:12px;border-radius:14px;color:var(--text);border:1.5px dashed var(--green-soft-border);margin-bottom:12px">${code}</div>
       <button class="btn btn-primary" onclick="show('dashboard')">${t('कमेटी खोलें','Open Group')}</button>`;
   } catch { appAlert(t('सेव नहीं हो पाया','Save failed')); }
   document.getElementById('createBtn').innerHTML = `<span class="hi">✅ कमेटी सुरक्षित करें</span><span class="en">✅ Save Group</span>`;
@@ -1064,15 +1184,15 @@ async function renderMyList(){
       let bc = (await res.json()).data;
       if(bc.isDeleted){ let joined = load(KEYS.joined,[]); save(KEYS.joined, joined.filter(x=>x!==bc.code)); continue; }
       html += `
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:18px;margin-bottom:10px;background:#fff;border:1.5px solid #e6f2ec;cursor:pointer;box-shadow:0 4px 14px -8px rgba(5,80,50,0.1)" onclick="save(KEYS.current,'${bc.code}');show('dashboard')">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:18px;margin-bottom:10px;background:var(--card);border:1.5px solid var(--card-border);cursor:pointer;box-shadow:0 4px 14px -8px var(--shadow)" onclick="save(KEYS.current,'${bc.code}');show('dashboard')">
         <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
           <div style="width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;background:${colors[i%4]};flex-shrink:0">${icons[i%4]}</div>
           <div style="min-width:0;flex:1">
-            <b style="display:block;font-size:15px;color:#0b3b2b;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bc.name}</b>
-            <span style="font-size:11px;color:#5a7d6e;font-weight:600">Code: ${bc.code}</span>
+            <b style="display:block;font-size:15px;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bc.name}</b>
+            <span style="font-size:11px;color:var(--text-muted);font-weight:600">Code: ${bc.code}</span>
           </div>
         </div>
-        <span style="font-size:20px;color:#8aa79c">›</span>
+        <span style="font-size:20px;color:var(--text-soft)">›</span>
       </div>`;
     } catch {}
   }
@@ -1118,7 +1238,7 @@ async function loadDash(){
     currentBCData = (await res.json()).data;
     const bc = currentBCData;
     if(bc.isDeleted){
-      document.getElementById('walletBlock').innerHTML = `<div class="card card-cream" style="text-align:center;color:#dc2626">❌ ${t('यह कमेटी डिलीट कर दी गई है।','This Group is deleted.')}</div>`;
+      document.getElementById('walletBlock').innerHTML = `<div class="card card-cream" style="text-align:center;color:var(--danger)">❌ ${t('यह कमेटी डिलीट कर दी गई है।','This Group is deleted.')}</div>`;
       document.getElementById('memberCard').classList.add('hidden');
       document.getElementById('ledgerCardBlock').classList.add('hidden');
       return;
@@ -1151,10 +1271,10 @@ async function loadDash(){
     let ti = Number(bc.totalInst)||tm;
     document.getElementById('walletBlock').innerHTML = `
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:0 4px">
-        <div style="width:44px;height:44px;background:#d5f2e2;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;border:1.5px solid #a7e0c5">👥</div>
+        <div style="width:44px;height:44px;background:var(--green-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;border:1.5px solid var(--green-soft-border)">👥</div>
         <div>
-          <h2 style="font-size:18px;font-weight:900;margin-bottom:2px;color:#0b3b2b">${bc.name}</h2>
-          <p style="font-size:11px;color:#5a7d6e;font-weight:700">Code: ${bc.code}</p>
+          <h2 style="font-size:18px;font-weight:900;margin-bottom:2px;color:var(--text)">${bc.name}</h2>
+          <p style="font-size:11px;color:var(--text-muted);font-weight:700">Code: ${bc.code}</p>
         </div>
       </div>
       <div class="wallet-card">
@@ -1171,13 +1291,13 @@ async function loadDash(){
         </div>
       </div>
       <div class="stats">
-        <div class="stat"><b style="color:#0e8a5c">🏦 ₹${bc.amount}</b><span>${t('किस्त','Inst.')}</span></div>
-        <div class="stat"><b style="color:#0e8a5c">⏳ ${bc.currentRound} / ${ti}</b><span>${t('चल रही किश्त','Current Round')}</span></div>
+        <div class="stat"><b>🏦 ₹${bc.amount}</b><span>${t('किस्त','Inst.')}</span></div>
+        <div class="stat"><b>⏳ ${bc.currentRound} / ${ti}</b><span>${t('चल रही किश्त','Current Round')}</span></div>
         <div class="stat stat-pool"><b style="font-size:24px">₹${Number(bc.totalPool||bc.amount*tm).toLocaleString('en-IN')}</b><span>${t('कमेटी खुलने पर मिलेगा','Total Pool')}</span></div>
       </div>
-      <div style="background:#fff;padding:12px;border-radius:18px;margin:14px 0;text-align:center;border:1.5px solid #e6f2ec">
-        <div style="font-size:14px;font-weight:800;color:#0b3b2b;margin-bottom:2px">Code: <b style="color:#0e8a5c;letter-spacing:1px">${bc.code}</b></div>
-        <div style="color:#5a7d6e;font-size:12px;font-weight:600">${t('संचालक','Owner')}: ${bc.ownerName}</div>
+      <div style="background:var(--card);padding:12px;border-radius:18px;margin:14px 0;text-align:center;border:1.5px solid var(--card-border)">
+        <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px">Code: <b style="color:var(--green-light);letter-spacing:1px">${bc.code}</b></div>
+        <div style="color:var(--text-muted);font-size:12px;font-weight:600">${t('संचालक','Owner')}: ${bc.ownerName}</div>
       </div>
     `;
     document.getElementById('members').innerHTML = bc.members.map((m,i)=>{
@@ -1190,43 +1310,43 @@ async function loadDash(){
         isMe = (cN===mN || mN.includes(cN) || cN.includes(mN));
       }
       let uid = m.phone || m.name;
-      let tracker = `<div style="background:#f0faf4;border:1px dashed #a7e0c5;padding:10px;border-radius:14px;margin-top:12px;text-align:center;font-size:12px;font-weight:700;color:#0b3b2b">
+      let tracker = `<div style="background:var(--green-pale);border:1px dashed var(--green-soft-border);padding:10px;border-radius:14px;margin-top:12px;text-align:center;font-size:12px;font-weight:700;color:var(--text)">
         <span class="hi">✅ <b>${m.paidRounds}</b> किश्त जमा | <b>${left}</b> बाकी</span>
         <span class="en">✅ <b>${m.paidRounds}</b> Paid | <b>${left}</b> Left</span></div>`;
-      if(m.hasWon) tracker = `<div style="background:#d5f2e2;border:1px solid #a7e0c5;padding:10px;border-radius:14px;margin-top:12px;text-align:center;font-size:13px;font-weight:800;color:#0e8a5c">
+      if(m.hasWon) tracker = `<div style="background:var(--green-soft);border:1px solid var(--green-soft-border);padding:10px;border-radius:14px;margin-top:12px;text-align:center;font-size:13px;font-weight:800;color:var(--green-light)">
         <span class="hi">🎉 बधाई! कमेटी खुल चुकी है।</span><span class="en">🎉 Congrats! Group opened.</span></div>`;
       let payBtn = '';
-      if(isOwner && due > 0) payBtn = `<div style="display:flex;justify-content:flex-end;margin-top:10px;padding-top:10px;border-top:1px dashed #e6f2ec"><button class="btn btn-sm" style="background:#fef3c7;color:#b45309;font-weight:800" onclick="markPaidAdvance('${uid}')">➕ ${t('अगली किश्त जमा करें','Pay Installment')}</button></div>`;
+      if(isOwner && due > 0) payBtn = `<div style="display:flex;justify-content:flex-end;margin-top:10px;padding-top:10px;border-top:1px dashed var(--card-border)"><button class="btn btn-sm" style="background:#fef3c7;color:#b45309;font-weight:800" onclick="markPaidAdvance('${uid}')">➕ ${t('अगली किश्त जमा करें','Pay Installment')}</button></div>`;
       let online = '';
       if(!isOwner && due > 0 && bc.upiId && isMe){
-        online = `<div style="margin-top:14px;padding-top:14px;border-top:1px dashed #e6f2ec;text-align:center">
-          <p style="font-size:12px;color:#0b3b2b;margin-bottom:10px;font-weight:700">💳 UPI ID:</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;background:#f0faf4;border:1.5px solid #a7e0c5;border-radius:14px;padding:6px 6px 6px 12px">
-            <code style="font-size:13px;font-weight:800;color:#0b3b2b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bc.upiId}</code>
-            <button onclick="copyToClipboard('${bc.upiId}')" style="background:#0e8a5c;color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer;flex-shrink:0">📋 Copy</button>
+        online = `<div style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--card-border);text-align:center">
+          <p style="font-size:12px;color:var(--text);margin-bottom:10px;font-weight:700">💳 UPI ID:</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:var(--green-pale);border:1.5px solid var(--green-soft-border);border-radius:14px;padding:6px 6px 6px 12px">
+            <code style="font-size:13px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bc.upiId}</code>
+            <button onclick="copyToClipboard('${bc.upiId}')" style="background:var(--green-light);color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer;flex-shrink:0">📋 Copy</button>
           </div></div>`;
       } else if(!isOwner && due === 0 && isMe){
-        online = `<div style="background:#d5f2e2;border:1px solid #a7e0c5;padding:12px;border-radius:14px;margin-top:12px;text-align:center;font-size:12px;font-weight:800;color:#0e8a5c">✅ ${t('आपकी किश्त पूरी हुई','Payment Clear')}</div>`;
+        online = `<div style="background:var(--green-soft);border:1px solid var(--green-soft-border);padding:12px;border-radius:14px;margin-top:12px;text-align:center;font-size:12px;font-weight:800;color:var(--green-light)">✅ ${t('आपकी किश्त पूरी हुई','Payment Clear')}</div>`;
       }
       let winBtn = `<div style="opacity:0.2">🏆</div>`;
       if(isOwner && !m.hasWon) winBtn = `<button class="win-icon-btn" onclick="declareWinner('${uid}')">🏆</button>`;
       else if(m.hasWon) winBtn = `<div style="font-size:26px">🎉</div>`;
       let nameDisp = `<b>${m.name}</b>`;
-      if(isOwner) nameDisp = `<input type="text" value="${m.name}" style="font-weight:800;font-size:15px;border:none;background:transparent;padding:0;margin:0;width:130px;color:#0b3b2b;outline:none" onchange="editMemberName('${uid}', this.value)">`;
-      let phoneDisp = m.phone ? `<div style="font-size:10px;color:#5a7d6e;font-weight:700;margin-top:4px">📱 ${m.phone}</div>` : '';
-      let cStyle = isMe ? 'border:2px solid #0e8a5c;background:#f8fcfa;' : '';
+      if(isOwner) nameDisp = `<input type="text" value="${m.name}" style="font-weight:800;font-size:15px;border:none;background:transparent;padding:0;margin:0;width:130px;color:var(--text);outline:none" onchange="editMemberName('${uid}', this.value)">`;
+      let phoneDisp = m.phone ? `<div style="font-size:10px;color:var(--text-muted);font-weight:700;margin-top:4px">📱 ${m.phone}</div>` : '';
+      let cStyle = isMe ? 'border:2px solid var(--green-light);background:var(--green-pale);' : '';
       return `<div class="member" style="${cStyle}">
         <div class="member-top" style="margin-bottom:0">
           <div class="mem-info">
             <div class="mem-num">${i+1}</div>
             <div style="min-width:0;flex:1">
               ${nameDisp}${isOwner?phoneDisp:''}
-              <div style="font-size:12px;color:#5a7d6e;font-weight:700;margin-top:4px">${t('जमा','Paid')}: <span style="color:#0b3b2b">₹${paid.toLocaleString('en-IN')}</span></div>
+              <div style="font-size:12px;color:var(--text-muted);font-weight:700;margin-top:4px">${t('जमा','Paid')}: <span style="color:var(--text)">₹${paid.toLocaleString('en-IN')}</span></div>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
             <div style="text-align:right">
-              <div style="font-size:11px;color:#5a7d6e;font-weight:800">${t('बाकी है','Due')}:</div>
+              <div style="font-size:11px;color:var(--text-muted);font-weight:800">${t('बाकी है','Due')}:</div>
               <div class="due ${due>0?'red':''}" style="font-size:15px">₹${due.toLocaleString('en-IN')}</div>
             </div>
             ${winBtn}
@@ -1295,6 +1415,7 @@ async function adminDeleteBC(){
   } catch { appAlert('Error'); }
 }
 window.onload = () => {
+  applyTheme();
   applyLang();
   document.getElementById('startDate').value = new Date().toISOString().slice(0,10);
   const s = load(KEYS.session, null);
@@ -1303,4 +1424,4 @@ window.onload = () => {
 };
 </script>
 </body>
-                                                                                                      </html>
+      </html>
