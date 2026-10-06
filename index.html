@@ -11,28 +11,20 @@
 <style>
 :root{
   --primary:#10b981;--primary-dark:#059669;--accent:#34d399;
-  --gold:#fbbf24;--gold-dark:#d97706;
+  --gold:#fbbf24;--gold-light:#fcd34d;--gold-dark:#d97706;
   --bg:#0a0a0f;--card:#16161f;--card-2:#1c1c26;--card-3:#22222e;
   --border:#2a2a38;--border-light:#333344;
   --text:#f5f5f7;--muted:#8b8ba0;--muted-2:#6b6b80;
   --input-bg:#1a1a24;--success:#10b981;--danger:#f43f5e;
   --radius:22px;
   --shadow:0 10px 30px rgba(0,0,0,.5), 0 0 30px rgba(16,185,129,.12);
-  --glow-green:0 0 20px rgba(16,185,129,.45);
-  --glow-gold:0 0 20px rgba(251,191,36,.45);
 }
-
-body { overflow-x: hidden; }
-
+body{overflow-x:hidden;}
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent;}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
-
 body{
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:130px;
-  overscroll-behavior-y:none;
-  -webkit-font-smoothing:antialiased;
+  color:var(--text);min-height:100vh;padding-bottom:130px;
+  overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;
   transition:background .3s,color .3s;
   background:
     radial-gradient(circle at 0% 0%, rgba(16,185,129,.10) 0%, transparent 40%),
@@ -43,7 +35,7 @@ body{
 body.lang-hi .en{display:none !important;}
 body.lang-en .hi{display:none !important;}
 
-/* ============ LIGHT THEME — Fresh Mint ============ */
+/* ============ LIGHT THEME ============ */
 body.theme-light{
   --bg:#f0fdf4;--card:#ffffff;--card-2:#f7fef9;--card-3:#ecfdf5;
   --border:#d1fae5;--border-light:#a7f3d0;
@@ -56,10 +48,7 @@ body.theme-light{
     #f0fdf4;
   background-attachment:fixed;
 }
-body.theme-light .card.premium{
-  background:#fff;
-  box-shadow:0 10px 30px rgba(6,78,59,.10), 0 0 30px rgba(16,185,129,.14);
-}
+body.theme-light .card.premium{background:#fff;box-shadow:0 10px 30px rgba(6,78,59,.10),0 0 30px rgba(16,185,129,.14);}
 body.theme-light .card.gold-card{background:linear-gradient(165deg,#fffbeb,#ffffff);border-color:rgba(251,191,36,.35);}
 body.theme-light .card h2{color:#064e3b;}
 body.theme-light .input-wrap input,
@@ -128,7 +117,6 @@ body.theme-light .access-row{background:rgba(251,191,36,.08);border-color:rgba(2
 body.theme-light .access-row .left b{color:#451a03;}
 body.theme-light .access-row .left span{color:#92400e;}
 
-.app-bg{display:none;} /* अब body पर ही background है */
 body.admin-mode{
   background:
     radial-gradient(circle at 0% 0%, rgba(251,191,36,.12) 0%, transparent 40%),
@@ -164,24 +152,16 @@ body.admin-mode.theme-light .topbar-share{background:rgba(251,191,36,.15);border
 
 main{max-width:480px;margin:6px auto 0;padding:0 14px 20px;position:relative;z-index:10;width:100%;}
 
-/* ============ CARDS with GLOW ============ */
+/* ============ CARDS ============ */
 .card{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:22px;
-  margin-bottom:16px;
-  box-shadow:var(--shadow);
-  border:1px solid var(--border);
-  animation:fadeUp .45s both;
+  background:var(--card);border-radius:var(--radius);padding:22px;margin-bottom:16px;
+  box-shadow:var(--shadow);border:1px solid var(--border);animation:fadeUp .45s both;
 }
 .card.premium{
   background:linear-gradient(165deg,#1a1a24 0%,#16161f 60%);
   border:1px solid rgba(52,211,153,.35);
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.5),
-    0 0 35px rgba(16,185,129,.18),
-    inset 0 0 30px rgba(16,185,129,.05),
-    inset 0 1px 0 rgba(255,255,255,.05);
+  box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 35px rgba(16,185,129,.18),
+    inset 0 0 30px rgba(16,185,129,.05),inset 0 1px 0 rgba(255,255,255,.05);
 }
 .card.gold-card{background:linear-gradient(165deg,#1f1a10 0%,#16161f 60%);border:1px solid rgba(251,191,36,.25);}
 .card h2{font-size:17px;font-weight:900;margin-bottom:18px;display:flex;align-items:center;gap:8px;color:var(--text);letter-spacing:.2px;}
@@ -199,98 +179,85 @@ input::placeholder{color:var(--muted-2);}
 select.no-ico option{background:var(--card-2);color:var(--text);}
 .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;width:100%;}
 
-/* ============ BUTTONS with GLOW ============ */
+/* ============ BUTTONS ============ */
 .btn{width:100%;padding:16px;border:none;border-radius:50px;font-size:15px;font-weight:900;cursor:pointer;transition:transform .18s,box-shadow .22s;text-align:center;letter-spacing:.2px;min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis;}
 .btn:active{transform:scale(.965);}
 .btn-primary{
   background:linear-gradient(120deg,#059669 0%,#10b981 55%,#34d399 100%);
   color:#fff;
-  box-shadow:
-    0 10px 24px rgba(16,185,129,.45),
-    0 0 22px rgba(16,185,129,.35),
-    inset 0 1px 0 rgba(255,255,255,.25);
+  box-shadow:0 10px 24px rgba(16,185,129,.45),0 0 22px rgba(16,185,129,.35),inset 0 1px 0 rgba(255,255,255,.25);
 }
-.btn-primary:active{
-  box-shadow:
-    0 4px 12px rgba(16,185,129,.5),
-    0 0 30px rgba(16,185,129,.55);
-}
+.btn-primary:active{box-shadow:0 4px 12px rgba(16,185,129,.5),0 0 30px rgba(16,185,129,.55);}
 .btn-secondary{background:linear-gradient(135deg,#1f2937,#111827);color:#fff;border:1px solid var(--border-light);}
 .btn-gold{
   background:linear-gradient(120deg,#d97706 0%,#fbbf24 55%,#fcd34d 100%);
   color:#451a03;font-weight:900;
-  box-shadow:
-    0 10px 24px rgba(251,191,36,.4),
-    0 0 22px rgba(251,191,36,.3),
-    inset 0 1px 0 rgba(255,255,255,.3);
+  box-shadow:0 10px 24px rgba(251,191,36,.4),0 0 22px rgba(251,191,36,.3),inset 0 1px 0 rgba(255,255,255,.3);
 }
 .btn-sm{padding:9px 15px;font-size:12px;width:auto;border-radius:50px;}
 
 .tabs{display:flex;background:var(--input-bg);border-radius:50px;padding:5px;margin-bottom:22px;border:1px solid var(--border);width:100%;}
 .tabs button{flex:1 1 0;padding:12px;border:none;border-radius:50px;background:transparent;font-size:13.5px;font-weight:900;color:var(--muted);cursor:pointer;transition:.28s;min-width:0;}
-.tabs button.active{
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  color:#fff;
-  box-shadow:0 6px 16px rgba(16,185,129,.35),0 0 20px rgba(16,185,129,.4);
-}
+.tabs button.active{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 6px 16px rgba(16,185,129,.35),0 0 20px rgba(16,185,129,.4);}
 
 .msg{padding:13px 16px;border-radius:14px;margin-bottom:16px;font-size:13.5px;text-align:center;font-weight:800;word-wrap:break-word;}
 .msg.err{background:rgba(244,63,94,.15);color:#fda4af;border:1px solid rgba(244,63,94,.3);}
 .msg.ok{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3);}
 body.theme-light .msg.ok{color:#059669;}
 
-/* ============ WALLET CARD — PREMIUM ============ */
+/* =========================================
+   ⭐ PREMIUM BLACK + GOLD CARD (नया design)
+   ========================================= */
 .wallet-card{
   position:relative;
   overflow:hidden;
-  padding:26px 24px;
-  border-radius:26px;
+  padding:16px 18px 14px;
+  border-radius:20px;
   color:#fff;
   background:
-    radial-gradient(circle at 100% 0%, rgba(52,211,153,.5) 0%, transparent 45%),
-    radial-gradient(circle at 0% 100%, rgba(16,185,129,.35) 0%, transparent 55%),
-    linear-gradient(135deg,#031a14 0%,#052e23 50%,#064e3b 100%);
+    radial-gradient(ellipse at 100% 0%, rgba(251,191,36,.38) 0%, transparent 45%),
+    radial-gradient(ellipse at 0% 100%, rgba(251,191,36,.14) 0%, transparent 42%),
+    linear-gradient(135deg, #050508 0%, #10101a 45%, #0a0a12 100%);
   box-shadow:
-    0 25px 60px rgba(0,0,0,.65),
-    0 0 50px rgba(16,185,129,.25),
-    inset 0 0 0 1px rgba(52,211,153,.4),
-    inset 0 1px 0 rgba(255,255,255,.12);
-  margin-bottom:18px;
-  animation:fadeUp .45s both;
+    0 20px 45px rgba(0,0,0,.75),
+    0 0 40px rgba(251,191,36,.18),
+    inset 0 0 0 1px rgba(251,191,36,.4),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  margin-bottom:14px;
   isolation:isolate;
+  animation:fadeUp .5s both;
 }
 
-/* Golden shine sweep */
+/* Gold ribbons (धनुषाकार लाइनें) */
 .wallet-card::before{
   content:'';
   position:absolute;
-  top:-60%;left:-60%;
-  width:220%;height:220%;
-  background:linear-gradient(
-    115deg,
-    transparent 35%,
-    rgba(255,255,255,.10) 45%,
-    rgba(253,224,71,.15) 50%,
-    rgba(255,255,255,.10) 55%,
-    transparent 65%
-  );
-  animation:shine 5s ease-in-out infinite;
+  top:-20%;
+  right:-15%;
+  width:75%;
+  height:140%;
+  background:
+    linear-gradient(115deg, transparent 55%, rgba(251,191,36,.15) 61%, rgba(253,224,71,.55) 64%, rgba(251,191,36,.15) 67%, transparent 73%),
+    linear-gradient(115deg, transparent 73%, rgba(251,191,36,.12) 78%, rgba(253,224,71,.35) 81%, rgba(251,191,36,.12) 84%, transparent 90%);
   pointer-events:none;
   z-index:1;
-}
-@keyframes shine{
-  0%,100%{transform:translateX(-70%) rotate(0);}
-  50%{transform:translateX(70%) rotate(0);}
+  transform:rotate(-15deg);
+  transform-origin:center;
 }
 
-/* Glow ring border */
+/* Golden neon border */
 .wallet-card::after{
   content:'';
   position:absolute;
   inset:-1px;
-  border-radius:26px;
+  border-radius:20px;
   padding:1px;
-  background:linear-gradient(135deg,rgba(52,211,153,.6),transparent 40%,transparent 60%,rgba(251,191,36,.5));
+  background:linear-gradient(135deg,
+    rgba(251,191,36,.85) 0%,
+    rgba(251,191,36,.15) 28%,
+    transparent 50%,
+    rgba(251,191,36,.15) 72%,
+    rgba(251,191,36,.75) 100%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;
           mask-composite:exclude;
@@ -298,48 +265,150 @@ body.theme-light .msg.ok{color:#059669;}
   z-index:2;
 }
 
-.wallet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;position:relative;z-index:3;}
-.w-chip{
-  width:48px;height:35px;
-  border-radius:8px;
-  background:linear-gradient(135deg,#fff8dc 0%,#fbbf24 35%,#b45309 70%,#fcd34d 100%);
-  border:1px solid rgba(120,53,15,.7);
-  position:relative;overflow:hidden;
-  box-shadow:
-    0 3px 10px rgba(0,0,0,.5),
-    inset 0 1px 0 rgba(255,255,255,.6),
-    0 0 15px rgba(251,191,36,.4);
+/* ---- Top row: Premium Member + brand ---- */
+.wallet-top{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:10px;position:relative;z-index:3;gap:10px;
 }
-.w-chip::after{content:'';position:absolute;top:11px;left:0;right:0;height:1px;background:rgba(0,0,0,.28);box-shadow:0 9px 0 rgba(0,0,0,.28);}
-.w-wifi{font-size:22px;opacity:.9;color:#fde68a;transform:rotate(90deg);filter:drop-shadow(0 0 6px rgba(253,224,71,.6));}
-.wallet-title{
-  position:relative;z-index:3;
-  font-size:11px;font-weight:800;opacity:.95;margin-bottom:6px;
-  text-transform:uppercase;letter-spacing:3px;
-  color:#6ee7b7;
-  text-shadow:0 0 12px rgba(52,211,153,.8);
-}
-.wallet-amt{
-  position:relative;z-index:3;
-  font-size:42px;font-weight:900;margin-bottom:16px;
-  display:flex;align-items:center;gap:4px;
-  color:#fff;
-  letter-spacing:-.5px;
-  word-break:break-all;
-  text-shadow:
-    0 0 20px rgba(16,185,129,.55),
-    0 0 40px rgba(16,185,129,.35),
-    0 2px 4px rgba(0,0,0,.5);
-}
-.wallet-amt span{font-size:26px;color:#a7f3d0;text-shadow:0 0 15px rgba(52,211,153,.7);}
-.wallet-num{
-  position:relative;z-index:3;
-  font-size:12px;letter-spacing:4px;opacity:.9;margin-bottom:16px;
-  color:#d1fae5;font-weight:700;font-family:'SF Mono',Menlo,monospace;
-  text-shadow:0 1px 2px rgba(0,0,0,.5);
-}
-.wallet-bot{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:700;opacity:.9;position:relative;z-index:3;color:#a7f3d0;text-shadow:0 0 8px rgba(52,211,153,.4);}
+.wallet-brand{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.wallet-brand-title{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:900;letter-spacing:.4px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);}
+.wallet-brand-title .crown{font-size:14px;filter:drop-shadow(0 0 6px rgba(251,191,36,.9));}
+.wallet-brand-sub{font-size:8px;font-weight:800;letter-spacing:1.8px;color:#fbbf24;text-shadow:0 0 10px rgba(251,191,36,.7);}
+.wallet-brand-logo{display:flex;align-items:center;gap:5px;flex-shrink:0;text-align:right;}
+.wallet-brand-logo .logo-em{font-size:20px;filter:drop-shadow(0 0 8px rgba(251,191,36,.6));}
+.wallet-brand-logo .logo-txt{display:flex;flex-direction:column;align-items:flex-end;}
+.wallet-brand-logo b{font-size:13px;font-weight:900;color:#fcd34d;letter-spacing:.3px;text-shadow:0 0 12px rgba(251,191,36,.8);line-height:1;}
+.wallet-brand-logo span{font-size:7px;letter-spacing:2px;color:#fbbf24;font-weight:800;}
 
+/* ---- Chip + WiFi ---- */
+.wallet-chip-row{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:8px;position:relative;z-index:3;
+}
+.w-chip{
+  width:36px;height:26px;border-radius:5px;
+  background:linear-gradient(135deg,#fff8dc 0%,#fbbf24 35%,#b45309 70%,#fcd34d 100%);
+  border:1px solid rgba(120,53,15,.8);position:relative;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.7),0 0 12px rgba(251,191,36,.5);
+}
+.w-chip::after{
+  content:'';position:absolute;top:8px;left:0;right:0;height:1px;
+  background:rgba(0,0,0,.3);box-shadow:0 7px 0 rgba(0,0,0,.3);
+}
+.w-wifi{
+  font-size:16px;color:#fde68a;
+  filter:drop-shadow(0 0 6px rgba(253,224,71,.9));
+  transform:rotate(0deg);
+}
+
+/* ---- Wallet balance ---- */
+.wallet-balance{position:relative;z-index:3;margin-bottom:10px;}
+.wallet-balance-label{
+  font-size:8.5px;font-weight:800;letter-spacing:2.5px;
+  color:#fbbf24;margin-bottom:2px;
+  text-shadow:0 0 12px rgba(251,191,36,.9);
+  text-transform:uppercase;
+}
+.wallet-balance-amt{
+  font-size:32px;font-weight:900;line-height:1.05;
+  color:#fff;display:flex;align-items:baseline;gap:2px;
+  letter-spacing:-.5px;word-break:break-all;
+  text-shadow:
+    0 0 20px rgba(251,191,36,.75),
+    0 0 40px rgba(251,191,36,.4),
+    0 2px 4px rgba(0,0,0,.6);
+}
+.wallet-balance-amt span{font-size:22px;color:#fcd34d;text-shadow:0 0 18px rgba(251,191,36,.95);}
+
+/* ---- Card holder ---- */
+.wallet-holder{position:relative;z-index:3;margin-bottom:10px;}
+.wallet-holder-name{
+  font-size:13px;font-weight:900;letter-spacing:.6px;
+  color:#fff;text-transform:uppercase;
+  text-shadow:0 1px 3px rgba(0,0,0,.7);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.wallet-holder-phone{
+  font-size:10px;font-weight:700;letter-spacing:.8px;
+  color:#fde68a;opacity:.95;
+  text-shadow:0 0 8px rgba(251,191,36,.5);
+  font-family:'SF Mono',Menlo,monospace;
+}
+
+/* ---- Round Badge (जैसे 12 MONTHS) ---- */
+.wallet-badge{
+  position:absolute;
+  top:74px;
+  right:16px;
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  z-index:4;
+  background:
+    radial-gradient(circle at 50% 30%, #1c1c26 0%, #0a0a12 100%);
+  border:2px solid #fbbf24;
+  box-shadow:
+    0 0 0 3px rgba(251,191,36,.18),
+    0 0 18px rgba(251,191,36,.65),
+    inset 0 0 14px rgba(251,191,36,.35),
+    0 6px 16px rgba(0,0,0,.7);
+  pointer-events:none;
+}
+.wallet-badge::before,
+.wallet-badge::after{
+  content:'';
+  position:absolute;
+  top:50%;width:12px;height:20px;
+  background:linear-gradient(135deg,#fbbf24,#d97706);
+  border:1px solid #fcd34d;
+  box-shadow:0 0 10px rgba(251,191,36,.7);
+}
+.wallet-badge::before{left:-8px;transform:translateY(-50%) rotate(-15deg);clip-path:polygon(0 0,100% 25%,100% 75%,0 100%);}
+.wallet-badge::after{right:-8px;transform:translateY(-50%) rotate(15deg);clip-path:polygon(0 25%,100% 0,100% 100%,0 75%);}
+.wallet-badge-crown{font-size:11px;line-height:1;filter:drop-shadow(0 0 6px rgba(251,191,36,1));margin-bottom:0;}
+.wallet-badge-num{
+  font-size:22px;font-weight:900;line-height:1;
+  color:#fcd34d;
+  text-shadow:0 0 12px rgba(251,191,36,.95),0 0 20px rgba(251,191,36,.6);
+}
+.wallet-badge-label{
+  font-size:6.5px;font-weight:900;letter-spacing:1.2px;
+  color:#fbbf24;margin-top:1px;
+  text-shadow:0 0 8px rgba(251,191,36,.8);
+}
+
+/* ---- Bottom: Member ID + Valid Till ---- */
+.wallet-bot{
+  display:flex;align-items:center;gap:14px;
+  position:relative;z-index:3;
+  padding-top:10px;margin-top:6px;
+  border-top:1px solid rgba(251,191,36,.18);
+  margin-right:88px;
+}
+.wallet-info{display:flex;align-items:center;gap:7px;min-width:0;}
+.wallet-info-icon{
+  font-size:13px;flex-shrink:0;
+  filter:drop-shadow(0 0 6px rgba(251,191,36,.6));
+}
+.wallet-info-label{
+  font-size:6.5px;font-weight:900;letter-spacing:1.2px;
+  color:#fbbf24;text-transform:uppercase;opacity:.9;
+  margin-bottom:1px;
+}
+.wallet-info-value{
+  font-size:10.5px;font-weight:900;letter-spacing:.6px;
+  color:#fff;white-space:nowrap;
+  text-shadow:0 0 6px rgba(251,191,36,.4);
+}
+.wallet-info-divider{
+  width:1px;height:24px;
+  background:linear-gradient(180deg,transparent,rgba(251,191,36,.4),transparent);
+  flex-shrink:0;
+}
+
+/* ============ STATS ============ */
 .stats{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-bottom:16px;width:100%;}
 .stat{background:var(--card-2);border-radius:18px;padding:16px 12px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border);min-width:0;}
 .stat b{display:flex;flex-direction:column;align-items:center;font-size:18px;color:var(--accent);font-weight:900;gap:4px;word-break:break-word;text-shadow:0 0 12px rgba(52,211,153,.5);}
@@ -356,6 +425,7 @@ body.theme-light .msg.ok{color:#059669;}
 .due.red{color:var(--danger);}
 .pay-action{display:flex;justify-content:flex-end;margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);}
 
+/* ============ BOTTOM NAV ============ */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:9999;display:flex;justify-content:center;padding:0 14px calc(14px + env(safe-area-inset-bottom,0px));pointer-events:none;}
 .nav-inner{display:flex;justify-content:space-around;align-items:center;gap:2px;width:100%;max-width:460px;background:rgba(22,22,31,.92);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px);border-radius:26px;padding:7px;box-shadow:0 14px 34px rgba(0,0,0,.6),0 0 30px rgba(16,185,129,.15);border:1px solid var(--border);pointer-events:auto;transition:.3s;}
 .bottom-nav button{flex:1 1 0;background:none;border:none;font-size:9.5px;font-weight:900;color:var(--muted-2);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px;border-radius:20px;transition:.25s;line-height:1;min-width:0;}
@@ -386,6 +456,7 @@ body.theme-light .msg.ok{color:#059669;}
 .mem-input-group input{flex:1 1 0;padding:13px 14px;border-radius:13px;border:1.5px solid var(--border);font-size:14px;background:var(--input-bg);color:var(--text);font-weight:700;transition:.2s;min-width:0;}
 .mem-input-group input:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 4px rgba(16,185,129,.15),0 0 20px rgba(16,185,129,.25);}
 
+/* ============ MODALS ============ */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s both;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .modal-box{background:var(--card);border-radius:26px;padding:30px 22px;max-width:380px;width:100%;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.7),0 0 40px rgba(16,185,129,.15);position:relative;overflow:hidden;animation:popIn .32s cubic-bezier(.21,.9,.35,1) both;border:1px solid var(--border);max-height:85vh;overflow-y:auto;color:var(--text);}
@@ -503,7 +574,10 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 .action-bar-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:10px;margin-top:16px;width:100%;}
 
 @media (max-width:360px){
-  .wallet-amt{font-size:32px;}
+  .wallet-balance-amt{font-size:26px;}
+  .wallet-badge{width:64px;height:64px;top:68px;right:14px;}
+  .wallet-badge-num{font-size:19px;}
+  .wallet-bot{margin-right:76px;}
   .topbar-text h1{font-size:16px;}
   .topbar-share{padding:8px 10px;font-size:11px;}
   .freq-card b{font-size:10px;}
@@ -514,6 +588,7 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 </head>
 <body class="lang-hi">
 
+<!-- ============ MODALS ============ -->
 <div id="appModal" class="modal-bg hidden">
   <div class="modal-box" style="padding:26px;">
     <p id="modalText" style="font-weight:800;margin-bottom:22px;white-space:pre-wrap;font-size:15px;line-height:1.6;"></p>
@@ -562,12 +637,21 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 </div>
 
 <div id="editModal" class="modal-bg hidden">
-  <div class="modal-box">
+  <div class="modal-box" style="max-width:420px;">
     <h2 style="color:var(--accent);font-size:17px;margin-bottom:18px;font-weight:900;"><span class="hi">कमेटी एडिट</span><span class="en">Edit Group</span></h2>
     <div class="field"><label><span class="hi">किस्त (₹)</span><span class="en">Amount</span></label><input class="no-ico" type="number" id="editAmt" oninput="editAutoCalc()"></div>
     <div class="field"><label><span class="hi">कुल किश्तें</span><span class="en">Total</span></label><input class="no-ico" type="number" id="editInst" oninput="editAutoCalc()"></div>
     <div class="field"><label><span class="hi">कुल राशि</span><span class="en">Pool</span></label><input class="no-ico" type="number" id="editPool" readonly style="background:rgba(16,185,129,.1);color:var(--accent);"></div>
     <div class="field"><label>UPI ID</label><input class="no-ico" type="text" id="editUpi"></div>
+
+    <div class="field" style="margin-top:16px;">
+      <label style="display:flex;justify-content:space-between;align-items:center;">
+        <span><span class="hi">सदस्य एडिट</span><span class="en">Edit Members</span></span>
+        <button type="button" onclick="addMemberInEdit()" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;padding:5px 10px;border-radius:8px;font-weight:900;cursor:pointer;font-size:11px;">+ <span class="hi">जोड़ें</span><span class="en">Add</span></button>
+      </label>
+      <div id="editMembersList" style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:2px;margin-top:6px;"></div>
+    </div>
+
     <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:20px;">
        <button class="btn" style="background:var(--card-3);color:var(--muted);" onclick="document.getElementById('editModal').classList.add('hidden')"><span class="hi">रद्द</span><span class="en">Cancel</span></button>
        <button class="btn btn-primary" onclick="saveEdit()"><span class="hi">सेव</span><span class="en">Save</span></button>
@@ -578,7 +662,7 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 <div id="joinModal" class="modal-bg hidden">
   <div class="modal-box">
     <h2 style="color:var(--accent);font-size:18px;margin-bottom:8px;font-weight:900;justify-content:center;">🔑 <span class="hi">कोड से जुड़ें</span><span class="en">Join with Code</span></h2>
-    <p style="font-size:12px;color:var(--muted);font-weight:700;margin-bottom:20px;"><span class="hi">संचालक से मिला 8 अंकों का कोड डालें</span><span class="en">Enter the 8-digit code from your admin</span></p>
+    <p style="font-size:12px;color:var(--muted);font-weight:700;margin-bottom:20px;"><span class="hi">संचालक से मिला 8 अंकों का कोड डालें</span><span class="en">Enter the 8-digit code from admin</span></p>
     <div class="field">
       <input class="no-ico lang-input" id="accessCode" data-hi="कोड यहाँ लिखें" data-en="Enter code here" placeholder="कोड यहाँ लिखें" style="text-transform:uppercase;letter-spacing:3px;text-align:center;font-weight:900;font-size:18px;">
     </div>
@@ -589,6 +673,7 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
   </div>
 </div>
 
+<!-- ============ TOPBAR ============ -->
 <div class="topbar">
   <div class="topbar-text">
     <div class="topbar-icon"><span style="font-size:23px;" id="topIcon">🌿</span></div>
@@ -636,11 +721,9 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 
   <!-- ============ HOME ============ -->
   <section id="home" class="hidden">
-    <div class="card premium" style="text-align:center;padding:22px;">
-      <div style="font-size:36px;margin-bottom:8px;">👋</div>
-      <h2 style="font-size:20px;justify-content:center;margin-bottom:6px;"><span class="hi">नमस्ते!</span><span class="en">Welcome!</span></h2>
-      <p style="font-size:13px;color:var(--muted);font-weight:800;" id="homeName">User</p>
-    </div>
+    <span id="homeName" style="display:none;"></span>
+
+    <div id="homeActiveWallet"></div>
 
     <div class="quick-grid">
       <div class="quick-card" onclick="tryCreate()">
@@ -870,117 +953,95 @@ let currentLang = localStorage.getItem('kk_lang') || 'hi';
 let currentDashTab = 'members';
 let currentFreq = 'weekly';
 let currentAdminTab = 'features';
+let pendingWinnerId = "";
 
 const FEATURE_DETAILS = {
   rating: { emoji:'⭐', hi:'रेटिंग सिस्टम', en:'Rating System',
     hiWhat:'यूज़र्स ऐप को 1-5 स्टार दे सकेंगे।', enWhat:'Users rate the app 1-5 stars.',
-    hiHow:'कमेटी पूरी होने पर यूज़र रेटिंग देगा। ज़्यादा रेटिंग = ज़्यादा भरोसा।',
-    enHow:'Users rate after each group. Higher ratings build trust.' },
+    hiHow:'कमेटी पूरी होने पर यूज़र रेटिंग देगा।', enHow:'Users rate after each group.' },
   feedback: { emoji:'💬', hi:'फीडबैक', en:'Feedback',
     hiWhat:'यूज़र्स सुझाव भेज सकेंगे।', enWhat:'Users send suggestions.',
-    hiHow:'सिंपल फॉर्म — "क्या अच्छा? क्या सुधारें?" — admin panel में सब feedback आएगा।',
-    enHow:'Simple form. All feedback lands in admin panel.' },
+    hiHow:'सिंपल फॉर्म — feedback admin panel में आएगा।', enHow:'Simple form. Feedback lands in admin panel.' },
   complaint: { emoji:'⚠️', hi:'शिकायत', en:'Complaint',
     hiWhat:'यूज़र्स शिकायत दर्ज कर सकेंगे।', enWhat:'Users file complaints.',
-    hiHow:'किसी ने पैसे नहीं दिए? UPI काम नहीं कर रहा? यूज़र शिकायत भेजेगा, आप action लेंगे।',
-    enHow:'Payment issues? Users file complaints, you take action.' },
+    hiHow:'पैसे नहीं मिले? UPI issue? शिकायत भेजें।', enHow:'Payment issues? File complaints.' },
   referral: { emoji:'🎁', hi:'रेफरल', en:'Referral',
     hiWhat:'दोस्तों को बुलाने पर इनाम।', enWhat:'Reward for inviting friends.',
-    hiHow:'हर यूज़र को unique कोड। जितने दोस्त लाएगा उतना रिवॉर्ड। ऐप तेज़ी से फैलेगा!',
-    enHow:'Unique code per user. More friends = more rewards!' },
+    hiHow:'हर यूज़र को unique कोड। जितने दोस्त लाएगा उतना रिवॉर्ड।', enHow:'Unique code per user.' },
   notifications: { emoji:'🔔', hi:'नोटिफिकेशन', en:'Notifications',
     hiWhat:'पेमेंट रिमाइंडर भेजें।', enWhat:'Send payment reminders.',
-    hiHow:'किश्त की तारीख पर फोन पर notification — "आज ₹500 जमा करना है"।',
-    enHow:'Push on installment date. No more forgetting.' },
+    hiHow:'किश्त की तारीख पर फोन पर notification।', enHow:'Push on installment date.' },
   coupon: { emoji:'🏷️', hi:'कूपन कोड', en:'Coupon Codes',
     hiWhat:'डिस्काउंट कूपन सिस्टम।', enWhat:'Discount coupon system.',
-    hiHow:'कूपन बनाएं "SAVE50" — ₹50 छूट। मार्केटिंग का बेहतरीन तरीका।',
-    enHow:'Create coupons like SAVE50. Great for marketing.' },
+    hiHow:'कूपन बनाएं "SAVE50" — ₹50 छूट।', enHow:'Create coupons like SAVE50.' },
   otp: { emoji:'🔐', hi:'OTP लॉगिन', en:'OTP Login',
     hiWhat:'SMS OTP से वेरिफिकेशन।', enWhat:'SMS OTP verification.',
-    hiHow:'पासवर्ड की जगह 6 अंकों का OTP। फर्जी अकाउंट नहीं बनेंगे।',
-    enHow:'6-digit OTP instead of password. No fake accounts.' },
+    hiHow:'पासवर्ड की जगह 6 अंकों का OTP।', enHow:'6-digit OTP instead of password.' },
   memberPhoto: { emoji:'📸', hi:'मेंबर फोटो', en:'Member Photo',
     hiWhat:'सदस्यों की फोटो।', enWhat:'Member photos.',
-    hiHow:'हर सदस्य अपनी फोटो अपलोड करे। पहचानना आसान, भरोसा बढ़ेगा।',
-    enHow:'Each member uploads photo. More trust.' },
+    hiHow:'हर सदस्य अपनी फोटो अपलोड करे।', enHow:'Each member uploads photo.' },
   pdfReport: { emoji:'📄', hi:'PDF रिपोर्ट', en:'PDF Report',
     hiWhat:'PDF में हिसाब डाउनलोड।', enWhat:'Download as PDF.',
-    hiHow:'Excel की तरह, पर PDF में। ऑफिशियल डॉक्युमेंट के लिए।',
-    enHow:'Like Excel but PDF. For official docs.' },
+    hiHow:'Excel की तरह, पर PDF में।', enHow:'Like Excel but PDF.' },
   analytics: { emoji:'📊', hi:'एडवांस एनालिटिक्स', en:'Advanced Analytics',
     hiWhat:'ग्राफ और स्टैट्स।', enWhat:'Charts and stats.',
-    hiHow:'किस महीने सबसे ज़्यादा कलेक्शन? कौन लेट आता है? विज़ुअल ग्राफ में।',
-    enHow:'See monthly collections, late payers — all in charts.' },
+    hiHow:'किस महीने सबसे ज़्यादा कलेक्शन? विज़ुअल ग्राफ में।', enHow:'See monthly collections in charts.' },
   whatsapp: { emoji:'💚', hi:'WhatsApp रिमाइंडर', en:'WhatsApp Reminder',
     hiWhat:'सीधे WhatsApp पर भेजें।', enWhat:'Send on WhatsApp.',
-    hiHow:'एक बटन — सारे pending members को WhatsApp रिमाइंडर।',
-    enHow:'One tap — auto WhatsApp reminder.' },
+    hiHow:'एक बटन — सारे pending members को रिमाइंडर।', enHow:'One tap — WhatsApp reminder.' },
   calendar: { emoji:'📅', hi:'कैलेंडर व्यू', en:'Calendar View',
     hiWhat:'किश्त कैलेंडर।', enWhat:'Installment calendar.',
-    hiHow:'पूरा साल का कैलेंडर — कब-कब किश्त।',
-    enHow:'Full year calendar showing all dates.' },
+    hiHow:'पूरा साल का कैलेंडर।', enHow:'Full year calendar.' },
   bankTransfer: { emoji:'🏦', hi:'बैंक ट्रांसफर', en:'Bank Transfer',
     hiWhat:'बैंक अकाउंट से पेमेंट।', enWhat:'Pay via bank.',
-    hiHow:'UPI के अलावा NEFT/IMPS। जो UPI नहीं इस्तेमाल करते उनके लिए।',
-    enHow:'Direct bank (NEFT/IMPS) for non-UPI users.' },
+    hiHow:'UPI के अलावा NEFT/IMPS।', enHow:'Direct bank for non-UPI users.' },
   multipleUpi: { emoji:'💳', hi:'मल्टीपल UPI', en:'Multiple UPI',
     hiWhat:'एक से ज़्यादा UPI ID।', enWhat:'Multiple UPI IDs.',
-    hiHow:'हर कमेटी के लिए अलग UPI, या PhonePe/GPay/Paytm सब।',
-    enHow:'Different UPI per group or multiple in one.' },
+    hiHow:'हर कमेटी के लिए अलग UPI।', enHow:'Different UPI per group.' },
   announcement: { emoji:'📢', hi:'अनाउंसमेंट', en:'Announcement',
     hiWhat:'सभी को मैसेज भेजें।', enWhat:'Broadcast message.',
-    hiHow:'एक मैसेज — सभी यूज़र्स के होम पर दिखेगा। Instant!',
-    enHow:'One message — shows on all home pages.' },
+    hiHow:'एक मैसेज — सभी यूज़र्स के होम पर।', enHow:'One message — all home pages.' },
   autoReminder: { emoji:'⏰', hi:'ऑटो रिमाइंडर', en:'Auto Reminder',
     hiWhat:'अपने आप रिमाइंडर।', enWhat:'Automatic reminders.',
-    hiHow:'किश्त की तारीख पर खुद notification। Zero manual work।',
-    enHow:'Auto-notify on installment date. Zero manual work.' },
+    hiHow:'किश्त की तारीख पर खुद notification।', enHow:'Auto-notify on date.' },
   darkLightToggle: { emoji:'🌙', hi:'डार्क/लाइट थीम', en:'Dark/Light Theme',
     hiWhat:'थीम बदलने का ऑप्शन।', enWhat:'Theme switcher.',
-    hiHow:'यूज़र अपनी पसंद से डार्क या लाइट चुन सके।',
-    enHow:'Users pick dark or light theme.' },
+    hiHow:'यूज़र अपनी पसंद चुन सके।', enHow:'Users pick theme.' },
   memberChat: { emoji:'💭', hi:'मेंबर चैट', en:'Member Chat',
     hiWhat:'आपस में बात करें।', enWhat:'Chat with members.',
-    hiHow:'एक कमेटी के सदस्य आपस में चैट करेंगे।',
-    enHow:'Group members chat together.' },
+    hiHow:'कमेटी के सदस्य चैट करेंगे।', enHow:'Group members chat.' },
   goalTarget: { emoji:'🎯', hi:'गोल/टारगेट', en:'Goal/Target',
     hiWhat:'कमेटी का लक्ष्य सेट करें।', enWhat:'Set group goals.',
-    hiHow:'"3 महीने में ₹5 लाख" — टारगेट सेट करें, ऐप प्रोग्रेस बताएगा।',
-    enHow:'Set targets. App tracks progress.' }
+    hiHow:'"3 महीने में ₹5 लाख" — टारगेट सेट करें।', enHow:'Set targets.' }
 };
 
 const USER_HELP = {
   howToJoin: { emoji:'🔑', hi:'कमेटी में कैसे जुड़ें?', en:'How to Join?',
-    hiAns:'1. होम पेज पर "कोड से जुड़ें" दबाएं<br>2. संचालक से मिला 8 अंकों का कोड डालें<br>3. "जुड़ें" दबाएं',
-    enAns:'1. Tap "Join Code" on home<br>2. Enter 8-digit code<br>3. Tap "Join"' },
+    hiAns:'1. होम पर "कोड से जुड़ें" दबाएं<br>2. 8 अंकों का कोड डालें<br>3. "जुड़ें" दबाएं',
+    enAns:'1. Tap "Join Code"<br>2. Enter 8-digit code<br>3. Tap "Join"' },
   howToPay: { emoji:'💳', hi:'ऑनलाइन पेमेंट?', en:'How to Pay?',
     hiAns:'1. कमेटी खोलें<br>2. UPI ID के आगे 📋 दबाएं<br>3. PhonePe/GPay में पेस्ट करें<br>4. पेमेंट करें',
-    enAns:'1. Open group<br>2. Tap 📋 next to UPI<br>3. Paste in PhonePe/GPay<br>4. Pay' },
+    enAns:'1. Open group<br>2. Tap 📋 next to UPI<br>3. Paste in app<br>4. Pay' },
   howToShare: { emoji:'📱', hi:'कोड कैसे शेयर करें?', en:'Share Code?',
-    hiAns:'1. कमेटी डैशबोर्ड खोलें<br>2. "📋 कोड कॉपी" दबाएं<br>3. WhatsApp पर भेजें',
+    hiAns:'1. डैशबोर्ड खोलें<br>2. "📋 कोड कॉपी" दबाएं<br>3. WhatsApp पर भेजें',
     enAns:'1. Open dashboard<br>2. Tap "📋 Copy Code"<br>3. Send on WhatsApp' },
   howToSee: { emoji:'📊', hi:'हिसाब कैसे देखें?', en:'See Accounts?',
     hiAns:'डैशबोर्ड में 4 tabs:<br>👥 सदस्य<br>💰 भुगतान<br>⚙️ सेटिंग<br>ℹ️ जानकारी',
-    enAns:'4 tabs in dashboard:<br>👥 Members<br>💰 Payments<br>⚙️ Settings<br>ℹ️ Info' },
+    enAns:'4 tabs:<br>👥 Members<br>💰 Payments<br>⚙️ Settings<br>ℹ️ Info' },
   howWinner: { emoji:'🏆', hi:'विजेता कैसे?', en:'Winner?',
-    hiAns:'संचालक 🏆 बटन दबाकर विजेता बनाते हैं। विजेता को पूरा पूल मिलता है।',
-    enAns:'Admin taps 🏆 to mark winner. They get the full pool.' },
+    hiAns:'संचालक 🏆 बटन दबाकर विजेता बनाते हैं।', enAns:'Admin taps 🏆 to mark winner.' },
   howExcel: { emoji:'📋', hi:'Excel डाउनलोड?', en:'Download Excel?',
-    hiAns:'डैशबोर्ड → जानकारी tab → "📊 Excel" बटन।',
-    enAns:'Dashboard → Info tab → "📊 Excel" button.' },
+    hiAns:'डैशबोर्ड → जानकारी tab → "📊 Excel" बटन।', enAns:'Dashboard → Info → "📊 Excel".' },
   contactAdmin: { emoji:'⚠️', hi:'संचालक से संपर्क?', en:'Contact Admin?',
-    hiAns:'कमेटी डैशबोर्ड में ऊपर संचालक का नाम और मोबाइल होता है।',
-    enAns:'Group dashboard shows owner name and phone.' },
+    hiAns:'डैशबोर्ड में संचालक का नाम और मोबाइल होता है।', enAns:'Dashboard shows owner info.' },
   whyCantPay: { emoji:'❓', hi:'Pay बटन क्यों नहीं?', en:'Why no Pay button?',
-    hiAns:'Pay बटन तब दिखता है जब:<br>✅ नंबर रजिस्टर्ड हो<br>✅ किश्त बाकी हो<br>✅ ऑनलाइन पेमेंट ON हो<br>✅ UPI ID set हो',
-    enAns:'Pay shows only if:<br>✅ Number registered<br>✅ Payment pending<br>✅ Online pay ON<br>✅ UPI set' },
+    hiAns:'जब:<br>✅ नंबर रजिस्टर्ड हो<br>✅ किश्त बाकी हो<br>✅ ऑनलाइन ON हो<br>✅ UPI set हो',
+    enAns:'Only if:<br>✅ Registered<br>✅ Pending<br>✅ Online ON<br>✅ UPI set' },
   themeChange: { emoji:'🎨', hi:'थीम कैसे बदलें?', en:'Change Theme?',
-    hiAns:'ऊपर दाईं तरफ 🤍 या 🖤 बटन दबाएं। डार्क और लाइट में switch हो जाएगा।',
-    enAns:'Top right — tap 🤍 or 🖤 to switch Dark/Light.' },
+    hiAns:'ऊपर दाईं तरफ 🤍 या 🖤 बटन दबाएं।', enAns:'Top right — tap 🤍 or 🖤.' },
   newGroup: { emoji:'➕', hi:'नई कमेटी कैसे?', en:'Create New Group?',
-    hiAns:'1. "+ नई" बटन<br>2. नाम और किस्त भरें<br>3. फ्रीक्वेंसी चुनें<br>4. सदस्य जोड़ें<br>5. संचालक की जानकारी<br>6. सेव करें',
-    enAns:'1. Tap "+ New"<br>2. Enter name & amount<br>3. Pick frequency<br>4. Add members<br>5. Owner info<br>6. Save' }
+    hiAns:'1. "+ नई" बटन<br>2. नाम और किस्त भरें<br>3. फ्रीक्वेंसी चुनें<br>4. सदस्य जोड़ें<br>5. संचालक जानकारी<br>6. सेव करें',
+    enAns:'1. Tap "+ New"<br>2. Enter details<br>3. Pick frequency<br>4. Add members<br>5. Owner info<br>6. Save' }
 };
 
 const DEFAULT_GLOBAL = {
@@ -1047,6 +1108,7 @@ function applyLang(){
   });
   if(!document.getElementById('dashboard').classList.contains('hidden')) loadDash();
   if(!document.getElementById('mylist').classList.contains('hidden')) renderMyList();
+  if(!document.getElementById('home').classList.contains('hidden')) renderHomeWallet();
   if(!document.getElementById('create').classList.contains('hidden')) { renderFreqOptions(); autoCalc(); }
   if(!document.getElementById('admin').classList.contains('hidden')) renderAdminPanel();
   const isReg = document.getElementById('tabReg').classList.contains('active');
@@ -1089,6 +1151,7 @@ async function shareApp(){
   catch(e){ window.location.href='https://wa.me/?text='+encodeURIComponent(text); }
 }
 
+/* ============ AI GUIDE ============ */
 function openAiModal(){
   const isAdmin = isAdminUser();
   const chat = document.getElementById('aiChat');
@@ -1147,17 +1210,12 @@ function askAdminFeature(key){
     const statusColor = isOn ? '#34d399' : '#fbbf24';
     const what = currentLang==='hi' ? f.hiWhat : f.enWhat;
     const how = currentLang==='hi' ? f.hiHow : f.enHow;
-    const tip = currentLang==='hi'
-      ? 'Admin Panel → Features में टॉगल करें।'
-      : 'Toggle in Admin Panel → Features.';
-    const whatLbl = currentLang==='hi'?'क्या है?':'What?';
-    const howLbl = currentLang==='hi'?'कैसे?':'How?';
-    const tipLbl = currentLang==='hi'?'सलाह':'Tip';
+    const tip = currentLang==='hi' ? 'Admin Panel → Features में टॉगल करें।' : 'Toggle in Admin → Features.';
     const ans = `
       <div style="margin-bottom:8px;"><b>${f.emoji} ${currentLang==='hi'?f.hi:f.en}</b> — <span style="color:${statusColor};font-weight:900;">${status}</span></div>
-      <div style="margin-bottom:10px;"><b style="color:#34d399;">${whatLbl}</b><br>${what}</div>
-      <div style="margin-bottom:10px;"><b style="color:#34d399;">${howLbl}</b><br>${how}</div>
-      <div style="background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(251,191,36,.05));border-left:3px solid var(--gold);padding:10px 14px;border-radius:10px;font-size:12px;font-weight:700;">💡 <b>${tipLbl}:</b> ${tip}</div>
+      <div style="margin-bottom:10px;"><b style="color:#34d399;">${currentLang==='hi'?'क्या है?':'What?'}</b><br>${what}</div>
+      <div style="margin-bottom:10px;"><b style="color:#34d399;">${currentLang==='hi'?'कैसे?':'How?'}</b><br>${how}</div>
+      <div style="background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(251,191,36,.05));border-left:3px solid var(--gold);padding:10px 14px;border-radius:10px;font-size:12px;font-weight:700;">💡 <b>${currentLang==='hi'?'सलाह':'Tip'}:</b> ${tip}</div>
     `;
     chat.innerHTML += `<div class="msg-bubble msg-ai">${ans}</div>`;
     chat.scrollTop = chat.scrollHeight;
@@ -1179,6 +1237,7 @@ function askUserHelp(key){
   }, 450);
 }
 
+/* ============ AUTH ============ */
 function switchAuth(mode){
   const isReg = mode==='register';
   document.getElementById('tabReg').classList.toggle('active',isReg);
@@ -1225,6 +1284,7 @@ async function doForgot(){
   }catch(e){ appAlert("Error: "+e.message); }
 }
 
+/* ============ ENTER APP ============ */
 function enterApp(){
   const s = load(KEYS.session,null);
   if(!s) return;
@@ -1233,7 +1293,6 @@ function enterApp(){
   document.getElementById('profName').textContent = s.name;
   document.getElementById('profPhone').textContent = "+91 "+s.phone;
   document.getElementById('profCount').textContent = load(KEYS.joined,[]).length;
-  document.getElementById('homeName').textContent = s.name;
   const badge = document.getElementById('adminBadge');
   const isAdmin = s.phone === ADMIN_PHONE;
   if(isAdmin){
@@ -1256,7 +1315,6 @@ function enterApp(){
 }
 function appLogout(){ localStorage.removeItem(KEYS.session); localStorage.removeItem('kk_last_tab'); location.reload(); }
 
-/* ✅ UPDATED — अब popup खोलता है */
 function focusJoin(){
   document.getElementById('accessCode').value = '';
   document.getElementById('joinModal').classList.remove('hidden');
@@ -1281,6 +1339,7 @@ function show(id){
   localStorage.setItem('kk_last_tab', id);
   if(id==='dashboard') loadDash();
   if(id==='mylist') renderMyList();
+  if(id==='home') renderHomeWallet();
   window.scrollTo(0,0);
 }
 function tryCreate(){
@@ -1325,10 +1384,144 @@ function renderNoticeOnHome(){
         <p style="font-size:12.5px;color:#d97706;font-weight:700;line-height:1.5;margin:0;word-wrap:break-word;">${GLOBAL.notice}</p>
       </div>
     </div>`;
-    home.insertBefore(div, home.children[1]);
+    const walletSlot = document.getElementById('homeActiveWallet');
+    if(walletSlot) home.insertBefore(div, walletSlot);
+    else home.insertBefore(div, home.firstChild);
   }
 }
 
+/* ============================================================
+   ⭐ HOME WALLET CARD — Black + Gold Premium Design
+   ============================================================ */
+async function renderHomeWallet(){
+  const box = document.getElementById('homeActiveWallet');
+  if(!box) return;
+  box.innerHTML = '';
+
+  const codes = load(KEYS.joined, []);
+  if(!codes.length) return;
+
+  const currentUser = load(KEYS.session, {});
+  let activeBC = null;
+  let activeCode = null;
+
+  const lastCode = load(KEYS.current, null);
+  const orderedCodes = lastCode && codes.includes(lastCode)
+    ? [lastCode, ...codes.filter(c => c !== lastCode)]
+    : codes;
+
+  for(const c of orderedCodes){
+    try{
+      const res = await fetch(`${API_URL}/api/bcs?code=${c}`);
+      if(!res.ok) continue;
+      const bc = (await res.json()).data;
+      if(!bc || bc.isDeleted) continue;
+      const isOwner = (String(bc.ownerPhone) === String(currentUser.phone)) || (currentUser.phone === ADMIN_PHONE);
+      const isMember = bc.members.some(m => m.phone === currentUser.phone);
+      if(!isOwner && !isMember) continue;
+      activeBC = bc;
+      activeCode = c;
+      break;
+    }catch(e){}
+  }
+
+  if(!activeBC){ box.innerHTML = ''; return; }
+
+  const bc = activeBC;
+  if(bc.walletBalance === undefined) bc.walletBalance = 0;
+  if(bc.currentRound === undefined) bc.currentRound = 1;
+  const totalInstalls = Number(bc.totalInst) || bc.members.length;
+  const freq = bc.freqVal || 'weekly';
+  const startD = new Date(bc.startDate);
+  const endD = new Date(startD);
+  const totalDays = freq === 'weekly' ? totalInstalls * 7
+    : freq === 'biweekly' ? totalInstalls * 14
+    : totalInstalls * 30;
+  endD.setDate(endD.getDate() + totalDays);
+  const formatD = (d) => d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+
+  const holderName = bc.ownerName || currentUser.name || 'Member';
+  const holderPhone = bc.ownerPhone || currentUser.phone || '';
+  const memberId = 'ZF' + (bc.code || '').slice(0, 6);
+  const badgeLabel = freq === 'weekly' ? 'WEEKS' : freq === 'biweekly' ? '2WEEKS' : 'MONTHS';
+  const validTill = formatD(endD);
+  const totalRounds = totalInstalls;
+  const paidRounds = bc.currentRound > 1 ? bc.currentRound - 1 : 0;
+  const badgeNum = totalRounds;
+
+  box.innerHTML = `
+    <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px;">
+      <div style="width:40px;height:40px;background:linear-gradient(145deg,rgba(251,191,36,.25),rgba(251,191,36,.1));border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:19px;border:1.5px solid rgba(251,191,36,.45);flex-shrink:0;box-shadow:0 0 18px rgba(251,191,36,.35);">💼</div>
+      <div style="min-width:0;flex:1;">
+        <h2 style="font-size:16px;font-weight:900;margin-bottom:2px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${bc.name}</h2>
+        <p style="font-size:10.5px;font-weight:800;color:var(--accent);letter-spacing:.5px;">Code: ${bc.code}</p>
+      </div>
+      <button onclick="openActiveFromHome('${activeCode}')" style="background:linear-gradient(135deg,#d97706,#fbbf24);color:#451a03;border:none;padding:8px 14px;border-radius:11px;font-weight:900;font-size:11.5px;cursor:pointer;flex-shrink:0;box-shadow:0 6px 16px rgba(251,191,36,.45);">${t('खोलें','Open')} ›</button>
+    </div>
+
+    <div class="wallet-card" style="cursor:pointer;margin-bottom:16px;" onclick="openActiveFromHome('${activeCode}')">
+      <div class="wallet-top">
+        <div class="wallet-brand">
+          <div class="wallet-brand-title"><span class="crown">👑</span> Premium Member</div>
+          <div class="wallet-brand-sub">GROUP KHATA</div>
+        </div>
+        <div class="wallet-brand-logo">
+          <span class="logo-em">🌿</span>
+          <div class="logo-txt">
+            <b>Khata</b>
+            <span>PREMIUM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wallet-chip-row">
+        <div class="w-chip"></div>
+        <div class="w-wifi">📶</div>
+      </div>
+
+      <div class="wallet-balance">
+        <div class="wallet-balance-label">${t('कमेटी वॉलेट','WALLET BALANCE')}</div>
+        <div class="wallet-balance-amt"><span>₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
+      </div>
+
+      <div class="wallet-holder">
+        <div class="wallet-holder-name">${holderName}</div>
+        <div class="wallet-holder-phone">+91${holderPhone}</div>
+      </div>
+
+      <div class="wallet-badge">
+        <div class="wallet-badge-crown">👑</div>
+        <div class="wallet-badge-num">${badgeNum}</div>
+        <div class="wallet-badge-label">${badgeLabel}</div>
+      </div>
+
+      <div class="wallet-bot">
+        <div class="wallet-info">
+          <span class="wallet-info-icon">👤</span>
+          <div>
+            <div class="wallet-info-label">Member ID</div>
+            <div class="wallet-info-value">${memberId}</div>
+          </div>
+        </div>
+        <div class="wallet-info-divider"></div>
+        <div class="wallet-info">
+          <span class="wallet-info-icon">📅</span>
+          <div>
+            <div class="wallet-info-label">Valid Till</div>
+            <div class="wallet-info-value">${validTill}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function openActiveFromHome(code){
+  save(KEYS.current, code);
+  show('dashboard');
+}
+
+/* ============ CREATE ============ */
 function createTab(tab, btn){
   document.querySelectorAll('.create-panel').forEach(p=>p.classList.add('hidden'));
   document.getElementById('ct-'+tab).classList.remove('hidden');
@@ -1405,6 +1598,7 @@ async function createBC(){
   }
   if(!name||!amount||!totalInst||!totalPool||members.length===0) return appAlert(t('सभी जानकारी भरें!','Fill all details!'));
   if(!ownerName||ownerPhone.length!==10) return appAlert(t('संचालक का नाम और सही नंबर भरें!','Valid Owner Name & Phone!'));
+  if(hasError) return appAlert(t('सभी सदस्यों की जानकारी सही भरें!','Fill all members correctly!'));
 
   const user = load(KEYS.session,{});
   const joined = load(KEYS.joined,[]);
@@ -1447,7 +1641,7 @@ async function createBC(){
   document.getElementById('createBtn').innerHTML = `<span class="hi">✅ कमेटी बनाएं</span><span class="en">✅ Create</span>`;
 }
 
-/* ✅ UPDATED — modal बंद होगा join के बाद */
+/* ============ JOIN ============ */
 async function join(){
   const code = document.getElementById('accessCode').value.trim().toUpperCase();
   const currentUser = load(KEYS.session,{});
@@ -1469,6 +1663,7 @@ async function join(){
   }catch(e){ appAlert(t("गलत कोड! दोबारा जांचें।","Invalid code! Check again.")); }
 }
 
+/* ============ MY LIST ============ */
 async function renderMyList(){
   const codes = load(KEYS.joined,[]); let html = '';
   document.getElementById('bcList').innerHTML = `<p class="empty-state">${t('लोड हो रहा है...','Loading...')}</p>`;
@@ -1493,6 +1688,7 @@ async function renderMyList(){
   document.getElementById('bcList').innerHTML = html || `<div class="empty-state"><span class="emo">📋</span><p>${t('अभी कोई कमेटी नहीं','No groups yet')}</p></div>`;
 }
 
+/* ============ DASHBOARD ============ */
 function dashTab(tab, btn){
   currentDashTab = tab;
   document.querySelectorAll('.dash-panel').forEach(p=>p.classList.add('hidden'));
@@ -1538,34 +1734,83 @@ async function loadDash(){
     let totalDays = freq==='weekly'?inst*7:freq==='biweekly'?inst*14:inst*30;
     endD.setDate(endD.getDate()+totalDays);
     let formatD = (d)=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-    let dateStr = `📅 ${formatD(startD)} → ${formatD(endD)}`;
     let freqLabel = freq==='weekly'?t('1 हफ्ता','1 Week'):freq==='biweekly'?t('2 हफ्ते','2 Weeks'):t('1 महीना','1 Month');
     const totalMembers = bc.members.length;
     let totalInstalls = Number(bc.totalInst) || totalMembers;
+    const holderName = bc.ownerName || currentUser.name || 'Member';
+    const holderPhone = bc.ownerPhone || currentUser.phone || '';
+    const memberId = 'ZF' + (bc.code || '').slice(0, 6);
+    const badgeLabel = freq === 'weekly' ? 'WEEKS' : freq === 'biweekly' ? '2WEEKS' : 'MONTHS';
+
     document.getElementById('walletBlock').innerHTML = `
       <div style="display:flex;align-items:center;gap:11px;margin-bottom:15px;">
-         <div style="width:42px;height:42px;background:linear-gradient(145deg,rgba(16,185,129,.25),rgba(16,185,129,.1));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;border:1.5px solid rgba(52,211,153,.4);flex-shrink:0;box-shadow:0 0 18px rgba(16,185,129,.35);">👥</div>
+         <div style="width:42px;height:42px;background:linear-gradient(145deg,rgba(251,191,36,.25),rgba(251,191,36,.1));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;border:1.5px solid rgba(251,191,36,.45);flex-shrink:0;box-shadow:0 0 18px rgba(251,191,36,.35);">💼</div>
          <div style="min-width:0;flex:1;">
             <h2 style="font-size:17px;font-weight:900;margin-bottom:3px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${bc.name}</h2>
             <p style="font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.5px;">Code: ${bc.code} • ${freqLabel}</p>
          </div>
       </div>
+
       <div class="wallet-card">
-         <div class="wallet-top"><div class="w-chip"></div><div class="w-wifi">🛜</div></div>
-         <div class="wallet-title">${t('कमेटी वॉलेट','WALLET')}</div>
-         <div class="wallet-amt"><span>₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
-         <div class="wallet-num">Available Balance</div>
-         <div class="wallet-bot"><div>${dateStr}</div></div>
+        <div class="wallet-top">
+          <div class="wallet-brand">
+            <div class="wallet-brand-title"><span class="crown">👑</span> Premium Member</div>
+            <div class="wallet-brand-sub">GROUP KHATA</div>
+          </div>
+          <div class="wallet-brand-logo">
+            <span class="logo-em">🌿</span>
+            <div class="logo-txt">
+              <b>Khata</b>
+              <span>PREMIUM</span>
+            </div>
+          </div>
+        </div>
+        <div class="wallet-chip-row">
+          <div class="w-chip"></div>
+          <div class="w-wifi">📶</div>
+        </div>
+        <div class="wallet-balance">
+          <div class="wallet-balance-label">${t('कमेटी वॉलेट','WALLET BALANCE')}</div>
+          <div class="wallet-balance-amt"><span>₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>
+        </div>
+        <div class="wallet-holder">
+          <div class="wallet-holder-name">${holderName}</div>
+          <div class="wallet-holder-phone">+91${holderPhone}</div>
+        </div>
+        <div class="wallet-badge">
+          <div class="wallet-badge-crown">👑</div>
+          <div class="wallet-badge-num">${totalInstalls}</div>
+          <div class="wallet-badge-label">${badgeLabel}</div>
+        </div>
+        <div class="wallet-bot">
+          <div class="wallet-info">
+            <span class="wallet-info-icon">👤</span>
+            <div>
+              <div class="wallet-info-label">Member ID</div>
+              <div class="wallet-info-value">${memberId}</div>
+            </div>
+          </div>
+          <div class="wallet-info-divider"></div>
+          <div class="wallet-info">
+            <span class="wallet-info-icon">📅</span>
+            <div>
+              <div class="wallet-info-label">Valid Till</div>
+              <div class="wallet-info-value">${formatD(endD)}</div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="stats">
         <div class="stat"><b>₹${bc.amount}</b><span>${t('किस्त','Inst.')}</span></div>
         <div class="stat"><b>${bc.currentRound}/${totalInstalls}</b><span>${t('किश्त #','Round')}</span></div>
         <div class="stat stat-pool"><b>₹${Number(bc.totalPool||(bc.amount*totalMembers)).toLocaleString('en-IN')}</b><span>${t('कुल पूल','Pool')}</span></div>
       </div>
-      <div style="background:rgba(16,185,129,.1);padding:13px;border-radius:16px;margin-bottom:16px;text-align:center;border:1px solid rgba(16,185,129,.3);">
+
+      <div style="background:rgba(251,191,36,.08);padding:13px;border-radius:16px;margin-bottom:16px;text-align:center;border:1px solid rgba(251,191,36,.3);">
          <div style="font-size:13.5px;font-weight:900;color:var(--text);margin-bottom:6px;">Code: <b style="color:var(--gold);letter-spacing:2px;text-shadow:0 0 12px rgba(251,191,36,.5);">${bc.code}</b></div>
          <div style="color:var(--muted);font-size:11.5px;font-weight:700;margin-bottom:8px;">${t('संचालक','Owner')}: ${bc.ownerName}</div>
-         <button onclick="copyToClipboard('${bc.code}','${t('✅ कोड कॉपी!','✅ Code copied!')}')" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-weight:900;font-size:11.5px;cursor:pointer;box-shadow:0 6px 16px rgba(16,185,129,.35);">📋 ${t('कोड कॉपी','Copy Code')}</button>
+         <button onclick="copyToClipboard('${bc.code}','${t('✅ कोड कॉपी!','✅ Code copied!')}')" style="background:linear-gradient(135deg,#d97706,#fbbf24);color:#451a03;border:none;padding:8px 16px;border-radius:10px;font-weight:900;font-size:11.5px;cursor:pointer;box-shadow:0 6px 16px rgba(251,191,36,.4);">📋 ${t('कोड कॉपी','Copy Code')}</button>
       </div>
     `;
     document.getElementById('members').innerHTML = bc.members.map((m,i)=>{
@@ -1631,6 +1876,7 @@ async function loadDash(){
         ${tracker}${payBtn}${payOnline}
       </div>`;
     }).join('');
+
     let totalCollected = bc.members.reduce((s,m)=>s+(m.paidRounds*bc.amount),0);
     let totalExpected = bc.currentRound*bc.amount*totalMembers;
     let totalPending = Math.max(0, totalExpected-totalCollected);
@@ -1705,13 +1951,59 @@ async function toggleSetting(key, val){
   currentBCData.settings[key] = val;
   await saveBCState();
 }
+
+/* ============ EDIT MODAL (with members) ============ */
 function openEditModal(){
   if(!currentBCData) return;
   document.getElementById('editAmt').value = currentBCData.amount;
   document.getElementById('editInst').value = currentBCData.totalInst||currentBCData.members.length;
   document.getElementById('editPool').value = currentBCData.totalPool||(currentBCData.amount*currentBCData.members.length);
   document.getElementById('editUpi').value = currentBCData.upiId||'';
+  renderEditMembers();
   document.getElementById('editModal').classList.remove('hidden');
+}
+function renderEditMembers(){
+  const list = document.getElementById('editMembersList');
+  if(!currentBCData || !currentBCData.members.length){
+    list.innerHTML = '<p style="text-align:center;color:var(--muted);font-size:12px;padding:12px;font-weight:700;">कोई सदस्य नहीं</p>';
+    return;
+  }
+  list.innerHTML = currentBCData.members.map((m,i)=>`
+    <div style="display:flex;gap:6px;align-items:center;background:var(--card-2);padding:8px;border-radius:12px;border:1px solid var(--border);">
+      <span style="font-size:12px;font-weight:900;color:var(--muted);min-width:20px;text-align:center;">${i+1}</span>
+      <input class="no-ico" style="padding:8px;font-size:12.5px;flex:1;min-width:0;" value="${m.name||''}" onchange="editMemberField(${i},'name',this.value)" placeholder="नाम">
+      <input class="no-ico" style="padding:8px;font-size:12px;width:92px;flex-shrink:0;" value="${m.phone||''}" maxlength="10" onchange="editMemberField(${i},'phone',this.value)" placeholder="फ़ोन">
+      <button type="button" onclick="removeMemberFromEdit(${i})" style="background:linear-gradient(135deg,#e11d48,#be123c);color:white;border:none;padding:8px 10px;border-radius:10px;font-weight:900;cursor:pointer;font-size:12px;flex-shrink:0;">✕</button>
+    </div>
+  `).join('');
+}
+function editMemberField(idx, field, val){
+  if(!currentBCData || !currentBCData.members[idx]) return;
+  val = (val||'').trim();
+  if(field === 'phone' && val !== '' && val.length !== 10){
+    appAlert('फ़ोन नंबर 10 अंकों का होना चाहिए');
+    renderEditMembers();
+    return;
+  }
+  currentBCData.members[idx][field] = val;
+}
+function removeMemberFromEdit(idx){
+  if(!currentBCData || !currentBCData.members[idx]) return;
+  appConfirm('इस सदस्य को हटाएं?').then(ans=>{
+    if(ans){
+      currentBCData.members.splice(idx,1);
+      renderEditMembers();
+    }
+  });
+}
+function addMemberInEdit(){
+  if(!currentBCData) return;
+  currentBCData.members.push({name:'', phone:'', paidRounds:0, hasWon:false});
+  renderEditMembers();
+  setTimeout(()=>{
+    const list = document.getElementById('editMembersList');
+    if(list) list.scrollTop = list.scrollHeight;
+  }, 50);
 }
 function editAutoCalc(){
   let a = Number(document.getElementById('editAmt').value)||0;
@@ -1724,11 +2016,22 @@ async function saveEdit(){
   let p = Number(document.getElementById('editPool').value);
   let u = document.getElementById('editUpi').value.trim();
   if(a<=0||i<=0||p<=0) return appAlert(t('सही जानकारी भरें','Enter valid info'));
-  currentBCData.amount=a; currentBCData.totalInst=i; currentBCData.totalPool=p; currentBCData.upiId=u;
+
+  for(let k=0; k<currentBCData.members.length; k++){
+    const m = currentBCData.members[k];
+    if(!m.name || !m.name.trim()) return appAlert(`सदस्य #${k+1} का नाम खाली है`);
+    if(m.phone && m.phone.length !== 10) return appAlert(`सदस्य #${k+1} का फ़ोन 10 अंकों का नहीं है`);
+  }
+
+  currentBCData.amount = a;
+  currentBCData.totalInst = i;
+  currentBCData.totalPool = p;
+  currentBCData.upiId = u;
   document.getElementById('editModal').classList.add('hidden');
   document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('सेव हो रहा है...','Saving...')}</div>`;
   await saveBCState();
 }
+
 async function editMemberName(id, newName){
   if(!newName.trim()) return;
   let m = currentBCData.members.find(x=>(x.phone||x.name)===id);
@@ -1752,7 +2055,6 @@ async function startNextRound(){
   document.getElementById('walletBlock').innerHTML = `<div class='empty-state'>${t('अपडेट हो रहा है...','Updating...')}</div>`;
   await saveBCState();
 }
-let pendingWinnerId = "";
 function declareWinner(id){
   pendingWinnerId = id;
   let m = currentBCData.members.find(x=>(x.phone||x.name)===id);
@@ -1791,6 +2093,7 @@ function downloadExcel(){
   appAlert(t("✅ Excel डाउनलोड हो गया!","✅ Excel downloaded!"));
 }
 
+/* ============ ADMIN ============ */
 function adminTab(tab, btn){
   currentAdminTab = tab;
   document.querySelectorAll('.admin-panel').forEach(p=>p.classList.add('hidden'));
@@ -1993,6 +2296,7 @@ function resetGlobalSettings(){
   });
 }
 
+/* ============ INIT ============ */
 window.onload = ()=>{
   applyLang();
   const s = load(KEYS.session,null);
@@ -2002,4 +2306,4 @@ window.onload = ()=>{
 };
 </script>
 </body>
-  </html>
+</html>
