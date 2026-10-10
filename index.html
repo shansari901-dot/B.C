@@ -11,7 +11,7 @@
   --gold:#fbbf24;--gold-dark:#d97706;
   --bg:#0a0a0f;--card:#16161f;--card-2:#1c1c26;--card-3:#22222e;
   --border:#2a2a38;--border-light:#333344;
-  --text:#ffffff;--text-dim:#b8b8cc;--muted:#8b8ba0;--muted-2:#6b6b80;
+  --text:#ffffff;--muted:#8b8ba0;--muted-2:#6b6b80;
   --input-bg:#1a1a24;--danger:#f43f5e;
   --radius:20px;--shadow:0 8px 24px rgba(0,0,0,.5);
   --name-font:14px;
@@ -20,7 +20,7 @@
 body.theme-light{
   --bg:#f1f5f9;--card:#ffffff;--card-2:#ffffff;--card-3:#f1f5f9;
   --border:#e2e8f0;--border-light:#cbd5e1;
-  --text:#000000;--text-dim:#1e293b;--muted:#475569;--muted-2:#64748b;
+  --text:#000000;--muted:#475569;--muted-2:#64748b;
   --input-bg:#f8fafc;--danger:#e11d48;
   --shadow:0 8px 24px rgba(2,44,34,.08);
 }
@@ -29,7 +29,6 @@ body.font-name-sm { --name-font:12.5px; }
 body.font-name-md { --name-font:14px; }
 body.font-name-lg { --name-font:16px; }
 body.font-name-xl { --name-font:18px; }
-
 body.scale-sm { font-size:13px; }
 body.scale-md { font-size:14.5px; }
 body.scale-lg { font-size:16px; }
@@ -50,12 +49,12 @@ body.theme-light .topbar-text h1{color:#000;}
 body.theme-light .topbar-share{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.3);color:#000;}
 body.theme-light .stat{background:#fff;border-color:#e2e8f0;}
 body.theme-light .member{background:#fff;border-color:#e2e8f0;}
-body.theme-light .member b, body.theme-light .member input[type=text]{color:#000 !important;}
+body.theme-light .mem-line{background:#fff;border-color:#e2e8f0;}
+body.theme-light .mem-line .ml-name{color:#000;}
+body.theme-light .mem-line .ml-info{color:#475569;}
 body.theme-light .menu-tile{background:#fff;border-color:#e2e8f0;}
 body.theme-light .menu-tile .mt-label{color:#000;}
 body.theme-light .menu-tile .mt-sub{color:#64748b;}
-body.theme-light .bottom-nav .nav-inner{background:rgba(255,255,255,.98);border-color:#e2e8f0;}
-body.theme-light .bottom-nav button{color:#64748b;}
 body.theme-light .calc-box{background:linear-gradient(160deg,#ecfdf5,#f0fdf4);border-color:#a7f3d0;}
 body.theme-light .calc-row{color:#065f46;}
 body.theme-light .calc-total{color:#059669;border-color:#6ee7b7;}
@@ -71,19 +70,14 @@ body.theme-light .mem-row{background:#fff;border-color:#e2e8f0;}
 body.theme-light .mem-input-group input{background:#f8fafc;color:#000;border-color:#e2e8f0;}
 body.theme-light .empty-state{color:#64748b;}
 body.theme-light .app-bg{background-color:#eef2f6;background-image:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(16,185,129,.12),transparent 60%),radial-gradient(circle at 100% 0%,rgba(16,185,129,.08),transparent 50%);}
-body.theme-light .freq-card{background:#fff;border-color:#e2e8f0;}
-body.theme-light .freq-card b{color:#000;}
-body.theme-light .freq-card.active{background:linear-gradient(160deg,#ecfdf5,#d1fae5);border-color:#10b981;}
-body.theme-light .topbar-icon{background:linear-gradient(145deg,#ecfdf5,#d1fae5);box-shadow:0 8px 20px rgba(5,150,105,.15),inset 0 0 0 1px rgba(16,185,129,.4);}
+body.theme-light .bc-item{background:#fff;border-color:#e2e8f0;}
+body.theme-light .bc-info b{color:#000;}
+body.theme-light .topbar-icon{background:linear-gradient(145deg,#ecfdf5,#d1fae5);}
 body.theme-light .tabs{background:#f1f5f9;border-color:#e2e8f0;}
 body.theme-light .tabs button{color:#64748b;}
 body.theme-light .back-btn{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#000;}
-body.theme-light .mem-line{background:#fff;border-color:#e2e8f0;}
-body.theme-light .mem-line .ml-name{color:#000;}
-body.theme-light .mem-line .ml-info{color:#475569;}
-body.theme-light .emoji-tile{background:#f1f5f9;}
 
-body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:90px;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:24px;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
 body.lang-hi .en{display:none !important;}
 body.lang-en .hi{display:none !important;}
 
@@ -98,7 +92,7 @@ body.admin-mode .app-bg{background-image:radial-gradient(ellipse 60% 40% at 50% 
 .topbar-text p{font-size:9.5px;margin-top:2px;font-weight:700;color:var(--primary);}
 body.admin-mode .topbar-text p{color:var(--gold);}
 .topbar-actions{display:flex;gap:5px;flex-shrink:0;}
-.topbar-share{background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text);padding:8px 11px;border-radius:12px;font-size:11px;font-weight:800;cursor:pointer;transition:.2s;}
+.topbar-share{background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text);padding:8px 11px;border-radius:12px;font-size:11px;font-weight:800;cursor:pointer;}
 .topbar-share:active{transform:scale(.95);}
 
 main{max-width:520px;margin:0 auto;padding:0 14px 20px;position:relative;z-index:10;width:100%;}
@@ -111,16 +105,16 @@ main{max-width:520px;margin:0 auto;padding:0 14px 20px;position:relative;z-index
 .field{margin-bottom:12px;position:relative;width:100%;}
 .field label{display:block;font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:6px;letter-spacing:.4px;text-transform:uppercase;}
 .input-wrap{position:relative;display:flex;align-items:center;width:100%;}
-.input-ico{position:absolute;left:13px;font-size:16px;color:var(--primary);opacity:.9;pointer-events:none;}
-.input-wrap input,.input-wrap select{width:100%;padding:13px 14px 13px 40px;border-radius:12px;border:1.5px solid var(--border);font-size:14px;background:var(--input-bg);color:var(--text);font-weight:700;transition:.2s;}
+.input-ico{position:absolute;left:13px;font-size:16px;color:var(--primary);pointer-events:none;}
+.input-wrap input,.input-wrap select{width:100%;padding:13px 14px 13px 40px;border-radius:12px;border:1.5px solid var(--border);font-size:14px;background:var(--input-bg);color:var(--text);font-weight:700;}
 .input-wrap input:focus,.input-wrap select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(16,185,129,.15);}
-input.no-ico,select.no-ico{padding:13px 14px;border:1.5px solid var(--border);border-radius:12px;width:100%;font-size:14px;font-weight:700;background:var(--input-bg);color:var(--text);transition:.2s;}
+input.no-ico,select.no-ico{padding:13px 14px;border:1.5px solid var(--border);border-radius:12px;width:100%;font-size:14px;font-weight:700;background:var(--input-bg);color:var(--text);}
 input.no-ico:focus,select.no-ico:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px rgba(16,185,129,.15);}
 input::placeholder{color:var(--muted-2);}
 select.no-ico option{background:var(--card-2);color:var(--text);}
 .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;width:100%;}
 
-.btn{width:100%;padding:14px;border:none;border-radius:50px;font-size:14px;font-weight:900;cursor:pointer;transition:transform .15s;text-align:center;min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn{width:100%;padding:14px;border:none;border-radius:50px;font-size:14px;font-weight:900;cursor:pointer;text-align:center;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .btn:active{transform:scale(.96);}
 .btn-primary{background:linear-gradient(120deg,#059669,#10b981 55%,#34d399);color:#fff;box-shadow:0 8px 20px rgba(16,185,129,.3);}
 .btn-secondary{background:linear-gradient(135deg,#1f2937,#111827);color:#fff;border:1px solid var(--border-light);}
@@ -129,69 +123,102 @@ select.no-ico option{background:var(--card-2);color:var(--text);}
 .btn-sm{padding:8px 14px;font-size:11.5px;width:auto;border-radius:50px;white-space:nowrap;}
 
 .tabs{display:flex;background:var(--input-bg);border-radius:50px;padding:4px;margin-bottom:16px;border:1px solid var(--border);width:100%;}
-.tabs button{flex:1 1 0;padding:11px;border:none;border-radius:50px;background:transparent;font-size:13px;font-weight:900;color:var(--muted);cursor:pointer;transition:.25s;}
+.tabs button{flex:1;padding:11px;border:none;border-radius:50px;background:transparent;font-size:13px;font-weight:900;color:var(--muted);cursor:pointer;}
 .tabs button.active{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;}
 
 .msg{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-size:13px;text-align:center;font-weight:800;word-wrap:break-word;}
 .msg.err{background:rgba(244,63,94,.15);color:#fda4af;border:1px solid rgba(244,63,94,.3);}
 .msg.ok{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3);}
-body.theme-light .msg.ok{color:#059669;}
 
-/* 💎 MENU GRID - HOME */
-.welcome-box{background:linear-gradient(135deg,#065f46 0%,#059669 100%);border-radius:20px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden;}
-.welcome-box::after{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%;}
+/* WELCOME */
+.welcome-box{background:linear-gradient(135deg,#065f46 0%,#10b981 100%);border-radius:18px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 10px 26px rgba(5,150,105,.35);}
+.welcome-box::after{content:'';position:absolute;right:-40px;top:-40px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);border-radius:50%;}
 .welcome-box h2{color:#fff;font-size:17px;font-weight:900;margin-bottom:3px;position:relative;z-index:2;}
 .welcome-box p{color:#d1fae5;font-size:12px;font-weight:700;position:relative;z-index:2;}
 
+/* 🎨 MENU GRID - APP ICON STYLE */
 .menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-bottom:14px;}
 
-.menu-tile{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px 12px;cursor:pointer;transition:.2s;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;min-height:120px;justify-content:center;}
-.menu-tile:active{transform:scale(.96);border-color:var(--primary);}
-.menu-tile .mt-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:10px;}
-.menu-tile .mt-icon.i1{background:linear-gradient(135deg,rgba(52,211,153,.25),rgba(16,185,129,.1));border:1px solid rgba(52,211,153,.4);}
-.menu-tile .mt-icon.i2{background:linear-gradient(135deg,rgba(167,139,250,.25),rgba(139,92,246,.1));border:1px solid rgba(167,139,250,.4);}
-.menu-tile .mt-icon.i3{background:linear-gradient(135deg,rgba(251,191,36,.25),rgba(245,158,11,.1));border:1px solid rgba(251,191,36,.4);}
-.menu-tile .mt-icon.i4{background:linear-gradient(135deg,rgba(96,165,250,.25),rgba(59,130,246,.1));border:1px solid rgba(96,165,250,.4);}
-.menu-tile .mt-icon.i5{background:linear-gradient(135deg,rgba(244,63,94,.25),rgba(225,29,72,.1));border:1px solid rgba(244,63,94,.4);}
-.menu-tile .mt-icon.i6{background:linear-gradient(135deg,rgba(251,191,36,.35),rgba(217,119,6,.15));border:1.5px solid rgba(251,191,36,.55);}
+.menu-tile{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px 12px 14px;cursor:pointer;transition:.2s;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;min-height:126px;justify-content:center;}
+.menu-tile:active{transform:scale(.96);}
+
+.menu-tile .mt-icon{
+  width:58px;height:58px;
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+  margin-bottom:11px;
+  position:relative;
+  box-shadow:0 8px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -2px 6px rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.15);
+}
+.menu-tile .mt-icon::before{
+  content:'';position:absolute;inset:0;border-radius:16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 55%);
+  pointer-events:none;
+}
+.menu-tile .mt-icon i{position:relative;z-index:2;font-style:normal;filter:drop-shadow(0 2px 3px rgba(0,0,0,.2));}
+
+/* iOS-style vivid gradients */
+.menu-tile .mt-icon.i1{background:linear-gradient(135deg,#10b981 0%,#059669 100%);}
+.menu-tile .mt-icon.i2{background:linear-gradient(135deg,#a78bfa 0%,#7c3aed 100%);}
+.menu-tile .mt-icon.i3{background:linear-gradient(135deg,#fbbf24 0%,#d97706 100%);}
+.menu-tile .mt-icon.i4{background:linear-gradient(135deg,#60a5fa 0%,#2563eb 100%);}
+.menu-tile .mt-icon.i5{background:linear-gradient(135deg,#f472b6 0%,#db2777 100%);}
+.menu-tile .mt-icon.i6{background:linear-gradient(135deg,#fbbf24 0%,#d97706 100%);box-shadow:0 8px 20px rgba(251,191,36,.4),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 6px rgba(120,53,15,.3);}
+
 .menu-tile .mt-label{font-size:13px;font-weight:900;color:var(--text);margin-bottom:3px;line-height:1.2;}
 .menu-tile .mt-sub{font-size:10px;color:var(--muted);font-weight:700;line-height:1.3;}
-.menu-tile .mt-badge{position:absolute;top:8px;right:8px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:9.5px;font-weight:900;padding:3px 7px;border-radius:50px;min-width:22px;text-align:center;}
-.menu-tile .mt-badge.gold{background:linear-gradient(135deg,#d97706,#fbbf24);}
+.menu-tile .mt-badge{position:absolute;top:9px;right:9px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:9.5px;font-weight:900;padding:3px 7px;border-radius:50px;min-width:20px;text-align:center;box-shadow:0 4px 10px rgba(5,150,105,.4);}
+.menu-tile .mt-badge.gold{background:linear-gradient(135deg,#d97706,#fbbf24);box-shadow:0 4px 10px rgba(217,119,6,.4);}
 
 .admin-tile .mt-label{color:var(--gold);}
 .admin-tile{border-color:rgba(251,191,36,.4);background:linear-gradient(165deg,#1f1a10 0%,#16161f 60%);}
-body.theme-light .admin-tile{background:linear-gradient(165deg,#fffbeb 0%,#ffffff 60%);border-color:rgba(251,191,36,.5);}
-body.theme-light .admin-tile .mt-label{color:#b45309;}
 
-/* COMPACT MEMBER LINE */
-.mem-line{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card-2);border-radius:14px;margin-bottom:8px;border:1px solid var(--border);width:100%;}
-.mem-line.me{border-color:var(--accent);background:rgba(16,185,129,.06);}
-.mem-line .ml-num{width:28px;height:28px;min-width:28px;border-radius:9px;background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;}
-.mem-line .ml-body{flex:1;min-width:0;}
-.mem-line .ml-name{font-size:var(--name-font);font-weight:900;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;}
-.mem-line .ml-info{font-size:10.5px;color:var(--muted);font-weight:700;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.mem-line .ml-due{text-align:right;flex-shrink:0;}
-.mem-line .ml-due .lbl{font-size:9px;color:var(--muted);font-weight:800;}
-.mem-line .ml-due .val{font-size:13px;font-weight:900;color:var(--success);}
-.mem-line .ml-due .val.red{color:var(--danger);}
-.mem-line .ml-actions{display:flex;gap:5px;flex-shrink:0;}
-.mem-line .ml-btn{width:32px;height:32px;border-radius:10px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.mem-line .ml-btn.pay{background:linear-gradient(135deg,#fde047,#f59e0b);color:#78350f;}
-.mem-line .ml-btn.win{background:linear-gradient(135deg,#fef08a,#fde047);color:#78350f;}
+/* 💳 PREMIUM CREDIT CARD WALLET */
+.credit-card{
+  border-radius:20px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  color:#fff;
+  margin-bottom:12px;
+  box-shadow:0 16px 40px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.15);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255,255,255,.22) 0%, transparent 40%),
+    radial-gradient(circle at 10% 100%, rgba(251,191,36,.18) 0%, transparent 45%),
+    linear-gradient(135deg,#0a3d2e 0%,#064e3b 35%,#065f46 65%,#0d9488 100%);
+  min-height:180px;
+  display:flex;flex-direction:column;
+}
+.credit-card::before{
+  content:'';position:absolute;left:-50%;top:-50%;width:200%;height:200%;
+  background:linear-gradient(115deg,transparent 45%,rgba(255,255,255,.08) 50%,transparent 55%);
+  pointer-events:none;
+}
+.cc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:relative;z-index:2;}
+.cc-chip{
+  width:42px;height:30px;border-radius:6px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#fef3c7 0%,#fbbf24 40%,#d97706 100%);
+  box-shadow:0 3px 8px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.5);
+}
+.cc-chip::before{content:'';position:absolute;top:9px;left:6px;right:6px;height:1px;background:rgba(120,53,15,.5);}
+.cc-chip::after{content:'';position:absolute;top:19px;left:6px;right:6px;height:1px;background:rgba(120,53,15,.5);}
+.cc-brand{font-size:11px;font-weight:900;letter-spacing:1.5px;color:#fef3c7;text-transform:uppercase;display:flex;align-items:center;gap:5px;}
+.cc-brand .cc-brand-dot{width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;}
 
-/* WALLET - FIXED */
-.wallet-card{background:radial-gradient(circle at 90% 10%, rgba(52,211,153,.28) 0%, transparent 45%),linear-gradient(135deg,#022c22 0%,#064e3b 55%,#065f46 100%);color:#fff;padding:20px;border-radius:20px;margin-bottom:12px;position:relative;overflow:hidden;border:1px solid rgba(16,185,129,.4);}
-.wallet-card::after{content:'';position:absolute;right:-30px;bottom:-40px;width:140px;height:140px;background:radial-gradient(circle,rgba(52,211,153,.15),transparent 70%);border-radius:50%;}
-.wc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;position:relative;z-index:2;}
-.wc-chip{width:36px;height:26px;border-radius:5px;background:linear-gradient(135deg,#fef3c7,#fbbf24 45%,#d97706);border:1px solid rgba(180,83,9,.5);position:relative;overflow:hidden;}
-.wc-chip::after{content:'';position:absolute;top:8px;left:0;right:0;height:1px;background:rgba(0,0,0,.28);box-shadow:0 7px 0 rgba(0,0,0,.28);}
-.wc-signal{font-size:18px;color:#fde68a;}
-.wc-label{font-size:10px;font-weight:800;letter-spacing:2px;color:#a7f3d0;text-transform:uppercase;position:relative;z-index:2;margin-bottom:5px;}
-.wc-amount{font-size:34px;font-weight:900;color:#fef3c7;display:flex;align-items:center;gap:4px;position:relative;z-index:2;line-height:1;margin-bottom:8px;word-break:break-all;}
-.wc-bal{font-size:11px;color:#d1fae5;font-weight:700;opacity:.85;position:relative;z-index:2;margin-bottom:12px;}
-.wc-foot{display:flex;justify-content:space-between;font-size:10px;color:#d1fae5;font-weight:700;opacity:.85;position:relative;z-index:2;padding-top:10px;border-top:1px solid rgba(255,255,255,.12);}
+.cc-label{font-size:10px;font-weight:800;letter-spacing:2px;color:#a7f3d0;text-transform:uppercase;position:relative;z-index:2;margin-bottom:6px;}
+.cc-amount{font-size:36px;font-weight:900;color:#ffffff;letter-spacing:-1px;line-height:1;position:relative;z-index:2;display:flex;align-items:flex-start;gap:2px;margin-bottom:4px;text-shadow:0 3px 12px rgba(0,0,0,.35);}
+.cc-amount .rs{font-size:22px;margin-top:4px;color:#fef3c7;font-weight:800;}
+.cc-bal{font-size:11px;font-weight:700;color:#d1fae5;opacity:.9;position:relative;z-index:2;letter-spacing:.3px;}
 
+.cc-foot{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.12);}
+.cc-foot-item{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.cc-foot-item .lbl{font-size:9px;font-weight:800;letter-spacing:1.5px;color:#a7f3d0;text-transform:uppercase;}
+.cc-foot-item .val{font-size:12px;font-weight:900;color:#ffffff;font-family:'SF Mono',Menlo,monospace;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cc-hide{opacity:.45;letter-spacing:3px;}
+
+/* STATS */
 .stats{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;margin-bottom:12px;}
 .stat{background:var(--card-2);border-radius:14px;padding:12px;text-align:center;border:1px solid var(--border);}
 .stat b{display:flex;flex-direction:column;align-items:center;font-size:16px;color:var(--accent);font-weight:900;gap:2px;}
@@ -199,12 +226,47 @@ body.theme-light .admin-tile .mt-label{color:#b45309;}
 .stat-pool{grid-column:span 2;background:linear-gradient(160deg,rgba(16,185,129,.12),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);}
 .stat-pool b{color:var(--accent);font-size:20px;flex-direction:row;justify-content:center;}
 
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:9999;display:flex;justify-content:center;padding:0 14px calc(12px + env(safe-area-inset-bottom,0px));pointer-events:none;}
-.nav-inner{display:flex;justify-content:space-around;align-items:center;width:100%;max-width:480px;background:rgba(22,22,31,.96);backdrop-filter:blur(20px);border-radius:22px;padding:6px;box-shadow:0 12px 28px rgba(0,0,0,.6);border:1px solid var(--border);pointer-events:auto;}
-.bottom-nav button{flex:1 1 0;background:none;border:none;font-size:9px;font-weight:900;color:var(--muted-2);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;border-radius:16px;transition:.2s;line-height:1;min-width:0;}
-.bottom-nav button .ico{font-size:19px;line-height:1;filter:grayscale(1);opacity:.6;}
-.bottom-nav button.active{color:#fff;background:linear-gradient(140deg,var(--primary),var(--accent));transform:translateY(-2px);box-shadow:0 6px 14px rgba(16,185,129,.4);}
-.bottom-nav button.active .ico{filter:grayscale(0);opacity:1;transform:scale(1.1);}
+/* COMPACT MEMBER LINE - EMI INFO */
+.mem-line{
+  display:flex;align-items:center;gap:10px;padding:11px 12px;
+  background:var(--card-2);border-radius:14px;margin-bottom:8px;
+  border:1px solid var(--border);width:100%;
+}
+.mem-line.me{border-color:var(--accent);background:rgba(16,185,129,.08);box-shadow:0 0 0 3px rgba(16,185,129,.1);}
+.mem-line .ml-num{
+  width:32px;height:32px;min-width:32px;border-radius:10px;
+  background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:12.5px;font-weight:900;flex-shrink:0;
+  box-shadow:0 4px 10px rgba(5,150,105,.3);
+}
+.mem-line .ml-body{flex:1;min-width:0;}
+.mem-line .ml-name{font-size:var(--name-font);font-weight:900;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;}
+.mem-line .ml-info{font-size:10.5px;color:var(--muted);font-weight:700;margin-top:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.mem-line .ml-info .dot{opacity:.5;}
+.mem-line .ml-info .emi-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  background:rgba(16,185,129,.18);color:#34d399;
+  padding:2px 7px;border-radius:50px;font-size:9.5px;font-weight:900;
+  border:1px solid rgba(16,185,129,.3);
+}
+.mem-line .ml-info .emi-badge .num{color:#fff;}
+.mem-line .ml-info .emi-badge.warn{background:rgba(244,63,94,.15);color:#fda4af;border-color:rgba(244,63,94,.3);}
+.mem-line .ml-info .emi-badge.gold{background:rgba(251,191,36,.18);color:#fbbf24;border-color:rgba(251,191,36,.35);}
+.mem-line .ml-due{text-align:right;flex-shrink:0;}
+.mem-line .ml-due .lbl{font-size:9px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
+.mem-line .ml-due .val{font-size:13.5px;font-weight:900;color:var(--success);margin-top:1px;}
+.mem-line .ml-due .val.red{color:var(--danger);}
+.mem-line .ml-actions{display:flex;gap:5px;flex-shrink:0;}
+.mem-line .ml-btn{
+  width:34px;height:34px;border-radius:11px;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
+.mem-line .ml-btn.pay{background:linear-gradient(135deg,#fde047,#f59e0b);color:#78350f;}
+.mem-line .ml-btn.win{background:linear-gradient(135deg,#fef08a,#fde047);color:#78350f;}
+.mem-line .ml-btn.upi{background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:13px;}
+.mem-line .ml-btn:active{transform:scale(.9);}
 
 .calc-box{background:linear-gradient(160deg,rgba(16,185,129,.1),rgba(16,185,129,.04));border-radius:14px;padding:14px;margin-top:12px;border:1px solid rgba(16,185,129,.25);}
 .calc-row{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800;color:#a7f3d0;margin-bottom:7px;}
@@ -212,7 +274,7 @@ body.theme-light .admin-tile .mt-label{color:#b45309;}
 
 .hidden{display:none !important;}
 
-.bc-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:14px;margin-bottom:9px;background:var(--card-2);cursor:pointer;border:1px solid var(--border);transition:.2s;}
+.bc-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:14px;margin-bottom:9px;background:var(--card-2);cursor:pointer;border:1px solid var(--border);}
 .bc-item:active{transform:scale(.98);border-color:var(--primary);}
 .bc-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-right:11px;flex-shrink:0;}
 .bc-color-1{background:linear-gradient(135deg,rgba(52,211,153,.25),rgba(16,185,129,.15));color:#34d399;border:1px solid rgba(52,211,153,.35);}
@@ -225,7 +287,7 @@ body.theme-light .admin-tile .mt-label{color:#b45309;}
 .mem-row{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:var(--card-2);margin-bottom:9px;border:1px solid var(--border);}
 .mem-input-group{display:flex;align-items:center;gap:10px;width:100%;min-width:0;}
 .mem-input-group .num{width:30px;height:30px;min-width:30px;border-radius:9px;background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;font-size:11.5px;font-weight:900;display:flex;align-items:center;justify-content:center;}
-.mem-input-group input{flex:1 1 0;padding:11px 12px;border-radius:11px;border:1.5px solid var(--border);font-size:13.5px;background:var(--input-bg);color:var(--text);font-weight:700;min-width:0;}
+.mem-input-group input{flex:1;padding:11px 12px;border-radius:11px;border:1.5px solid var(--border);font-size:13.5px;background:var(--input-bg);color:var(--text);font-weight:700;min-width:0;}
 .mem-input-group input:focus{border-color:var(--primary);outline:none;}
 
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s;}
@@ -234,7 +296,7 @@ body.theme-light .admin-tile .mt-label{color:#b45309;}
 .win-trophy{font-size:70px;margin-bottom:6px;}
 #winAmount{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:9px 22px;border-radius:16px;font-size:26px;display:inline-block;margin:12px 0;font-weight:900;}
 
-.code-copy-box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:2px dashed rgba(16,185,129,.5);border-radius:14px;padding:12px;margin-bottom:12px;width:100%;flex-wrap:wrap;}
+.code-copy-box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:2px dashed rgba(16,185,129,.5);border-radius:14px;padding:12px;margin-bottom:12px;flex-wrap:wrap;}
 .code-copy-box .code-text{font-family:'SF Mono',Menlo,monospace;font-size:19px;font-weight:900;letter-spacing:3px;color:#6ee7b7;flex:1;text-align:left;word-break:break-all;min-width:0;}
 .code-copy-box button{background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;padding:9px 14px;border-radius:11px;font-weight:900;cursor:pointer;font-size:12px;white-space:nowrap;flex-shrink:0;}
 
@@ -250,7 +312,7 @@ body.theme-light .admin-tile .mt-label{color:#b45309;}
 .toggle-switch input:checked + .slider:before{transform:translateX(18px);}
 .toggle-switch.gold input:checked + .slider{background:linear-gradient(135deg,#d97706,#fbbf24);}
 
-.ai-fab{position:fixed;bottom:88px;right:14px;width:48px;height:48px;background:linear-gradient(135deg,#10b981,#059669);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;box-shadow:0 8px 22px rgba(16,185,129,.5);cursor:pointer;z-index:900;border:2px solid #fff;}
+.ai-fab{position:fixed;bottom:20px;right:14px;width:48px;height:48px;background:linear-gradient(135deg,#10b981,#059669);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;box-shadow:0 8px 22px rgba(16,185,129,.5);cursor:pointer;z-index:900;border:2px solid #fff;}
 body.admin-mode .ai-fab{background:linear-gradient(135deg,#d97706,#fbbf24);}
 
 .chat-box{height:240px;overflow-y:auto;background:var(--card-2);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--border);margin-bottom:12px;}
@@ -285,15 +347,9 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 .opt-btn.active{border-color:var(--primary);background:linear-gradient(160deg,rgba(16,185,129,.15),rgba(16,185,129,.05));color:var(--accent);}
 .opt-group-3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px;}
 
-.menu-item{display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--card-2);border-radius:14px;margin-bottom:8px;border:1px solid var(--border);cursor:pointer;}
-.menu-item .mi-left{display:flex;align-items:center;gap:10px;}
-.menu-item .mi-ico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;background:linear-gradient(135deg,rgba(52,211,153,.22),rgba(16,185,129,.1));border:1px solid rgba(52,211,153,.3);}
-.menu-item .mi-text b{font-size:12.5px;color:var(--text);font-weight:900;display:block;}
-.menu-item .mi-text span{font-size:10.5px;color:var(--muted);font-weight:700;}
-
 @media (max-width:360px){
-  .wc-amount{font-size:28px;}
-  .menu-tile .mt-icon{width:46px;height:46px;font-size:22px;}
+  .cc-amount{font-size:30px;}
+  .menu-tile .mt-icon{width:50px;height:50px;font-size:24px;}
   .menu-tile .mt-label{font-size:12px;}
 }
 </style>
@@ -400,7 +456,6 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 </div>
 
 <main>
-  <!-- AUTH -->
   <section id="auth">
     <div class="card premium" style="text-align:center;padding-top:26px;">
       <div style="font-size:40px;margin-bottom:8px;">🌿</div>
@@ -428,22 +483,17 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
     </div>
   </section>
 
-  <!-- 🏠 HOME - MENU GRID -->
   <section id="home" class="hidden">
     <div id="homeNotice"></div>
-
     <div class="welcome-box">
       <h2>👋 <span id="homeName">User</span></h2>
       <p><span class="hi">आपका स्वागत है!</span><span class="en">Welcome!</span></p>
     </div>
-
     <div class="menu-grid" id="mainMenuGrid"></div>
-
     <div class="section-title">📋 <span class="hi">आपकी कमेटियाँ</span><span class="en">Your Groups</span> <span class="count" id="bcCount">0</span></div>
     <div id="bcList"></div>
   </section>
 
-  <!-- ACTIVE KHATA (dashboard) -->
   <section id="dashboard" class="hidden">
     <button class="back-btn" onclick="show('home')">← <span class="hi">मेनू</span><span class="en">Menu</span></button>
     <div id="emiBannerHolder"></div>
@@ -452,18 +502,16 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
     <div id="extraBlock"></div>
   </section>
 
-  <!-- ENTER CODE & VIEW -->
   <section id="joinSection" class="hidden">
     <button class="back-btn" onclick="show('home')">← <span class="hi">मेनू</span><span class="en">Menu</span></button>
     <div class="card premium">
       <h2 style="font-size:15px;">🔑 <span class="hi">कोड डालकर जुड़ें</span><span class="en">Join with Code</span></h2>
-      <p style="font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:12px;"><span class="hi">संचालक से मिला 8 अंकों का कोड डालें:</span><span class="en">Enter 8-char code from admin:</span></p>
+      <p style="font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:12px;"><span class="hi">संचालक से मिला 8 अंकों का कोड डालें:</span><span class="en">Enter code from admin:</span></p>
       <div class="field"><input class="no-ico lang-input" id="accessCode" data-hi="Code" data-en="Code" placeholder="Code" style="text-transform:uppercase;letter-spacing:2px;text-align:center;font-weight:900;"></div>
       <button class="btn btn-primary" onclick="join()"><span class="hi">प्रवेश करें</span><span class="en">Enter Group</span></button>
     </div>
   </section>
 
-  <!-- CREATE -->
   <section id="create" class="hidden">
     <button class="back-btn" onclick="show('home')">← <span class="hi">मेनू</span><span class="en">Menu</span></button>
     <div class="card premium">
@@ -506,14 +554,12 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
     <div id="created" class="card hidden"></div>
   </section>
 
-  <!-- KAMETI LIST (full list) -->
   <section id="kametiList" class="hidden">
     <button class="back-btn" onclick="show('home')">← <span class="hi">मेनू</span><span class="en">Menu</span></button>
     <div class="section-title" style="margin-top:0;font-size:15px;">📋 <span class="hi">सभी कमेटियाँ</span><span class="en">All Groups</span> <span class="count" id="bcCount2">0</span></div>
     <div id="bcListFull"></div>
   </section>
 
-  <!-- SETTINGS -->
   <section id="settings" class="hidden">
     <button class="back-btn" onclick="show('home')">← <span class="hi">मेनू</span><span class="en">Menu</span></button>
 
@@ -532,25 +578,19 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
     <div class="card premium">
       <h2 style="font-size:14px;">⚙️ <span class="hi">सेटिंग्स</span><span class="en">Settings</span></h2>
 
-      <div class="section-title" style="margin-top:0;font-size:11.5px;color:var(--muted);">
-        <span class="hi">🎨 थीम</span><span class="en">🎨 Theme</span>
-      </div>
+      <div class="section-title" style="margin-top:0;font-size:11.5px;color:var(--muted);"><span class="hi">🎨 थीम</span><span class="en">🎨 Theme</span></div>
       <div class="opt-group">
         <div class="opt-btn" id="themeDarkBtn" onclick="setTheme('dark')">🌙<br><span style="font-size:9px;"><span class="hi">डार्क</span><span class="en">Dark</span></span></div>
         <div class="opt-btn" id="themeLightBtn" onclick="setTheme('light')">☀️<br><span style="font-size:9px;"><span class="hi">लाइट</span><span class="en">Light</span></span></div>
       </div>
 
-      <div class="section-title" style="font-size:11.5px;color:var(--muted);">
-        <span class="hi">🌐 भाषा</span><span class="en">🌐 Language</span>
-      </div>
+      <div class="section-title" style="font-size:11.5px;color:var(--muted);"><span class="hi">🌐 भाषा</span><span class="en">🌐 Language</span></div>
       <div class="opt-group">
         <div class="opt-btn" id="langHiBtn" onclick="setLang('hi')">हिंदी</div>
         <div class="opt-btn" id="langEnBtn" onclick="setLang('en')">English</div>
       </div>
 
-      <div class="section-title" style="font-size:11.5px;color:var(--muted);">
-        <span class="hi">👤 नाम का आकार</span><span class="en">👤 Name Size</span>
-      </div>
+      <div class="section-title" style="font-size:11.5px;color:var(--muted);"><span class="hi">👤 नाम का आकार</span><span class="en">👤 Name Size</span></div>
       <div class="opt-group">
         <div class="opt-btn" id="fsName-sm" onclick="setNameSize('sm')">S</div>
         <div class="opt-btn" id="fsName-md" onclick="setNameSize('md')">M</div>
@@ -558,9 +598,7 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
         <div class="opt-btn" id="fsName-xl" onclick="setNameSize('xl')">XL</div>
       </div>
 
-      <div class="section-title" style="font-size:11.5px;color:var(--muted);">
-        <span class="hi">📱 सिस्टम साइज़</span><span class="en">📱 System Size</span>
-      </div>
+      <div class="section-title" style="font-size:11.5px;color:var(--muted);"><span class="hi">📱 सिस्टम साइज़</span><span class="en">📱 System Size</span></div>
       <div class="opt-group-3">
         <div class="opt-btn" id="fsScale-sm" onclick="setScale('sm')">Small</div>
         <div class="opt-btn" id="fsScale-md" onclick="setScale('md')">Normal</div>
@@ -570,9 +608,6 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 
     <div class="card premium">
       <h2 style="font-size:14px;">👁️ <span class="hi">क्या छिपाएं?</span><span class="en">Hide / Show</span></h2>
-      <p style="font-size:11px;color:var(--muted);font-weight:700;margin-bottom:10px;">
-        <span class="hi">कमेटी स्क्रीन पर:</span><span class="en">On committee screen:</span>
-      </p>
       <div id="hideShowToggles"></div>
     </div>
 
@@ -582,7 +617,6 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
     </div>
   </section>
 
-  <!-- ADMIN PANEL -->
   <section id="admin" class="hidden">
     <button class="back-btn" onclick="show('home')">← <span class="hi">मेनू</span><span class="en">Menu</span></button>
 
@@ -597,7 +631,7 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
     </div>
 
     <div class="card premium">
-      <h2 style="font-size:14px;">🎛️ <span class="hi">फीचर कंट्रोल</span><span class="en">Feature Control</span> <span class="count" id="featBadge" style="margin-left:auto;background:rgba(16,185,129,.15);color:var(--accent);padding:2px 8px;border-radius:50px;font-size:10px;font-weight:900;">0 ON</span></h2>
+      <h2 style="font-size:14px;">🎛️ <span class="hi">फीचर कंट्रोल</span><span class="en">Features</span> <span class="count" id="featBadge">0 ON</span></h2>
       <div id="featureFlagsList"></div>
     </div>
 
@@ -633,7 +667,6 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 
     <div class="card premium">
       <h2 style="font-size:14px;">📢 <span class="hi">ग्लोबल अनाउंसमेंट</span><span class="en">Global Announcement</span></h2>
-      <p style="font-size:11px;color:var(--muted);font-weight:700;margin-bottom:10px;"><span class="hi">सभी यूज़र्स के मेनू पर दिखेगा</span><span class="en">Shows on all users' menu</span></p>
       <div class="field"><textarea class="no-ico" id="globalNotice" rows="3" style="resize:vertical;font-family:inherit;padding:11px;" placeholder="Announcement..."></textarea></div>
       <div class="action-bar-2">
         <button class="btn" style="background:var(--card-3);color:var(--muted);" onclick="clearNotice()">🗑️ <span class="hi">हटाएं</span><span class="en">Clear</span></button>
@@ -642,16 +675,6 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
     </div>
   </section>
 </main>
-
-<nav id="mainNav" class="bottom-nav hidden">
-  <div class="nav-inner">
-    <button id="nav-home" onclick="show('home')"><div class="ico">🏠</div><span class="hi">मेनू</span><span class="en">Menu</span></button>
-    <button id="nav-create" onclick="tryCreate()"><div class="ico">➕</div><span class="hi">नई</span><span class="en">New</span></button>
-    <button id="nav-list" onclick="show('kametiList')"><div class="ico">📋</div><span class="hi">लिस्ट</span><span class="en">List</span></button>
-    <button id="nav-settings" onclick="show('settings')"><div class="ico">⚙️</div><span class="hi">सेटिंग</span><span class="en">Setting</span></button>
-    <button id="nav-admin" class="hidden" onclick="show('admin')"><div class="ico">👑</div>Admin</button>
-  </div>
-</nav>
 
 <script>
 const API_URL = 'https://withered-base-4632.ashifmd400.workers.dev';
@@ -666,7 +689,6 @@ const KEYS = {
 let currentBCData = null;
 let currentLang = localStorage.getItem('kk_lang') || 'hi';
 let currentFreq = 'weekly';
-let scrollLockY = 0;
 
 const DEFAULT_HIDE = { wallet:false, pool:false, due:false, code:false, owner:false };
 function loadHide(){ return Object.assign({}, DEFAULT_HIDE, load(KEYS.hideOpts, {})); }
@@ -695,12 +717,13 @@ const FEATURE_DETAILS = {
 };
 
 const USER_HELP = {
-  howToJoin:{emoji:'🔑',hi:'कमेटी में कैसे जुड़ें?',en:'How to Join?',hiAns:'1. मेनू पर "Enter Code & View" दबाएं<br>2. 8 अंकों का कोड डालें<br>3. "प्रवेश करें" दबाएं',enAns:'1. Menu → "Enter Code & View"<br>2. Enter 8-char code<br>3. Tap Enter'},
-  howToPay:{emoji:'💳',hi:'ऑनलाइन पेमेंट?',en:'How to Pay?',hiAns:'अपनी लाइन पर "📋" बटन दबाएं। UPI ID कॉपी होगी। PhonePe/GPay में पेस्ट करके पेमेंट करें।',enAns:'Tap "📋" on your row. UPI copies. Paste in PhonePe/GPay.'},
-  howWinner:{emoji:'🏆',hi:'विजेता कैसे?',en:'Winner?',hiAns:'संचालक "🏆" दबाकर विजेता बनाते हैं। पूरा पूल मिलता है।',enAns:'Admin taps "🏆". Winner gets full pool.'},
-  themeChange:{emoji:'🎨',hi:'थीम बदलें?',en:'Change Theme?',hiAns:'मेनू → Setting → थीम से डार्क/लाइट चुनें।',enAns:'Menu → Setting → Theme → Dark/Light.'},
-  newGroup:{emoji:'➕',hi:'नई कमेटी?',en:'Create Group?',hiAns:'मेनू पर "Create Khata" दबाएं। नाम, किस्त, सदस्य भरें।',enAns:'Menu → "Create Khata". Enter name, amount, members.'},
-  hideShow:{emoji:'👁️',hi:'कुछ छिपाना?',en:'Hide something?',hiAns:'मेनू → Setting → "क्या छिपाएं" में वॉलेट, पूल, due छिपा सकते हैं।',enAns:'Menu → Setting → Hide/Show.'}
+  howToJoin:{emoji:'🔑',hi:'कमेटी में कैसे जुड़ें?',en:'How to Join?',hiAns:'1. मेनू पर "कोड & व्यू" दबाएं<br>2. 8 अंकों का कोड डालें<br>3. "प्रवेश करें" दबाएं',enAns:'1. Menu → "Code & View"<br>2. Enter code<br>3. Tap Enter'},
+  howToPay:{emoji:'💳',hi:'ऑनलाइन पेमेंट?',en:'How to Pay?',hiAns:'अपनी लाइन पर 📋 बटन दबाएं। UPI कॉपी होगा। PhonePe/GPay में पेस्ट करें।',enAns:'Tap 📋 on your row. Paste UPI in PhonePe/GPay.'},
+  emiInfo:{emoji:'📊',hi:'EMI कैसे देखें?',en:'See EMI?',hiAns:'हर सदस्य के नाम के नीचे "X जमा • Y बाकी" दिखता है।',enAns:'Under each name: "X paid • Y left".'},
+  howWinner:{emoji:'🏆',hi:'विजेता कैसे?',en:'Winner?',hiAns:'संचालक 🏆 दबाकर विजेता बनाते हैं। पूरा पूल मिलता है।',enAns:'Admin taps 🏆. Winner gets pool.'},
+  themeChange:{emoji:'🎨',hi:'थीम/फॉन्ट?',en:'Theme/Font?',hiAns:'मेनू → सेटिंग्स में डार्क/लाइट, भाषा, फॉन्ट साइज़ बदलें।',enAns:'Menu → Settings for theme, lang, font.'},
+  newGroup:{emoji:'➕',hi:'नई कमेटी?',en:'Create Group?',hiAns:'मेनू पर "नई कमेटी बनाएं" दबाएं।',enAns:'Menu → "Create Khata".'},
+  hideShow:{emoji:'👁️',hi:'कुछ छिपाना?',en:'Hide?',hiAns:'मेनू → सेटिंग्स → "क्या छिपाएं" में।',enAns:'Menu → Settings → Hide/Show.'}
 };
 
 const DEFAULT_GLOBAL = { features:{}, freeLimit:2, frequencies:{weekly:true,biweekly:true,monthly:true}, notice:'' };
@@ -817,7 +840,6 @@ async function shareApp(){
   catch(e){ window.location.href='https://wa.me/?text='+encodeURIComponent(text); }
 }
 
-/* AI */
 function openAiModal(){
   const isAdmin = isAdminUser();
   const chat = document.getElementById('aiChat');
@@ -889,7 +911,6 @@ function askUserHelp(key){
   }, 400);
 }
 
-/* AUTH */
 function switchAuth(mode){
   const isReg = mode==='register';
   document.getElementById('tabReg').classList.toggle('active',isReg);
@@ -936,12 +957,10 @@ async function doForgot(){
   }catch(e){ appAlert("Error: "+e.message); }
 }
 
-/* ENTER */
 function enterApp(){
   const s = load(KEYS.session,null);
   if(!s) return;
   document.getElementById('auth').classList.add('hidden');
-  document.getElementById('mainNav').classList.remove('hidden');
   document.getElementById('profName').textContent = s.name;
   document.getElementById('profPhone').textContent = "+91 "+s.phone;
   document.getElementById('profCount').textContent = load(KEYS.joined,[]).length;
@@ -950,7 +969,6 @@ function enterApp(){
   const isAdmin = s.phone === ADMIN_PHONE;
   if(isAdmin){
     document.body.classList.add('admin-mode');
-    document.getElementById('nav-admin').classList.remove('hidden');
     document.getElementById('profRole').innerHTML = '<span class="hi">मुख्य एडमिन</span><span class="en">Admin</span>';
     badge.innerHTML = '<span class="admin-badge">👑 MASTER ADMIN</span>';
     document.getElementById('topIcon').textContent = '👑';
@@ -970,7 +988,6 @@ function enterApp(){
 }
 function appLogout(){ localStorage.removeItem(KEYS.session); localStorage.removeItem('kk_last_tab'); location.reload(); }
 
-/* 🏠 MENU GRID */
 function buildMenuGrid(){
   const grid = document.getElementById('mainMenuGrid');
   if(!grid) return;
@@ -989,7 +1006,7 @@ function buildMenuGrid(){
   }
   grid.innerHTML = tiles.map(x=>`
     <div class="menu-tile ${x.admin?'admin-tile':''}" onclick="handleMenuTile('${x.id}')">
-      <div class="mt-icon ${x.cls}">${x.icon}</div>
+      <div class="mt-icon ${x.cls}"><i>${x.icon}</i></div>
       <div class="mt-label"><span class="hi">${x.hi}</span><span class="en">${x.en}</span></div>
       <div class="mt-sub"><span class="hi">${x.subHi}</span><span class="en">${x.subEn}</span></div>
       ${x.badge ? `<div class="mt-badge ${x.admin?'gold':''}">${x.badge}</div>` : ''}
@@ -1000,7 +1017,7 @@ function handleMenuTile(id){
   if(id==='dashboard'){
     const current = load(KEYS.current,null);
     if(!current){
-      appAlert(t('कोई चालू कमेटी नहीं है।\n\nपहले "Create Khata" या "Code & View" से कमेटी खोलें।','No active group.\n\nUse "Create Khata" or "Code & View" first.'));
+      appAlert(t('कोई चालू कमेटी नहीं है।\n\nपहले "नई कमेटी बनाएं" या "कोड & व्यू" से कमेटी खोलें।','No active group.\n\nUse "Create Khata" or "Code & View" first.'));
       return;
     }
     show('dashboard');
@@ -1010,7 +1027,6 @@ function handleMenuTile(id){
   show(id);
 }
 
-/* PROFILE TOGGLES */
 function renderProfileToggles(){
   const hide = loadHide();
   const opts = [
@@ -1053,10 +1069,6 @@ function show(id){
   if(id==='home'){ buildMenuGrid(); renderMyList(); renderNoticeOnHome(); updateLimitBadge(); }
   if(id==='admin'){ renderAdminPanel(); }
   if(id==='kametiList'){ renderMyListFull(); }
-  ['home','create','kametiList','settings','admin'].forEach(n=>{
-    const b = document.getElementById('nav-'+n);
-    if(b) b.classList.toggle('active', n===id);
-  });
   localStorage.setItem('kk_last_tab', id);
   if(id==='dashboard') loadDash();
   window.scrollTo(0,0);
@@ -1066,10 +1078,7 @@ function tryCreate(){
   const joined = load(KEYS.joined,[]);
   const isAdmin = user.phone === ADMIN_PHONE;
   if(!isAdmin && joined.length >= GLOBAL.freeLimit){
-    appAlert(t(
-      `⚠️ फ्री लिमिट खत्म!\n\nआप सिर्फ ${GLOBAL.freeLimit} कमेटी बना सकते हैं।\nअभी ${joined.length} बनाई है।`,
-      `⚠️ Free Limit!\n\nMax ${GLOBAL.freeLimit} groups.\nYou have ${joined.length}.`
-    ));
+    appAlert(t(`⚠️ फ्री लिमिट खत्म!\n\nआप सिर्फ ${GLOBAL.freeLimit} कमेटी बना सकते हैं।\nअभी ${joined.length} बनाई है।`, `⚠️ Free Limit!\n\nMax ${GLOBAL.freeLimit} groups.\nYou have ${joined.length}.`));
     return;
   }
   show('create');
@@ -1094,7 +1103,7 @@ function renderNoticeOnHome(){
   if(GLOBAL.notice && GLOBAL.notice.trim()){
     const div = document.createElement('div');
     div.className = 'card';
-    div.style.cssText = 'background:linear-gradient(160deg,rgba(251,191,36,.15),rgba(251,191,36,.05));border:1px solid rgba(251,191,36,.35);';
+    div.style.cssText = 'background:linear-gradient(160deg,rgba(251,191,36,.15),rgba(251,191,36,.05));border:1px solid rgba(251,191,36,.35);margin-bottom:12px;';
     div.innerHTML = `<div style="display:flex;gap:10px;align-items:flex-start;">
       <div style="font-size:20px;">📢</div>
       <div style="flex:1;min-width:0;">
@@ -1106,7 +1115,6 @@ function renderNoticeOnHome(){
   }
 }
 
-/* CREATE */
 function renderFreqOptions(){
   const c = document.getElementById('freqOptions');
   if(!c) return;
@@ -1117,7 +1125,8 @@ function renderFreqOptions(){
   ];
   c.innerHTML = opts.map(o=>{
     const avail = GLOBAL.frequencies[o.key];
-    return `<div class="freq-card" style="background:var(--card-2);border:2px solid ${currentFreq===o.key?'var(--primary)':'var(--border)'};border-radius:14px;padding:12px 6px;text-align:center;cursor:pointer;${!avail?'opacity:.35;pointer-events:none;':''}${currentFreq===o.key?'background:linear-gradient(160deg,rgba(16,185,129,.15),rgba(16,185,129,.05));':''}" onclick="setFreq('${o.key}')">
+    const active = currentFreq===o.key;
+    return `<div style="background:${active?'linear-gradient(160deg,rgba(16,185,129,.15),rgba(16,185,129,.05))':'var(--card-2)'};border:2px solid ${active?'var(--primary)':'var(--border)'};border-radius:14px;padding:12px 6px;text-align:center;cursor:pointer;${!avail?'opacity:.35;pointer-events:none;':''}" onclick="setFreq('${o.key}')">
       <span style="font-size:20px;display:block;margin-bottom:5px;">${o.em}</span>
       <b style="font-size:10.5px;color:var(--text);font-weight:900;display:block;"><span class="hi">${o.hi}</span><span class="en">${o.en}</span></b>
     </div>`;
@@ -1139,14 +1148,8 @@ function buildMemberInputs(){
   let h = '';
   for(let i=1;i<=c;i++){
     h += `<div class="mem-row">
-       <div class="mem-input-group">
-           <span class="num">${i}</span>
-           <input class="mem-name lang-input" data-hi="सदस्य ${i} नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' नाम *','Member '+i+' Name *')}">
-       </div>
-       <div class="mem-input-group" style="padding-left:40px;">
-           <span style="font-size:14px;">📱</span>
-           <input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल *" data-en="Mobile *" placeholder="${t('मोबाइल *','Mobile *')}">
-       </div>
+       <div class="mem-input-group"><span class="num">${i}</span><input class="mem-name lang-input" data-hi="सदस्य ${i} नाम *" data-en="Member ${i} Name *" placeholder="${t('सदस्य '+i+' नाम *','Member '+i+' Name *')}"></div>
+       <div class="mem-input-group" style="padding-left:40px;"><span style="font-size:14px;">📱</span><input class="mem-phone lang-input" type="tel" maxlength="10" data-hi="मोबाइल *" data-en="Mobile *" placeholder="${t('मोबाइल *','Mobile *')}"></div>
     </div>`;
   }
   document.getElementById('memberInputs').innerHTML = h;
@@ -1203,10 +1206,7 @@ async function createBC(){
     document.getElementById('created').innerHTML = `
       <h2 style="color:var(--accent);font-weight:900;margin-bottom:10px;justify-content:center;font-size:16px;">✅ ${t('बन गई!','Created!')}</h2>
       <p style="font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:8px;"><span class="hi">कोड सदस्यों को भेजें:</span><span class="en">Share code:</span></p>
-      <div class="code-copy-box">
-        <div class="code-text">${code}</div>
-        <button onclick="copyToClipboard('${code}', '${t('✅ कॉपी!','✅ Copied!')}')">📋 Copy</button>
-      </div>
+      <div class="code-copy-box"><div class="code-text">${code}</div><button onclick="copyToClipboard('${code}', '${t('✅ कॉपी!','✅ Copied!')}')">📋 Copy</button></div>
       <button class="btn btn-primary" onclick="show('dashboard')">${t('खोलें','Open')}</button>
     `;
     updateLimitBadge();
@@ -1215,7 +1215,6 @@ async function createBC(){
   document.getElementById('createBtn').innerHTML = `<span class="hi">✅ कमेटी बनाएं</span><span class="en">✅ Create</span>`;
 }
 
-/* JOIN */
 async function join(){
   const code = document.getElementById('accessCode').value.trim().toUpperCase();
   const cu = load(KEYS.session,{});
@@ -1236,7 +1235,6 @@ async function join(){
   }catch(e){ appAlert(t("गलत Code!","Invalid Code!")); }
 }
 
-/* MY LIST */
 async function renderMyList(){
   const codes = load(KEYS.joined,[]);
   document.getElementById('bcCount').textContent = codes.length;
@@ -1286,7 +1284,6 @@ async function renderMyListFull(){
   document.getElementById('bcListFull').innerHTML = html || `<div class="empty-state"><span class="emo">📋</span><p>${t('कोई कमेटी नहीं','No Group')}</p></div>`;
 }
 
-/* DASHBOARD */
 async function saveBCState(preserveScroll){
   const sy = preserveScroll ? window.scrollY : 0;
   try{
@@ -1340,6 +1337,7 @@ async function loadDash(preserveScroll, prevScroll){
       document.getElementById('emiBannerHolder').appendChild(b);
     }
 
+    // 💳 CREDIT CARD WALLET
     document.getElementById('walletBlock').innerHTML = `
       <div class="card premium" style="padding:12px;margin-bottom:10px;">
         <div style="display:flex;align-items:center;gap:10px;">
@@ -1351,12 +1349,24 @@ async function loadDash(preserveScroll, prevScroll){
           ${isOwner && bc.settings.allowNextRound ? `<button class="btn btn-sm" style="background:linear-gradient(135deg,#fde047,#f59e0b);color:#78350f;flex-shrink:0;" onclick="startNextRound()">+ ${t('अगला','Next')}</button>` : ''}
         </div>
       </div>
-      <div class="wallet-card">
-        <div class="wc-head"><div class="wc-chip"></div><div class="wc-signal">🛜</div></div>
-        <div class="wc-label">${t('कमेटी वॉलेट','WALLET')}</div>
-        ${hide.wallet ? `<div class="wc-amount" style="opacity:.4;">₹ ••••••</div>` : `<div class="wc-amount"><span style="font-size:22px;">₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>`}
-        <div class="wc-bal">${t('उपलब्ध बैलेंस','Available Balance')}</div>
-        <div class="wc-foot"><div>📅 ${formatD(startD)} → ${formatD(endD)}</div></div>
+      <div class="credit-card">
+        <div class="cc-top">
+          <div class="cc-chip"></div>
+          <div class="cc-brand"><span class="cc-brand-dot"></span> KAMETI WALLET</div>
+        </div>
+        <div class="cc-label">${t('कमेटी वॉलेट','COMMITTEE WALLET')}</div>
+        ${hide.wallet ? `<div class="cc-amount cc-hide">••••••</div>` : `<div class="cc-amount"><span class="rs">₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>`}
+        <div class="cc-bal">${t('उपलब्ध बैलेंस','Available Balance')}</div>
+        <div class="cc-foot">
+          <div class="cc-foot-item">
+            <span class="lbl">${t('संचालक','OWNER')}</span>
+            <span class="val">${bc.ownerName}</span>
+          </div>
+          <div class="cc-foot-item" style="text-align:right;">
+            <span class="lbl">${t('वैध तक','VALID')}</span>
+            <span class="val">${formatD(endD)}</span>
+          </div>
+        </div>
       </div>
       <div class="stats">
         <div class="stat"><b>₹${bc.amount}</b><span>${t('किस्त','Inst.')}</span></div>
@@ -1432,11 +1442,12 @@ async function loadDash(preserveScroll, prevScroll){
   } catch(e){ show('home'); }
 }
 
-/* COMPACT MEMBER ROW */
+/* 🌟 COMPACT MEMBER ROW WITH EMI INFO */
 function renderMemberCompact(m, i, bc, cu, isOwner, hide, totalInstalls){
   let totalPaidByMem = m.paidRounds*bc.amount;
   let targetPaid = bc.currentRound*bc.amount;
   let pendingDue = Math.max(0, targetPaid - totalPaidByMem);
+  let leftEMIs = Math.max(0, totalInstalls - m.paidRounds);
   let isMe = (m.phone && m.phone===cu.phone);
   if(!m.phone && cu.name){
     let cN = cu.name.toLowerCase().trim();
@@ -1449,23 +1460,35 @@ function renderMemberCompact(m, i, bc, cu, isOwner, hide, totalInstalls){
 
   let nameDisplay = `<div class="ml-name">${m.name}</div>`;
   if(isOwner && bc.settings.allowNameEdit){
-    nameDisplay = `<input type="text" value="${m.name}" class="ml-name-input" style="font-size:var(--name-font);font-weight:900;border:none;background:transparent;padding:0;color:var(--text);width:100%;" onchange="editMemberName('${uniqueId}',this.value)">`;
+    nameDisplay = `<input type="text" value="${m.name}" style="font-size:var(--name-font);font-weight:900;border:none;background:transparent;padding:0;color:var(--text);width:100%;" onchange="editMemberName('${uniqueId}',this.value)">`;
   }
+
+  // EMI badge colors
+  let emiClass = '';
+  if(m.hasWon) emiClass = 'gold';
+  else if(leftEMIs === 0) emiClass = 'gold';
+  else if(pendingDue > 0) emiClass = 'warn';
 
   // Actions
   let actions = '';
   if(m.hasWon){
-    actions += `<div style="font-size:18px;">🎉</div>`;
-  } else if(isOwner && bc.settings.allowWinnerDeclare){
-    actions += `<button class="ml-btn win" onclick="declareWinner('${uniqueId}')">🏆</button>`;
-  }
-  if(!isOwner && isMe && pendingDue>0 && bc.upiId && bc.settings.allowOnlinePayment){
-    actions += `<button class="ml-btn pay" onclick="copyToClipboard('${bc.upiId}','${t('✅ UPI कॉपी!','✅ UPI copied!')}')">📋</button>`;
-  } else if(isOwner && pendingDue>0 && bc.settings.allowMemberPay){
-    actions += `<button class="ml-btn pay" onclick="markPaidAdvance('${uniqueId}', true)">➕</button>`;
+    actions = `<div style="font-size:20px;flex-shrink:0;">🎉</div>`;
+  } else {
+    if(isOwner && bc.settings.allowWinnerDeclare){
+      actions += `<button class="ml-btn win" onclick="declareWinner('${uniqueId}')">🏆</button>`;
+    }
+    if(!isOwner && isMe && pendingDue>0 && bc.upiId && bc.settings.allowOnlinePayment){
+      actions += `<button class="ml-btn upi" onclick="copyToClipboard('${bc.upiId}','${t('✅ UPI कॉपी!','✅ UPI copied!')}')">📋</button>`;
+    } else if(isOwner && pendingDue>0 && bc.settings.allowMemberPay){
+      actions += `<button class="ml-btn pay" onclick="markPaidAdvance('${uniqueId}', true)">➕</button>`;
+    }
   }
 
-  let infoLine = `📱 ${m.phone||'—'} • ${t('जमा','Paid')}: ₹${totalPaidByMem.toLocaleString('en-IN')}`;
+  // Info line: phone • EMI badge
+  let infoLine = `<span>📱 ${m.phone||'—'}</span><span class="dot">•</span>
+    <span class="emi-badge ${emiClass}">
+      <span class="num">${m.paidRounds}</span> ${t('जमा','paid')} <span class="dot" style="opacity:.7;">|</span> <span class="num">${leftEMIs}</span> ${t('बाकी','left')}
+    </span>`;
 
   return `<div class="mem-line ${isMe?'me':''}">
     <div class="ml-num">${i+1}</div>
@@ -1567,13 +1590,12 @@ async function confirmWinner(){
   }
 }
 
-/* EMI */
 function openEmiModal(){
   if(!currentBCData) return;
   if(currentBCData.emiReminder){
     document.getElementById('emiMsg').value = currentBCData.emiReminder.message;
   } else {
-    document.getElementById('emiMsg').value = t('कृपया अपनी बाकी किश्त जल्द से जल्द जमा करें। धन्यवाद!','Please pay your pending installment as soon as possible. Thanks!');
+    document.getElementById('emiMsg').value = t('कृपया अपनी बाकी किश्त जल्द से जल्द जमा करें। धन्यवाद!','Please pay your pending installment ASAP. Thanks!');
   }
   document.getElementById('emiModal').classList.remove('hidden');
 }
@@ -1584,10 +1606,9 @@ async function sendEmiReminder(){
   currentBCData.emiReminder = { message: msg, sentAt: Date.now(), expiresAt: Date.now() + durHrs*3600*1000 };
   document.getElementById('emiModal').classList.add('hidden');
   await saveBCState(true);
-  appAlert(t('✅ रिमाइंडर भेज दिया! सभी सदस्यों को दिखेगा।','✅ Reminder sent!'));
+  appAlert(t('✅ रिमाइंडर भेज दिया!','✅ Reminder sent!'));
 }
 
-/* EXCEL */
 function downloadExcel(){
   if(!currentBCData) return;
   let csv = "\uFEFF";
@@ -1609,7 +1630,6 @@ function downloadExcel(){
   appAlert(t("✅ Excel डाउनलोड!","✅ Downloaded!"));
 }
 
-/* ADMIN */
 function renderAdminPanel(){
   if(!isAdminUser()) return;
   const joined = load(KEYS.joined,[]);
@@ -1746,7 +1766,6 @@ function clearNotice(){
   renderNoticeOnHome();
 }
 
-/* INIT */
 window.onload = ()=>{
   applyLang();
   const s = load(KEYS.session,null);
@@ -1756,4 +1775,4 @@ window.onload = ()=>{
 };
 </script>
 </body>
-  </html>
+         </html>
