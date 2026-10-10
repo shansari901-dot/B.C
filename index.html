@@ -130,77 +130,83 @@ select.no-ico option{background:var(--card-2);color:var(--text);}
 .admin-tile{border-color:rgba(251,191,36,.4);background:linear-gradient(165deg,#1f1a10 0%,#16161f 60%);}
 
 /* ═══════════════════════════════════════════
-   💎 PREMIUM BLACK + GOLD WALLET CARD
+   💎 COMPACT PREMIUM WALLET CARD
    ═══════════════════════════════════════════ */
 .premium-card{
-  border-radius:22px;
-  padding:20px 18px 18px;
+  border-radius:18px;
+  padding:14px 14px 0;
   position:relative;
   overflow:hidden;
   color:#fff;
-  margin-bottom:12px;
-  box-shadow:0 18px 44px rgba(0,0,0,.75),0 0 0 1px rgba(251,191,36,.2),inset 0 1px 0 rgba(255,255,255,.06);
+  margin-bottom:10px;
+  box-shadow:0 14px 32px rgba(0,0,0,.6),0 0 0 1px rgba(251,191,36,.35),inset 0 1px 0 rgba(255,255,255,.08);
   background:
-    radial-gradient(circle at 100% 0%, rgba(251,191,36,.15) 0%, transparent 42%),
-    radial-gradient(circle at 0% 100%, rgba(251,191,36,.08) 0%, transparent 40%),
-    linear-gradient(135deg,#050505 0%,#0f0f0f 45%,#050505 100%);
-  border:1px solid rgba(251,191,36,.3);
-  min-height:200px;
+    radial-gradient(circle at 95% 8%, rgba(16,185,129,.25) 0%, transparent 40%),
+    radial-gradient(circle at 100% 90%, rgba(251,191,36,.12) 0%, transparent 45%),
+    radial-gradient(circle at 0% 0%, rgba(30,58,138,.35) 0%, transparent 50%),
+    linear-gradient(135deg,#0a1428 0%,#0f1f35 30%,#0a3d2e 65%,#064e3b 100%);
+  border:1.5px solid rgba(251,191,36,.5);
 }
 .premium-card::before{
-  content:'';position:absolute;top:-60%;left:-60%;width:220%;height:220%;
-  background:linear-gradient(115deg,transparent 42%,rgba(251,191,36,.05) 46%,rgba(251,191,36,.09) 50%,rgba(251,191,36,.05) 54%,transparent 58%);
+  content:'';position:absolute;top:0;right:0;width:45%;height:100%;
+  background:radial-gradient(ellipse at 100% 50%, rgba(16,185,129,.28) 0%, transparent 65%);
+  pointer-events:none;
+}
+.premium-card::after{
+  content:'';position:absolute;top:-40%;right:-10%;width:60%;height:120%;
+  background:linear-gradient(115deg,transparent 42%,rgba(251,191,36,.06) 47%,rgba(251,191,36,.1) 50%,rgba(251,191,36,.06) 53%,transparent 58%);
   pointer-events:none;animation:shine 7s infinite;
 }
-@keyframes shine{0%{transform:translateX(-100%) rotate(0deg);}100%{transform:translateX(100%) rotate(0deg);}}
-.pc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative;z-index:2;margin-bottom:16px;}
+@keyframes shine{0%{transform:translateX(-140%);}100%{transform:translateX(80%);}}
+.pc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative;z-index:2;margin-bottom:10px;}
 .pc-title-block{min-width:0;flex:1;}
-.pc-member-title{display:flex;align-items:center;gap:5px;font-size:14px;font-weight:900;color:#fff;line-height:1.15;margin-bottom:3px;letter-spacing:.2px;}
-.pc-member-title .crown{font-size:14px;filter:drop-shadow(0 2px 4px rgba(251,191,36,.6));}
-.pc-member-sub{font-size:8.5px;font-weight:900;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;opacity:.9;}
-.pc-brand{display:flex;align-items:center;gap:5px;flex-shrink:0;}
-.pc-brand .brand-leaf{font-size:20px;filter:drop-shadow(0 2px 4px rgba(16,185,129,.5));}
+.pc-member-title{display:flex;align-items:center;gap:5px;font-size:13.5px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:3px;letter-spacing:.2px;}
+.pc-member-title .crown{font-size:14px;filter:drop-shadow(0 2px 4px rgba(251,191,36,.7));}
+.pc-member-sub{font-size:8px;font-weight:900;letter-spacing:3px;color:var(--gold);text-transform:uppercase;opacity:.95;padding-left:20px;}
+.pc-brand{display:flex;align-items:center;gap:5px;flex-shrink:0;text-align:right;}
+.pc-brand .brand-leaf{font-size:22px;filter:drop-shadow(0 2px 6px rgba(16,185,129,.6));}
 .pc-brand .brand-text{text-align:right;}
-.pc-brand .brand-name{font-size:15px;font-weight:900;color:var(--gold);line-height:1;font-family:Georgia,'Times New Roman',serif;letter-spacing:.3px;text-shadow:0 1px 4px rgba(251,191,36,.4);}
-.pc-brand .brand-sub{font-size:7px;font-weight:900;color:var(--gold);letter-spacing:2px;opacity:.85;text-transform:uppercase;margin-top:2px;}
-.pc-chip-row{display:flex;align-items:center;gap:10px;position:relative;z-index:2;margin-bottom:14px;}
-.pc-chip{width:42px;height:30px;border-radius:5px;background:linear-gradient(135deg,#fef3c7 0%,#fbbf24 40%,#d97706 100%);position:relative;overflow:hidden;box-shadow:0 3px 8px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.6);}
-.pc-chip::before{content:'';position:absolute;top:8px;left:5px;right:5px;height:1px;background:rgba(120,53,15,.55);}
-.pc-chip::after{content:'';position:absolute;top:19px;left:5px;right:5px;height:1px;background:rgba(120,53,15,.55);}
-.pc-signal{display:flex;align-items:flex-end;gap:2px;height:16px;}
-.pc-signal span{width:3.5px;background:var(--gold);border-radius:1px;display:block;}
-.pc-signal span:nth-child(1){height:6px;}
-.pc-signal span:nth-child(2){height:10px;}
-.pc-signal span:nth-child(3){height:14px;}
-.pc-label{font-size:9.5px;font-weight:900;letter-spacing:2px;color:var(--gold);text-transform:uppercase;position:relative;z-index:2;margin-bottom:4px;opacity:.95;}
-.pc-amount-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative;z-index:2;margin-bottom:14px;}
+.pc-brand .brand-name{font-size:14px;font-weight:900;color:#fff;line-height:1;font-family:-apple-system,sans-serif;letter-spacing:.3px;}
+.pc-brand .brand-sub{font-size:7px;font-weight:700;color:#a7f3d0;letter-spacing:1.5px;opacity:.9;margin-top:2px;}
+.pc-chip-row{display:flex;align-items:center;gap:8px;position:relative;z-index:2;margin-bottom:8px;}
+.pc-chip{width:34px;height:24px;border-radius:5px;background:linear-gradient(135deg,#fef3c7 0%,#fbbf24 40%,#d97706 100%);position:relative;overflow:hidden;box-shadow:0 3px 8px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.6);}
+.pc-chip::before{content:'';position:absolute;top:7px;left:4px;right:4px;height:1px;background:rgba(120,53,15,.55);}
+.pc-chip::after{content:'';position:absolute;top:15px;left:4px;right:4px;height:1px;background:rgba(120,53,15,.55);}
+.pc-signal{display:flex;align-items:flex-end;gap:2px;height:14px;}
+.pc-signal span{width:3px;background:var(--gold);border-radius:1px;display:block;}
+.pc-signal span:nth-child(1){height:5px;}
+.pc-signal span:nth-child(2){height:9px;}
+.pc-signal span:nth-child(3){height:13px;}
+.pc-amount-row{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;z-index:2;margin-bottom:10px;}
 .pc-amount-block{min-width:0;flex:1;}
-.pc-amount{font-size:34px;font-weight:900;color:#ffffff;letter-spacing:-1px;line-height:1;text-shadow:0 3px 14px rgba(0,0,0,.6);word-break:break-all;font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;}
-.pc-amount .rs{font-size:22px;margin-right:1px;color:var(--gold);font-weight:800;vertical-align:top;}
-.pc-bal{font-size:10px;font-weight:700;color:#a7f3d0;opacity:.85;margin-top:6px;letter-spacing:.4px;}
-.pc-round{
-  min-width:72px;height:72px;border-radius:50%;
-  background:radial-gradient(circle,rgba(251,191,36,.12) 0%,rgba(251,191,36,.03) 70%,transparent 100%);
-  border:2px solid var(--gold);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  position:relative;flex-shrink:0;
-  box-shadow:0 0 22px rgba(251,191,36,.4),inset 0 0 14px rgba(251,191,36,.15);
-}
-.pc-round::before,.pc-round::after{content:'';position:absolute;width:0;height:0;border-style:solid;}
-.pc-round::before{left:-13px;top:50%;transform:translateY(-50%);border-width:6px 8px 6px 0;border-color:transparent var(--gold) transparent transparent;}
-.pc-round::after{right:-13px;top:50%;transform:translateY(-50%);border-width:6px 0 6px 8px;border-color:transparent transparent transparent var(--gold);}
-.pc-round .crown{font-size:11px;line-height:1;margin-bottom:2px;}
-.pc-round .num{font-size:21px;font-weight:900;color:#fff;line-height:1;text-shadow:0 0 10px rgba(251,191,36,.7);}
-.pc-round .lbl{font-size:7.5px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-top:1px;}
-.pc-owner{position:relative;z-index:2;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(251,191,36,.15);}
-.pc-owner-name{font-size:13px;font-weight:900;color:#fff;letter-spacing:1.2px;text-transform:uppercase;}
-.pc-owner-phone{font-size:11px;font-weight:800;color:var(--gold);margin-top:3px;letter-spacing:.5px;}
-.pc-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;position:relative;z-index:2;}
-.pc-foot-item{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
-.pc-foot-item.right{text-align:right;}
-.pc-foot-item .lbl{font-size:7.5px;font-weight:900;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;opacity:.9;}
-.pc-foot-item .val{font-size:11px;font-weight:900;color:#fff;font-family:'SF Mono',Menlo,monospace;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.pc-foot-item .val.phone{font-family:inherit;letter-spacing:.3px;}
+.pc-label{font-size:10px;font-weight:900;color:#fff;letter-spacing:.5px;margin-bottom:2px;opacity:.95;}
+.pc-amount{font-size:28px;font-weight:900;color:#fbbf24;letter-spacing:-.5px;line-height:1;text-shadow:0 2px 8px rgba(251,191,36,.35),0 1px 0 rgba(0,0,0,.4);word-break:break-all;margin-bottom:6px;}
+.pc-amount .rs{font-size:22px;margin-right:1px;color:#fbbf24;font-weight:900;vertical-align:top;}
+.pc-bal-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.5);padding:3px 9px;border-radius:50px;font-size:9.5px;font-weight:900;color:#a7f3d0;letter-spacing:.3px;}
+.pc-bal-pill .dot{width:6px;height:6px;border-radius:50%;background:#10b981;box-shadow:0 0 6px #10b981;}
+.pc-round{min-width:76px;height:76px;border-radius:50%;background:radial-gradient(circle,#1a1a2e 0%,#0a0a15 100%);border:2.5px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex-shrink:0;box-shadow:0 0 20px rgba(251,191,36,.5),inset 0 0 14px rgba(251,191,36,.2);}
+.pc-round .crown-badge{position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-size:12px;line-height:1;filter:drop-shadow(0 2px 4px rgba(251,191,36,.7));}
+.pc-round .num{font-size:22px;font-weight:900;color:#fff;line-height:1;text-shadow:0 0 12px rgba(251,191,36,.7);margin-top:2px;}
+.pc-round .lbl{font-size:7.5px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-top:2px;text-transform:uppercase;}
+.pc-round .wreath-l,.pc-round .wreath-r{position:absolute;top:50%;transform:translateY(-50%);font-size:26px;opacity:.85;filter:drop-shadow(0 0 6px rgba(251,191,36,.5));pointer-events:none;}
+.pc-round .wreath-l{left:-14px;}
+.pc-round .wreath-r{right:-14px;transform:translateY(-50%) scaleX(-1);}
+.pc-owner{position:relative;z-index:2;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(251,191,36,.2);}
+.pc-owner-row{display:flex;align-items:center;gap:7px;margin-bottom:4px;}
+.pc-owner-row:last-child{margin-bottom:0;}
+.pc-owner-row .icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.pc-owner-row .icon.person{background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.4);}
+.pc-owner-row .icon.phone{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);}
+.pc-owner-name{font-size:12.5px;font-weight:900;color:#fff;letter-spacing:.7px;text-transform:uppercase;}
+.pc-owner-phone{font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px;}
+.pc-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;position:relative;z-index:2;background:rgba(0,0,0,.4);border-radius:12px 12px 0 0;padding:10px 10px;margin:0 -14px;border-top:1px solid rgba(251,191,36,.2);}
+.pc-foot-item{display:flex;align-items:center;gap:7px;min-width:0;flex:1;}
+.pc-foot-item .ft-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.3);}
+.pc-foot-item .ft-text{min-width:0;}
+.pc-foot-item .lbl{font-size:7.5px;font-weight:900;letter-spacing:1.2px;color:var(--gold);text-transform:uppercase;opacity:.95;margin-bottom:1px;}
+.pc-foot-item .val{font-size:11.5px;font-weight:900;color:#fff;font-family:'SF Mono',Menlo,monospace;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pc-foot-divider{width:1px;height:26px;background:rgba(251,191,36,.25);flex-shrink:0;}
+.pc-script{font-size:9px;font-weight:800;color:var(--gold);font-style:italic;text-align:right;font-family:Georgia,serif;letter-spacing:.2px;line-height:1.15;flex-shrink:0;opacity:.95;}
 .pc-hide{opacity:.4;letter-spacing:3px;}
 
 .stats{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;margin-bottom:12px;}
@@ -295,7 +301,7 @@ body.admin-mode .ai-opt-btn{border-color:rgba(251,191,36,.5);color:var(--gold);}
 .opt-btn{background:var(--card-2);border:2px solid var(--border);border-radius:11px;padding:9px 4px;font-size:11px;font-weight:900;color:var(--muted);cursor:pointer;text-align:center;}
 .opt-btn.active{border-color:var(--primary);background:linear-gradient(160deg,rgba(16,185,129,.15),rgba(16,185,129,.05));color:var(--accent);}
 .opt-group-3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px;}
-@media (max-width:360px){ .pc-amount{font-size:28px;} .pc-round{min-width:62px;height:62px;} .pc-round .num{font-size:18px;} .menu-tile .mt-icon{width:50px;height:50px;font-size:24px;} .menu-tile .mt-label{font-size:12px;} }
+@media (max-width:360px){ .pc-amount{font-size:24px;} .pc-round{min-width:66px;height:66px;} .pc-round .num{font-size:19px;} .menu-tile .mt-icon{width:50px;height:50px;font-size:24px;} .menu-tile .mt-label{font-size:12px;} }
 </style>
 </head>
 <body class="lang-hi font-name-md scale-md">
@@ -826,27 +832,23 @@ function enterApp(){
   renderProfileToggles();
   buildMenuGrid();
   applyLang();
-  // Initialize history
-  history.replaceState({screen:'auth'}, '', '');
-  goto('home');
+  history.replaceState({screen:'home'}, '', '#home');
+  currentScreen = 'home';
+  document.querySelectorAll('main > section').forEach(x=>x.classList.add('hidden'));
+  document.getElementById('home').classList.remove('hidden');
+  buildMenuGrid(); renderMyList(); renderNoticeOnHome();
 }
 function appLogout(){ localStorage.removeItem(KEYS.session); localStorage.removeItem('kk_last_tab'); location.reload(); }
 
-/* ═══════════════════════════════════════════
-   🧭 SCREEN NAVIGATION WITH HISTORY
-   ═══════════════════════════════════════════ */
+/* 🧭 NAVIGATION */
 function goto(id, fromPop){
-  if(!fromPop){
-    // push new state
-    if(currentScreen !== id){
-      SCREEN_STACK.push(currentScreen);
-      history.pushState({screen: id}, '', '#'+id);
-    }
+  if(!fromPop && currentScreen !== id){
+    SCREEN_STACK.push(currentScreen);
+    history.pushState({screen: id}, '', '#'+id);
   }
   currentScreen = id;
   document.querySelectorAll('main > section').forEach(x=>x.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
-  
   if(id==='settings'){
     document.getElementById('profCount').textContent = load(KEYS.joined,[]).length;
     renderProfileToggles();
@@ -860,26 +862,27 @@ function goto(id, fromPop){
   if(id==='home'){ buildMenuGrid(); renderMyList(); renderNoticeOnHome(); updateLimitBadge(); }
   if(id==='admin'){ renderAdminPanel(); }
   if(id==='kametiList'){ renderMyListFull(); }
-  if(id==='dashboard'){ loadDash(); return; } // loadDash handles its own scroll
+  if(id==='dashboard'){ loadDash(); return; }
   localStorage.setItem('kk_last_tab', id);
   window.scrollTo(0,0);
 }
 function goBack(){
-  // Custom back — go to previous screen in stack, or home
+  if(currentScreen === 'home' || currentScreen === 'auth'){
+    // Let app exit
+    history.back();
+    return;
+  }
   history.back();
 }
 function show(id){ goto(id); }
 
-// Back button handling
 window.addEventListener('popstate', (e) => {
-  const targetScreen = e.state?.screen;
-  if(targetScreen && targetScreen !== currentScreen){
-    goto(targetScreen, true);
+  const target = e.state?.screen;
+  if(target && target !== currentScreen){
+    goto(target, true);
     return;
   }
-  // No state — go home if not on home, else allow exit
   if(currentScreen === 'home' || currentScreen === 'auth'){
-    // Let it close the app (only fires once more)
     return;
   }
   goto('home', true);
@@ -1161,16 +1164,12 @@ async function renderMyListFull(){
   document.getElementById('bcListFull').innerHTML = html || `<div class="empty-state"><span class="emo">📋</span><p>${t('कोई कमेटी नहीं','No Group')}</p></div>`;
 }
 
-/* ═══════════════════════════════════════════
-   📊 DASHBOARD — WITH SCROLL PRESERVATION
-   ═══════════════════════════════════════════ */
+/* DASHBOARD */
 async function loadDash(){
   const code = load(KEYS.current,null);
   const cu = load(KEYS.session,{});
   const hide = loadHide();
   const sY = window.scrollY;
-
-  // Don't clear blocks — this preserves height
   try{
     const res = await fetch(`${API_URL}/api/bcs?code=${code}`);
     currentBCData = (await res.json()).data;
@@ -1189,10 +1188,7 @@ async function loadDash(){
       if(m.hasWon===undefined) m.hasWon = false;
     });
     if(!bc.settings) bc.settings = { allowOnlinePayment:true, showExcel:true, allowNameEdit:true, allowWinnerDeclare:true, allowNextRound:true, showWalletToMembers:true, allowMemberPay:true, showUPIToAll:true };
-
     renderDashboardContent(bc, cu, hide);
-
-    // Restore scroll position after render (no loading state, so minimal shift)
     requestAnimationFrame(()=>window.scrollTo(0, sY));
   } catch(e){ goto('home'); }
 }
@@ -1209,9 +1205,7 @@ function renderDashboardContent(bc, cu, hide){
   let freqLabel = freq==='weekly'?t('हफ्ता','Week'):freq==='biweekly'?t('2 हफ्ते','2 Weeks'):t('महीना','Month');
   const totalMembers = bc.members.length;
   let totalInstalls = Number(bc.totalInst) || totalMembers;
-  let monthsLeft = Math.max(1, Math.ceil(totalInstalls / 4));
 
-  // EMI banner
   document.getElementById('emiBannerHolder').innerHTML = '';
   if(bc.emiReminder && bc.emiReminder.expiresAt > Date.now()){
     const b = document.createElement('div');
@@ -1220,7 +1214,6 @@ function renderDashboardContent(bc, cu, hide){
     document.getElementById('emiBannerHolder').appendChild(b);
   }
 
-  // ═══ PREMIUM BLACK + GOLD WALLET ═══
   document.getElementById('walletBlock').innerHTML = `
     <div class="card premium" style="padding:12px;margin-bottom:10px;">
       <div style="display:flex;align-items:center;gap:10px;">
@@ -1241,8 +1234,8 @@ function renderDashboardContent(bc, cu, hide){
         <div class="pc-brand">
           <span class="brand-leaf">🌿</span>
           <div class="brand-text">
-            <div class="brand-name">Khata</div>
-            <div class="brand-sub">PREMIUM</div>
+            <div class="brand-name">कमेटी खाता</div>
+            <div class="brand-sub">आपकी कमेटी • आपका हिसाब</div>
           </div>
         </div>
       </div>
@@ -1250,31 +1243,47 @@ function renderDashboardContent(bc, cu, hide){
         <div class="pc-chip"></div>
         <div class="pc-signal"><span></span><span></span><span></span></div>
       </div>
-      <div class="pc-label">${t('कमेटी वॉलेट','COMMITTEE WALLET')}</div>
       <div class="pc-amount-row">
         <div class="pc-amount-block">
+          <div class="pc-label">${t('कमेटी बैलेंस','COMMITTEE BALANCE')}</div>
           ${hide.wallet ? `<div class="pc-amount pc-hide">••••••</div>` : `<div class="pc-amount"><span class="rs">₹</span>${Number(bc.walletBalance).toLocaleString('en-IN')}</div>`}
-          <div class="pc-bal">${t('उपलब्ध बैलेंस','Available Balance')}</div>
+          <div class="pc-bal-pill"><span class="dot"></span> ${t('उपलब्ध बैलेंस','Available Balance')}</div>
         </div>
         <div class="pc-round">
-          <div class="crown">👑</div>
+          <span class="wreath-l">🌾</span>
+          <span class="wreath-r">🌾</span>
+          <span class="crown-badge">👑</span>
           <div class="num">${totalInstalls}</div>
           <div class="lbl">ROUNDS</div>
         </div>
       </div>
       <div class="pc-owner">
-        <div class="pc-owner-name">${bc.ownerName}</div>
-        <div class="pc-owner-phone">+91${bc.ownerPhone}</div>
+        <div class="pc-owner-row">
+          <span class="icon person">👤</span>
+          <span class="pc-owner-name">${bc.ownerName}</span>
+        </div>
+        <div class="pc-owner-row">
+          <span class="icon phone">📞</span>
+          <span class="pc-owner-phone">+91 ${bc.ownerPhone}</span>
+        </div>
       </div>
       <div class="pc-foot">
         <div class="pc-foot-item">
-          <span class="lbl">MEMBER ID</span>
-          <span class="val">${bc.code}</span>
+          <span class="ft-icon">👥</span>
+          <div class="ft-text">
+            <div class="lbl">MEMBER ID</div>
+            <div class="val">${bc.code}</div>
+          </div>
         </div>
-        <div class="pc-foot-item right">
-          <span class="lbl">VALID TILL</span>
-          <span class="val">${formatD(endD)}</span>
+        <div class="pc-foot-divider"></div>
+        <div class="pc-foot-item">
+          <span class="ft-icon">📅</span>
+          <div class="ft-text">
+            <div class="lbl">VALID TILL</div>
+            <div class="val">${formatD(endD)}</div>
+          </div>
         </div>
+        <div class="pc-script">Saath Milkar<br>Badhte Hain</div>
       </div>
     </div>
     <div class="stats">
@@ -1289,13 +1298,11 @@ function renderDashboardContent(bc, cu, hide){
     </div>`}
   `;
 
-  // Members
   document.getElementById('membersBlock').innerHTML = `
     <div class="section-title">👥 <span class="hi">सदस्य</span><span class="en">Members</span> <span class="count">${totalMembers}</span></div>
     ${bc.members.map((m,i)=>renderMemberCompact(m,i,bc,cu,isOwner,hide,totalInstalls)).join('')}
   `;
 
-  // Extra
   const totalCollected = bc.members.reduce((s,m)=>s+(m.paidRounds*bc.amount),0);
   const totalExpected = bc.currentRound*bc.amount*totalMembers;
   const totalPending = Math.max(0, totalExpected-totalCollected);
@@ -1430,7 +1437,6 @@ function settingToggle(key, emoji, title, desc){
 async function toggleSetting(key, val){
   if(!currentBCData) return;
   currentBCData.settings[key] = val;
-  // Save in background — NO re-render
   fetch(`${API_URL}/api/bcs`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(currentBCData)}).catch(()=>{});
 }
 function openEditModal(){
@@ -1469,15 +1475,12 @@ async function markPaidAdvance(id, ev){
   if(!currentBCData) return;
   let m = currentBCData.members.find(x=>(x.phone||x.name)===id);
   if(m){
-    // Update LOCAL data immediately
     m.paidRounds += 1;
     currentBCData.walletBalance += Number(currentBCData.amount);
-    // Update UI in place — no full re-render, no scroll jump
     const hide = loadHide();
     const cu = load(KEYS.session,{});
     const isOwner = (String(currentBCData.ownerPhone)===String(cu.phone))||(String(cu.phone)===ADMIN_PHONE);
     const totalInstalls = Number(currentBCData.totalInst) || currentBCData.members.length;
-    // Replace just this member's row
     const idx = currentBCData.members.indexOf(m);
     const rows = document.getElementById('membersBlock').querySelectorAll('.mem-line');
     if(rows[idx]){
@@ -1485,12 +1488,10 @@ async function markPaidAdvance(id, ev){
       temp.innerHTML = renderMemberCompact(m, idx, currentBCData, cu, isOwner, hide, totalInstalls);
       rows[idx].replaceWith(temp.firstElementChild);
     }
-    // Update wallet amount in premium card
     const walletEl = document.querySelector('.premium-card .pc-amount');
     if(walletEl && !hide.wallet) {
       walletEl.innerHTML = `<span class="rs">₹</span>${Number(currentBCData.walletBalance).toLocaleString('en-IN')}`;
     }
-    // Update stats
     const stats = document.querySelector('.stats');
     if(stats) stats.outerHTML = `
       <div class="stats">
@@ -1498,7 +1499,6 @@ async function markPaidAdvance(id, ev){
         <div class="stat"><b>${currentBCData.currentRound}/${totalInstalls}</b><span>${t('राउंड','Round')}</span></div>
         ${hide.pool ? '' : `<div class="stat stat-pool"><b>₹${Number(currentBCData.totalPool||(currentBCData.amount*currentBCData.members.length)).toLocaleString('en-IN')}</b><span>${t('कुल पूल','Pool')}</span></div>`}
       </div>`;
-    // Save in background — no re-render
     fetch(`${API_URL}/api/bcs`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(currentBCData)}).catch(()=>appAlert(t("सेव त्रुटि।","Save error.")));
   }
 }
@@ -1507,7 +1507,6 @@ async function startNextRound(){
   let ans = await appConfirm(t("अगली किश्त चालू करें?","Start next round?"));
   if(!ans) return;
   currentBCData.currentRound += 1;
-  // Silent save
   fetch(`${API_URL}/api/bcs`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(currentBCData)}).then(()=>loadDash()).catch(()=>{});
 }
 let pendingWinnerId = "";
@@ -1604,7 +1603,6 @@ function freqToggle(key, emoji, label){
 async function toggleGlobalFeature(key, val){
   GLOBAL.features[key].enabled = val;
   saveGlobal();
-  // Update badge only, no full re-render
   const fkeys = Object.keys(GLOBAL.features);
   document.getElementById('featBadge').textContent = fkeys.filter(k=>GLOBAL.features[k].enabled).length + ' ON';
   document.getElementById('admActiveFeatures').textContent = fkeys.filter(k=>GLOBAL.features[k].enabled).length;
@@ -1713,4 +1711,4 @@ window.onload = ()=>{
 };
 </script>
 </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </html>
+  </html>
